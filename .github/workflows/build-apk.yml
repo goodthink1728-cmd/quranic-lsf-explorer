@@ -1,0 +1,91 @@
+name: Build Android APK (Quranic LSF)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-apk:
+    name: Build Fullscreen Capacitor Android APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Prepare web assets and app icon
+        run: |
+          mkdir -p www cap-assets release-apk
+          cp index.html app.js manifest.webmanifest sw.js www/
+          cp quran-*.js quran-*.json quranic-*.js quranic-*.json sfl-schema.json sfl-types.d.ts www/ 2>/dev/null || true
+          cp -r assets tafsir-ik www/
+          if command -v convert >/dev/null 2>&1; then
+            convert assets/icon-512.png -resize 1024x1024 cap-assets/logo.png
+          else
+            cp assets/icon-512.png cap-assets/logo.png
+          fi
+
+      - name: Install Capacitor 7 and build Android project
+        run: |
+          npm init -y
+          npm install --no-audit --no-fund @capacitor/core@7 @capacitor/cli@7 @capacitor/android@7 @capacitor/assets@4
+          cat << 'EOF' > capacitor.config.json
+          {
+            "appId": "io.github.goodthink1728.quraniclsf",
+            "appName": "Quranic LSF",
+            "webDir": "www",
+            "server": {
+              "androidScheme": "https"
+            },
+            "android": {
+              "allowMixedContent": true,
+              "backgroundColor": "#04392c"
+            }
+          }
+          EOF
+          npx cap add android
+          npx @capacitor/assets generate --android --assetPath cap-assets --iconBackgroundColor '#04392c' --iconBackgroundColorDark '#04392c' --splashBackgroundColor '#fbf7ef' --splashBackgroundColorDark '#04392c'
+          python3 - << 'PY'
+          from pathlib import Path
+          styles_path = Path("android/app/src/main/res/values/styles.xml")
+          text = styles_path.read_text(encoding="utf-8")
+          target = '<style name="AppTheme.NoActionBar" parent="Theme.AppCompat.DayNight.NoActionBar">'
+          replacement = target + '\n        <item name="android:statusBarColor">#04392c</item>\n        <item name="colorPrimary">#04392c</item>\n        <item name="colorPrimaryDark">#04392c</item>'
+          if target in text and 'android:statusBarColor' not in text:
+              styles_path.write_text(text.replace(target, replacement, 1), encoding="utf-8")
+          PY
+          npx cap sync android
+
+      - name: Build Debug APK (Direct Install, No Play Store Key Needed)
+        working-directory: ./android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Stage Quranic-LSF.apk
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk release-apk/Quranic-LSF.apk
+          ls -lh release-apk/Quranic-LSF.apk
+
+      - name: Upload Quranic LSF APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Quranic-LSF-APK
+          path: release-apk/Quranic-LSF.apk
+          retention-days: 30
