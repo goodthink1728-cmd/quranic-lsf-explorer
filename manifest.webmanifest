@@ -1,0 +1,40 @@
+{
+  "id": "./",
+  "name": "Quranic LSF & Tafsir Explorer",
+  "short_name": "Quranic LSF",
+  "description": "Menjembatani analisis gramatika Linguistik Sistemik Fungsional (LSF) dengan khazanah Tafsir Kemenag RI, Tafsir Ibnu Katsir, dan Nahwu–Balaghah (114 Surat & 6.236 Ayat).",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fbf7ef",
+  "theme_color": "#04392c",
+  "lang": "id",
+  "dir": "ltr",
+  "categories": ["education", "books", "reference"],
+  "icons": [
+    {
+      "src": "./assets/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

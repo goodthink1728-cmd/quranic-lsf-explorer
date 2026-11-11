@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quranic LSF &amp; Tafsir Explorer V6.0 - 114 Surat, LSF &amp; Komparasi Tafsir</title>
+  <link rel="icon" type="image/png" href="./assets/favicon.png?v=6">
+  <link rel="shortcut icon" type="image/png" href="./assets/favicon.png?v=6">
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#04392c">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Quranic LSF">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Naskh+Arabic:wght@400;600;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'KhotDiwani';
+      src: url('./assets/fonts/diwani-letter.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    .font-arabic {
+      font-family: 'Scheherazade New', 'Noto Naskh Arabic', 'Traditional Arabic', serif;
+      letter-spacing: 0 !important;
+      word-spacing: 0.08em;
+      font-feature-settings: "kern" 1, "liga" 1, "mark" 1, "mkmk" 1;
+    }
+    .font-diwani {
+      font-family: 'KhotDiwani', 'Diwani Letter', 'Aref Ruqaa', 'Scheherazade New', serif;
+      letter-spacing: 0 !important;
+      word-spacing: 0.08em;
+      line-height: 1.65;
+      font-weight: 400 !important;
+      font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    }
+    .waqf-mark {
+      display: inline-block;
+      margin: 0 0.18em;
+      padding: 0 0.12em;
+      color: #b45309;
+      font-size: 0.72em;
+      font-weight: 600;
+      vertical-align: middle;
+      line-height: 1;
+      user-select: none;
+    }
+    .waqf-mark-light {
+      display: inline-block;
+      margin: 0 0.18em;
+      padding: 0 0.12em;
+      color: #fcd34d;
+      font-size: 0.72em;
+      font-weight: 600;
+      vertical-align: middle;
+      line-height: 1;
+      user-select: none;
+    }
+    .font-mono-code { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+    body.hide-arabic-terms .arabic-term-badge { display: none !important; }
+    #audio-teleprompter {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(252, 211, 77, 0.48) rgba(12, 74, 56, 0.35);
+    }
+    #audio-teleprompter::-webkit-scrollbar { width: 5px; }
+    #audio-teleprompter::-webkit-scrollbar-track {
+      background: rgba(12, 74, 56, 0.35);
+      border-radius: 9999px;
+    }
+    #audio-teleprompter::-webkit-scrollbar-thumb {
+      background: rgba(252, 211, 77, 0.48);
+      border-radius: 9999px;
+    }
+    #audio-teleprompter::-webkit-scrollbar-thumb:hover {
+      background: rgba(252, 211, 77, 0.78);
+    }
+    .murottal-select {
+      color-scheme: dark;
+    }
+    .murottal-select option {
+      background-color: #126850;
+      color: #fef3c7;
+    }
+    #murottal-seek-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 5px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.22);
+      cursor: pointer;
+    }
+    #murottal-seek-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 13px;
+      height: 13px;
+      border-radius: 9999px;
+      background: #fbbf24;
+      border: 2px solid #0e5742;
+      box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.32);
+      cursor: pointer;
+      transition: transform 0.12s ease;
+    }
+    #murottal-seek-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+    #murottal-seek-slider::-moz-range-thumb {
+      width: 13px;
+      height: 13px;
+      border-radius: 9999px;
+      background: #fbbf24;
+      border: 2px solid #0e5742;
+      box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.32);
+      cursor: pointer;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fbf7ef;
+      background-image:
+        radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.08) 0px, transparent 48%),
+        radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.11) 0px, transparent 48%),
+        radial-gradient(at 100% 100%, rgba(13, 148, 136, 0.08) 0px, transparent 50%);
+    }
+    .islamic-pattern-soft {
+      background-image: url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23059669' stroke-opacity='0.06' stroke-width='1'%3E%3Cpath d='M24 2L29.5 14.5L42 14.5L32.5 23L36 36L24 29L12 36L15.5 23L6 14.5L18.5 14.5Z'/%3E%3Ccircle cx='24' cy='24' r='20' stroke-opacity='0.035'/%3E%3C/g%3E%3C/svg%3E");
+    }
+  </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col">
+
+  <!-- Modals (Overlay z-50) -->
+
+  <!-- Modal Pustaka, Kamus & Panduan LSF -->
+  <div id="theory-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-3xl w-full p-6 max-h-[88vh] overflow-y-auto">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-100 gap-2">
+        <div>
+          <h3 class="font-bold text-lg text-emerald-950">Panduan Teori, Kamus Arab–LSF &amp; Pustaka Ebook LSF</h3>
+          <p class="text-xs text-slate-500">Korpus LSF, Al-Qur'an Kementerian Agama RI, &amp; Pembaruan Berkala Gemini AI</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" id="btn-theory-new-window" class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-semibold px-2.5 py-1.5 rounded-lg border border-emerald-200 transition">Buka di Jendela Baru ↗</button>
+          <button id="btn-close-modal" class="text-slate-400 hover:text-slate-700 p-1 text-xl font-bold">&times;</button>
+        </div>
+      </div>
+
+      <div id="theory-sync-status" class="mt-3 px-3 py-2 rounded-xl bg-sky-50/90 border border-sky-200 flex flex-wrap items-center justify-between gap-2 text-[11px] text-sky-950">
+        <span id="theory-sync-text" class="font-semibold">✦ Sinkronisasi Otomatis Gemini AI aktif — siap menangkap pembaruan korpus &amp; penafsiran.</span>
+        <button type="button" id="btn-sync-knowledge-now" class="px-2.5 py-0.5 rounded-lg bg-white hover:bg-sky-100 border border-sky-200 text-sky-900 font-bold text-[10px] transition shrink-0">Sinkronkan Sekarang</button>
+      </div>
+
+      <div class="flex gap-2 border-b border-slate-200 mt-3 text-xs font-semibold">
+        <button id="guide-tab-theory" class="guide-tab px-3 py-2 border-b-2 border-emerald-600 text-emerald-800">3 Metafungsi &amp; 6 Proses</button>
+        <button id="guide-tab-glossary" class="guide-tab px-3 py-2 border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center gap-1.5"><span>Kamus Istilah (ID–EN–AR)</span><span id="glossary-dynamic-badge" class="hidden px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-sky-100 text-sky-800">+0</span></button>
+        <button id="guide-tab-refs" class="guide-tab px-3 py-2 border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center gap-1.5"><span>Pustaka Ebook &amp; Kemenag</span><span id="refs-dynamic-badge" class="hidden px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-emerald-100 text-emerald-800">+0</span></button>
+      </div>
+
+      <div id="guide-panel-theory" class="guide-panel mt-4 space-y-4 text-sm text-slate-600 leading-relaxed">
+        <div class="p-3 bg-emerald-50 border-l-4 border-emerald-500 rounded-r-lg">
+          <h4 class="font-semibold text-emerald-900">1. Metafungsi Ideasional<span class="arabic-term-badge"> • <span class="font-arabic text-base">الفوقية الفكرية (التعدية)</span></span></h4>
+          <p class="mt-0.5 text-xs text-emerald-950">
+            Merepresentasikan pengalaman fisik &amp; batin melalui <strong>6 Tipe Proses</strong> (Material, Mental, Relasional, Verbal, Behavioral, Eksistensial), <strong>Partisipan</strong><span class="arabic-term-badge"> (<span class="font-arabic">المشاركون</span>)</span>, dan <strong>Sirkumstansi</strong><span class="arabic-term-badge"> (<span class="font-arabic">محددات الظروف</span>)</span>.
+          </p>
+        </div>
+        <div class="p-3 bg-indigo-50 border-l-4 border-indigo-500 rounded-r-lg">
+          <h4 class="font-semibold text-indigo-900">2. Metafungsi Interpersonal<span class="arabic-term-badge"> • <span class="font-arabic text-base">الفوقية الشخصية (المزاج والبقية)</span></span></h4>
+          <p class="mt-0.5 text-xs text-indigo-950">
+            Menganalisis relasi sosial penutur–mitra tutur melalui <strong>Fungsi Tutur</strong> (Deklaratif, Imperatif, Interogatif, Doa), struktur <strong>Mood</strong> &amp; <strong>Residu</strong>, serta modalitas.
+          </p>
+        </div>
+        <div class="p-3 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg">
+          <h4 class="font-semibold text-amber-900">3. Metafungsi Tekstual<span class="arabic-term-badge"> • <span class="font-arabic text-base">الفوقية النصية (الموضوع والخبر)</span></span></h4>
+          <p class="mt-0.5 text-xs text-amber-950">
+            Mengatur arus pesan melalui <strong>Tema</strong> dan <strong>Rema</strong>. Pemajukan objek atau keterangan menjadi <em>Marked Theme</em> berkorespondensi dengan <em>Taqdim</em> &amp; <em>Qashr</em> dalam Balaghah.
+          </p>
+        </div>
+      </div>
+
+      <div id="guide-panel-glossary" class="guide-panel hidden mt-4 space-y-4">
+        <p class="text-xs text-slate-500">Taksonomi istilah LSF dalam bahasa Indonesia, Inggris, dan Arab:</p>
+        <div id="glossary-content" class="space-y-4 text-xs"></div>
+      </div>
+
+      <div id="guide-panel-refs" class="guide-panel hidden mt-4 space-y-3">
+        <p class="text-xs text-slate-500">Daftar sumber e-book LSF dan Al-Qur'an &amp; Tafsir Kemenag RI:</p>
+        <div id="references-list" class="space-y-2.5 text-xs"></div>
+      </div>
+
+      <div class="mt-5 text-right border-t border-slate-100 pt-3">
+        <button id="btn-close-modal-bottom" class="px-4 py-2 bg-emerald-800 text-white rounded-lg text-xs font-semibold hover:bg-emerald-700 transition">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Tafsir Kemenag & Tafsir Ibnu Katsir untuk Ayat dari Direktori -->
+  <div id="kemenag-tafsir-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-4xl w-full p-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-start pb-3 border-b border-slate-100 gap-3">
+        <div>
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Tafsir Kemenag RI</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-900 px-2 py-0.5 rounded">Tafsir Ibnu Katsir (Jilid I–VIII)</span>
+          </div>
+          <h3 id="ktm-title" class="font-bold text-lg text-emerald-950 mt-1">Tafsir Surat</h3>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" data-ai-scope="tafsir-modal" data-ai-label="Tafsir Modal Ayat" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-xs font-bold transition shadow-2xs" title="Tanyakan penafsiran &amp; LSF ayat ini ke Gemini AI">
+            <svg class="w-3.5 h-3.5 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
+            <span>Tanya AI</span>
+          </button>
+          <button type="button" id="btn-ktm-new-window" class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-semibold px-2.5 py-1.5 rounded-lg border border-emerald-200 transition">Buka di Jendela Baru ↗</button>
+          <button id="btn-close-ktm" class="text-slate-400 hover:text-slate-700 p-1 text-xl font-bold">&times;</button>
+        </div>
+      </div>
+      <div class="mt-4 space-y-4">
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-right">
+          <p id="ktm-arabic" class="font-arabic text-lg sm:text-xl text-emerald-950 leading-[2.3] font-normal pt-1" dir="rtl"></p>
+          <p id="ktm-translit" class="text-xs text-slate-500 italic text-left mt-2"></p>
+          <p id="ktm-translation" class="text-sm text-slate-800 font-medium text-left mt-1"></p>
+        </div>
+
+        <div class="flex flex-wrap gap-2 border-b border-slate-200 pb-2 text-xs font-semibold">
+          <button type="button" id="ktm-tab-kemenag" class="px-3 py-1.5 rounded-lg bg-emerald-700 text-white">Tafsir Tahlili Kemenag RI</button>
+          <button type="button" id="ktm-tab-ibnkatsir" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Tafsir Ibnu Katsir (Ma'tsur &amp; Arab Asli)</button>
+        </div>
+
+        <div id="ktm-panel-kemenag" class="space-y-2">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-900">Uraian Tafsir Tahlili Kemenag RI:</h4>
+          <div id="ktm-body" class="text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line bg-emerald-50/40 p-4 rounded-xl border border-emerald-100 max-h-[42vh] overflow-y-auto"></div>
+        </div>
+
+        <div id="ktm-panel-ibnkatsir" class="hidden space-y-3">
+          <div class="p-3 bg-amber-50/70 border border-amber-200 rounded-xl text-[11px] text-amber-950">
+            <strong>Sumber Kitab:</strong> <em>Lubaabut Tafsiir Min Ibni Katsiir</em> (Pustaka Imam Asy-Syafi'i, Jilid I–VIII, ISBN 979-3536-05-5) &amp; Matan Digital Lengkap.
+          </div>
+          <div class="space-y-2">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-amber-900">Terjemahan / Uraian Tafsir Ibnu Katsir:</h4>
+              <div class="inline-flex rounded-lg bg-amber-100/80 p-0.5 border border-amber-200 text-[11px] font-bold">
+                <button type="button" data-ik-lang="id" class="ik-lang-btn px-2.5 py-1 rounded-md bg-amber-600 text-white transition">Bahasa Indonesia</button>
+                <button type="button" data-ik-lang="en" class="ik-lang-btn px-2.5 py-1 rounded-md text-amber-900 hover:bg-amber-200/70 transition">Bahasa Inggris</button>
+              </div>
+            </div>
+            <div id="ktm-ik-en" class="text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line bg-amber-50/30 p-4 rounded-xl border border-amber-200 max-h-[26vh] overflow-y-auto"></div>
+          </div>
+          <details class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs">
+            <summary class="font-bold text-slate-800 cursor-pointer select-none">Lihat Teks Arab Asli Tafsir Ibnu Katsir (Klik untuk buka)</summary>
+            <div id="ktm-ik-ar" class="font-arabic text-lg leading-[2.2] text-slate-900 text-right whitespace-pre-line mt-3 max-h-[26vh] overflow-y-auto pr-1" dir="rtl"></div>
+          </details>
+        </div>
+      </div>
+      <div class="mt-4 flex flex-wrap justify-between items-center gap-2 pt-3 border-t border-slate-100">
+        <div class="flex flex-wrap gap-2">
+          <button id="btn-ktm-analyze-sfl" class="px-3.5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-semibold transition">Analisis LSF Ayat Ini</button>
+          <button id="btn-ktm-compare" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold transition">Bandingkan LSF vs. Tafsir</button>
+        </div>
+        <button id="btn-close-ktm-bottom" class="px-4 py-2 bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold hover:bg-slate-300 transition">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Tambah Analisis Ayat Mandiri -->
+  <div id="add-verse-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-xl w-full p-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+        <div>
+          <h3 class="font-bold text-lg text-emerald-950">Input Analisis Ayat Mandiri (Typed JSON)</h3>
+          <p class="text-xs text-slate-500">Tambahkan ayat beserta klasifikasi 6 Proses LSF &amp; perbandingan Tafsir</p>
+        </div>
+        <button id="btn-close-add-modal" class="text-slate-400 hover:text-slate-700 p-1 text-xl font-bold">&times;</button>
+      </div>
+
+      <form id="form-add-verse" class="mt-4 space-y-3.5 text-xs">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">No. Surat (1-114)</label>
+            <input type="number" id="input-surah" min="1" max="114" value="113" required class="w-full p-2 bg-slate-50 border border-slate-300 rounded-lg">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">No. Ayat</label>
+            <input type="number" id="input-verse" min="1" value="1" required class="w-full p-2 bg-slate-50 border border-slate-300 rounded-lg">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Label Rujukan</label>
+            <input type="text" id="input-ref" required placeholder="QS. Al-Falaq [113]: 1" class="w-full p-2 bg-slate-50 border border-slate-300 rounded-lg">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Teks Arab (Lafadz Lengkap)</label>
+          <input type="text" id="input-arabic" required placeholder="قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ" dir="rtl" class="w-full p-2.5 font-arabic text-lg bg-slate-50 border border-slate-300 rounded-lg">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Transliterasi Latin</label>
+            <input type="text" id="input-translit" required placeholder="Qul a'ūdzu birabbi l-falaq" class="w-full p-2 bg-slate-50 border border-slate-300 rounded-lg">
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Terjemahan Bahasa Indonesia</label>
+            <input type="text" id="input-translation" required placeholder="Katakanlah: Aku berlindung kepada Tuhan yang menguasai subuh" class="w-full p-2 bg-slate-50 border border-slate-300 rounded-lg">
+          </div>
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 space-y-3">
+          <h4 class="font-bold text-slate-800 text-xs uppercase tracking-wide">Klasifikasi 3 Metafungsi &amp; Tafsir</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">1. Tipe Proses</label>
+              <select id="input-process-type" class="w-full p-2 bg-white border border-slate-300 rounded-md">
+                <option value="Material">Material (العملية المادية)</option>
+                <option value="Mental">Mental (العملية الذهنية)</option>
+                <option value="Relational">Relational (العملية العلائقية)</option>
+                <option value="Verbal">Verbal (العملية اللفظية)</option>
+                <option value="Behavioural">Behavioural (العملية السلوكية)</option>
+                <option value="Existential">Existential (العملية الوجودية)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">2. Fungsi Tutur</label>
+              <select id="input-speech-func" class="w-full p-2 bg-white border border-slate-300 rounded-md">
+                <option value="Deklaratif">Deklaratif</option>
+                <option value="Imperatif">Imperatif</option>
+                <option value="Interogatif">Interogatif</option>
+                <option value="Doa">Doa</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">3. Pola Tema</label>
+              <select id="input-theme-type" class="w-full p-2 bg-white border border-slate-300 rounded-md">
+                <option value="Unmarked">Unmarked Theme</option>
+                <option value="Marked">Marked Theme</option>
+                <option value="Multiple">Multiple Theme</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">Sirkumstansi Utama (Opsional)</label>
+              <input type="text" id="input-circumstance" placeholder="Contoh: Ruang / Tujuan / Waktu" class="w-full p-2 bg-white border border-slate-300 rounded-md">
+            </div>
+            <div>
+              <label class="block font-medium text-slate-600 mb-1">Catatan Nahwu/Balaghah (Opsional)</label>
+              <input type="text" id="input-nahwu" placeholder="Contoh: Fi'il Amr + Jar Majrur" class="w-full p-2 bg-white border border-slate-300 rounded-md">
+            </div>
+          </div>
+
+          <div>
+            <label class="block font-medium text-slate-600 mb-1">Ringkasan Sintesis LSF</label>
+            <textarea id="input-summary" rows="2" placeholder="Catatan sintesis fungsional ayat..." class="w-full p-2 bg-white border border-slate-300 rounded-md"></textarea>
+          </div>
+          <div>
+            <label class="block font-medium text-slate-600 mb-1">Catatan Tafsir Ringkas (Opsional)</label>
+            <textarea id="input-tafsir-note" rows="2" placeholder="Ringkasan tafsir Kemenag / mufasir klasik &amp; kontemporer..." class="w-full p-2 bg-white border border-slate-300 rounded-md"></textarea>
+          </div>
+        </div>
+
+        <div class="flex justify-end gap-2 pt-2 border-t border-slate-100">
+          <button type="button" id="btn-cancel-add" class="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-100 transition">Batal</button>
+          <button type="submit" class="px-4 py-2 bg-emerald-700 text-white font-semibold rounded-lg hover:bg-emerald-800 transition">Simpan ke Korpus</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main 3-Zone Islamic Bento App Shell -->
+  <main class="max-w-[1460px] mx-auto px-3 sm:px-5 py-4 flex-1 w-full">
+    <div class="flex flex-col lg:flex-row gap-5 items-start">
+
+      <!-- ZONE 1: LEFT SIDEBAR NAVIGATION (Nuansa Buku LSF & Al-Qur'an) -->
+      <aside class="w-full lg:w-64 shrink-0 bg-white/95 backdrop-blur rounded-3xl shadow-sm border border-amber-200/70 p-4 space-y-5 lg:sticky lg:top-4">
+        <!-- Brand Header (Logo & Nama Aplikasi) -->
+        <div class="pb-3 border-b border-amber-100">
+          <img src="./assets/brand-logo-banner.png" alt="Quranic LSF - Mushaf • LSF • Tafsir" class="w-full h-auto block object-contain drop-shadow-sm select-none" />
+          <h1 class="sr-only">Quranic LSF — Mushaf • LSF • Tafsir</h1>
+        </div>
+
+        <!-- Primary 3-Pillar Navigation -->
+        <div class="space-y-1.5">
+          <p class="px-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">Ruang Kajian Utama</p>
+          <button id="nav-pillar-mushaf" class="pillar-btn w-full px-3.5 py-2.5 rounded-xl text-xs font-semibold transition flex items-center gap-2.5 text-left text-slate-600 hover:bg-emerald-50 hover:text-emerald-900">
+            <svg class="w-4 h-4 shrink-0 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            <span>1. Direktori 114 Surat</span>
+          </button>
+          <button id="nav-pillar-sfl" class="pillar-btn w-full px-3.5 py-2.5 rounded-xl text-xs font-semibold transition flex items-center gap-2.5 text-left bg-gradient-to-r from-emerald-700 to-teal-700 text-white shadow-sm">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h10"/></svg>
+            <span>2. Analyzer LSF</span>
+          </button>
+          <button id="nav-pillar-tafsir" class="pillar-btn w-full px-3.5 py-2.5 rounded-xl text-xs font-semibold transition flex items-center gap-2.5 text-left text-slate-600 hover:bg-emerald-50 hover:text-emerald-900">
+            <svg class="w-4 h-4 shrink-0 text-purple-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            <span>3. LSF vs. Tafsir</span>
+          </button>
+        </div>
+
+        <!-- Alat Riset & Pustaka -->
+        <div class="space-y-1.5 pt-2 border-t border-slate-100">
+          <p class="px-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">Perangkat Riset &amp; Kitab</p>
+          <button id="btn-toggle-analytics" class="w-full px-3.5 py-2 rounded-xl text-xs font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-900 transition flex items-center gap-2.5 text-left">
+            <svg class="w-4 h-4 shrink-0 text-teal-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/></svg>
+            <span>Statistik Korpus</span>
+          </button>
+          <button id="btn-toggle-compare" class="w-full px-3.5 py-2 rounded-xl text-xs font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-900 transition flex items-center gap-2.5 text-left">
+            <svg class="w-4 h-4 shrink-0 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+            <span id="label-compare-btn">Bandingkan 2 Ayat</span>
+          </button>
+          <button id="btn-info-toggle" class="w-full px-3.5 py-2 rounded-xl text-xs font-medium text-slate-700 hover:bg-amber-50 hover:text-amber-900 transition flex items-center gap-2.5 text-left">
+            <svg class="w-4 h-4 shrink-0 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            <span>Pustaka &amp; Kamus</span>
+          </button>
+          <button id="btn-add-verse-modal" class="w-full mt-2 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 shadow-sm transition flex items-center justify-center gap-1.5">
+            <span>+ Tambah Analisis Ayat</span>
+          </button>
+        </div>
+
+        <!-- Sidebar Bottom Card (Tadabbur & Ebook LSF) -->
+        <div class="hidden lg:block p-3.5 rounded-2xl bg-gradient-to-br from-amber-50 via-emerald-50/70 to-teal-50 border border-amber-200/70 space-y-2">
+          <div class="flex items-center gap-2 text-emerald-900">
+            <span class="font-diwani text-lg text-amber-700 leading-none">اقْرَأْ</span>
+            <span class="text-[11px] font-bold">Mushaf &amp; Pustaka LSF</span>
+          </div>
+          <p class="text-[11px] text-slate-600 leading-relaxed">
+            Memadukan Al-Qur'an Kemenag RI, teori <strong>LSF Halliday</strong>, dan kitab <strong>Tafsir Ibnu Katsir</strong> (8 Jilid).
+          </p>
+        </div>
+
+        <!-- Attribution Logo Footer inside Left Sidebar -->
+        <div class="pt-2.5 border-t border-amber-100/80 flex items-center justify-center">
+          <img src="./assets/digitab-logo.png" alt="created by. Digitab" class="w-full max-w-[208px] h-auto object-contain drop-shadow-xs select-none" />
+        </div>
+      </aside>
+
+      <!-- RIGHT SHELL: TOP UTILITY BAR + 2-COLUMN WORKSPACE -->
+      <div class="flex-1 min-w-0 space-y-5 w-full">
+
+        <!-- Top Utility Bar -->
+        <div class="relative overflow-hidden bg-gradient-to-r from-[#fffdf7] via-white to-[#f2faf5] backdrop-blur rounded-2xl shadow-[0_8px_24px_-12px_rgba(6,78,59,0.18),inset_0_1px_0_rgba(255,255,255,0.9)] border border-amber-300/75 px-5 py-3.5 flex flex-wrap md:flex-nowrap items-center justify-between gap-4">
+          <!-- Ornamen Tulisan Khot Arabic Penggalan Ayat (Gradual Soft Fade) -->
+          <div aria-hidden="true" class="hidden md:flex items-center justify-end pointer-events-none select-none absolute inset-y-0 right-44 xl:right-52 left-1/3 overflow-hidden" style="-webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.32) 32%, rgba(0,0,0,0.85) 75%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.32) 32%, rgba(0,0,0,0.85) 75%, transparent 100%);">
+            <span class="font-diwani text-3xl lg:text-4xl leading-none tracking-normal whitespace-nowrap" dir="rtl" lang="ar" style="color: rgba(180, 118, 22, 0.22); text-shadow: 0 1px 12px rgba(6, 95, 70, 0.08);">
+              أَفَلَا يَتَدَبَّرُونَ الْقُرْآنَ <span class="font-sans text-base text-emerald-700/25 mx-1.5 align-middle">✦</span> وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ
+            </span>
+          </div>
+
+          <div class="relative z-10 flex-1 min-w-0 space-y-2">
+            <div class="flex flex-wrap items-center gap-2.5 min-w-0">
+              <span class="px-3 py-1 rounded-full text-xs font-extrabold tracking-wide bg-gradient-to-br from-[#04392c] via-[#065f46] to-[#022b21] text-amber-200 border border-amber-400/60 shadow-[0_3px_8px_rgba(4,78,59,0.28)] shrink-0">
+                V6.0
+              </span>
+              <p class="text-base sm:text-xl font-black tracking-tight leading-snug">
+                <span class="bg-gradient-to-r from-[#022c22] via-[#065f46] to-[#b45309] bg-clip-text text-transparent drop-shadow-[0_1px_0_rgba(253,230,138,0.45)]">Quranic LSF &amp; Tafsir Explorer</span><span class="arabic-term-badge text-amber-600/85"> • <span class="font-diwani text-2xl sm:text-[26px] text-[#9a5b13] leading-none">اللسانيات الوظيفية النظامية</span></span>
+              </p>
+            </div>
+            <p class="border-l-2 border-amber-400/85 pl-3 text-xs sm:text-[13px] text-slate-700 leading-relaxed max-w-2xl">
+              Menjembatani analisis gramatika <strong class="font-bold text-[#065f46]">Linguistik Sistemik Fungsional (LSF)</strong> dengan khazanah <strong class="font-semibold text-[#92400e]">Tafsir Kemenag RI</strong>, <strong class="font-semibold text-[#92400e]">Tafsir Ibnu Katsir</strong>, dan <strong class="font-semibold text-[#065f46]">Nahwu–Balaghah</strong> untuk mendalami makna struktur ayat serta mendukung pembelajaran bahasa Arab Al-Qur'an.
+            </p>
+          </div>
+
+          <!-- Dua Elemen Kanan Dipisahkan Rapi (Profil Pengkaji di Atas & Kontrol Istilah Arab di Bawah) -->
+          <div class="relative z-10 flex flex-row md:flex-col items-center md:items-end justify-between gap-2.5 shrink-0 w-full md:w-auto pt-2 md:pt-0 border-t md:border-t-0 md:border-l border-amber-200/70 md:pl-4">
+            <div class="flex items-center gap-2.5 bg-white/85 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-amber-200/80 shadow-2xs">
+              <div class="w-8 h-8 rounded-full text-amber-50 font-arabic text-sm font-bold flex items-center justify-center shadow-sm ring-1 ring-amber-300/60 shrink-0" style="background: radial-gradient(circle at 26% 24%, #1e7a42 0%, #4d7c22 52%, #d49617 100%);">
+                ق
+              </div>
+              <div class="leading-tight">
+                <span class="block text-[10px] text-slate-500 font-medium">Assalamu'alaikum</span>
+                <span class="block text-xs font-extrabold text-emerald-950">Pengkaji Al-Qur'an</span>
+              </div>
+            </div>
+
+            <button id="btn-toggle-arabic-terms" type="button" aria-pressed="true" class="text-xs bg-[#fdf4df] hover:bg-[#faebc8] text-[#7c2d12] font-bold px-3.5 py-1.5 rounded-full border border-[#ebd7ac] transition flex items-center gap-1.5 shadow-2xs">
+              <svg class="w-3.5 h-3.5 text-[#7c2d12] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 17c2.5 2 6.5 2.5 9.5.5M12 4c-2.5 3.5-2.5 6.5 0 9.5 2.2-3 2.2-6 0-9.5z"/>
+                <path d="M8 14.5h8"/>
+              </svg>
+              <span id="label-arabic-terms">Istilah Arab: ON</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2-COLUMN BENTO GRID: CENTER WORKSPACE (8 COL) + RIGHT MUROTTAL BOX (4 COL) -->
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-5 items-start">
+
+          <!-- CENTER WORKSPACE -->
+          <div class="xl:col-span-8 space-y-5 min-w-0">
+
+            <!-- Hero Banner Card (Luminous Islamic Mushaf, Lantern & LSF Scholarly Art) -->
+            <section class="bg-gradient-to-r from-[#fcf6e8] via-[#f9f6ea] to-[#e9f2e6] rounded-3xl border border-amber-200/90 shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-12 items-stretch">
+              <div class="md:col-span-6 p-5 sm:p-6 flex flex-col justify-center space-y-2.5 z-10 min-w-0">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/95 border border-amber-200 text-[11px] font-semibold text-emerald-900 shadow-2xs self-start max-w-full">
+                  <span class="w-2 h-2 rounded-full bg-emerald-600 shrink-0"></span>
+                  <span class="truncate">Al-Qur'an Kemenag • Buku LSF • Tafsir Ibnu Katsir</span>
+                </div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-emerald-950 tracking-tight leading-snug">
+                  Tadabbur Ayat &amp; Linguistik Sistemik Fungsional
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Telusuri 114 surat (6.236 ayat), petakan Transitivitas, Mood &amp; Tema ala buku LSF, dan sandingkan dengan Tafsir Kemenag serta Ibnu Katsir.
+                </p>
+                <div class="flex flex-wrap gap-2 pt-1">
+                  <button type="button" id="btn-hero-open-mushaf" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-800 to-teal-700 hover:from-emerald-900 hover:to-teal-800 text-white text-xs font-bold shadow-sm transition inline-flex items-center gap-1.5 whitespace-nowrap">
+                    <span>Jelajahi 114 Surat</span>
+                    <span class="text-amber-300 font-bold">&rsaquo;</span>
+                  </button>
+                  <button type="button" id="btn-hero-open-studio" class="px-3.5 py-2 rounded-xl bg-white hover:bg-emerald-50 text-emerald-950 border border-emerald-200 shadow-2xs text-xs font-bold transition inline-flex items-center gap-1.5 whitespace-nowrap">
+                    <svg class="w-4 h-4 text-teal-700 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l9-3 9 3M12 3v18M4 10l-2 5a3 3 0 006 0l-2-5m14 0l-2 5a3 3 0 006 0l-2-5M8 21h8"/></svg>
+                    <span>Perbandingan LSF &amp; Tafsir</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- HD Ilustrasi Islami (Rehal Al-Qur'an, Lentera Fanous, Tumpukan Kitab LSF/Tafsir/Tadabbur & Pena Bulu Emas) -->
+              <div class="md:col-span-6 relative min-h-[190px] md:min-h-[245px] pointer-events-none select-none overflow-hidden">
+                <img src="./assets/hero-tadabbur-lsf.jpg" alt="Ilustrasi Tadabbur Al-Qur'an, Buku LSF, Tafsir & Pena Emas" class="w-full h-48 md:h-full md:absolute md:inset-0 object-cover object-center" style="-webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.88) 12%, #000 24%, #000 100%); mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.88) 12%, #000 24%, #000 100%);" />
+              </div>
+            </section>
+
+            <!-- 4 Soft-Pastel Interactive Bento KPI Cards -->
+            <section class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <button type="button" id="btn-kpi-mushaf" class="group cursor-pointer text-left bg-emerald-50/95 hover:bg-emerald-100/80 border border-emerald-200/80 hover:border-emerald-400 rounded-2xl p-3 space-y-1.5 shadow-2xs hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition">
+                <div class="flex items-center justify-between gap-1.5">
+                  <div class="flex items-center gap-2 min-w-0">
+                    <div class="w-7 h-7 rounded-lg bg-white border border-emerald-200 text-emerald-700 flex items-center justify-center shrink-0">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    </div>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 truncate">Mushaf Kemenag</span>
+                  </div>
+                  <span class="text-emerald-600/70 group-hover:text-emerald-900 text-xs font-bold transition shrink-0">&rsaquo;</span>
+                </div>
+                <div class="text-base sm:text-lg font-extrabold text-emerald-950 leading-tight">114 Surat</div>
+                <div class="text-[11px] text-emerald-800 truncate">6.236 Ayat Offline</div>
+              </button>
+              <button type="button" id="btn-kpi-lsf" class="group cursor-pointer text-left bg-indigo-50/95 hover:bg-indigo-100/80 border border-indigo-200/80 hover:border-indigo-400 rounded-2xl p-3 space-y-1.5 shadow-2xs hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition">
+                <div class="flex items-center justify-between gap-1.5">
+                  <div class="flex items-center gap-2 min-w-0">
+                    <div class="w-7 h-7 rounded-lg bg-white border border-indigo-200 text-indigo-700 flex items-center justify-center shrink-0">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.2"/><circle cx="6" cy="18" r="2.2"/><circle cx="18" cy="18" r="2.2"/><path stroke-linecap="round" d="M10.7 7.8L7.2 16M13.3 7.8L16.8 16M8.2 18h7.6"/></svg>
+                    </div>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-700 truncate">Kerangka LSF</span>
+                  </div>
+                  <span class="text-indigo-600/70 group-hover:text-indigo-900 text-xs font-bold transition shrink-0">&rsaquo;</span>
+                </div>
+                <div class="text-base sm:text-lg font-extrabold text-indigo-950 leading-tight">3 Metafungsi</div>
+                <div class="text-[11px] text-indigo-800 truncate">6 Proses Halliday</div>
+              </button>
+              <button type="button" id="btn-kpi-tafsir" class="group cursor-pointer text-left bg-amber-50/95 hover:bg-amber-100/80 border border-amber-200/80 hover:border-amber-400 rounded-2xl p-3 space-y-1.5 shadow-2xs hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition">
+                <div class="flex items-center justify-between gap-1.5">
+                  <div class="flex items-center gap-2 min-w-0">
+                    <div class="w-7 h-7 rounded-lg bg-white border border-amber-200 text-amber-800 flex items-center justify-center shrink-0">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h14a2 2 0 012 2v1H6a2 2 0 01-2-2V6zm0 6h14a2 2 0 012 2v1H6a2 2 0 01-2-2v-1zm0 6h12"/></svg>
+                    </div>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-amber-800 truncate">Kitab Tafsir</span>
+                  </div>
+                  <span class="text-amber-700/70 group-hover:text-amber-950 text-xs font-bold transition shrink-0">&rsaquo;</span>
+                </div>
+                <div class="text-base sm:text-lg font-extrabold text-amber-950 leading-tight">5 Tafsir</div>
+                <div class="text-[11px] text-amber-800 truncate" title="Tafsir Kemenag RI, Ibnu Katsir (Ma'tsur), Lughawi–Balaghi, Adabi Ijtima'i & Maqashidi">Kemenag, Klasik–Modern</div>
+              </button>
+              <button type="button" id="btn-kpi-active-verse" class="group cursor-pointer text-left bg-teal-50/95 hover:bg-teal-100/80 border border-teal-200/80 hover:border-teal-400 rounded-2xl p-3 space-y-1.5 shadow-2xs hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 transition">
+                <div class="flex items-center justify-between gap-1.5">
+                  <div class="flex items-center gap-2 min-w-0">
+                    <div class="w-7 h-7 rounded-lg bg-white border border-teal-200 text-teal-700 flex items-center justify-center shrink-0">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V6a2 2 0 012-2h2M4 16v2a2 2 0 002 2h2m8-16h2a2 2 0 012 2v2m-4 12h2a2 2 0 002-2v-2"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-teal-700 truncate">Ayat Aktif LSF</span>
+                  </div>
+                  <span class="text-teal-600/70 group-hover:text-teal-900 text-xs font-bold transition shrink-0">&rsaquo;</span>
+                </div>
+                <div id="kpi-active-ref" class="text-sm sm:text-base font-extrabold text-teal-950 truncate leading-tight">QS. Al-Fatihah [1]: 2</div>
+                <div id="kpi-active-process" class="text-[11px] text-teal-800 truncate">Proses: Relational</div>
+              </button>
+            </section>
+
+    <!-- Panel Statistik Korpus (Toggleable) -->
+    <section id="section-analytics" class="hidden bg-white rounded-2xl shadow-sm border border-emerald-200 p-5 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-3 border-b border-slate-100 gap-2">
+        <div>
+          <span class="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded uppercase tracking-wider">Analitik Korpus &amp; Benchmark Tesis</span>
+          <h2 class="text-base font-bold text-slate-900 mt-1">Distribusi 6 Proses Transitivitas Halliday</h2>
+          <p class="text-xs text-slate-500">Korpus LSF aktif dibandingkan dengan temuan Tesis Agus Gunawan (2025) pada QS. Ibrahim Segmen 2.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+          <button type="button" id="btn-analytics-new-window" class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-semibold px-3 py-1.5 rounded-lg border border-emerald-200 transition">Buka di Jendela Baru ↗</button>
+          <button id="btn-close-analytics" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1.5 rounded-lg transition">Tutup ✕</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xs font-bold text-slate-700 uppercase">Korpus LSF Terkurasi / Tersimpan</h3>
+            <span id="analytics-total-verses" class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">0 Ayat</span>
+          </div>
+          <div id="analytics-live-bars" class="space-y-2 text-xs"></div>
+        </div>
+        <div class="p-4 bg-emerald-50/50 rounded-xl border border-emerald-200 space-y-2.5">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xs font-bold text-emerald-900 uppercase">Benchmark: QS. Ibrahim Segmen 2 (Ayat 11–20)</h3>
+            <span class="text-[11px] font-semibold text-emerald-800 bg-white px-2 py-0.5 rounded-full border border-emerald-200">34 Klausa (Tesis 2025)</span>
+          </div>
+          <div id="analytics-benchmark-bars" class="space-y-2 text-xs"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel Komparasi Dua Ayat (Toggleable) -->
+    <section id="section-comparison" class="hidden bg-gradient-to-r from-indigo-950 via-slate-900 to-indigo-950 text-white rounded-2xl shadow-md p-6 border border-indigo-500/30 space-y-5">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-3 border-b border-indigo-700/50 gap-2">
+        <div>
+          <span class="text-xs font-semibold bg-indigo-500/30 text-indigo-300 px-2.5 py-0.5 rounded border border-indigo-400/30 uppercase tracking-wider">Mode Komparasi LSF</span>
+          <h2 class="text-lg font-bold mt-1 text-white">Perbandingan Struktur Retorika &amp; Leksikogramatika Dua Ayat</h2>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+          <button type="button" id="btn-compare-new-window" class="text-xs bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-3 py-1.5 rounded-lg transition">Buka di Jendela Baru ↗</button>
+          <button id="btn-close-comparison" class="text-xs bg-indigo-800/80 hover:bg-indigo-700 text-indigo-200 px-3 py-1.5 rounded-lg border border-indigo-600/40 transition">Tutup Komparasi ✕</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-indigo-950/60 p-4 rounded-xl border border-indigo-700/40 space-y-3">
+          <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wide">Ayat Pertama (A)</span>
+            <div class="flex flex-wrap items-center gap-1.5">
+              <select id="compare-surah-a" class="text-xs bg-slate-800 text-white border border-indigo-500/50 rounded-lg p-1.5 max-w-[155px]" title="Pilih Surat A"></select>
+              <select id="compare-ayah-a" class="text-xs bg-slate-800 text-white border border-indigo-500/50 rounded-lg p-1.5 w-24" title="Pilih Ayat A"></select>
+            </div>
+          </div>
+          <div class="text-center py-2.5 px-3 bg-slate-900/70 rounded-lg border border-indigo-800/30">
+            <p id="compare-arabic-a" class="font-arabic text-lg sm:text-xl text-emerald-300 font-normal leading-[2.25] pt-1" dir="rtl"></p>
+            <p id="compare-trans-a" class="text-xs text-indigo-200 mt-1 italic"></p>
+          </div>
+          <div class="space-y-1.5 text-xs">
+            <div class="flex justify-between gap-2 py-1 border-b border-indigo-800/40"><span class="text-indigo-300">Tipe Proses:</span><span id="compare-proc-a" class="font-semibold text-white text-right"></span></div>
+            <div class="flex justify-between gap-2 py-1 border-b border-indigo-800/40"><span class="text-indigo-300">Fungsi Tutur:</span><span id="compare-speech-a" class="font-semibold text-white text-right"></span></div>
+            <div class="flex justify-between gap-2 py-1"><span class="text-indigo-300">Pola Tema:</span><span id="compare-theme-a" class="font-semibold text-white text-right"></span></div>
+          </div>
+        </div>
+        <div class="bg-indigo-950/60 p-4 rounded-xl border border-indigo-700/40 space-y-3">
+          <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-wide">Ayat Pembanding (B)</span>
+            <div class="flex flex-wrap items-center gap-1.5">
+              <select id="compare-surah-b" class="text-xs bg-slate-800 text-white border border-indigo-500/50 rounded-lg p-1.5 max-w-[155px]" title="Pilih Surat B"></select>
+              <select id="compare-ayah-b" class="text-xs bg-slate-800 text-white border border-indigo-500/50 rounded-lg p-1.5 w-24" title="Pilih Ayat B"></select>
+            </div>
+          </div>
+          <div class="text-center py-2.5 px-3 bg-slate-900/70 rounded-lg border border-indigo-800/30">
+            <p id="compare-arabic-b" class="font-arabic text-lg sm:text-xl text-amber-300 font-normal leading-[2.25] pt-1" dir="rtl"></p>
+            <p id="compare-trans-b" class="text-xs text-indigo-200 mt-1 italic"></p>
+          </div>
+          <div class="space-y-1.5 text-xs">
+            <div class="flex justify-between gap-2 py-1 border-b border-indigo-800/40"><span class="text-indigo-300">Tipe Proses:</span><span id="compare-proc-b" class="font-semibold text-white text-right"></span></div>
+            <div class="flex justify-between gap-2 py-1 border-b border-indigo-800/40"><span class="text-indigo-300">Fungsi Tutur:</span><span id="compare-speech-b" class="font-semibold text-white text-right"></span></div>
+            <div class="flex justify-between gap-2 py-1"><span class="text-indigo-300">Pola Tema:</span><span id="compare-theme-b" class="font-semibold text-white text-right"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 bg-slate-900/90 rounded-xl border border-indigo-500/40 text-xs leading-relaxed space-y-2">
+        <h4 class="font-bold text-indigo-300 text-sm">Sintesis Analisis Komparatif LSF:</h4>
+        <p id="compare-synthesis-text" class="text-slate-200"></p>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- PILAR 1: DIREKTORI LENGKAP 114 SURAT & 6.236 AYAT (KEMENAG RI)        -->
+    <!-- ===================================================================== -->
+    <section id="pillar-mushaf" class="hidden space-y-5">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-900 px-2.5 py-0.5 rounded">Mushaf &amp; Terjemahan Kementerian Agama RI</span>
+            <h2 class="text-lg font-bold text-slate-900 mt-1">Direktori Lengkap 114 Surat &amp; 6.236 Ayat Al-Qur'an</h2>
+            <p class="text-xs text-slate-500">Pilih surat untuk membaca seluruh ayat, memutar murottal, membuka Tafsir Kemenag, atau menganalisisnya dengan metode LSF.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <input type="text" id="mushaf-search-surah" placeholder="Cari surat (mis. Al-Fatihah, Ibrahim, Yasin)..." class="text-xs p-2 bg-slate-50 border border-slate-300 rounded-lg w-full sm:w-64">
+            <select id="mushaf-filter-revelation" class="text-xs p-2 bg-slate-50 border border-slate-300 rounded-lg">
+              <option value="all">Semua (Makkiyyah &amp; Madaniyyah)</option>
+              <option value="Mekah">Makkiyyah (Mekah)</option>
+              <option value="Madinah">Madaniyyah (Madinah)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500">
+          <span id="mushaf-filter-count" class="font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">114 Surat</span>
+          <span>Klik kartu surat mana saja untuk membuka seluruh ayatnya di bawah.</span>
+        </div>
+
+        <!-- Grid 114 Surat -->
+        <div id="mushaf-surah-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 max-h-[296px] overflow-y-auto overflow-x-hidden p-1.5"></div>
+      </div>
+
+      <!-- Detail Surat Terpilih + Daftar Ayat Lengkap -->
+      <div id="mushaf-surah-detail" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 space-y-4">
+        <div class="bg-gradient-to-r from-emerald-900 to-teal-800 text-white rounded-xl p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4 overflow-hidden">
+          <div class="min-w-0">
+            <div class="flex flex-wrap items-center gap-2">
+              <span id="mushaf-detail-num" class="px-2.5 py-0.5 rounded-full bg-white/20 text-xs font-bold">Surat 1</span>
+              <span id="mushaf-detail-rev" class="px-2.5 py-0.5 rounded-full bg-amber-400/20 text-amber-200 text-xs font-semibold">Makkiyyah • 7 Ayat</span>
+            </div>
+            <h3 id="mushaf-detail-title" class="text-xl sm:text-2xl font-bold mt-1.5">Al-Fatihah (Pembukaan)</h3>
+            <p id="mushaf-detail-desc" class="text-xs text-emerald-100 mt-1 max-w-3xl leading-relaxed"></p>
+          </div>
+          <div class="text-right shrink-0 space-y-2 max-w-full">
+            <div id="mushaf-detail-arabic" class="font-diwani text-4xl sm:text-5xl text-amber-200 leading-[1.6] px-1 max-w-full overflow-hidden" dir="rtl" lang="ar">الفاتحة</div>
+            <button id="btn-mushaf-play-full" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-lg text-xs transition">
+              Putar Surat (Lanjut Otomatis)
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Rentang Ayat & Tampilan Kemenag -->
+        <div class="flex flex-wrap items-center justify-between gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+          <div class="flex flex-wrap items-center gap-2">
+            <label class="font-semibold text-slate-600">Dari Ayat:</label>
+            <input type="number" id="mushaf-from-ayah" min="1" value="1" class="w-16 p-1.5 bg-white border border-slate-300 rounded">
+            <label class="font-semibold text-slate-600">Ke Ayat:</label>
+            <input type="number" id="mushaf-to-ayah" min="1" value="7" class="w-16 p-1.5 bg-white border border-slate-300 rounded">
+            <button id="btn-mushaf-apply-range" class="px-3 py-1.5 bg-emerald-700 text-white rounded-lg font-semibold hover:bg-emerald-800 transition">Tampilkan</button>
+          </div>
+          <div class="flex flex-wrap items-center gap-4">
+            <label class="flex items-center gap-1.5 cursor-pointer">
+              <input type="checkbox" id="chk-mushaf-translit" checked class="rounded text-emerald-600">
+              <span>Transliterasi Latin</span>
+            </label>
+            <label class="flex items-center gap-1.5 cursor-pointer">
+              <input type="checkbox" id="chk-mushaf-translation" checked class="rounded text-emerald-600">
+              <span>Terjemahan Kemenag</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Daftar Ayat Surat -->
+        <div id="mushaf-ayahs-list" class="space-y-3"></div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- PILAR 2: ANALYZER LSF (3 METAFUNGSI HALLIDAY & EBOOK LSF)             -->
+    <!-- ===================================================================== -->
+    <section id="pillar-sfl" class="space-y-6">
+
+      <!-- Kontrol Pemilihan Ayat: Akses Cepat Seluruh 114 Surat & 6.236 Ayat -->
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 space-y-3">
+        <div class="p-3 bg-emerald-50/70 rounded-xl border border-emerald-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+          <div>
+            <span class="text-xs font-bold text-emerald-900 uppercase tracking-wide">Akses Cepat Seluruh Al-Qur'an (114 Surat • 6.236 Ayat Kemenag RI):</span>
+            <p class="text-[11px] text-emerald-800">Pilih surat &amp; ayat mana saja (bertanda ★ memiliki analisis terkurasi Ebook LSF) untuk dianalisis &amp; dibandingkan dengan Tafsir.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <select id="quick-surah-select" class="text-xs bg-white border border-emerald-300 rounded-lg p-2 font-medium text-slate-800 max-w-[240px]"></select>
+            <select id="quick-ayah-select" class="text-xs bg-white border border-emerald-300 rounded-lg p-2 font-medium text-slate-800 w-32"></select>
+            <button id="btn-quick-load-ayah" class="px-3 py-2 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold rounded-lg transition">
+              Muat Ayat Ini
+            </button>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-2 pt-0.5">
+          <span id="source-ref-label" class="text-[11px] text-slate-500 italic">Sumber analisis: -</span>
+          <div class="flex items-center gap-2">
+            <button id="btn-save-heuristic-verse" class="hidden px-3 py-1.5 text-xs font-semibold bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-lg transition">
+              Simpan Draf Ayat Ini ke Korpus
+            </button>
+            <button id="btn-prev-verse" class="px-3 py-1.5 text-xs font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition border border-slate-200">← Ayat Sebelumnya</button>
+            <button id="btn-next-verse" class="px-3 py-1.5 text-xs font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition border border-slate-200">Ayat Berikutnya →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tampilan Teks Ayat & Token Interaktif -->
+      <section id="sfl-active-verse-section" class="bg-gradient-to-b from-white to-slate-50/60 rounded-2xl shadow-sm border border-slate-200 p-6 text-center relative">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200" id="badge-verse-ref">QS. Al-Fatihah [1]: 2</span>
+            <span id="badge-heuristic-mode" class="hidden text-[11px] font-semibold bg-amber-100 text-amber-900 px-2.5 py-0.5 rounded-full border border-amber-300">Draf Analisis Otomatis LSF</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-1.5 text-[11px]">
+            <span id="badge-process-pill" class="px-2.5 py-0.5 rounded-full font-semibold bg-emerald-100 text-emerald-900 border border-emerald-200"></span>
+            <span id="badge-speech-pill" class="px-2.5 py-0.5 rounded-full font-semibold bg-indigo-100 text-indigo-900 border border-indigo-200"></span>
+            <span id="badge-theme-pill" class="px-2.5 py-0.5 rounded-full font-semibold bg-amber-100 text-amber-900 border border-amber-200"></span>
+          </div>
+        </div>
+
+        <div class="h-[156px] overflow-y-auto px-3 py-2 flex flex-col justify-center">
+          <div class="my-1 px-1">
+            <p id="arabic-text" class="font-arabic text-lg sm:text-xl lg:text-[22px] text-emerald-950 leading-[2.25] font-normal" dir="rtl"></p>
+          </div>
+          <p id="transliteration-text" class="text-sm font-medium text-slate-500 italic"></p>
+          <p id="translation-text" class="text-sm sm:text-base text-slate-700 mt-1.5 max-w-3xl mx-auto font-medium"></p>
+        </div>
+
+        <div class="mt-4 flex justify-center gap-2">
+          <button id="btn-play-active-audio" class="hidden px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 rounded-lg text-xs font-semibold transition">
+            Putar Murottal (Lanjut Otomatis)
+          </button>
+          <button id="btn-jump-to-tafsir-comp" class="px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200 rounded-lg text-xs font-semibold transition">
+            Buka Perbandingan LSF vs. Tafsir →
+          </button>
+        </div>
+
+        <!-- Token Interaktif -->
+        <div class="mt-6 pt-5 border-t border-slate-100">
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
+            Klik Unsur Kata di Bawah untuk Audio Cue, Akar Kata (Root), Kategori Nahwu &amp; Peran LSF:
+          </p>
+          <div id="tokens-container" class="flex flex-wrap justify-center gap-2" dir="rtl"></div>
+
+          <div id="token-inspector" class="hidden mt-4 max-w-2xl mx-auto p-3.5 bg-emerald-50/90 border border-emerald-200 rounded-xl text-left text-xs grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div><span class="text-[10px] text-slate-500 uppercase font-bold block">Lafadz</span><span id="tok-detail-ar" class="font-arabic text-lg font-bold text-emerald-950"></span></div>
+            <div><span class="text-[10px] text-slate-500 uppercase font-bold block">Akar Kata<span class="arabic-term-badge"> (الجذر)</span></span><span id="tok-detail-root" class="font-arabic text-base font-semibold text-slate-800"></span></div>
+            <div><span class="text-[10px] text-slate-500 uppercase font-bold block">Kategori Nahwu</span><span id="tok-detail-pos" class="font-medium text-slate-700"></span></div>
+            <div><span class="text-[10px] text-slate-500 uppercase font-bold block">Peran LSF</span><span id="tok-detail-role" class="font-semibold text-emerald-800 block"></span><span id="tok-detail-role-ar" class="arabic-term-badge font-arabic text-sm text-teal-800"></span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Diagram Berlapis 3 Metafungsi LSF -->
+      <section id="sfl-diagram-section" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-3 border-b border-slate-100 gap-2">
+          <div>
+            <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
+              Diagram Visual Struktur LSF Berlapis (Multi-Tier Clause Diagram)
+            </h3>
+            <p class="text-xs text-slate-500">Keselarasan peran kata dalam 3 dimensi metafungsi secara simultan (kanan ke kiri)</p>
+          </div>
+          <span class="text-[11px] bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md font-medium border border-slate-200">Orientasi Klausa Arab (RTL)</span>
+        </div>
+
+        <div class="overflow-x-auto pb-2">
+          <div class="min-w-[660px] space-y-2.5 text-center">
+            <div class="flex items-stretch gap-2" id="diagram-row-arabic" dir="rtl"></div>
+            <div class="flex items-stretch gap-2" id="diagram-row-ideational" dir="rtl"></div>
+            <div class="flex items-stretch gap-2" id="diagram-row-interpersonal" dir="rtl"></div>
+            <div class="flex items-stretch gap-2" id="diagram-row-textual" dir="rtl"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Navigasi Lima Tab Analisis -->
+      <div>
+        <div class="flex border-b border-slate-200 bg-white rounded-t-xl px-2 pt-2 gap-1.5 overflow-x-auto">
+          <button id="tab-ideational" class="tab-btn px-4 py-2.5 text-sm font-semibold text-emerald-700 border-b-2 border-emerald-600 flex items-center gap-2 whitespace-nowrap">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>1. Ideasional (Transitivitas)
+          </button>
+          <button id="tab-interpersonal" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-slate-800 border-b-2 border-transparent flex items-center gap-2 whitespace-nowrap">
+            <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>2. Interpersonal (Mood &amp; Residu)
+          </button>
+          <button id="tab-textual" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-slate-800 border-b-2 border-transparent flex items-center gap-2 whitespace-nowrap">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>3. Tekstual (Tema &amp; Rema)
+          </button>
+          <button id="tab-bridge" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-slate-800 border-b-2 border-transparent flex items-center gap-2 whitespace-nowrap">
+            <span class="w-2.5 h-2.5 rounded-full bg-teal-600"></span>4. Nahwu–Balaghah &amp; Pedagogis
+          </button>
+          <button id="tab-verse-tafsir" class="tab-btn px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-slate-800 border-b-2 border-transparent flex items-center gap-2 whitespace-nowrap">
+            <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span>5. Tafsir Kemenag &amp; Ibnu Katsir
+          </button>
+        </div>
+
+        <section class="bg-white rounded-b-xl shadow-sm border border-slate-200 p-6 min-h-[340px]">
+          <!-- Panel 1: Ideasional -->
+          <div id="panel-ideational" class="meta-panel space-y-5">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-2 border-b border-emerald-100 gap-2">
+              <div>
+                <h3 class="font-bold text-emerald-900 text-lg">Analisis Sistem Transitivitas (Metafungsi Ideasional)</h3>
+                <p class="text-xs text-slate-500">Pemetaan klausa, tipe proses, partisipan, dan sirkumstansi sesuai kerangka Tesis Surat Ibrahim &amp; Halliday.</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+                <span class="text-xs font-semibold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-md" id="ideational-process-type"></span>
+                <button type="button" data-ai-scope="ideational" data-ai-label="Transitivitas (Ideasional)" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-3 py-1 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-xs font-bold transition shadow-2xs">
+                  <svg class="w-3.5 h-3.5 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
+                  <span>Tanya AI</span>
+                </button>
+              </div>
+            </div>
+            <div id="clauses-breakdown-container" class="space-y-2"></div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                <thead>
+                  <tr class="bg-emerald-50 text-emerald-900 border-b border-emerald-100">
+                    <th class="py-2.5 px-3 font-semibold">Segmen Teks</th>
+                    <th class="py-2.5 px-3 font-semibold">Komponen LSF</th>
+                    <th class="py-2.5 px-3 font-semibold">Peran Fungsional</th>
+                    <th class="py-2.5 px-3 font-semibold">Penjelasan Makna</th>
+                  </tr>
+                </thead>
+                <tbody id="ideational-table-body" class="divide-y divide-slate-100"></tbody>
+              </table>
+            </div>
+            <div class="p-3.5 bg-emerald-50/70 rounded-lg border border-emerald-100 text-xs text-emerald-950 leading-relaxed" id="ideational-summary"></div>
+          </div>
+
+          <!-- Panel 2: Interpersonal -->
+          <div id="panel-interpersonal" class="meta-panel hidden space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-2 border-b border-indigo-100 gap-2">
+              <div>
+                <h3 class="font-bold text-indigo-900 text-lg">Struktur Mood &amp; Residu (Metafungsi Interpersonal)</h3>
+                <p class="text-xs text-slate-500">Interaksi penutur, fungsi tindak tutur, dan modalitas.</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="text-xs font-semibold px-2.5 py-1 bg-indigo-100 text-indigo-900 rounded-md" id="interpersonal-speech-func"></span>
+                <span class="text-xs font-medium px-2.5 py-1 bg-slate-100 text-slate-700 rounded-md border border-slate-200" id="interpersonal-modality"></span>
+                <button type="button" data-ai-scope="interpersonal" data-ai-label="Mood &amp; Tutur (Interpersonal)" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-3 py-1 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-xs font-bold transition shadow-2xs">
+                  <svg class="w-3.5 h-3.5 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
+                  <span>Tanya AI</span>
+                </button>
+              </div>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                <thead>
+                  <tr class="bg-indigo-50 text-indigo-900 border-b border-indigo-100">
+                    <th class="py-2.5 px-3 font-semibold">Segmen Teks</th>
+                    <th class="py-2.5 px-3 font-semibold">Blok Struktur</th>
+                    <th class="py-2.5 px-3 font-semibold">Fungsi Gramatikal</th>
+                    <th class="py-2.5 px-3 font-semibold">Implikasi Interpersonal</th>
+                  </tr>
+                </thead>
+                <tbody id="interpersonal-table-body" class="divide-y divide-slate-100"></tbody>
+              </table>
+            </div>
+            <div class="p-3.5 bg-indigo-50/70 rounded-lg border border-indigo-100 text-xs text-indigo-950 leading-relaxed" id="interpersonal-summary"></div>
+          </div>
+
+          <!-- Panel 3: Tekstual -->
+          <div id="panel-textual" class="meta-panel hidden space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-2 border-b border-amber-100 gap-2">
+              <div>
+                <h3 class="font-bold text-amber-900 text-lg">Struktur Tema – Rema (Metafungsi Tekstual)</h3>
+                <p class="text-xs text-slate-500">Titik tolak pesan (Theme) dan pengembangan informasi baru (Rheme).</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+                <span class="text-xs font-semibold px-2.5 py-1 bg-amber-100 text-amber-900 rounded-md" id="textual-theme-type"></span>
+                <button type="button" data-ai-scope="textual" data-ai-label="Tema–Rema (Tekstual)" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-3 py-1 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-xs font-bold transition shadow-2xs">
+                  <svg class="w-3.5 h-3.5 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
+                  <span>Tanya AI</span>
+                </button>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 bg-amber-50/80 rounded-xl border border-amber-200">
+                <span class="text-xs font-bold text-amber-800 uppercase tracking-wider">TEMA<span class="arabic-term-badge"> • <span class="font-arabic text-sm">الموضوع</span></span></span>
+                <div class="mt-2 font-semibold text-slate-800 font-arabic text-lg" id="textual-theme-content"></div>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed" id="textual-theme-desc"></p>
+              </div>
+              <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">REMA<span class="arabic-term-badge"> • <span class="font-arabic text-sm">الخبر</span></span></span>
+                <div class="mt-2 font-semibold text-slate-800 font-arabic text-lg" id="textual-rheme-content"></div>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed" id="textual-rheme-desc"></p>
+              </div>
+            </div>
+            <div class="p-3.5 bg-amber-50/60 rounded-lg border border-amber-100 text-xs text-amber-950 leading-relaxed" id="textual-summary"></div>
+          </div>
+
+          <!-- Panel 4: Nahwu-Balaghah & Pedagogis -->
+          <div id="panel-bridge" class="meta-panel hidden space-y-5">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-2 border-b border-teal-100">
+              <div>
+                <h3 class="font-bold text-teal-950 text-lg">Integrasi Nahwu–Balaghah &amp; Implikasi Pedagogis</h3>
+                <p class="text-xs text-slate-500">Sintesis dari risalah <span class="arabic-term-badge"><span class="font-arabic">اللسانيات الوظيفية النظامية والنحو العربي</span> dan </span>Bab V Tesis Agus Gunawan (2025).</p>
+              </div>
+              <button type="button" data-ai-scope="bridge" data-ai-label="Jembatan Nahwu &amp; Balaghah" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-3 py-1 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-xs font-bold transition shadow-2xs self-start sm:self-auto">
+                <svg class="w-3.5 h-3.5 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
+                <span>Tanya AI</span>
+              </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs leading-relaxed">
+              <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+                <span class="font-bold text-slate-800 uppercase tracking-wide block">1. Perspektif Nahwu (I'rab)</span>
+                <p id="bridge-nahwu" class="text-slate-600"></p>
+              </div>
+              <div class="p-4 bg-teal-50/70 rounded-xl border border-teal-200 space-y-1.5">
+                <span class="font-bold text-teal-900 uppercase tracking-wide block">2. Perspektif Balaghah (Ilmu Ma'ani)</span>
+                <p id="bridge-balaghah" class="text-teal-950"></p>
+              </div>
+              <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200 space-y-1.5">
+                <span class="font-bold text-emerald-900 uppercase tracking-wide block">3. Sintesis LSF Hallidayan</span>
+                <p id="bridge-sfl" class="text-emerald-950"></p>
+              </div>
+            </div>
+            <div class="p-4 bg-amber-50/60 rounded-xl border border-amber-200 space-y-2 text-xs">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="font-bold text-amber-950 uppercase tracking-wide">Implikasi Pembelajaran Bahasa Arab (Qira'ah)</span>
+                <span id="pedagogical-level" class="px-2 py-0.5 bg-amber-200/70 text-amber-950 font-semibold rounded"></span>
+              </div>
+              <p class="text-slate-700"><strong>Tujuan Pembelajaran:</strong> <span id="pedagogical-objective"></span></p>
+              <p class="text-slate-700"><strong>Aktivitas Kelas:</strong> <span id="pedagogical-activity"></span></p>
+            </div>
+          </div>
+
+          <!-- Panel 5: Tafsir Kemenag & Ibnu Katsir Lengkap untuk Ayat Aktif -->
+          <div id="panel-verse-tafsir" class="meta-panel hidden space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-2 border-b border-purple-100 gap-2">
+              <div>
+                <h3 class="font-bold text-purple-950 text-lg">Tafsir Kemenag RI (Tahlili) &amp; Tafsir Ibnu Katsir</h3>
+                <p class="text-xs text-slate-500">Teks lengkap offline Tafsir Tahlili Kemenag RI &amp; Kitab <em>Lubaabut Tafsiir Min Ibni Katsiir</em> (Pustaka Imam Asy-Syafi'i Jilid I–VIII) beserta matan Arab.</p>
+              </div>
+              <button id="btn-open-full-tafsir-studio" class="px-3 py-1.5 bg-purple-700 hover:bg-purple-800 text-white text-xs font-semibold rounded-lg transition">
+                Buka Studio Perbandingan Lengkap →
+              </button>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between gap-2">
+                  <h4 class="text-xs font-bold uppercase tracking-wider text-purple-900">1. Tafsir Tahlili Kemenag RI</h4>
+                  <button type="button" data-ai-scope="kemenag" data-ai-label="Tafsir Kemenag RI" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-[11px] font-bold transition">
+                    <svg class="w-3 h-3 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
+                    <span>Tanya AI</span>
+                  </button>
+                </div>
+                <div id="verse-kemenag-tafsir-box" class="p-4 bg-purple-50/40 rounded-xl border border-purple-200 text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line max-h-[380px] overflow-y-auto"></div>
+              </div>
+              <div class="space-y-2">
+                <div class="flex items-center justify-between gap-2">
+                  <h4 class="text-xs font-bold uppercase tracking-wider text-amber-900">2. Tafsir Ibnu Katsir (Ma'tsur • Jilid I–VIII)</h4>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <div class="inline-flex rounded-lg bg-amber-100/80 p-0.5 border border-amber-200 text-[10px] font-bold">
+                      <button type="button" data-ik-lang="id" class="ik-lang-btn px-2 py-0.5 rounded-md bg-amber-600 text-white transition">Indonesia</button>
+                      <button type="button" data-ik-lang="en" class="ik-lang-btn px-2 py-0.5 rounded-md text-amber-900 hover:bg-amber-200/70 transition">English</button>
+                    </div>
+                    <button type="button" data-ai-scope="ibnkatsir" data-ai-label="Tafsir Ibnu Katsir" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-[11px] font-bold transition">
+                      <svg class="w-3 h-3 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
+                      <span>Tanya AI</span>
+                    </button>
+                  </div>
+                </div>
+                <div id="verse-ibnkatsir-en-box" class="p-4 bg-amber-50/40 rounded-xl border border-amber-200 text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line max-h-[260px] overflow-y-auto"></div>
+                <details class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs">
+                  <summary class="font-bold text-slate-800 cursor-pointer select-none">Lihat Matan Arab Asli Tafsir Ibnu Katsir</summary>
+                  <div id="verse-ibnkatsir-ar-box" class="font-arabic text-base leading-[2.2] text-slate-900 text-right whitespace-pre-line mt-2 max-h-[220px] overflow-y-auto pr-1" dir="rtl"></div>
+                </details>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- PILAR 3: STUDIO PERBANDINGAN LSF VS. METODE TAFSIR KLASIK & KONTEMPORER -->
+    <!-- ===================================================================== -->
+    <section id="pillar-tafsir" class="hidden space-y-6">
+
+      <!-- Bagian A: Perbandingan Ayat Aktif (LSF vs. Berbagai Aliran Tafsir) -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-5">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 pb-4 border-b border-slate-100">
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider bg-purple-100 text-purple-900 px-2.5 py-0.5 rounded">Komparasi Tafsir &amp; Linguistik Al-Qur'an</span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">Perbandingan Penjelasan Ayat: Metode LSF vs. Tafsir Terkenal &amp; Kontemporer</h2>
+            <p class="text-xs text-slate-500">Menimbang apa yang diungkap oleh tata bahasa fungsional (LSF/Ebook) dibandingkan dengan Tafsir Kemenag, Tafsir Klasik, dan Tafsir Kontemporer.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <select id="studio-surah-select" class="text-xs bg-slate-50 border border-slate-300 rounded-lg p-2 font-medium text-slate-800 max-w-[190px]" title="Pilih dari 114 Surat"></select>
+            <select id="studio-ayah-select" class="text-xs bg-slate-50 border border-slate-300 rounded-lg p-2 font-medium text-slate-800 w-28" title="Pilih dari 6.236 Ayat"></select>
+            <button type="button" id="btn-studio-prev" class="px-2.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition" title="Ayat Sebelumnya">◄</button>
+            <button type="button" id="btn-studio-next" class="px-2.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition" title="Ayat Berikutnya">►</button>
+            <button type="button" id="btn-studio-new-window" class="px-3 py-2 bg-purple-700 hover:bg-purple-800 text-white rounded-lg text-xs font-semibold transition">Buka di Jendela Baru ↗</button>
+          </div>
+        </div>
+
+        <!-- Header Ayat yang Dibandingkan (Tinggi Stabil agar Pergantian Ayat Tidak Menggeser Tampilan) -->
+        <div id="studio-verse-banner" class="h-[164px] p-4 bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 text-white rounded-2xl text-center flex flex-col justify-between overflow-hidden">
+          <div class="flex justify-center gap-2 text-xs shrink-0">
+            <span id="studio-verse-ref" class="px-3 py-0.5 rounded-full bg-emerald-500/30 border border-emerald-400/40 font-semibold text-emerald-200"></span>
+            <span id="studio-verse-tags" class="px-3 py-0.5 rounded-full bg-amber-500/20 border border-amber-400/30 font-semibold text-amber-200 truncate max-w-[320px]"></span>
+          </div>
+          <div class="flex-1 overflow-y-auto px-2 py-1 flex flex-col justify-center space-y-1">
+            <p id="studio-verse-arabic" class="font-arabic text-lg sm:text-xl font-normal text-amber-200 leading-[2.1]" dir="rtl"></p>
+            <p id="studio-verse-translation" class="text-xs sm:text-sm text-slate-200 italic max-w-3xl mx-auto"></p>
+          </div>
+        </div>
+
+        <!-- Grid Perbandingan Utama: Kiri (Metode LSF Ebook) vs Kanan (Metode Tafsir) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+          <!-- Kolom Kiri: Metode LSF (5 kolom) -->
+          <div class="lg:col-span-5 bg-emerald-50/70 rounded-2xl border border-emerald-200 p-5 space-y-4">
+            <div class="flex items-center justify-between border-b border-emerald-200 pb-2.5">
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-700">Pendekatan Ebook LSF</span>
+                <h3 class="text-base font-bold text-emerald-950">1. Metode LSF (3 Metafungsi Halliday)</h3>
+              </div>
+              <span class="arabic-term-badge font-diwani text-base text-teal-800">اللسانيات الوظيفية</span>
+            </div>
+
+            <div class="space-y-3 text-xs leading-relaxed">
+              <div class="p-3 bg-white rounded-xl border border-emerald-200 space-y-1">
+                <div class="flex items-center justify-between gap-2">
+                  <strong class="text-emerald-900">A. Ideasional (Transitivitas):</strong>
+                  <button type="button" data-ai-scope="ideational" data-ai-label="Studio Ideasional LSF" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-[10px] font-bold transition">
+                    <svg class="w-3 h-3 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
+                    <span>Tanya AI</span>
+                  </button>
+                </div>
+                <p id="studio-lsf-ideational" class="text-slate-700"></p>
+              </div>
+              <div class="p-3 bg-white rounded-xl border border-indigo-200 space-y-1">
+                <div class="flex items-center justify-between gap-2">
+                  <strong class="text-indigo-900">B. Interpersonal (Mood &amp; Relasi Tutur):</strong>
+                  <button type="button" data-ai-scope="interpersonal" data-ai-label="Studio Interpersonal LSF" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-[10px] font-bold transition">
+                    <svg class="w-3 h-3 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
+                    <span>Tanya AI</span>
+                  </button>
+                </div>
+                <p id="studio-lsf-interpersonal" class="text-slate-700"></p>
+              </div>
+              <div class="p-3 bg-white rounded-xl border border-amber-200 space-y-1">
+                <div class="flex items-center justify-between gap-2">
+                  <strong class="text-amber-900">C. Tekstual (Tema–Rema &amp; Fokus):</strong>
+                  <button type="button" data-ai-scope="textual" data-ai-label="Studio Tekstual LSF" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-[10px] font-bold transition">
+                    <svg class="w-3 h-3 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
+                    <span>Tanya AI</span>
+                  </button>
+                </div>
+                <p id="studio-lsf-textual" class="text-slate-700"></p>
+              </div>
+              <div class="p-3 bg-teal-900 text-emerald-50 rounded-xl space-y-1">
+                <div class="flex items-center justify-between gap-2">
+                  <strong class="text-amber-200">D. Jembatan Nahwu–Balaghah (Ebook Arab):</strong>
+                  <button type="button" data-ai-scope="bridge" data-ai-label="Studio Nahwu &amp; Balaghah" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/95 hover:bg-white text-sky-950 text-[10px] font-bold transition">
+                    <svg class="w-3 h-3 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
+                    <span>Tanya AI</span>
+                  </button>
+                </div>
+                <p id="studio-lsf-bridge" class="text-emerald-100"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kolom Kanan: Metode Tafsir Terkenal & Kontemporer (7 kolom) -->
+          <div class="lg:col-span-7 space-y-3.5">
+            <!-- Tabs Pilih Aliran Tafsir atau Tampilkan Semua -->
+            <div class="flex flex-wrap gap-1.5 text-xs font-semibold">
+              <button data-tafsir-filter="all" class="tafsir-filter-btn px-3 py-1.5 rounded-lg bg-purple-700 text-white">Semua Aliran Tafsir</button>
+              <button data-tafsir-filter="kemenag" class="tafsir-filter-btn px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Tafsir Kemenag RI</button>
+              <button data-tafsir-filter="klasik" class="tafsir-filter-btn px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Klasik (Ma'tsur &amp; Balaghi)</button>
+              <button data-tafsir-filter="kontemporer" class="tafsir-filter-btn px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Kontemporer (Al-Misbah &amp; Maqashidi)</button>
+            </div>
+
+            <div id="studio-tafsir-cards" class="space-y-3 text-xs leading-relaxed"></div>
+
+            <!-- Teks Lengkap Kemenag Tahlili & Ibnu Katsir (Collapsible / Scrollable) -->
+            <details class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs">
+              <summary class="font-bold text-slate-800 cursor-pointer select-none">
+                Lihat Teks Lengkap Tafsir Tahlili Kemenag RI untuk Ayat Ini (Klik untuk buka)
+              </summary>
+              <div id="studio-kemenag-fulltext" class="mt-3 text-slate-700 whitespace-pre-line leading-relaxed max-h-64 overflow-y-auto pr-2"></div>
+            </details>
+
+            <details class="bg-amber-50/50 border border-amber-200 rounded-xl p-4 text-xs" open>
+              <summary class="font-bold text-amber-950 cursor-pointer select-none">
+                Tafsir Ibnu Katsir (Lubaabut Tafsiir Jilid I–VIII) untuk Ayat Ini
+              </summary>
+              <div class="mt-3 flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-amber-200/70">
+                <span class="text-[11px] font-semibold text-amber-900">Pilihan Bahasa Terjemahan Ibnu Katsir:</span>
+                <div class="inline-flex rounded-lg bg-amber-100/90 p-0.5 border border-amber-200 text-[11px] font-bold">
+                  <button type="button" data-ik-lang="id" class="ik-lang-btn px-2.5 py-1 rounded-md bg-amber-600 text-white transition">Bahasa Indonesia</button>
+                  <button type="button" data-ik-lang="en" class="ik-lang-btn px-2.5 py-1 rounded-md text-amber-900 hover:bg-amber-200/70 transition">Bahasa Inggris</button>
+                </div>
+              </div>
+              <div id="studio-ibnkatsir-en" class="mt-3 text-slate-700 whitespace-pre-line leading-relaxed max-h-60 overflow-y-auto pr-2"></div>
+              <details class="mt-3 pt-2 border-t border-amber-200/70">
+                <summary class="font-semibold text-amber-900 cursor-pointer select-none">Teks Arab Asli Tafsir Ibnu Katsir</summary>
+                <div id="studio-ibnkatsir-ar" class="font-arabic text-base leading-[2.2] text-slate-900 text-right whitespace-pre-line mt-2 max-h-52 overflow-y-auto pr-1" dir="rtl"></div>
+              </details>
+            </details>
+          </div>
+        </div>
+
+        <!-- Kotak Sintesis Unik: Apa Nilai Tambah LSF terhadap Tafsir? -->
+        <div class="p-5 bg-gradient-to-r from-indigo-900 to-purple-900 text-white rounded-2xl space-y-2">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h4 class="font-bold text-sm sm:text-base text-amber-200">Sintesis Perbandingan: Titik Temu &amp; Keunggulan Khas LSF vs. Metode Tafsir</h4>
+            <button type="button" data-ai-scope="synthesis" data-ai-label="Sintesis LSF vs. Tafsir" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/95 hover:bg-white text-sky-950 text-xs font-bold transition shadow-xs">
+              <svg class="w-3.5 h-3.5 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
+              <span>Tanya AI</span>
+            </button>
+          </div>
+          <p id="studio-synthesis-text" class="text-xs sm:text-sm text-indigo-100 leading-relaxed"></p>
+        </div>
+      </div>
+
+      <!-- Bagian B: Matriks Metodologi 6 Pendekatan (LSF vs. 5 Aliran Tafsir) -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-4">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded">Kerangka Epistemologis &amp; Metodologis</span>
+          <h3 class="text-lg font-bold text-slate-900 mt-1">Matriks Perbandingan Metodologi: LSF vs. Tafsir Klasik &amp; Kontemporer</h3>
+          <p class="text-xs text-slate-500">Membandingkan paradigma, tokoh utama, unit analisis, keunggulan, serta relasi komplementernya dengan LSF.</p>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="bg-slate-900 text-white">
+                <th class="py-3 px-3 font-semibold">Metode / Aliran</th>
+                <th class="py-3 px-3 font-semibold">Era &amp; Tokoh Utama</th>
+                <th class="py-3 px-3 font-semibold">Paradigma Dasar</th>
+                <th class="py-3 px-3 font-semibold">Unit Analisis</th>
+                <th class="py-3 px-3 font-semibold">Keunggulan &amp; Relasi dengan LSF</th>
+              </tr>
+            </thead>
+            <tbody id="methodology-matrix-body" class="divide-y divide-slate-200"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </section><!-- /pillar-tafsir -->
+          </div><!-- /CENTER WORKSPACE (xl:col-span-8) -->
+
+          <!-- ZONE 3: RIGHT SIDEBAR WIDGETS (MUROTTAL HARMONIS & GEMINI AI LSF DI SEBELAH KANAN) -->
+          <aside class="xl:col-span-4 space-y-4 xl:sticky xl:top-4">
+
+            <!-- GEMINI AI ASSISTANT PANEL (Posisi Kanan Atas: Kata Kunci LSF Otomatis & Tanya AI) -->
+            <section id="gemini-ai-panel" class="rounded-2xl shadow-sm bg-gradient-to-b from-sky-50/90 via-white to-emerald-50/70 border border-sky-200/80 p-3.5 space-y-2.5 text-xs">
+              <div class="flex items-start justify-between gap-2 pb-2 border-b border-sky-100">
+                <div class="flex items-center gap-2 min-w-0">
+                  <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-sky-500 via-indigo-600 to-teal-500 text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L14.2 9.2L21.5 11.5L14.2 13.8L12 21L9.8 13.8L2.5 11.5L9.8 9.2L12 2Z"/></svg>
+                  </div>
+                  <div class="min-w-0">
+                    <h3 class="font-extrabold text-sm text-slate-900 leading-tight">Gemini AI • LSF</h3>
+                    <p id="gemini-active-ref" class="text-[11px] text-sky-900 font-semibold truncate">QS. Al-Fatihah [1]: 2</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Kata & Istilah Kunci yang Perlu Dipahami pada Penafsiran LSF -->
+              <div class="bg-white/90 rounded-xl p-2.5 border border-sky-100 space-y-1.5">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-[10px] font-extrabold uppercase tracking-wider text-sky-900">Kata &amp; Istilah Kunci LSF</span>
+                  <span class="text-[10px] text-slate-400">Klik kata untuk uraian</span>
+                </div>
+                <div id="gemini-auto-terms" class="flex flex-wrap gap-1.5 h-[76px] overflow-y-auto content-start pr-1"></div>
+              </div>
+
+              <!-- Gemini AI Chat & Penjelasan Kontekstual -->
+              <div id="gemini-chat-log" class="space-y-2 max-h-44 overflow-y-auto pr-1 text-[11px] leading-relaxed"></div>
+
+              <!-- Form Tanya Gemini AI -->
+              <form id="gemini-chat-form" class="flex items-center gap-1.5 pt-0.5">
+                <input type="text" id="gemini-prompt-input" placeholder="Tanya AI makna kata, Nahwu, LSF, atau Tafsir..." class="flex-1 min-w-0 px-3 py-1.5 rounded-xl bg-white border border-sky-200 text-xs outline-none focus:ring-2 focus:ring-sky-400">
+                <button type="submit" id="btn-gemini-send" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 text-white font-bold text-xs shadow-xs transition shrink-0">Kirim</button>
+              </form>
+            </section>
+
+            <!-- Pemutar Murottal Al-Qur'an (Hijau Zamrud Lebih Muda & Emas Hangat) -->
+            <section id="global-audio-bar" class="rounded-2xl overflow-hidden relative text-white border border-amber-200/35 shadow-[0_14px_34px_-12px_rgba(16,99,74,0.34)]" style="background: linear-gradient(155deg, #178262 0%, #1d9670 48%, #10634a 100%);">
+              <!-- Subtle Watermark Twilight Mosque Domes & Golden Stars (Blended Softly, No Borders) -->
+              <svg class="absolute inset-0 w-full h-full opacity-25 pointer-events-none" viewBox="0 0 400 360" preserveAspectRatio="xMidYMid slice" fill="none" aria-hidden="true">
+                <circle cx="52" cy="36" r="1.5" fill="#FDE68A"/>
+                <circle cx="145" cy="22" r="1.2" fill="#FEF3C7"/>
+                <circle cx="290" cy="26" r="1.4" fill="#FDE68A"/>
+                <circle cx="350" cy="46" r="1.6" fill="#FEF3C7"/>
+                <path d="M26 215V135H38V215M32 112L25 135H39L32 112Z" fill="#0D523E"/>
+                <path d="M44 220V172C44 146 78 132 96 132C114 132 148 146 148 172V220H44Z" fill="#136F53"/>
+                <path d="M362 215V135H374V215M368 112L361 135H375L368 112Z" fill="#0D523E"/>
+                <path d="M252 220V172C252 146 286 132 304 132C322 132 356 146 356 172V220H252Z" fill="#136F53"/>
+                <circle cx="200" cy="155" r="120" fill="url(#softRadialMurottal)"/>
+                <defs>
+                  <radialGradient id="softRadialMurottal" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#A7F3D0" stop-opacity="0.24"/>
+                    <stop offset="100%" stop-color="#10634A" stop-opacity="0"/>
+                  </radialGradient>
+                </defs>
+              </svg>
+
+              <div class="p-3 space-y-1.5 relative z-10">
+                <!-- Header -->
+                <div class="flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2 min-w-0">
+                    <div class="w-6 h-6 rounded-lg bg-amber-300/20 border border-amber-200/30 backdrop-blur-sm flex items-center justify-center shrink-0">
+                      <svg class="w-3.5 h-3.5 text-amber-200" fill="currentColor" viewBox="0 0 24 24"><path d="M4 10h2v4H4v-4zm4-4h2v12H8V6zm4-3h2v18h-2V3zm4 5h2v8h-2V8zm4 2h2v4h-2v-4z"/></svg>
+                    </div>
+                    <h3 class="text-[11px] font-extrabold uppercase tracking-wider text-amber-200 truncate">Murottal Al-Qur'an</h3>
+                  </div>
+                  <button type="button" id="btn-audio-close" class="px-2 py-0.5 bg-white/15 hover:bg-rose-500/80 rounded-lg text-[10px] font-semibold transition shrink-0" title="Sembunyikan Kotak Murottal">Sembunyikan</button>
+                </div>
+
+                <!-- Borderless Frosted Selector Strip (Pilih Surat & Pilih Ayat) -->
+                <div class="grid grid-cols-12 gap-1.5 bg-[#0e5742]/65 border border-emerald-200/25 backdrop-blur-md rounded-xl p-1">
+                  <div class="col-span-7 flex items-center gap-1 min-w-0">
+                    <span class="w-6 h-6 rounded-lg bg-[#0c4a38]/80 text-amber-200 flex items-center justify-center shrink-0" title="Pilih Surat">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    </span>
+                    <select id="audio-surah-select" aria-label="Pilih Surat" class="murottal-select flex-1 min-w-0 h-6 text-[11px] bg-[#126850] hover:bg-[#167a5e] text-amber-50 font-semibold border border-emerald-200/30 focus:border-amber-300/70 rounded-lg px-1.5 outline-none truncate transition cursor-pointer"></select>
+                  </div>
+                  <div class="col-span-5 flex items-center gap-1 min-w-0">
+                    <span class="w-6 h-6 rounded-lg bg-[#0c4a38]/80 text-amber-200 flex items-center justify-center shrink-0" title="Pilih Ayat">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    </span>
+                    <select id="audio-ayah-select" aria-label="Pilih Ayat" class="murottal-select flex-1 min-w-0 h-6 text-[11px] bg-[#126850] hover:bg-[#167a5e] text-amber-50 font-semibold border border-emerald-200/30 focus:border-amber-300/70 rounded-lg px-1.5 outline-none truncate transition cursor-pointer"></select>
+                  </div>
+                </div>
+
+                <!-- Boxy Unified Flow Stage -->
+                <div class="rounded-xl bg-[#0c4a38]/48 border border-emerald-100/15 backdrop-blur-md p-2 text-center space-y-1">
+                  <!-- Compact Surah Crown -->
+                  <div class="inline-flex flex-wrap items-center justify-center gap-x-2 bg-white/14 rounded-lg px-3 py-0.5 max-w-full overflow-hidden">
+                    <span id="audio-surah-ar" class="font-diwani text-base text-amber-200 leading-[1.3] truncate" dir="rtl" lang="ar">سُورَةُ الفَاتِحَة</span>
+                    <span id="audio-now-playing" class="text-[10px] font-bold text-white leading-snug truncate">QS. Al-Fatihah [1] • Ayat 1 dari 7</span>
+                  </div>
+
+                  <!-- Info Singkat Ayat Sebelumnya -->
+                  <button type="button" id="btn-audio-prev-preview" class="w-full h-5 bg-white/10 hover:bg-white/18 rounded-lg px-2 flex items-center justify-between gap-2 text-[9px] transition disabled:opacity-45 disabled:cursor-default">
+                    <span class="font-bold text-amber-200 shrink-0">◄ Sebelumnya</span>
+                    <span id="audio-prev-ref" class="text-emerald-50/90 truncate">Awal Al-Qur'an</span>
+                    <span id="audio-prev-ar" class="font-arabic text-[11px] text-emerald-50/85 truncate max-w-[80px]" dir="rtl">—</span>
+                  </button>
+
+                  <!-- Aliran Vertikal Berkelanjutan Seluruh Ayat Surat -->
+                  <div id="audio-teleprompter" class="relative h-[112px] overflow-y-auto overscroll-contain pr-1 text-right">
+                    <div id="audio-surah-stream" class="space-y-1"></div>
+                  </div>
+
+                  <div id="audio-next-info" class="text-[9px] text-amber-200 font-semibold truncate">(Lanjut otomatis ke Ayat 2..dst)</div>
+                </div>
+
+                <!-- Audio Player Bar (Senada Hijau Zamrud Muda & Emas Hangat) -->
+                <div class="bg-[#0e5742]/75 border border-emerald-200/25 px-2.5 py-2 rounded-xl shadow-inner flex items-center gap-2">
+                  <audio id="quran-audio-player" preload="metadata" class="hidden" src="https://cdn.equran.id/audio-partial/Misyari-Rasyid-Al-Afasi/001001.mp3"></audio>
+                  <button type="button" id="btn-audio-mini-toggle" class="w-6 h-6 rounded-lg bg-amber-300/20 hover:bg-amber-300/35 text-amber-200 flex items-center justify-center shrink-0 transition" title="Putar / Jeda" aria-label="Putar atau Jeda">
+                    <svg class="w-3 h-3 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+                  </button>
+                  <span id="murottal-time-current" class="font-mono-code text-[10px] font-semibold text-amber-100 tabular-nums shrink-0">0:00</span>
+                  <input id="murottal-seek-slider" type="range" min="0" max="1000" value="0" aria-label="Posisi Audio Murottal" class="flex-1 min-w-0 outline-none" />
+                  <span id="murottal-time-duration" class="font-mono-code text-[10px] font-medium text-emerald-100/85 tabular-nums shrink-0">0:00</span>
+                  <button type="button" id="btn-audio-mute" class="w-6 h-6 rounded-lg bg-white/10 hover:bg-white/20 text-emerald-50 hover:text-amber-200 flex items-center justify-center shrink-0 transition" title="Bisukan / Suarakan" aria-label="Bisukan atau Suarakan">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5zm4.54 3.46a5 5 0 010 7.07m2.83-9.9a9 9 0 010 12.73"/></svg>
+                  </button>
+                </div>
+
+                <!-- Compact Box Controls Row -->
+                <div class="flex items-center justify-around gap-1">
+                  <label class="cursor-pointer group flex flex-col items-center gap-0.5" title="Ulangi Ayat">
+                    <input type="checkbox" id="chk-audio-repeat" class="sr-only peer">
+                    <span class="w-7 h-7 rounded-lg bg-white/15 peer-checked:bg-amber-400 peer-checked:text-slate-950 text-emerald-50 flex items-center justify-center transition group-hover:scale-105">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7h12l-3-3m3 3l-3 3M20 17H8l3 3m-3-3l3-3"/></svg>
+                    </span>
+                    <span class="text-[9px] font-semibold text-emerald-50/95">Ulangi</span>
+                  </label>
+
+                  <button type="button" id="btn-audio-prev" class="flex flex-col items-center gap-0.5 group" title="Ayat Sebelumnya">
+                    <span class="w-7 h-7 rounded-lg bg-white/15 hover:bg-white/28 text-white flex items-center justify-center transition group-hover:scale-105 text-[10px] font-bold">◄</span>
+                    <span class="text-[9px] font-semibold text-emerald-50/95">Sebelum</span>
+                  </button>
+
+                  <button type="button" id="btn-audio-play-active" class="w-9 h-9 rounded-xl bg-gradient-to-b from-amber-300 to-amber-500 hover:from-amber-200 hover:to-amber-400 text-slate-950 shadow-md flex items-center justify-center transition hover:scale-105" title="Putar / Jeda" aria-label="Putar atau Jeda Murottal">
+                    <svg class="w-4 h-4 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5.14v14l11-7-11-7z"/></svg>
+                  </button>
+
+                  <button type="button" id="btn-audio-next" class="flex flex-col items-center gap-0.5 group" title="Ayat Berikutnya">
+                    <span class="w-7 h-7 rounded-lg bg-white/15 hover:bg-white/28 text-white flex items-center justify-center transition group-hover:scale-105 text-[10px] font-bold">►</span>
+                    <span class="text-[9px] font-semibold text-emerald-50/95">Berikut</span>
+                  </button>
+
+                  <label class="cursor-pointer group flex flex-col items-center gap-0.5" title="Lanjut Otomatis ke Ayat/Surat Berikutnya">
+                    <input type="checkbox" id="chk-audio-autocontinue" checked class="sr-only peer">
+                    <span class="w-7 h-7 rounded-lg bg-white/15 peer-checked:bg-amber-400 peer-checked:text-slate-950 text-emerald-50 flex items-center justify-center transition group-hover:scale-105">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7"/></svg>
+                    </span>
+                    <span class="text-[9px] font-semibold text-emerald-50/95">Otomatis</span>
+                  </label>
+                </div>
+              </div>
+            </section>
+
+            <!-- Button Muncul Kembali Saat Kotak Murottal Disembunyikan -->
+            <button type="button" id="btn-audio-reopen" class="hidden w-full py-2.5 px-4 bg-[#178262] hover:bg-[#1d9670] border border-amber-200/35 text-amber-50 rounded-2xl text-xs font-semibold shadow-xs transition">
+              Tampilkan Kotak Murottal Al-Qur'an
+            </button>
+
+            <!-- Secondary Right Card: Ringkasan Taksonomi LSF & Kitab Tafsir -->
+            <section class="bg-white/95 backdrop-blur rounded-3xl shadow-sm border border-amber-200/70 p-4 space-y-3 text-xs">
+              <div class="flex items-center justify-between border-b border-amber-100 pb-2">
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-amber-700">Referensi Inti</span>
+                  <h3 class="font-bold text-sm text-emerald-950">6 Proses LSF &amp; Kitab</h3>
+                </div>
+                <span class="font-diwani text-lg text-teal-800">القرآن</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-[11px]">
+                <div class="p-2 rounded-xl bg-emerald-50/90 border border-emerald-200/70 flex items-center gap-2">
+                  <span class="w-7 h-7 rounded-lg bg-white text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h10"/></svg>
+                  </span>
+                  <div class="min-w-0"><strong class="text-emerald-950 block leading-tight">Material</strong><span class="text-[10px] text-slate-600 block truncate">Tindakan fisik</span></div>
+                </div>
+                <div class="p-2 rounded-xl bg-sky-50/90 border border-sky-200/70 flex items-center gap-2">
+                  <span class="w-7 h-7 rounded-lg bg-white text-sky-700 border border-sky-200 flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                  </span>
+                  <div class="min-w-0"><strong class="text-sky-950 block leading-tight">Mental</strong><span class="text-[10px] text-slate-600 block truncate">Kesadaran &amp; ilmu</span></div>
+                </div>
+                <div class="p-2 rounded-xl bg-teal-50/90 border border-teal-200/70 flex items-center gap-2">
+                  <span class="w-7 h-7 rounded-lg bg-white text-teal-700 border border-teal-200 flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                  </span>
+                  <div class="min-w-0"><strong class="text-teal-950 block leading-tight">Relational</strong><span class="text-[10px] text-slate-600 block truncate">Sifat &amp; identitas</span></div>
+                </div>
+                <div class="p-2 rounded-xl bg-indigo-50/90 border border-indigo-200/70 flex items-center gap-2">
+                  <span class="w-7 h-7 rounded-lg bg-white text-indigo-700 border border-indigo-200 flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                  </span>
+                  <div class="min-w-0"><strong class="text-indigo-950 block leading-tight">Verbal</strong><span class="text-[10px] text-slate-600 block truncate">Ujaran &amp; wahyu</span></div>
+                </div>
+                <div class="p-2 rounded-xl bg-amber-50/90 border border-amber-200/70 flex items-center gap-2">
+                  <span class="w-7 h-7 rounded-lg bg-white text-amber-700 border border-amber-200 flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  </span>
+                  <div class="min-w-0"><strong class="text-amber-950 block leading-tight">Behavioural</strong><span class="text-[10px] text-slate-600 block truncate">Sikap &amp; respon</span></div>
+                </div>
+                <div class="p-2 rounded-xl bg-purple-50/90 border border-purple-200/70 flex items-center gap-2">
+                  <span class="w-7 h-7 rounded-lg bg-white text-purple-700 border border-purple-200 flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v3m0 14v3M4.93 4.93l2.12 2.12m9.9 9.9l2.12 2.12M2 12h3m14 0h3M4.93 19.07l2.12-2.12m9.9-9.9l2.12-2.12"/></svg>
+                  </span>
+                  <div class="min-w-0"><strong class="text-purple-950 block leading-tight">Existential</strong><span class="text-[10px] text-slate-600 block truncate">Keberadaan &amp; ada</span></div>
+                </div>
+              </div>
+              <div class="p-3 rounded-2xl bg-gradient-to-r from-amber-50 to-emerald-50 border border-amber-200/80 space-y-1">
+                <div class="font-bold text-emerald-950 text-[11px]">Kitab Pendamping Terintegrasi:</div>
+                <p class="text-[11px] text-slate-600 leading-snug">Tafsir Tahlili Kemenag RI (6.236 Ayat) &amp; Tafsir Ibnu Katsir (Matan + Jilid I–VIII).</p>
+              </div>
+            </section>
+
+          </aside>
+
+        </div><!-- /2-COLUMN BENTO GRID -->
+      </div><!-- /RIGHT SHELL -->
+    </div><!-- /OUTER FLEX -->
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500 px-4">
+    <p>Quranic LSF &amp; Tafsir Explorer V6.0 • 114 Surat (6.236 Ayat) Kemenag RI • Korpus Ebook LSF &amp; Tafsir Ibnu Katsir</p>
+  </footer>
+
+  <!-- Offline & Full Quran Data Bundles -->
+  <script src="./quranic-sfl-data.js"></script>
+  <script src="./quran-kemenag-full.js"></script>
+  <script src="./quran-tafsir-kemenag-full.js"></script>
+  <script src="./quran-tafsir-ibnkatsir.js"></script>
+  <script src="./app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator && window.location.protocol.startsWith("http")) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

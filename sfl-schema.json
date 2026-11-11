@@ -1,0 +1,335 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quranic-sfl.local/schemas/sfl-schema.json",
+  "title": "QuranicSFLDataset",
+  "description": "Skema JSON terstandar untuk Analisis Linguistik Sistemik Fungsional (SFL), Korpus Al-Qur'an Kemenag RI (114 Surat, 6.236 Ayat), serta Komparasi Metode LSF vs. Tafsir Klasik & Kontemporer.",
+  "type": "object",
+  "required": ["schemaVersion", "metadata", "taxonomy", "verses"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["title", "framework", "language", "references"],
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "framework": { "type": "string" },
+        "language": { "type": "array", "items": { "type": "string" } },
+        "lastUpdated": { "type": "string", "format": "date" },
+        "references": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "title", "author", "type"],
+            "properties": {
+              "id": { "type": "string" },
+              "title": { "type": "string" },
+              "author": { "type": "string" },
+              "year": { "type": ["string", "integer"] },
+              "type": { "type": "string" },
+              "notes": { "type": "string" }
+            }
+          }
+        },
+        "corpusBenchmark": {
+          "type": "object",
+          "properties": {
+            "source": { "type": "string" },
+            "segment": { "type": "string" },
+            "totalClauses": { "type": "integer" },
+            "distribution": {
+              "type": "object",
+              "additionalProperties": { "type": "number" }
+            }
+          }
+        },
+        "methodologyMatrix": {
+          "type": "array",
+          "description": "Matriks perbandingan metodologi antara LSF/SFL dengan metode tafsir klasik dan kontemporer.",
+          "items": { "$ref": "#/$defs/MethodologyProfile" }
+        }
+      }
+    },
+    "taxonomy": {
+      "type": "object",
+      "required": ["processes", "participants", "circumstances", "metafunctions"],
+      "properties": {
+        "metafunctions": { "type": "array", "items": { "$ref": "#/$defs/TaxonomyTerm" } },
+        "processes": { "type": "array", "items": { "$ref": "#/$defs/TaxonomyTerm" } },
+        "participants": { "type": "array", "items": { "$ref": "#/$defs/TaxonomyTerm" } },
+        "circumstances": { "type": "array", "items": { "$ref": "#/$defs/TaxonomyTerm" } }
+      }
+    },
+    "verses": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/VerseSFLAnalysis" }
+    }
+  },
+  "$defs": {
+    "ProcessCategory": {
+      "type": "string",
+      "enum": ["Material", "Mental", "Relational", "Verbal", "Behavioural", "Existential"]
+    },
+    "SpeechFunctionCategory": {
+      "type": "string",
+      "enum": ["Deklaratif", "Imperatif", "Interogatif", "Doa"]
+    },
+    "ThemeCategory": {
+      "type": "string",
+      "enum": ["Unmarked", "Marked", "Multiple"]
+    },
+    "MethodologyProfile": {
+      "type": "object",
+      "required": ["id", "name", "era", "keyFigures", "paradigm", "unitOfAnalysis", "strength", "relationToLsf"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "era": { "type": "string" },
+        "keyFigures": { "type": "string" },
+        "paradigm": { "type": "string" },
+        "unitOfAnalysis": { "type": "string" },
+        "strength": { "type": "string" },
+        "relationToLsf": { "type": "string" }
+      }
+    },
+    "TafsirComparison": {
+      "type": "object",
+      "required": ["kemenagSummary", "klasikMatsur", "lughawiBalaghi", "kontemporerAdabi", "kontemporerMaqashidi", "lsfVsTafsirSynthesis"],
+      "properties": {
+        "kemenagSummary": { "type": "string" },
+        "klasikMatsur": { "type": "string" },
+        "lughawiBalaghi": { "type": "string" },
+        "kontemporerAdabi": { "type": "string" },
+        "kontemporerMaqashidi": { "type": "string" },
+        "lsfVsTafsirSynthesis": { "type": "string" }
+      }
+    },
+    "TaxonomyTerm": {
+      "type": "object",
+      "required": ["key", "labelId", "labelEn", "labelAr", "description"],
+      "properties": {
+        "key": { "type": "string" },
+        "labelId": { "type": "string" },
+        "labelEn": { "type": "string" },
+        "labelAr": { "type": "string" },
+        "description": { "type": "string" },
+        "examples": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "DiagramSegment": {
+      "type": "object",
+      "required": ["ar", "ide", "int", "tex", "flex"],
+      "properties": {
+        "ar": { "type": "string" },
+        "ide": { "type": "string" },
+        "ideAr": { "type": "string" },
+        "int": { "type": "string" },
+        "intAr": { "type": "string" },
+        "tex": { "type": "string" },
+        "texAr": { "type": "string" },
+        "flex": { "type": "string" }
+      }
+    },
+    "SFLToken": {
+      "type": "object",
+      "required": ["ar", "tr", "role"],
+      "properties": {
+        "ar": { "type": "string" },
+        "tr": { "type": "string" },
+        "root": { "type": "string" },
+        "pos": { "type": "string" },
+        "role": { "type": "string" },
+        "roleAr": { "type": "string" }
+      }
+    },
+    "SFLClause": {
+      "type": "object",
+      "required": ["clauseId", "arabicText", "transitivity", "interpersonal", "textual"],
+      "properties": {
+        "clauseId": { "type": "string" },
+        "arabicText": { "type": "string" },
+        "transitivity": {
+          "type": "object",
+          "required": ["process", "participants", "circumstances"],
+          "properties": {
+            "process": {
+              "type": "object",
+              "required": ["typeEn", "typeAr", "lexicalVerb"],
+              "properties": {
+                "typeEn": { "$ref": "#/$defs/ProcessCategory" },
+                "typeAr": { "type": "string" },
+                "subtype": { "type": "string" },
+                "lexicalVerb": { "type": "string" },
+                "root": { "type": "string" }
+              }
+            },
+            "participants": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["roleEn", "roleAr", "text"],
+                "properties": {
+                  "roleEn": { "type": "string" },
+                  "roleAr": { "type": "string" },
+                  "text": { "type": "string" }
+                }
+              }
+            },
+            "circumstances": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["typeEn", "typeAr", "text"],
+                "properties": {
+                  "typeEn": { "type": "string" },
+                  "typeAr": { "type": "string" },
+                  "text": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "interpersonal": {
+          "type": "object",
+          "required": ["speechFunction", "mood"],
+          "properties": {
+            "speechFunction": { "type": "string" },
+            "mood": { "type": "string" },
+            "moodAr": { "type": "string" },
+            "modality": { "type": "string" }
+          }
+        },
+        "textual": {
+          "type": "object",
+          "required": ["theme", "rheme", "themeType"],
+          "properties": {
+            "theme": { "type": "string" },
+            "rheme": { "type": "string" },
+            "themeType": { "$ref": "#/$defs/ThemeCategory" }
+          }
+        }
+      }
+    },
+    "VerseSFLAnalysis": {
+      "type": "object",
+      "required": [
+        "surah",
+        "verse",
+        "ref",
+        "arabic",
+        "translit",
+        "translation",
+        "processCategory",
+        "speechCategory",
+        "themeCategory",
+        "diagramSegments",
+        "tokens",
+        "ideational",
+        "interpersonal",
+        "textual"
+      ],
+      "properties": {
+        "surah": { "type": "integer", "minimum": 1, "maximum": 114 },
+        "surahName": { "type": "string" },
+        "verse": { "type": "integer", "minimum": 1 },
+        "ref": { "type": "string" },
+        "sourceRef": { "type": "string" },
+        "isDraftHeuristic": { "type": "boolean" },
+        "arabic": { "type": "string" },
+        "translit": { "type": "string" },
+        "translation": { "type": "string" },
+        "processCategory": { "$ref": "#/$defs/ProcessCategory" },
+        "processCategoryAr": { "type": "string" },
+        "speechCategory": { "$ref": "#/$defs/SpeechFunctionCategory" },
+        "themeCategory": { "$ref": "#/$defs/ThemeCategory" },
+        "clauses": { "type": "array", "items": { "$ref": "#/$defs/SFLClause" } },
+        "diagramSegments": { "type": "array", "items": { "$ref": "#/$defs/DiagramSegment" } },
+        "tokens": { "type": "array", "items": { "$ref": "#/$defs/SFLToken" } },
+        "ideational": {
+          "type": "object",
+          "required": ["processType", "rows", "summary"],
+          "properties": {
+            "processType": { "type": "string" },
+            "processTypeAr": { "type": "string" },
+            "rows": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["seg", "comp", "role", "desc"],
+                "properties": {
+                  "seg": { "type": "string" },
+                  "comp": { "type": "string" },
+                  "compAr": { "type": "string" },
+                  "role": { "type": "string" },
+                  "desc": { "type": "string" }
+                }
+              }
+            },
+            "summary": { "type": "string" }
+          }
+        },
+        "interpersonal": {
+          "type": "object",
+          "required": ["speechFunc", "rows", "summary"],
+          "properties": {
+            "speechFunc": { "type": "string" },
+            "speechFuncAr": { "type": "string" },
+            "modality": { "type": "string" },
+            "rows": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["seg", "block", "role", "desc"],
+                "properties": {
+                  "seg": { "type": "string" },
+                  "block": { "type": "string" },
+                  "blockAr": { "type": "string" },
+                  "role": { "type": "string" },
+                  "desc": { "type": "string" }
+                }
+              }
+            },
+            "summary": { "type": "string" }
+          }
+        },
+        "textual": {
+          "type": "object",
+          "required": ["themeType", "themeContent", "themeDesc", "rhemeContent", "rhemeDesc", "summary"],
+          "properties": {
+            "themeType": { "type": "string" },
+            "themeTypeAr": { "type": "string" },
+            "themeContent": { "type": "string" },
+            "themeDesc": { "type": "string" },
+            "rhemeContent": { "type": "string" },
+            "rhemeDesc": { "type": "string" },
+            "summary": { "type": "string" }
+          }
+        },
+        "nahwuBalaghahBridge": {
+          "type": "object",
+          "properties": {
+            "nahwu": { "type": "string" },
+            "balaghah": { "type": "string" },
+            "sflSynthesis": { "type": "string" }
+          }
+        },
+        "pedagogicalNote": {
+          "type": "object",
+          "properties": {
+            "targetLevel": { "type": "string" },
+            "learningObjective": { "type": "string" },
+            "qiraahActivity": { "type": "string" }
+          }
+        },
+        "tafsirComparison": {
+          "$ref": "#/$defs/TafsirComparison"
+        }
+      }
+    }
+  }
+}

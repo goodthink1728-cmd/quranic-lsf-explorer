@@ -1,0 +1,3528 @@
+// Auto-generated offline/file:// bundle from quranic-sfl-data.json, sfl-schema.json, and sfl-types.d.ts
+window.QURANIC_SFL_DEFAULT_DATA = {
+  "$schema": "./sfl-schema.json",
+  "schemaVersion": "6.0.0",
+  "metadata": {
+    "title": "Quranic LSF & Comparative Tafsir Corpus",
+    "description": "Korpus terpadu 114 Surat & 6.236 Ayat Al-Qur'an (Kemenag RI), Analisis Linguistik Sistemik Fungsional (LSF), serta Komparasi Metode LSF vs. Tafsir Klasik & Kontemporer.",
+    "framework": "Systemic Functional Linguistics (Halliday & Matthiessen, 2004)",
+    "language": [
+      "id",
+      "ar",
+      "en"
+    ],
+    "lastUpdated": "2026-11-11",
+    "references": [
+      {
+        "id": "halliday-2004",
+        "title": "An Introduction to Functional Grammar (3rd Edition)",
+        "author": "M.A.K. Halliday & Christian M.I.M. Matthiessen",
+        "year": 2004,
+        "type": "Buku Referensi Utama LSF",
+        "notes": "Kerangka dasar tiga metafungsi: Ideasional (Transitivitas), Interpersonal (Mood & Residu), dan Tekstual (Tema & Rema)."
+      },
+      {
+        "id": "agus-gunawan-2025",
+        "title": "Analisis Transitivitas Pada Teks Surat Ibrahim Berbasis Teori Sistemik Linguistik Fungsional Menurut Halliday",
+        "author": "Agus Gunawan",
+        "year": 2025,
+        "type": "Tesis Magister Pendidikan Bahasa Arab (UIN Sunan Gunung Djati Bandung)",
+        "notes": "Analisis 52 ayat Surat Ibrahim (5 segmen), pemetaan 6 proses transitivitas, partisipan, sirkumstansi, serta implikasi pedagogis pembelajaran Qira'ah."
+      },
+      {
+        "id": "noor-book-lsf-arab",
+        "title": "اللسانيات الوظيفية النظامية: الوافد الغربي والنحو العربي",
+        "author": "Noor-Book Treatise",
+        "year": 2025,
+        "type": "Ebook Kajian Linguistik Arab-LSF",
+        "notes": "Jembatan konseptual antara LSF Hallidayan dengan Nahwu klasik (Sibawayh, Al-Jurjani) dan Ilmu Ma'ani (Balaghah)."
+      },
+      {
+        "id": "zulhaeri-al-insan",
+        "title": "Linguistik Fungsional Sistemik Surat Al-Insan",
+        "author": "Zulhaeri",
+        "year": 2025,
+        "type": "Artikel / Kajian Teks Qur'ani",
+        "notes": "Analisis transitivitas dan pilihan leksikogramatika Surat Al-Insan ayat 1-10."
+      },
+      {
+        "id": "kemenag-lpmq",
+        "title": "Al-Qur'an dan Tafsirnya (Tahlili & Al-Wajiz) – Lajnah Pentashihan Mushaf Al-Qur'an",
+        "author": "Kementerian Agama Republik Indonesia (LPMQ)",
+        "year": 2022,
+        "type": "Tafsir Resmi & Mushaf Standar Indonesia",
+        "notes": "Sumber teks Al-Qur'an 114 surat (6.236 ayat), transliterasi, terjemahan, serta Tafsir Tahlili dan Ringkas Kemenag RI."
+      }
+    ],
+    "corpusBenchmark": {
+      "source": "Tesis Agus Gunawan (2025) - QS. Ibrahim [14]",
+      "segment": "Segmen 2 (Ayat 11-20, Total 34 Klausa)",
+      "totalClauses": 34,
+      "distribution": {
+        "Material": 47,
+        "Verbal": 14.7,
+        "Mental": 14.7,
+        "Relational": 11.8,
+        "Existential": 11.8,
+        "Behavioural": 0
+      }
+    },
+    "methodologyMatrix": [
+      {
+        "id": "lsf",
+        "name": "Linguistik Sistemik Fungsional (LSF)",
+        "era": "Modern–Kontemporer (Linguistik Wacana)",
+        "keyFigures": "M.A.K. Halliday, Christian Matthiessen, Agus Gunawan (2025), Penulis Risalah اللسانيات الوظيفية النظامية",
+        "paradigm": "Bahasa dipandang sebagai sistem pilihan makna sosial (semiotik sosial) dalam konteks situasi dan budaya, bukan sekadar aturan sintaksis mekanis.",
+        "unitOfAnalysis": "Klausa simultan pada 3 Metafungsi: Ideasional (Transitivitas), Interpersonal (Mood & Residu), dan Tekstual (Tema & Rema).",
+        "strength": "Membongkar secara objektif siapa aktor teologis, siapa penerima aksi, bagaimana relasi kuasa penutur-pendengar dibangun, serta efek penekanan posisi kata.",
+        "relationToLsf": "Kerangka utama aplikasi ini; beririsan kuat dengan Ilmu Ma'ani dalam Balaghah namun lebih terstruktur secara taksonomis dan kuantitatif."
+      },
+      {
+        "id": "kemenag",
+        "name": "Tafsir Kemenag RI (Tahlili & Ringkas / Al-Wajiz)",
+        "era": "Kontemporer Institusional Indonesia",
+        "keyFigures": "Tim Lajnah Pentashihan Mushaf Al-Qur'an (LPMQ) Kemenag RI",
+        "paradigm": "Kombinasi analisis ayat demi ayat (Tahlili) dan ringkasan praktis (Al-Wajiz) yang moderat, kontekstual keindonesiaan, dan berbasis ilmu tafsir baku.",
+        "unitOfAnalysis": "Kosakata (mufradat), munasabah antar-ayat, asbabun nuzul, hadis pendukung, akidah, akhlak, dan pesan praktis umat.",
+        "strength": "Sangat komprehensif, otoritatif di Indonesia, mudah dipahami pembaca umum maupun akademisi, serta menyertakan dimensi sosial-kebangsaan.",
+        "relationToLsf": "Tafsir Kemenag memberi konteks historis-teologis luas; LSF memperdalam bukti gramatikal mengapa pesan tersebut disusun dengan struktur klausa tertentu."
+      },
+      {
+        "id": "matsur",
+        "name": "Tafsir Bi al-Ma'tsur (Klasik Riwayat)",
+        "era": "Klasik (Abad ke-3 s.d. ke-8 H)",
+        "keyFigures": "Ibnu Jarir Ath-Thabari (Jami' al-Bayan), Ibnu Katsir (Tafsir al-Qur'an al-'Azhim)",
+        "paradigm": "Menafsirkan Al-Qur'an dengan Al-Qur'an, Hadis Nabi saw, serta riwayat sahih para Sahabat dan Tabi'in.",
+        "unitOfAnalysis": "Sanad riwayat, konteks turunnya ayat (asbabun nuzul), qira'at, dan kesepakatan ulama salaf.",
+        "strength": "Menjaga otentisitas historis dan transmisi makna dari generasi awal Islam, mencegah penafsiran spekulatif yang jauh dari nash.",
+        "relationToLsf": "Fokus pada transmisi riwayat (ekstralinguistik & intertekstual), sedangkan LSF menelaah mekanisme leksikogramatika di dalam teksnya sendiri."
+      },
+      {
+        "id": "balaghi",
+        "name": "Tafsir Lughawi–Balaghi (Klasik Kebahasaan)",
+        "era": "Klasik (Abad ke-5 s.d. ke-6 H)",
+        "keyFigures": "Abdul Qahir Al-Jurjani (Dala'il al-I'jaz), Az-Zamakhsyari (Al-Kasysyaf), Fakhruddin Ar-Razi",
+        "paradigm": "Keindahan dan kemukjizatan Al-Qur'an (I'jaz) lahir dari ketepatan susunan kalimat (Nazhm), ilmu Ma'ani, Bayan, dan Badi'.",
+        "unitOfAnalysis": "Taqdim wa Ta'khir (pemajukan kata), Qashr (pembatasan), Iltifat (perubahan persona), Isti'arah (metafora), dan Dzikr/Hadzf.",
+        "strength": "Paling peka terhadap nuansa retorika Arab klasik, gaya bahasa ilahi, dan implikasi teologis dari pemilihan diksi.",
+        "relationToLsf": "Pendahulu klasik paling dekat dengan LSF! Konsep Taqdim–Qashr berkorespondensi dengan Marked Theme, sementara Iltifat sejajar dengan pergeseran Mood Interpersonal."
+      },
+      {
+        "id": "adabi",
+        "name": "Tafsir Adabi Ijtima'i (Sastra–Sosial Kontemporer)",
+        "era": "Modern–Kontemporer (Abad ke-20 s.d. 21 M)",
+        "keyFigures": "Muhammad Abduh & Rasyid Ridha (Al-Manar), M. Quraish Shihab (Tafsir Al-Misbah)",
+        "paradigm": "Al-Qur'an sebagai kitab petunjuk hidup yang menyapa psikologi manusia modern melalui kehalusan sastra dan kesatuan tema surat.",
+        "unitOfAnalysis": "Munasabah (keserasian) antar-ayat/surat, nuansa kata sinomis, tujuan sentral surat, serta solusi problematika sosial kontemporer.",
+        "strength": "Menghidupkan pesan Al-Qur'an agar relevan dengan realitas budaya, psikologi sosial, dan tantangan masyarakat masa kini.",
+        "relationToLsf": "Sejalan dengan pandangan LSF tentang bahasa sebagai semiotik sosial; LSF memberi perangkat analisis mikro-klausa untuk membuktikan kesan sastra yang dijelaskan Al-Misbah."
+      },
+      {
+        "id": "maqashidi",
+        "name": "Tafsir Maqashidi & Tematik-Kontekstual",
+        "era": "Kontemporer",
+        "keyFigures": "Thahir Ibnu 'Asyur (At-Tahrir wa at-Tanwir), Fazlur Rahman, Al-Farmawi (Maudhu'i)",
+        "paradigm": "Menangkap tujuan-tujuan luhur syariat (maqashid al-syari'ah), nilai keadilan, kemanusiaan, dan spirit moral di balik teks partikular.",
+        "unitOfAnalysis": "Pola tematik lintas ayat, konteks sosio-historis makro, dan prinsip etis universal.",
+        "strength": "Menghindari pembacaan atomistik/sepotong-sepotong dan menghasilkan panduan etika publik yang kontekstual di era modern.",
+        "relationToLsf": "Analisis Sirkumstansi Tujuan (Purpose) dan distribusi Proses dominan dalam LSF (mis. 47% Material di QS. Ibrahim) membantu memvalidasi orientasi praksis dan tujuan wacana surat."
+      }
+    ]
+  },
+  "taxonomy": {
+    "metafunctions": [
+      {
+        "key": "ideational",
+        "labelId": "Metafungsi Ideasional (Transitivitas)",
+        "labelEn": "Ideational Metafunction",
+        "labelAr": "الفوقية الفكرية / التمثيلية (نظام التعدية)",
+        "description": "Merepresentasikan pengalaman dunia nyata maupun batin melalui struktur Proses, Partisipan, dan Sirkumstansi."
+      },
+      {
+        "key": "interpersonal",
+        "labelId": "Metafungsi Interpersonal (Mood & Residu)",
+        "labelEn": "Interpersonal Metafunction",
+        "labelAr": "الفوقية الشخصية / التبادلية (المزاج والبقية)",
+        "description": "Mengatur relasi sosial dan komunikasi antara penutur (Khithab Ilahi / hamba) dan mitra tutur melalui fungsi tutur dan modalitas."
+      },
+      {
+        "key": "textual",
+        "labelId": "Metafungsi Tekstual (Tema & Rema)",
+        "labelEn": "Textual Metafunction",
+        "labelAr": "الفوقية النصية / الرسالية (الموضوع والخبر)",
+        "description": "Mengorganisasi alur pesan wacana melalui titik tolak klausa (Tema) dan informasi pengembangnya (Rema)."
+      }
+    ],
+    "processes": [
+      {
+        "key": "Material",
+        "labelId": "Proses Material",
+        "labelEn": "Material Process",
+        "labelAr": "العملية المادية",
+        "description": "Proses tindakan fisik atau peristiwa nyata (mencipta, menurunkan, memberi, membinasakan).",
+        "examples": [
+          "خَلَقَ",
+          "أَنزَلْنَا",
+          "جَاءَ",
+          "نَعْبُدُ"
+        ]
+      },
+      {
+        "key": "Mental",
+        "labelId": "Proses Mental",
+        "labelEn": "Mental Process",
+        "labelAr": "العملية العقلية / الذهنية",
+        "description": "Proses persepsi, kognisi, kehendak, dan afeksi batin.",
+        "examples": [
+          "يَشَاءُ",
+          "تَرَ",
+          "يَعْلَمُ",
+          "نَسْتَعِينُ"
+        ]
+      },
+      {
+        "key": "Relational",
+        "labelId": "Proses Relasional",
+        "labelEn": "Relational Process",
+        "labelAr": "العملية العلاقاتية / العلائقية",
+        "description": "Proses penyifatan (Atributif: Carrier–Attribute) atau penyamaan identitas (Identifikatif: Identified–Identifier).",
+        "examples": [
+          "الْحَمْدُ لِلَّهِ",
+          "إِن نَّحْنُ إِلَّا بَشَرٌ",
+          "جَعَلْنَاهُ سَمِيعًا"
+        ]
+      },
+      {
+        "key": "Verbal",
+        "labelId": "Proses Verbal",
+        "labelEn": "Verbal Process",
+        "labelAr": "العملية اللفظية",
+        "description": "Proses pengujaran, dialog kenabian, atau perintah penyampaian wahyu.",
+        "examples": [
+          "قَالَ",
+          "قَالَتْ لَهُمْ رُسُلُهُمْ",
+          "قُلْ"
+        ]
+      },
+      {
+        "key": "Behavioural",
+        "labelId": "Proses Behavioral",
+        "labelEn": "Behavioural Process",
+        "labelAr": "العملية السلوكية",
+        "description": "Proses perilaku psikologis-fisiologis yang tampak sebagai respon kesadaran.",
+        "examples": [
+          "شَاكِرًا",
+          "كَفُورًا",
+          "بَكَى",
+          "ضَحِكَ"
+        ]
+      },
+      {
+        "key": "Existential",
+        "labelId": "Proses Eksistensial",
+        "labelEn": "Existential Process",
+        "labelAr": "العملية الوجودية",
+        "description": "Proses yang menegaskan keberadaan atau kemunculan suatu entitas.",
+        "examples": [
+          "لَمْ يَكُن شَيْئًا مَّذْكُورًا",
+          "بِخَلْقٍ جَدِيدٍ"
+        ]
+      }
+    ],
+    "participants": [
+      {
+        "key": "Actor-Goal",
+        "labelId": "Aktor & Goal",
+        "labelEn": "Actor & Goal",
+        "labelAr": "الفاعل (المنفذ) والهدف (المتأثر)",
+        "description": "Pelaku tindakan dan sasaran yang terdampak dalam Proses Material."
+      },
+      {
+        "key": "Senser-Phenomenon",
+        "labelId": "Senser & Fenomena",
+        "labelEn": "Senser & Phenomenon",
+        "labelAr": "الشاهد العقلي (صاحب الإدراك) والظاهرة",
+        "description": "Subjek yang mengalami/merasa dan objek yang dipersepsi dalam Proses Mental."
+      },
+      {
+        "key": "Carrier-Attribute",
+        "labelId": "Carrier & Atribut / Identified & Identifier",
+        "labelEn": "Carrier–Attribute / Identified–Identifier",
+        "labelAr": "الحامل والسمة / المعرف والمعرف به",
+        "description": "Partisipan pada Proses Relasional atributif maupun identifikatif."
+      },
+      {
+        "key": "Sayer-Verbiage",
+        "labelId": "Sayer, Receiver & Verbiage",
+        "labelEn": "Sayer, Receiver & Verbiage",
+        "labelAr": "القائل والمستلم ومقول القول",
+        "description": "Penutur, lawan bicara, dan isi ucapan dalam Proses Verbal."
+      },
+      {
+        "key": "Behaver-Existent",
+        "labelId": "Behaver & Existent",
+        "labelEn": "Behaver & Existent",
+        "labelAr": "الفاعل السلوكي والموجود",
+        "description": "Pelaku perilaku (Behavioral) dan entitas yang ada (Eksistensial)."
+      }
+    ],
+    "circumstances": [
+      {
+        "key": "Space",
+        "labelId": "Sirkumstansi Tempat / Ruang",
+        "labelEn": "Circumstance of Space",
+        "labelAr": "محددة المكان (ظرف المكان)",
+        "description": "Menunjukkan lokasi fisik atau arah metaforis (contoh: مِنَ الظُّلُمَاتِ إِلَى النُّورِ)."
+      },
+      {
+        "key": "Time",
+        "labelId": "Sirkumstansi Waktu",
+        "labelEn": "Circumstance of Time",
+        "labelAr": "محددة الزمن (ظرف الزمان)",
+        "description": "Menunjukkan momentum temporal atau syarat waktu (contoh: إِذَا، حِينٌ مِّنَ الدَّهْرِ)."
+      },
+      {
+        "key": "Purpose-Cause",
+        "labelId": "Sirkumstansi Tujuan & Sebab",
+        "labelEn": "Circumstance of Purpose & Cause",
+        "labelAr": "محددة الغرض والعلة",
+        "description": "Menjelaskan tujuan ilahi atau alasan peristiwa (contoh: لِتُخْرِجَ النَّاسَ، بِإِذْنِ رَبِّهِمْ)."
+      },
+      {
+        "key": "Manner",
+        "labelId": "Sirkumstansi Cara & Kualitas",
+        "labelEn": "Circumstance of Manner",
+        "labelAr": "محددة الطريقة والكيفية",
+        "description": "Menjelaskan cara atau sifat berlangsungnya proses (contoh: بِالْحَقِّ)."
+      }
+    ]
+  },
+  "verses": {
+    "1:2": {
+      "surah": 1,
+      "surahName": "Al-Fatihah",
+      "verse": 2,
+      "ref": "QS. Al-Fatihah [1]: 2",
+      "sourceRef": "Korpus Dasar LSF + Risalah النحو العربي واللسانيات الوظيفية",
+      "arabic": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+      "translit": "Al-ḥamdu lillāhi rabbi l-ʿālamīn",
+      "translation": "Segala puji bagi Allah, Tuhan seluruh alam.",
+      "processCategory": "Relational",
+      "processCategoryAr": "العملية العلاقاتية",
+      "speechCategory": "Deklaratif",
+      "themeCategory": "Unmarked",
+      "clauses": [
+        {
+          "clauseId": "1:2:c1",
+          "arabicText": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Relational",
+              "typeAr": "العملية العلاقاتية (الامتلاك/الوصف)",
+              "subtype": "Attributive / Possessive",
+              "lexicalVerb": "لِلَّهِ (مقدر: كائن / مستحق)",
+              "root": "ح-م-د"
+            },
+            "participants": [
+              {
+                "roleEn": "Carrier",
+                "roleAr": "الحامل",
+                "text": "الْحَمْدُ"
+              },
+              {
+                "roleEn": "Attribute / Possessor",
+                "roleAr": "السمة / المالك",
+                "text": "لِلَّهِ"
+              }
+            ],
+            "circumstances": [
+              {
+                "typeEn": "Scope / Epithet",
+                "typeAr": "التخصيص الكوني",
+                "text": "رَبِّ الْعَالَمِينَ"
+              }
+            ]
+          },
+          "interpersonal": {
+            "speechFunction": "Statement (Doksologi)",
+            "mood": "Deklaratif",
+            "moodAr": "خبري تقريري",
+            "modality": "Ketetapan Mutlak (Tsubutiyah)"
+          },
+          "textual": {
+            "theme": "الْحَمْدُ",
+            "rheme": "لِلَّهِ رَبِّ الْعَالَمِينَ",
+            "themeType": "Unmarked"
+          }
+        }
+      ],
+      "diagramSegments": [
+        {
+          "ar": "الْحَمْدُ",
+          "ide": "Carrier (Entitas Pujian)",
+          "ideAr": "الحامل",
+          "int": "Subjek (Topik Mood)",
+          "intAr": "المسند إليه",
+          "tex": "Tema Topikal (Unmarked)",
+          "texAr": "الموضوع غير الموسوم",
+          "flex": "1"
+        },
+        {
+          "ar": "لِلَّهِ",
+          "ide": "Proses Relasional Hakiki",
+          "ideAr": "عملية علائقية",
+          "int": "Predikator Tersirat",
+          "intAr": "المسند المقدر",
+          "tex": "Awal Rema",
+          "texAr": "بداية الخبر",
+          "flex": "1"
+        },
+        {
+          "ar": "رَبِّ الْعَالَمِينَ",
+          "ide": "Kualifikasi Kosmik",
+          "ideAr": "نعت / تخصيص",
+          "int": "Residu (Komplemen)",
+          "intAr": "البقية / المكمل",
+          "tex": "Rema Pengembang",
+          "texAr": "توسيع الخبر",
+          "flex": "1.5"
+        }
+      ],
+      "tokens": [
+        {
+          "ar": "الْحَمْدُ",
+          "tr": "al-ḥamdu",
+          "root": "ح-م-د",
+          "pos": "Isim Ma'rifah (Mubtada')",
+          "role": "Carrier / Tema / Subjek",
+          "roleAr": "الحامل / الموضوع"
+        },
+        {
+          "ar": "لِلَّهِ",
+          "tr": "lillāh",
+          "root": "أ-ل-ه",
+          "pos": "Jar Majrur (Khabar)",
+          "role": "Process Relasional / Attribute",
+          "roleAr": "العملية العلائقية"
+        },
+        {
+          "ar": "رَبِّ",
+          "tr": "rabbi",
+          "root": "ر-ب-ب",
+          "pos": "Isim Badal / Na'at",
+          "role": "Epithet Pemelihara",
+          "roleAr": "صفة الربوبية"
+        },
+        {
+          "ar": "الْعَالَمِينَ",
+          "tr": "al-ʿālamīn",
+          "root": "ع-ل-م",
+          "pos": "Mudhaf Ilaih",
+          "role": "Qualifier Semesta",
+          "roleAr": "محددة النطاق"
+        }
+      ],
+      "ideational": {
+        "processType": "Relasional (Atributif / Kepemilikan)",
+        "processTypeAr": "العملية العلاقاتية (الوصفية/الامتلاكية)",
+        "rows": [
+          {
+            "seg": "الْحَمْدُ (Segala Puji)",
+            "comp": "Partisipan (Carrier)",
+            "compAr": "الحامل",
+            "role": "Entitas yang disifati",
+            "desc": "Definit (al-istighraq): merangkum seluruh spektrum pujian absolut."
+          },
+          {
+            "seg": "لِلَّهِ (Milik Allah)",
+            "comp": "Proses Relasional",
+            "compAr": "العملية العلائقية",
+            "role": "Penyandaran Hakiki",
+            "desc": "Huruf lam al-ikhtishash menghubungkan Carrier (pujian) dengan Pemilik tunggal."
+          },
+          {
+            "seg": "رَبِّ الْعَالَمِينَ (Tuhan Semesta)",
+            "comp": "Kualifikasi / Atribut",
+            "compAr": "السمة الموسعة",
+            "role": "Atribut Perluasan",
+            "desc": "Menjelaskan ruang lingkup pemeliharaan dan penguasaan kosmik."
+          }
+        ],
+        "summary": "Dalam perspektif transitivitas, jumlah ismiyah ini merepresentasikan relasi kepemilikan abadi (tsubut): segala bentuk pujian secara eksistensial hanya bersandar kepada Allah selaku Rabb seluruh alam."
+      },
+      "interpersonal": {
+        "speechFunc": "Deklaratif (Pengakuan & Doksologi)",
+        "speechFuncAr": "كلام خبري (إقرار وثناء)",
+        "modality": "Kepastian Hakiki (Tak terbantahkan)",
+        "rows": [
+          {
+            "seg": "الْحَمْدُ",
+            "block": "Mood",
+            "blockAr": "المزاج",
+            "role": "Subjek",
+            "desc": "Topik utama proposisi yang diakui oleh pembicara (hamba)."
+          },
+          {
+            "seg": "لِلَّهِ",
+            "block": "Mood / Residu",
+            "blockAr": "المسند",
+            "role": "Predikator Tersirat",
+            "desc": "Menyatakan ketetapan (tsubutiyah) tanpa batasan kala (tense)."
+          },
+          {
+            "seg": "رَبِّ الْعَالَمِينَ",
+            "block": "Residu",
+            "blockAr": "البقية",
+            "role": "Komplemen Penguat",
+            "desc": "Mempertegas legitimasi kedudukan Ilahi di hadapan hamba."
+          }
+        ],
+        "summary": "Tindak tutur deklaratif ini membangun kontrak interpersonal antara hamba dan Pencipta sebagai pijakan pujian sebelum memasuki permohonan doa."
+      },
+      "textual": {
+        "themeType": "Unmarked Topical Theme (Tema Biasa)",
+        "themeTypeAr": "الموضوع غير الموسوم (Unmarked)",
+        "themeContent": "الْحَمْدُ (Al-ḥamdu)",
+        "themeDesc": "Nomina definit di awal kalimat menjadi titik tolak alami (Mubtada') yang memfokuskan perhatian pada konsep 'Pujian Universal'.",
+        "rhemeContent": "لِلَّهِ رَبِّ الْعَالَمِينَ (lillāhi rabbi l-ʿālamīn)",
+        "rhemeDesc": "Informasi inti (Khabar) yang menetapkan kepada siapa pujian itu dialamatkan secara eksklusif.",
+        "summary": "Pola Tema-Rema menempatkan ide pujian sebagai informasi bersama (Given), lalu mengunci Allah sebagai tujuan tunggalnya (New)."
+      },
+      "nahwuBalaghahBridge": {
+        "nahwu": "Jumlah Ismiyah: الْحَمْدُ sebagai Mubtada' (marfu'), لِلَّهِ sebagai Khabar Syibhul Jumlah, dan رَبِّ الْعَالَمِينَ sebagai Na'at/Badal.",
+        "balaghah": "Ilmu Ma'ani memilih Jumlah Ismiyah (bukan Fi'liyah seperti نحمد الله) untuk menghadirkan makna dawam (keabadian) dan tsubut (ketetapan pujian) tanpa terikat pelaku manusia.",
+        "sflSynthesis": "LSF memetakan Jumlah Ismiyah ini sebagai Proses Relasional tak-berkala yang menjadikan Mubtada' sebagai Carrier + Unmarked Theme sekaligus."
+      },
+      "pedagogicalNote": {
+        "targetLevel": "Menengah (Mutawassith)",
+        "learningObjective": "Memahami perbedaan fungsi komunikatif antara kalimat nominal (Relasional) dan kalimat verbal (Material) dalam teks Arab.",
+        "qiraahActivity": "Latihan membandingkan terjemahan 'Kami memuji Allah' vs 'Segala puji milik Allah' dengan menandai Carrier dan Attribute."
+      },
+      "tafsirComparison": {
+        "kemenagSummary": "Tafsir Kemenag menjelaskan 'al-hamdu' sebagai pujian penuh atas sumber segala nikmat, 'Rabb' sebagai pemilik sekaligus pendidik/pemelihara yang menyempurnakan makhluk secara bertahap, dan 'al-alamin' mencakup seluruh makhluk ciptaan (manusia, jin, malaikat, alam semesta).",
+        "klasikMatsur": "Ibnu Katsir dan Ath-Thabari mengutip atsar Ibnu Abbas bahwa 'Alhamdulillah' adalah kalimat syukur setiap mukmin yang memuji Allah atas nikmat-Nya; segala pujian hakikatnya kembali kepada Allah karena Dia-lah pencipta segala sebab kebaikan.",
+        "lughawiBalaghi": "Az-Zamakhsyari (Al-Kasysyaf) menekankan penggunaan Jumlah Ismiyah (bukan Fi'liyah) untuk menunjukkan ketetapan abadi (tsubut wa dawam), serta 'al' pada 'al-hamdu' bermakna istighraq (mencakup seluruh jenis pujian).",
+        "kontemporerAdabi": "Quraish Shihab (Al-Misbah) menyoroti kata 'Rabb' yang bermakna tarbiyah (pendidikan dan pemeliharaan penuh kasih); pujian kepada Allah lahir dari kesadaran manusia bahwa seluruh alam berada di bawah asuhan-Nya.",
+        "kontemporerMaqashidi": "Ibnu 'Asyur menegaskan ayat ini membangun fondasi tauhid kosmologis dan ekologi spiritual: menolak eksklusivisme kesukuan karena Allah adalah Rabb seluruh alam tanpa kecuali.",
+        "lsfVsTafsirSynthesis": "Sementara Tafsir Klasik/Kontemporer menguraikan keluasan makna 'Rabb' dan 'Alamin' secara leksikal-teologis, metode LSF membuktikan secara struktural mengapa ayat ini memakai Proses Relasional tak-berkala dengan 'Al-Hamdu' sebagai Unmarked Theme—menjadikan pujian sebagai fakta eksistensial abadi, bukan sekadar aksi sesaat."
+      }
+    },
+    "1:5": {
+      "surah": 1,
+      "surahName": "Al-Fatihah",
+      "verse": 5,
+      "ref": "QS. Al-Fatihah [1]: 5",
+      "sourceRef": "Korpus Dasar LSF + Risalah القصر والتقديم في النحو واللسانيات",
+      "arabic": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+      "translit": "Iyyāka naʿbudu wa-iyyāka nastaʿīn",
+      "translation": "Hanya kepada Engkaulah kami menyembah dan hanya kepada Engkaulah kami memohon pertolongan.",
+      "processCategory": "Material",
+      "processCategoryAr": "العملية المادية",
+      "speechCategory": "Deklaratif",
+      "themeCategory": "Marked",
+      "clauses": [
+        {
+          "clauseId": "1:5:c1",
+          "arabicText": "إِيَّاكَ نَعْبُدُ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Material",
+              "typeAr": "العملية المادية",
+              "lexicalVerb": "نَعْبُدُ",
+              "root": "ع-ب-د"
+            },
+            "participants": [
+              {
+                "roleEn": "Actor",
+                "roleAr": "الفاعل (ضمير مستتر: نحن)",
+                "text": "نحن (في نَعْبُدُ)"
+              },
+              {
+                "roleEn": "Goal",
+                "roleAr": "الهدف (مفعول به مقدم)",
+                "text": "إِيَّاكَ"
+              }
+            ],
+            "circumstances": []
+          },
+          "interpersonal": {
+            "speechFunction": "Ikrar / Komitmen",
+            "mood": "Deklaratif",
+            "moodAr": "خطاب مباشر (مخاطب)"
+          },
+          "textual": {
+            "theme": "إِيَّاكَ",
+            "rheme": "نَعْبُدُ",
+            "themeType": "Marked"
+          }
+        },
+        {
+          "clauseId": "1:5:c2",
+          "arabicText": "وَإِيَّاكَ نَسْتَعِينُ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Mental",
+              "typeAr": "العملية الذهنية / الطلبية",
+              "lexicalVerb": "نَسْتَعِينُ",
+              "root": "ع-و-ن"
+            },
+            "participants": [
+              {
+                "roleEn": "Senser / Requester",
+                "roleAr": "الطالب (نحن)",
+                "text": "نحن (في نَسْتَعِينُ)"
+              },
+              {
+                "roleEn": "Phenomenon / Source",
+                "roleAr": "المستعان به",
+                "text": "إِيَّاكَ"
+              }
+            ],
+            "circumstances": []
+          },
+          "interpersonal": {
+            "speechFunction": "Ikrar Dependensi",
+            "mood": "Deklaratif",
+            "moodAr": "خطاب مباشر"
+          },
+          "textual": {
+            "theme": "وَإِيَّاكَ",
+            "rheme": "نَسْتَعِينُ",
+            "themeType": "Multiple"
+          }
+        }
+      ],
+      "diagramSegments": [
+        {
+          "ar": "إِيَّاكَ",
+          "ide": "Goal Sasaran Ibadah",
+          "ideAr": "الهدف المقدم",
+          "int": "Residu Komplemen (Fronted)",
+          "intAr": "المكمل المقدم",
+          "tex": "Marked Topical Theme (Qashr)",
+          "texAr": "موضوع موسوم (قصر)",
+          "flex": "1"
+        },
+        {
+          "ar": "نَعْبُدُ",
+          "ide": "Proses Material (Ubudiyah)",
+          "ideAr": "عملية مادية",
+          "int": "Mood (Subjek Kami + Finit)",
+          "intAr": "المزاج (فاعل+زمن)",
+          "tex": "Rema Aksi",
+          "texAr": "الخبر الفعلي",
+          "flex": "1"
+        },
+        {
+          "ar": "وَ",
+          "ide": "Penyambung Klausa",
+          "ideAr": "أداة عطف",
+          "int": "Penghubung Tutur",
+          "intAr": "رابط خطابي",
+          "tex": "Tema Tekstual (Konjungsi)",
+          "texAr": "موضوع نصي",
+          "flex": "0.5"
+        },
+        {
+          "ar": "إِيَّاكَ",
+          "ide": "Goal Permohonan",
+          "ideAr": "الهدف المقدم",
+          "int": "Residu Komplemen (Fronted)",
+          "intAr": "المكمل المقدم",
+          "tex": "Marked Topical Theme (Qashr)",
+          "texAr": "موضوع موسوم",
+          "flex": "1"
+        },
+        {
+          "ar": "نَسْتَعِينُ",
+          "ide": "Proses Mental/Bantuan",
+          "ideAr": "عملية ذهنية/طلبية",
+          "int": "Mood (Subjek + Finit)",
+          "intAr": "المزاج",
+          "tex": "Rema Doa",
+          "texAr": "الخبر",
+          "flex": "1"
+        }
+      ],
+      "tokens": [
+        {
+          "ar": "إِيَّاكَ",
+          "tr": "iyyāka",
+          "root": "ضمير نصب",
+          "pos": "Dhamir Nashab Munfashil (Maf'ul Bih Muqaddam)",
+          "role": "Goal / Marked Theme",
+          "roleAr": "الهدف / الموضوع الموسوم"
+        },
+        {
+          "ar": "نَعْبُدُ",
+          "tr": "naʿbudu",
+          "root": "ع-ب-د",
+          "pos": "Fi'il Mudhari' + Fa'il (نحن)",
+          "role": "Process Material / Aktor",
+          "roleAr": "العملية المادية"
+        },
+        {
+          "ar": "وَ",
+          "tr": "wa",
+          "root": "حرف",
+          "pos": "Harf Athaf",
+          "role": "Textual Theme (Konjungsi)",
+          "roleAr": "الموضوع النصي"
+        },
+        {
+          "ar": "إِيَّاكَ",
+          "tr": "iyyāka",
+          "root": "ضمير نصب",
+          "pos": "Dhamir Nashab Munfashil (Maf'ul Bih Muqaddam)",
+          "role": "Goal / Marked Theme",
+          "roleAr": "الهدف / الموضوع الموسوم"
+        },
+        {
+          "ar": "نَسْتَعِينُ",
+          "tr": "nastaʿīn",
+          "root": "ع-و-ن",
+          "pos": "Fi'il Mudhari' Istif'al",
+          "role": "Process Mental / Bantuan",
+          "roleAr": "العملية الذهنية"
+        }
+      ],
+      "ideational": {
+        "processType": "Material (Ubudiyah) & Mental/Dependensi",
+        "processTypeAr": "العملية المادية والذهنية",
+        "rows": [
+          {
+            "seg": "إِيَّاكَ (Hanya kepada-Mu)",
+            "comp": "Partisipan (Goal / Sasaran)",
+            "compAr": "الهدف",
+            "role": "Tujuan Ibadah",
+            "desc": "Sasaran peribadatan yang dikhususkan melalui pemajukan objek."
+          },
+          {
+            "seg": "نَعْبُدُ (Kami menyembah)",
+            "comp": "Proses Material",
+            "compAr": "العملية المادية",
+            "role": "Aksi Penghambaan",
+            "desc": "Melibatkan partisipan tersembunyi (Aktor: نحن / jamaah mukmin)."
+          },
+          {
+            "seg": "وَإِيَّاكَ نَسْتَعِينُ",
+            "comp": "Proses Dependensi",
+            "compAr": "عملية الاستعانة",
+            "role": "Permintaan Tolong",
+            "desc": "Melengkapi ibadah fisik dengan ketergantungan spiritual total."
+          }
+        ],
+        "summary": "Transitivitas ayat ini memajukan Goal (إِيَّاكَ) ke awal klausa untuk menegaskan bahwa ibadah dan istianah tidak dapat diarahkan kepada selain Allah."
+      },
+      "interpersonal": {
+        "speechFunc": "Deklaratif Ikrar (Komitmen Interaktif)",
+        "speechFuncAr": "خطاب مباشر (الالتفات من الغيبة إلى الخطاب)",
+        "modality": "Komitmen Komunal Pasti",
+        "rows": [
+          {
+            "seg": "إِيَّاكَ",
+            "block": "Residu (Fronted)",
+            "blockAr": "المكمل المقدم",
+            "role": "Komplemen Terdepan",
+            "desc": "Menyerap fokus pendengar untuk pengkhususan (Qashr)."
+          },
+          {
+            "seg": "نَعْبُدُ (ضمير نحن)",
+            "block": "Mood",
+            "blockAr": "المزاج",
+            "role": "Subjek jamak + Finit",
+            "desc": "Menggambarkan ikatan komunal umat yang serempak berserah diri."
+          },
+          {
+            "seg": "نَسْتَعِينُ",
+            "block": "Mood",
+            "blockAr": "المزاج",
+            "role": "Finit Kontinu",
+            "desc": "Keberlanjutan permohonan pertolongan sepanjang waktu (Mudhari')."
+          }
+        ],
+        "summary": "Perubahan persona dari ghaibah (ayat 2–4) menjadi mukhathab ('Engkau') menandai puncak kedekatan interpersonal hamba dengan Allah (Iltifat)."
+      },
+      "textual": {
+        "themeType": "Marked Topical Theme (Tema Bermarka / Qashr)",
+        "themeTypeAr": "الموضوع الموسوم (التقديم للقصر)",
+        "themeContent": "إِيَّاكَ (Iyyāka) — Objek yang Dimajukan",
+        "themeDesc": "Objek (Maf'ul bih) diletakkan sebelum verba (Fi'il), menciptakan Tema Bermarka (Marked Theme) untuk efek eksklusivitas.",
+        "rhemeContent": "نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+        "rhemeDesc": "Aksi ibadah dan permohonan pertolongan yang menyertai ketauhidan.",
+        "summary": "Dalam LSF, Tema Bermarka berfungsi menonjolkan fokus kontras: HANYA ENGKAU titik sentral ibadah, bukan yang lain."
+      },
+      "nahwuBalaghahBridge": {
+        "nahwu": "Taqdim al-Maf'ul 'ala al-Fi'il: إِيَّاكَ adalah Maf'ul Bih Muqaddam yang wajib dipisahkan menjadi dhamir munfashil.",
+        "balaghah": "Qashr bi Taqdim ma Haqquhu at-Ta'khir (الإفراد/التخصيص): mendahulukan objek menghasilkan makna 'hanya Engkau' sekaligus teknik Iltifat.",
+        "sflSynthesis": "Konsep Taqdim Balaghah berkorespondensi langsung dengan Marked Topical Theme dalam LSF Hallidayan."
+      },
+      "pedagogicalNote": {
+        "targetLevel": "Menengah–Lanjut",
+        "learningObjective": "Mengidentifikasi fungsi retoris perubahan urutan kata (V-S-O ke O-V-S) dalam bahasa Arab.",
+        "qiraahActivity": "Membandingkan pola عَبَدْنَاكَ vs إِيَّاكَ نَعْبُدُ untuk memahami pergeseran Tema Unmarked menjadi Marked."
+      },
+      "tafsirComparison": {
+        "kemenagSummary": "Tafsir Kemenag menyoroti pengulangan 'Iyyāka' (hanya kepada-Mu) sebagai bentuk Qashr (pembatasan tauhid), penggunaan persona kedua untuk menghadirkan kelezatan munajat langsung, serta alasan 'na'budu' didahulukan atas 'nasta'in' (kewajiban ibadah sebelum meminta hak pertolongan).",
+        "klasikMatsur": "Ibnu Katsir meriwayatkan bahwa ayat ini merupakan inti perjanjian antara Allah dan hamba (Hadis Qudsi: 'Ini antara Aku dan hamba-Ku'); 'kami' (jamak) mengajarkan kerendahan hati bersama seluruh orang beriman dan malaikat.",
+        "lughawiBalaghi": "Al-Jurjani dan Az-Zamakhsyari menyoroti dua fenomena Balaghah utama: Taqdim al-Maf'ul ('Iyyāka') untuk Qashr, dan Iltifat dari persona ketiga (ayat 2–4) ke persona kedua ('Engkau') demi puncak kekhusyukan.",
+        "kontemporerAdabi": "Dalam Al-Misbah dan Tafsir Al-Manar, kata kerja jamak 'na'budu' dan 'nasta'īn' dimaknai sebagai kesadaran kolektif umat yang mendorong solidaritas sosial, sedangkan mendahulukan ibadah sebelum isti'anah menegaskan etika ikhtiar spiritual.",
+        "kontemporerMaqashidi": "Meneguhkan kemerdekaan manusia dari segala bentuk penghambaan selain Allah (tauhid pembebasan): siapa yang hanya menyembah Allah tidak akan tunduk pada tirani kekuasaan atau materi.",
+        "lsfVsTafsirSynthesis": "LSF mengonfirmasi temuan Balaghah klasik secara sistematis: pemajukan 'Iyyāka' adalah Marked Topical Theme yang mengalihkan fokus dari Aktor ke Goal, sementara pergeseran dari orang ketiga ke orang kedua terbaca jelas pada blok Mood Interpersonal sebagai titik puncak keintiman hamba–Khaliq."
+      }
+    },
+    "1:6": {
+      "surah": 1,
+      "surahName": "Al-Fatihah",
+      "verse": 6,
+      "ref": "QS. Al-Fatihah [1]: 6",
+      "sourceRef": "Korpus Doa Qur'ani LSF (Mood Imperatif-Doa)",
+      "arabic": "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
+      "translit": "Ihdinā ṣ-ṣirāṭa l-mustaqīm",
+      "translation": "Tunjukilah kami jalan yang lurus,",
+      "processCategory": "Material",
+      "processCategoryAr": "العملية المادية / الإرشادية",
+      "speechCategory": "Doa",
+      "themeCategory": "Unmarked",
+      "clauses": [
+        {
+          "clauseId": "1:6:c1",
+          "arabicText": "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Material",
+              "typeAr": "العملية المادية / الإرشادية",
+              "lexicalVerb": "اهْدِ",
+              "root": "ه-د-ي"
+            },
+            "participants": [
+              {
+                "roleEn": "Actor",
+                "roleAr": "الفاعل (أنت - الله)",
+                "text": "أنت (مستتر)"
+              },
+              {
+                "roleEn": "Recipient / Beneficiary",
+                "roleAr": "المستفيد / المستلم",
+                "text": "نَا"
+              },
+              {
+                "roleEn": "Goal / Scope",
+                "roleAr": "الهدف / المفعول الثاني",
+                "text": "الصِّرَاطَ الْمُسْتَقِيمَ"
+              }
+            ],
+            "circumstances": []
+          },
+          "interpersonal": {
+            "speechFunction": "Doa / Permohonan (Imperatif dari bawah ke atas)",
+            "mood": "Imperatif (Du'a)",
+            "moodAr": "أسلوب الطلب (الدعاء)",
+            "modality": "Pengharapan Tinggi"
+          },
+          "textual": {
+            "theme": "اهْدِنَا",
+            "rheme": "الصِّرَاطَ الْمُسْتَقِيمَ",
+            "themeType": "Unmarked"
+          }
+        }
+      ],
+      "diagramSegments": [
+        {
+          "ar": "اهْدِ",
+          "ide": "Proses Pembimbingan",
+          "ideAr": "عملية الهداية",
+          "int": "Mood Finit Imperatif-Doa",
+          "intAr": "فعل أمر للدعاء",
+          "tex": "Tema Proses (Unmarked Imperatif)",
+          "texAr": "موضوع غير موسوم",
+          "flex": "1"
+        },
+        {
+          "ar": "نَا",
+          "ide": "Beneficiary / Penerima",
+          "ideAr": "المستفيد (نحن)",
+          "int": "Residu Komplemen 1",
+          "intAr": "مكمل أول",
+          "tex": "Transisi Tema-Rema",
+          "texAr": "انتقال",
+          "flex": "0.7"
+        },
+        {
+          "ar": "الصِّرَاطَ الْمُسْتَقِيمَ",
+          "ide": "Scope / Tujuan Jalan Lurus",
+          "ideAr": "المجال / الهدف",
+          "int": "Residu Komplemen 2",
+          "intAr": "مكمل ثانٍ",
+          "tex": "Rema Substantif",
+          "texAr": "الخبر",
+          "flex": "1.6"
+        }
+      ],
+      "tokens": [
+        {
+          "ar": "اهْدِ",
+          "tr": "ihdi",
+          "root": "ه-د-ي",
+          "pos": "Fi'il Amr (Li ad-Du'a)",
+          "role": "Process / Tema Imperatif",
+          "roleAr": "العملية / فعل الدعاء"
+        },
+        {
+          "ar": "نَا",
+          "tr": "nā",
+          "root": "ضمير",
+          "pos": "Maf'ul Bih Awwal",
+          "role": "Recipient / Beneficiary",
+          "roleAr": "المستفيد"
+        },
+        {
+          "ar": "الصِّرَاطَ",
+          "tr": "aṣ-ṣirāṭa",
+          "root": "ص-ر-ط",
+          "pos": "Maf'ul Bih Tsani",
+          "role": "Goal / Scope",
+          "roleAr": "الهدف / المجال"
+        },
+        {
+          "ar": "الْمُسْتَقِيمَ",
+          "tr": "al-mustaqīm",
+          "root": "ق-و-م",
+          "pos": "Na'at (Sifat)",
+          "role": "Epithet Kualitatif",
+          "roleAr": "نعت وصفي"
+        }
+      ],
+      "ideational": {
+        "processType": "Material / Transformasional (Hidayah)",
+        "processTypeAr": "العملية المادية الإرشادية",
+        "rows": [
+          {
+            "seg": "اهْدِ (Tunjukilah)",
+            "comp": "Proses Material-Mental",
+            "compAr": "العملية",
+            "role": "Aksi Pemberian Hidayah",
+            "desc": "Verba bitransitif yang membutuhkan penerima dan tujuan jalan."
+          },
+          {
+            "seg": "نَا (Kami)",
+            "comp": "Partisipan (Beneficiary)",
+            "compAr": "المستفيد",
+            "role": "Penerima Bimbingan",
+            "desc": "Hamba-hamba yang memohon bimbingan kolektif."
+          },
+          {
+            "seg": "الصِّرَاطَ الْمُسْتَقِيمَ",
+            "comp": "Partisipan (Scope/Goal)",
+            "compAr": "الهدف",
+            "role": "Jalan yang Lurus",
+            "desc": "Objek tujuan bimbingan yang disifati lurus (tanpa penyimpangan)."
+          }
+        ],
+        "summary": "Hidayah dimodelkan sebagai proses aktif yang menggerakkan penerima ('kami') menuju jalan yang lurus dan kokoh."
+      },
+      "interpersonal": {
+        "speechFunc": "Doa (Permohonan Hamba kepada Khaliq)",
+        "speechFuncAr": "إنشاء طلبي (الدعاء)",
+        "modality": "Permohonan Rendah Hati",
+        "rows": [
+          {
+            "seg": "اهْدِ",
+            "block": "Mood (Predicator-Imperatif)",
+            "blockAr": "فعل الطلب",
+            "role": "Finit Imperatif",
+            "desc": "Secara gramatikal berbentuk Fi'il Amr, namun secara pragmatis-interpersonal bernilai Doa."
+          },
+          {
+            "seg": "نَا الصِّرَاطَ الْمُسْتَقِيمَ",
+            "block": "Residu",
+            "blockAr": "البقية",
+            "role": "Komplemen Ganda",
+            "desc": "Merinci objek permohonan doa."
+          }
+        ],
+        "summary": "LSF membedakan struktur gramatikal (Imperatif) dengan fungsi sosialnya (Doa): karena penuturnya adalah hamba kepada Tuhan, maka imperatif berubah makna menjadi permohonan penuh kerendahan hati."
+      },
+      "textual": {
+        "themeType": "Unmarked Theme in Imperative Clause",
+        "themeTypeAr": "الموضوع غير الموسوم في جملة الأمر",
+        "themeContent": "اهْدِ (Ihdi)",
+        "themeDesc": "Dalam klausa imperatif/doa, verba perintah berada di posisi awal secara alami (Unmarked) untuk langsung menyampaikan hajat.",
+        "rhemeContent": "نَا الصِّرَاطَ الْمُسْتَقِيمَ",
+        "rhemeDesc": "Penerima doa dan substansi hidayah yang diharapkan.",
+        "summary": "Posisi awal verba 'Ihdi' langsung menyalurkan urgensi permohonan hidayah setelah pengakuan ibadah di ayat sebelumnya."
+      },
+      "nahwuBalaghahBridge": {
+        "nahwu": "Fi'il Amr mabni 'ala hadzfi harfil 'illah (اهْدِ), Fa'il dhamir mustatir 'anta', dua Maf'ul Bih (نَا dan الصِّرَاطَ).",
+        "balaghah": "Amr keluar dari makna hakiki (perintah atasan) menjadi makna majazi Du'a (permohonan bawahan kepada Allah).",
+        "sflSynthesis": "Contoh sempurna ketidaksamaan langsung (incongruent realization) antara Mood Imperatif dengan Speech Function Doa dalam Metafungsi Interpersonal."
+      },
+      "pedagogicalNote": {
+        "targetLevel": "Dasar–Menengah",
+        "learningObjective": "Membedakan bentuk gramatikal perintah (Amr) dengan fungsi pragmatis-interpersonalnya (Doa).",
+        "qiraahActivity": "Mencari contoh Fi'il Amr dalam Al-Qur'an dan mengklasifikasikan apakah fungsinya Mandat Ilahi atau Doa Hamba."
+      },
+      "tafsirComparison": {
+        "kemenagSummary": "Tafsir Kemenag (merujuk juga pembahasan Muhammad Abduh) merinci empat tingkat hidayah: naluri (garizah), pancaindra, akal, dan agama; lalu menegaskan bahwa yang dimohon dalam 'Ihdinā' adalah taufik dan bimbingan terus-menerus di jalan lurus (akidah, syariah, dan akhlak).",
+        "klasikMatsur": "Ath-Thabari dan Ibnu Katsir menafsirkan 'ash-Shirāṭ al-Mustaqīm' melalui riwayat sahabat sebagai Al-Qur'an, agama Islam yang lurus, dan jalan Nabi Muhammad saw serta para khalifah yang terbimbing.",
+        "lughawiBalaghi": "Ilmu Ma'ani menjelaskan bahwa bentuk kata kerja perintah (Fi'il Amr 'Ihdi') mengalami pergeseran makna dari perintah (Amr) menjadi Doa (Du'a) karena diucapkan oleh pihak lebih rendah (hamba) kepada Yang Mahatinggi.",
+        "kontemporerAdabi": "Quraish Shihab menjelaskan kata 'ihdinā' yang langsung menyambung ke 'ash-shirāṭ' (tanpa kata depan 'ilā') bermakna permohonan agar bukan sekadar ditunjukkan arah jalan, melainkan dibimbing melangkah di dalamnya.",
+        "kontemporerMaqashidi": "Jalan lurus dipahami sebagai etos keseimbangan (wasathiyyah) yang menghindarkan umat dari ekstremisme perilaku ('dimurkai') maupun kebingungan arah ('tersesat').",
+        "lsfVsTafsirSynthesis": "LSF menyingkap fenomena 'incongruent realization' pada Metafungsi Interpersonal: bentuk gramatikalnya Mood Imperatif, tetapi fungsi tuturnya adalah Doa (Permohonan); pada Metafungsi Ideasional, ketiadaan preposisi menegaskan Proses Material-Transformasional langsung kepada Beneficiary ('nā')."
+      }
+    },
+    "112:1": {
+      "surah": 112,
+      "surahName": "Al-Ikhlas",
+      "verse": 1,
+      "ref": "QS. Al-Ikhlas [112]: 1",
+      "sourceRef": "Korpus Dasar LSF (Klausa Proyeksi Verbal)",
+      "arabic": "قُلْ هُوَ اللَّهُ أَحَدٌ",
+      "translit": "Qul huwa Allāhu aḥad",
+      "translation": "Katakanlah (Muhammad), 'Dialah Allah, Yang Maha Esa.'",
+      "processCategory": "Verbal",
+      "processCategoryAr": "العملية اللفظية",
+      "speechCategory": "Imperatif",
+      "themeCategory": "Unmarked",
+      "clauses": [
+        {
+          "clauseId": "112:1:c1",
+          "arabicText": "قُلْ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Verbal",
+              "typeAr": "العملية اللفظية",
+              "lexicalVerb": "قُلْ",
+              "root": "ق-و-ل"
+            },
+            "participants": [
+              {
+                "roleEn": "Sayer",
+                "roleAr": "القائل (النبي محمد)",
+                "text": "أنت (مستتر)"
+              }
+            ],
+            "circumstances": []
+          },
+          "interpersonal": {
+            "speechFunction": "Command (Mandat Wahyu)",
+            "mood": "Imperatif",
+            "moodAr": "أمر تكليف"
+          },
+          "textual": {
+            "theme": "قُلْ",
+            "rheme": "هُوَ اللَّهُ أَحَدٌ",
+            "themeType": "Unmarked"
+          }
+        },
+        {
+          "clauseId": "112:1:c2",
+          "arabicText": "هُوَ اللَّهُ أَحَدٌ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Relational",
+              "typeAr": "العملية العلاقاتية التحديدية",
+              "subtype": "Identifying",
+              "lexicalVerb": "إسناد اسمي",
+              "root": "و-ح-د"
+            },
+            "participants": [
+              {
+                "roleEn": "Identified",
+                "roleAr": "المعرف",
+                "text": "هُوَ"
+              },
+              {
+                "roleEn": "Identifier",
+                "roleAr": "المعرف به",
+                "text": "اللَّهُ أَحَدٌ"
+              }
+            ],
+            "circumstances": []
+          },
+          "interpersonal": {
+            "speechFunction": "Statement (Doktrin Tauhid)",
+            "mood": "Deklaratif Proyeksi",
+            "moodAr": "خبر مقول القول"
+          },
+          "textual": {
+            "theme": "هُوَ",
+            "rheme": "اللَّهُ أَحَدٌ",
+            "themeType": "Unmarked"
+          }
+        }
+      ],
+      "diagramSegments": [
+        {
+          "ar": "قُلْ",
+          "ide": "Proses Verbal Mandat",
+          "ideAr": "عملية لفظية",
+          "int": "Mood Finit Imperatif",
+          "intAr": "أمر إلهي",
+          "tex": "Tema Klausa Utama",
+          "texAr": "موضوع الجملة الرئيسة",
+          "flex": "1"
+        },
+        {
+          "ar": "هُوَ",
+          "ide": "Identified (Dhamir Sya'n)",
+          "ideAr": "المعرف (ضمير الشأن)",
+          "int": "Subjek Proyeksi",
+          "intAr": "مبتدأ مقول القول",
+          "tex": "Tema Klausa Proyeksi",
+          "texAr": "موضوع الجملة المقول",
+          "flex": "1"
+        },
+        {
+          "ar": "اللَّهُ أَحَدٌ",
+          "ide": "Identifier Kemahaesaan",
+          "ideAr": "المعرف به",
+          "int": "Residu Proyeksi",
+          "intAr": "الخبر المقرر",
+          "tex": "Rema Pamungkas",
+          "texAr": "الخبر الحاسم",
+          "flex": "1.5"
+        }
+      ],
+      "tokens": [
+        {
+          "ar": "قُلْ",
+          "tr": "qul",
+          "root": "ق-و-ل",
+          "pos": "Fi'il Amr",
+          "role": "Process Verbal / Imperatif",
+          "roleAr": "العملية اللفظية"
+        },
+        {
+          "ar": "هُوَ",
+          "tr": "huwa",
+          "root": "ضمير",
+          "pos": "Dhamir Sya'n (Mubtada')",
+          "role": "Identified / Tema Proyeksi",
+          "roleAr": "المعرف / ضمير الشأن"
+        },
+        {
+          "ar": "اللَّهُ",
+          "tr": "allāh",
+          "root": "أ-ل-ه",
+          "pos": "Lafzhul Jalalah (Khabar)",
+          "role": "Identifier Inti",
+          "roleAr": "المعرف به"
+        },
+        {
+          "ar": "أَحَدٌ",
+          "tr": "aḥad",
+          "root": "و-ح-د",
+          "pos": "Khabar Tsani / Badal",
+          "role": "Attribute Kemahaesaan",
+          "roleAr": "سمة الوحدانية"
+        }
+      ],
+      "ideational": {
+        "processType": "Verbal (Proyeksi) & Relasional Identifikatif",
+        "processTypeAr": "العملية اللفظية والعلائقية التحديدية",
+        "rows": [
+          {
+            "seg": "قُلْ (Katakanlah)",
+            "comp": "Proses Verbal",
+            "compAr": "العملية اللفظية",
+            "role": "Perintah Ujaran",
+            "desc": "Memproyeksikan klausa pesan tauhid melalui lisan Rasulullah saw."
+          },
+          {
+            "seg": "هُوَ (Dia)",
+            "comp": "Partisipan (Identified)",
+            "compAr": "المعرف",
+            "role": "Dhamir Sya'n",
+            "desc": "Memusatkan perhatian pada hakikat agung yang akan dijelaskan."
+          },
+          {
+            "seg": "اللَّهُ أَحَدٌ",
+            "comp": "Partisipan (Identifier)",
+            "compAr": "المعرف به",
+            "role": "Identitas Absolut",
+            "desc": "Menyatukan nama agung Allah dengan sifat keesaan mutlak (Ahad)."
+          }
+        ],
+        "summary": "Secara ideasional, ayat ini memadukan Proses Verbal proyeksi ('Katakanlah') dengan klausa Relasional Identifikatif untuk meneguhkan doktrin tauhid murni."
+      },
+      "interpersonal": {
+        "speechFunc": "Imperatif (Mandat Ilahi) memproyeksikan Deklaratif",
+        "speechFuncAr": "أمر إلهي ينتج خبراً عقائدياً",
+        "modality": "Mandat Mutlak Wahyu",
+        "rows": [
+          {
+            "seg": "قُلْ",
+            "block": "Mood",
+            "blockAr": "المزاج",
+            "role": "Finit Imperatif",
+            "desc": "Perintah langsung dari Allah kepada Nabi Muhammad saw dan umatnya."
+          },
+          {
+            "seg": "هُوَ",
+            "block": "Mood Proyeksi",
+            "blockAr": "مبتدأ المقول",
+            "role": "Subjek Proyeksi",
+            "desc": "Pondasi proposisi tauhid."
+          },
+          {
+            "seg": "اللَّهُ أَحَدٌ",
+            "block": "Residu Proyeksi",
+            "blockAr": "خبر المقول",
+            "role": "Komplemen Penentu",
+            "desc": "Pernyataan doktrinal yang final."
+          }
+        ],
+        "summary": "Struktur imperatif 'Qul' menegaskan bahwa pesan tersebut merupakan transmisi wahyu Ilahi yang otoritatif."
+      },
+      "textual": {
+        "themeType": "Struktur Proyeksi Bertingkat",
+        "themeTypeAr": "بنية الموضوع المزدوج (الإسقاط)",
+        "themeContent": "قُلْ (Tema Klausa Utama) + هُوَ (Tema Klausa Proyeksi)",
+        "themeDesc": "Tema ganda: 'Qul' membuka kerangka transmisi ujaran, sementara 'Huwa' (Dhamir Sya'n) mengawali klausa inti.",
+        "rhemeContent": "اللَّهُ أَحَدٌ (Allāhu Aḥad)",
+        "rhemeDesc": "Informasi baru yang menjelaskan hakikat keesaan Allah.",
+        "summary": "Penggunaan Dhamir Sya'n 'Huwa' sebagai Tema memancing ketertarikan kognitif pendengar sebelum Rema menyebut Allah Yang Maha Esa."
+      },
+      "nahwuBalaghahBridge": {
+        "nahwu": "قُلْ adalah Fi'il Amr; jumlah هُوَ اللَّهُ أَحَدٌ berada pada posisi nashab sebagai Maqul al-Qaul (مقول القول).",
+        "balaghah": "Dhamir Sya'n (هُوَ) berfungsi untuk tafkhim (mengagungkan) dan memfokuskan jiwa pendengar sebelum penyebutan khabar.",
+        "sflSynthesis": "Maqul al-Qaul dalam Nahwu sejalan dengan konsep Projection (Locution) pada Proses Verbal dalam LSF Halliday."
+      },
+      "pedagogicalNote": {
+        "targetLevel": "Dasar–Menengah",
+        "learningObjective": "Mengenali klausa proyeksi (Direct Speech / Maqul al-Qaul) yang diawali verba verbal seperti قَالَ / قُلْ.",
+        "qiraahActivity": "Memisahkan klausa pengujar (Sayer + Verbal Process) dari klausa isi pesan (Verbiage/Projected Clause)."
+      },
+      "tafsirComparison": {
+        "kemenagSummary": "Tafsir Kemenag menjelaskan turunnya ayat ini menjawab pertanyaan kaum musyrikin tentang nasab/sifat Tuhan: Allah Maha Esa secara mutlak, tidak beranak, tidak diperanakkan, dan bebas dari segala bentuk penyerupaan.",
+        "klasikMatsur": "Ibnu Katsir dan Ath-Thabari meriwayatkan sababun nuzul dari Ubay bin Ka'ab ketika kaum musyrikin berkata, 'Terangkan nasab Tuhanmu kepada kami', maka turunlah Surat Al-Ikhlas.",
+        "lughawiBalaghi": "Dhamir Sya'n 'Huwa' berfungsi sebagai pengagung (tafkhim) yang menggugah fokus jiwa pendengar; kata 'Ahad' lebih absolut dari 'Wahid' karena menafikan keterbilangan dan sekutu.",
+        "kontemporerAdabi": "Tafsir kontemporer membaca keesaan mutlak ('Ahad') sebagai pusat orientasi hidup manusia modern agar tidak terpecah oleh pemujaan materi, egoisme, atau ideologi semu.",
+        "kontemporerMaqashidi": "Menjaga kemurnian akidah tauhid (hifzh ad-din) sekaligus menjadi landasan kesatuan kemanusiaan di bawah satu Pencipta.",
+        "lsfVsTafsirSynthesis": "LSF memodelkan ayat ini sebagai klausa proyeksi bertingkat: Proses Verbal Imperatif ('Qul') memproyeksikan Proses Relasional Identifikatif ('Huwa' sebagai Identified dan 'Allāhu Aḥad' sebagai Identifier), menegaskan bahwa tauhid adalah transmisi wahyu, bukan spekulasi manusia."
+      }
+    },
+    "110:1": {
+      "surah": 110,
+      "surahName": "An-Nasr",
+      "verse": 1,
+      "ref": "QS. An-Nasr [110]: 1",
+      "sourceRef": "Korpus Dasar LSF (Marked Circumstantial Theme)",
+      "arabic": "إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ",
+      "translit": "Idhā jā'a naṣrullāhi wal-fatḥ",
+      "translation": "Apabila telah datang pertolongan Allah dan kemenangan,",
+      "processCategory": "Material",
+      "processCategoryAr": "العملية المادية",
+      "speechCategory": "Deklaratif",
+      "themeCategory": "Marked",
+      "clauses": [
+        {
+          "clauseId": "110:1:c1",
+          "arabicText": "إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Material",
+              "typeAr": "العملية المادية",
+              "lexicalVerb": "جَاءَ",
+              "root": "ج-ي-أ"
+            },
+            "participants": [
+              {
+                "roleEn": "Actor",
+                "roleAr": "الفاعل",
+                "text": "نَصْرُ اللَّهِ وَالْفَتْحُ"
+              }
+            ],
+            "circumstances": [
+              {
+                "typeEn": "Time / Condition",
+                "typeAr": "ظرف الزمن والشرط",
+                "text": "إِذَا"
+              }
+            ]
+          },
+          "interpersonal": {
+            "speechFunction": "Statement (Janji Pasti)",
+            "mood": "Deklaratif Bersyarat",
+            "moodAr": "أسلوب الشرط للتحقيق"
+          },
+          "textual": {
+            "theme": "إِذَا",
+            "rheme": "جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ",
+            "themeType": "Marked"
+          }
+        }
+      ],
+      "diagramSegments": [
+        {
+          "ar": "إِذَا",
+          "ide": "Sirkumstansi Waktu/Kondisi",
+          "ideAr": "ظرف الزمان المستقبلي",
+          "int": "Residu Adjunct Bersyarat",
+          "intAr": "ملحق شرطي",
+          "tex": "Marked Circumstantial Theme",
+          "texAr": "موضوع ظرفي موسوم",
+          "flex": "1"
+        },
+        {
+          "ar": "جَاءَ",
+          "ide": "Proses Material Kedatangan",
+          "ideAr": "عملية مادية",
+          "int": "Mood Finit Tahqiq",
+          "intAr": "فعل ماضٍ للتحقيق",
+          "tex": "Awal Rema",
+          "texAr": "بداية الخبر",
+          "flex": "1"
+        },
+        {
+          "ar": "نَصْرُ اللَّهِ وَالْفَتْحُ",
+          "ide": "Aktor Peristiwa Agung",
+          "ideAr": "الفاعل",
+          "int": "Mood Subjek Gramatikal",
+          "intAr": "المسند إليه",
+          "tex": "Rema Substantif",
+          "texAr": "بقية الخبر",
+          "flex": "1.5"
+        }
+      ],
+      "tokens": [
+        {
+          "ar": "إِذَا",
+          "tr": "idhā",
+          "root": "ظرف",
+          "pos": "Zharf Zaman Syarthiyah",
+          "role": "Circumstance Time / Marked Theme",
+          "roleAr": "ظرف الزمان / موضوع موسوم"
+        },
+        {
+          "ar": "جَاءَ",
+          "tr": "jā'a",
+          "root": "ج-ي-أ",
+          "pos": "Fi'il Madhi",
+          "role": "Process Material",
+          "roleAr": "العملية المادية"
+        },
+        {
+          "ar": "نَصْرُ اللَّهِ",
+          "tr": "naṣrullāh",
+          "root": "ن-ص-ر",
+          "pos": "Fa'il + Mudhaf Ilaih",
+          "role": "Actor Utama",
+          "roleAr": "الفاعل"
+        },
+        {
+          "ar": "وَالْفَتْحُ",
+          "tr": "wal-fatḥ",
+          "root": "ف-ت-ح",
+          "pos": "Ma'thuf marfu'",
+          "role": "Actor Perluasan",
+          "roleAr": "الفاعل المعطوف"
+        }
+      ],
+      "ideational": {
+        "processType": "Material (Peristiwa Historis-Spiritual)",
+        "processTypeAr": "العملية المادية",
+        "rows": [
+          {
+            "seg": "إِذَا (Apabila)",
+            "comp": "Sirkumstansi Waktu / Syarat",
+            "compAr": "ظرف الزمان والشرط",
+            "role": "Kondisi Temporal",
+            "desc": "Menandai kepastian momentum waktu yang dijanjikan (bukan keraguan)."
+          },
+          {
+            "seg": "جَاءَ (Telah datang)",
+            "comp": "Proses Material",
+            "compAr": "العملية المادية",
+            "role": "Tindakan Kedatangan",
+            "desc": "Fi'il madhi setelah idha memberi efek kepastian terwujud (tahqiq)."
+          },
+          {
+            "seg": "نَصْرُ اللَّهِ وَالْفَتْحُ",
+            "comp": "Partisipan (Actor)",
+            "compAr": "الفاعل",
+            "role": "Pelaku / Peristiwa Agung",
+            "desc": "Pertolongan Allah dan kemenangan Makkah (Fath Makkah)."
+          }
+        ],
+        "summary": "Proses material kedatangan pertolongan Allah diposisikan sebagai kepastian historis yang melampaui keraguan."
+      },
+      "interpersonal": {
+        "speechFunc": "Deklaratif Bersyarat (Janji & Pengharapan)",
+        "speechFuncAr": "خبر شرطي مبشر",
+        "modality": "Kepastian Tinggi (Tahqiq dengan Idha)",
+        "rows": [
+          {
+            "seg": "إِذَا",
+            "block": "Residu",
+            "blockAr": "ملحق",
+            "role": "Adjunct Kondisional",
+            "desc": "Mengaitkan syarat kemenangan dengan respon tasbih dan istighfar."
+          },
+          {
+            "seg": "جَاءَ",
+            "block": "Mood",
+            "blockAr": "المزاج",
+            "role": "Finit Masa Lampau (Tahqiq)",
+            "desc": "Membangun keyakinan penuh pada penerima wahyu."
+          },
+          {
+            "seg": "نَصْرُ اللَّهِ",
+            "block": "Mood",
+            "blockAr": "المزاج",
+            "role": "Subjek Gramatikal",
+            "desc": "Agen kemenangan yang disandarkan langsung kepada Allah."
+          }
+        ],
+        "summary": "Menciptakan nuansa optimisme tinggi dan kesiapan spiritual menyambut penyempurnaan misi dakwah."
+      },
+      "textual": {
+        "themeType": "Marked Circumstantial Theme",
+        "themeTypeAr": "الموضوع الظرفي الموسوم",
+        "themeContent": "إِذَا (Idhā) — Penanda Waktu Bersyarat",
+        "themeDesc": "Sirkumstansi waktu ditempatkan di awal klausa untuk menyusun struktur antisipasi menuju ayat ke-3.",
+        "rhemeContent": "جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ",
+        "rhemeDesc": "Kabar gembira tibanya pertolongan dan pembebasan.",
+        "summary": "Tema kondisional 'Idha' menjembatani wacana peristiwa kemenangan dengan perintah bertasbih dan beristighfar."
+      },
+      "nahwuBalaghahBridge": {
+        "nahwu": "إِذَا adalah zharf lima yastaqbil min az-zaman (penunjuk waktu mendatang) yang mensyaratkan jumlah fi'liyah sesudahnya.",
+        "balaghah": "Pemakaian إِذَا (bukan إِنْ) menunjukkan kepastian terjadinya peristiwa, diperkuat oleh Fi'il Madhi جَاءَ (Tahqiq al-Wuqu').",
+        "sflSynthesis": "Sirkumstansi Waktu yang dimajukan menjadi Marked Circumstantial Theme yang mengikat kohesi antar-ayat dalam satu periode wacana."
+      },
+      "pedagogicalNote": {
+        "targetLevel": "Menengah",
+        "learningObjective": "Memahami perbedaan nuansa kepastian antara إِذَا dan إِنْ dalam analisis Sirkumstansi dan Modalitas.",
+        "qiraahActivity": "Menghubungkan klausa syarat (ayat 1-2) dengan klausa jawab syarat (فَسَبِّحْ pada ayat 3) sebagai satu kompleks klausa."
+      },
+      "tafsirComparison": {
+        "kemenagSummary": "Tafsir Kemenag menafsirkan turunnya pertolongan Allah dan kemenangan (Fath Makkah) sebagai isyarat sempurnanya tugas dakwah Rasulullah saw, yang harus disambut dengan tasbih dan istighfar, bukan kesombongan.",
+        "klasikMatsur": "Ibnu Katsir meriwayatkan hadis Ibnu Abbas di hadapan Khalifah Umar bin Khattab bahwa Surat An-Nasr adalah pemberitahuan dekatnya wafat Rasulullah saw setelah risalah paripurna.",
+        "lughawiBalaghi": "Pemakaian kata syarat 'Idhā' (bukan 'In') bersama fi'il madhi 'jā'a' memberi efek kepastian mutlak terjadinya kemenangan di masa depan sebelum Fath Makkah terjadi.",
+        "kontemporerAdabi": "Tafsir kontemporer menjadikannya etika kepemimpinan pasca-kemenangan: keberhasilan gerakan sosial tidak dirayakan dengan euforia kekuasaan, melainkan dengan kerendahan hati, evaluasi diri (istighfar), dan pengabdian.",
+        "kontemporerMaqashidi": "Membentuk budaya politik profetik yang antikorupsi kekuasaan dan berorientasi pada pertobatan kolektif saat mencapai puncak keberhasilan.",
+        "lsfVsTafsirSynthesis": "LSF memetakan 'Idhā' sebagai Marked Circumstantial Theme (Sirkumstansi Waktu/Syarat yang dimajukan), sehingga seluruh ayat 1–2 menggantungkan antisipasi pembaca menuju perintah tasbih-istighfar di ayat 3."
+      }
+    },
+    "14:1": {
+      "surah": 14,
+      "surahName": "Ibrahim",
+      "verse": 1,
+      "ref": "QS. Ibrahim [14]: 1",
+      "sourceRef": "Tesis Agus Gunawan (2025) - Surat Ibrahim Segmen 1 (Ayat 1-10)",
+      "arabic": "كِتَابٌ أَنزَلْنَاهُ إِلَيْكَ لِتُخْرِجَ النَّاسَ مِنَ الظُّلُمَاتِ إِلَى النُّورِ بِإِذْنِ رَبِّهِمْ",
+      "translit": "Kitābun anzalnāhu ilayka litukhrija n-nāsa mina ẓ-ẓulumāti ilā n-nūri bi-idhni rabbihim",
+      "translation": "(Ini adalah) Kitab yang Kami turunkan kepadamu (Muhammad) agar engkau mengeluarkan manusia dari kegelapan menuju cahaya terang-benderang dengan izin Tuhan mereka.",
+      "processCategory": "Material",
+      "processCategoryAr": "العملية المادية",
+      "speechCategory": "Deklaratif",
+      "themeCategory": "Unmarked",
+      "clauses": [
+        {
+          "clauseId": "14:1:c1",
+          "arabicText": "كِتَابٌ أَنزَلْنَاهُ إِلَيْكَ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Material",
+              "typeAr": "العملية المادية",
+              "lexicalVerb": "أَنزَلْنَا",
+              "root": "ن-ز-ل"
+            },
+            "participants": [
+              {
+                "roleEn": "Actor",
+                "roleAr": "الفاعل / المنفذ",
+                "text": "نَا (الله)"
+              },
+              {
+                "roleEn": "Goal",
+                "roleAr": "الهدف / المتأثر",
+                "text": "هُ (الكتاب)"
+              },
+              {
+                "roleEn": "Recipient",
+                "roleAr": "المستلم",
+                "text": "إِلَيْكَ (النبي)"
+              }
+            ],
+            "circumstances": []
+          },
+          "interpersonal": {
+            "speechFunction": "Statement (Penegasan Wahyu)",
+            "mood": "Deklaratif",
+            "moodAr": "خبر تقريري"
+          },
+          "textual": {
+            "theme": "كِتَابٌ",
+            "rheme": "أَنزَلْنَاهُ إِلَيْكَ لِتُخْرِجَ...",
+            "themeType": "Unmarked"
+          }
+        },
+        {
+          "clauseId": "14:1:c2",
+          "arabicText": "لِتُخْرِجَ النَّاسَ مِنَ الظُّلُمَاتِ إِلَى النُّورِ بِإِذْنِ رَبِّهِمْ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Material",
+              "typeAr": "العملية المادية التحويلية",
+              "lexicalVerb": "تُخْرِجَ",
+              "root": "خ-ر-ج"
+            },
+            "participants": [
+              {
+                "roleEn": "Actor",
+                "roleAr": "الفاعل",
+                "text": "أنت (النبي)"
+              },
+              {
+                "roleEn": "Goal",
+                "roleAr": "الهدف",
+                "text": "النَّاسَ"
+              }
+            ],
+            "circumstances": [
+              {
+                "typeEn": "Purpose",
+                "typeAr": "محددة الغرض والهدف",
+                "text": "لِـ (لام التعليل)"
+              },
+              {
+                "typeEn": "Space (Source → Destination)",
+                "typeAr": "محددة المكان المجازي",
+                "text": "مِنَ الظُّلُمَاتِ إِلَى النُّورِ"
+              },
+              {
+                "typeEn": "Cause / Condition",
+                "typeAr": "محددة السبب والإذن",
+                "text": "بِإِذْنِ رَبِّهِمْ"
+              }
+            ]
+          },
+          "interpersonal": {
+            "speechFunction": "Statement (Misi Kenabian)",
+            "mood": "Deklaratif",
+            "moodAr": "إسناد سببي"
+          },
+          "textual": {
+            "theme": "لِتُخْرِجَ",
+            "rheme": "النَّاسَ مِنَ الظُّلُمَاتِ إِلَى النُّورِ",
+            "themeType": "Unmarked"
+          }
+        }
+      ],
+      "diagramSegments": [
+        {
+          "ar": "كِتَابٌ",
+          "ide": "Goal / Entitas Wahyu",
+          "ideAr": "الكتاب (المعرف)",
+          "int": "Subjek Tersirat (هذا كتاب)",
+          "intAr": "خبر لمبتدأ محذوف",
+          "tex": "Tema Topikal",
+          "texAr": "الموضوع",
+          "flex": "0.9"
+        },
+        {
+          "ar": "أَنزَلْنَاهُ إِلَيْكَ",
+          "ide": "Proses Material Pewahyuan",
+          "ideAr": "عملية مادية + مستلم",
+          "int": "Mood + Residu",
+          "intAr": "المزاج والبقية",
+          "tex": "Rema 1 (Asal Wahyu)",
+          "texAr": "الخبر الأول",
+          "flex": "1.2"
+        },
+        {
+          "ar": "لِتُخْرِجَ النَّاسَ",
+          "ide": "Sirkumstansi Tujuan + Proses",
+          "ideAr": "محددة الغرض + عملية",
+          "int": "Residu Finalitas",
+          "intAr": "تعليل المهمة",
+          "tex": "Rema 2 (Misi)",
+          "texAr": "الخبر الثاني",
+          "flex": "1.2"
+        },
+        {
+          "ar": "مِنَ الظُّلُمَاتِ إِلَى النُّورِ",
+          "ide": "Sirkumstansi Ruang Metaforis",
+          "ideAr": "ظرف المكان المجازي",
+          "int": "Residu Arah Transformasi",
+          "intAr": "نطاق التحول",
+          "tex": "Rema 3 (Arah)",
+          "texAr": "الخبر الثالث",
+          "flex": "1.4"
+        },
+        {
+          "ar": "بِإِذْنِ رَبِّهِمْ",
+          "ide": "Sirkumstansi Sebab/Izin",
+          "ideAr": "محددة السبب",
+          "int": "Adjunct Otoritas",
+          "intAr": "قيد الإذن الإلهي",
+          "tex": "Rema Penutup",
+          "texAr": "ختام الخبر",
+          "flex": "1"
+        }
+      ],
+      "tokens": [
+        {
+          "ar": "كِتَابٌ",
+          "tr": "kitābun",
+          "root": "ك-ت-ب",
+          "pos": "Khabar li Mubtada' Mahdzuf",
+          "role": "Goal / Tema Wahyu",
+          "roleAr": "الهدف / الموضوع"
+        },
+        {
+          "ar": "أَنزَلْنَاهُ",
+          "tr": "anzalnāhu",
+          "root": "ن-ز-ل",
+          "pos": "Fi'il Madhi + Fa'il + Maf'ul",
+          "role": "Process Material + Actor + Goal",
+          "roleAr": "العملية المادية"
+        },
+        {
+          "ar": "إِلَيْكَ",
+          "tr": "ilayka",
+          "root": "حرف+ضمير",
+          "pos": "Jar Majrur",
+          "role": "Recipient (Penerima Wahyu)",
+          "roleAr": "المستلم"
+        },
+        {
+          "ar": "لِتُخْرِجَ",
+          "tr": "litukhrija",
+          "root": "خ-ر-ج",
+          "pos": "Lam Ta'lil + Fi'il Mudhari'",
+          "role": "Circumstance Purpose + Process",
+          "roleAr": "محددة الغرض + عملية"
+        },
+        {
+          "ar": "النَّاسَ",
+          "tr": "an-nāsa",
+          "root": "أ-ن-س",
+          "pos": "Maf'ul Bih",
+          "role": "Goal (Manusia)",
+          "roleAr": "الهدف"
+        },
+        {
+          "ar": "مِنَ الظُّلُمَاتِ إِلَى النُّورِ",
+          "tr": "mina ẓ-ẓulumāti ilā n-nūr",
+          "root": "ظ-ل-م / ن-و-ر",
+          "pos": "Jar Majrur Mutallaq",
+          "role": "Circumstance Space (Metaforis)",
+          "roleAr": "محددة المكان المجازي"
+        },
+        {
+          "ar": "بِإِذْنِ رَبِّهِمْ",
+          "tr": "bi-idhni rabbihim",
+          "root": "أ-ذ-ن",
+          "pos": "Jar Majrur + Mudhaf Ilaih",
+          "role": "Circumstance Cause / Means",
+          "roleAr": "محددة السبب"
+        }
+      ],
+      "ideational": {
+        "processType": "Material Berlapis (Pewahyuan & Transformasi Sosial)",
+        "processTypeAr": "العملية المادية (التنزيل والإخراج)",
+        "rows": [
+          {
+            "seg": "أَنزَلْنَاهُ إِلَيْكَ",
+            "comp": "Proses Material + Aktor (نَا)",
+            "compAr": "العملية المادية",
+            "role": "Aksi Pewahyuan",
+            "desc": "Allah menurunkan Al-Qur'an langsung kepada Nabi saw sebagai penerima (Recipient)."
+          },
+          {
+            "seg": "لِتُخْرِجَ النَّاسَ",
+            "comp": "Sirkumstansi Tujuan + Proses Material",
+            "compAr": "محددة الغرض + عملية",
+            "role": "Misi Transformasi",
+            "desc": "Menjelaskan tujuan diturunkannya Kitab: mengeluarkan umat manusia."
+          },
+          {
+            "seg": "مِنَ الظُّلُمَاتِ إِلَى النُّورِ",
+            "comp": "Sirkumstansi Ruang Metaforis",
+            "compAr": "محددة المكان",
+            "role": "Titik Asal → Tujuan",
+            "desc": "Jamak (الظلمات = ragam kesesatan) menuju tunggal (النور = cahaya kebenaran)."
+          },
+          {
+            "seg": "بِإِذْنِ رَبِّهِمْ",
+            "comp": "Sirkumstansi Sebab / Izin",
+            "compAr": "محددة السبب",
+            "role": "Prasyarat Ilahi",
+            "desc": "Menegaskan bahwa keberhasilan dakwah selalu bersandar pada izin Allah."
+          }
+        ],
+        "summary": "Sesuai temuan Tesis Agus Gunawan (2025), ayat pembuka Surat Ibrahim ini memadukan dua Proses Material (أَنزَلْنَا dan تُخْرِجَ) dengan tiga jenis Sirkumstansi sekaligus: Tujuan, Ruang Metaforis, dan Sebab."
+      },
+      "interpersonal": {
+        "speechFunc": "Deklaratif (Penegasan Amanah Kenabian)",
+        "speechFuncAr": "خطاب خبري تكليفي",
+        "modality": "Otoritas Ilahi Penuh",
+        "rows": [
+          {
+            "seg": "كِتَابٌ أَنزَلْنَاهُ",
+            "block": "Mood",
+            "blockAr": "المزاج",
+            "role": "Subjek (Kami) + Finit",
+            "desc": "Pronomina agung 'نَا' menampakkan otoritas Pengutus wahyu."
+          },
+          {
+            "seg": "إِلَيْكَ / لِتُخْرِجَ",
+            "block": "Residu",
+            "blockAr": "البقية",
+            "role": "Komplemen + Adjunct Tujuan",
+            "desc": "Menyematkan tanggung jawab langsung kepada Rasul sebagai khitab kedua."
+          },
+          {
+            "seg": "بِإِذْنِ رَبِّهِمْ",
+            "block": "Residu",
+            "blockAr": "البقية",
+            "role": "Adjunct Pembatas",
+            "desc": "Mengembalikan seluruh otoritas keberhasilan kepada Rabb manusia."
+          }
+        ],
+        "summary": "Kombinasi pronomina orang pertama jamak keagungan (نَا) dengan orang kedua (إليكَ/تُخْرِجَ) membangun hierarki pembina–utusan dalam penyampaian hidayah."
+      },
+      "textual": {
+        "themeType": "Unmarked Theme (Fokus Entitas Wahyu)",
+        "themeTypeAr": "الموضوع غير الموسوم",
+        "themeContent": "كِتَابٌ (Kitābun — dengan mubtada' tersirat هذا)",
+        "themeDesc": "Dimulai dengan entitas Al-Kitab sebagai titik tolak pesan utama seluruh Surat Ibrahim.",
+        "rhemeContent": "أَنزَلْنَاهُ إِلَيْكَ لِتُخْرِجَ النَّاسَ مِنَ الظُّلُمَاتِ إِلَى النُّورِ بِإِذْنِ رَبِّهِمْ",
+        "rhemeDesc": "Rantai pengembangan fungsi kitab: sumber turunnya, misinya, arah perubahannya, dan izin pelaksanaannya.",
+        "summary": "Organisasi Tema-Rema bergerak terstruktur dari benda (Kitab) → sumber (Kami) → misi (mengeluarkan manusia) → otoritas akhir (izin Rabb)."
+      },
+      "nahwuBalaghahBridge": {
+        "nahwu": "كِتَابٌ berposisi sebagai Khabar dari Mubtada' mahdzuf (هذا كتابٌ); أَنزَلْنَاهُ adalah jumlah fi'liyah yang menjadi Na'at bagi كِتَابٌ.",
+        "balaghah": "Isti'arah (Metafora) الظُّلُمَاتِ (bentuk jamak untuk kesesatan yang bercabang) berlawanan dengan النُّورِ (bentuk mufrad untuk kebenaran yang satu).",
+        "sflSynthesis": "Kaya akan Sirkumstansi (Purpose, Space, Cause) yang dalam LSF menjelaskan kondisi ideologis di sekeliling Proses Material."
+      },
+      "pedagogicalNote": {
+        "targetLevel": "Lanjut (Mutaqaddim) — Bahan Ajar Qira'ah",
+        "learningObjective": "Menganalisis klausa kompleks dengan banyak Sirkumstansi (الظروف) menggunakan peta transitivitas.",
+        "qiraahActivity": "Mahasiswa memetakan 4 komponen: Siapa Aktor? Apa Prosesnya? Ke mana Arahnya? Dengan izin siapa?"
+      },
+      "tafsirComparison": {
+        "kemenagSummary": "Tafsir Kemenag menjelaskan Al-Qur'an diturunkan sebagai petunjuk universal untuk mengeluarkan manusia dari beragam kegelapan (kekafiran, kebodohan, kezaliman) menuju satu cahaya kebenaran (iman dan ilmu) dengan izin dan taufik Allah.",
+        "klasikMatsur": "Ibnu Katsir mengaitkan 'mizh-zhulumāt ilā an-nūr' dengan ayat-ayat semakna (QS. Al-Baqarah: 257) bahwa Allah menjadi wali orang beriman yang mengeluarkan mereka dari kegelapan menuju cahaya wahyu.",
+        "lughawiBalaghi": "Para ahli Balaghah menyoroti kontras bentuk jamak 'azh-zhulumāt' (kegelapan yang bercabang-cabang) melawan bentuk tunggal 'an-nūr' (cahaya kebenaran yang satu dan lurus).",
+        "kontemporerAdabi": "Tafsir kontemporer memaknai ayat ini sebagai misi peradaban Al-Qur'an: membebaskan manusia dari kebodohan struktural, penindasan, dan krisis makna menuju pencerahan spiritual serta intelektual.",
+        "kontemporerMaqashidi": "Maqashid utama diturunkannya Kitab Suci dirumuskan secara eksplisit pada klausa tujuan ('litukhrija an-nās'): transformasi sosial-spiritual umat manusia.",
+        "lsfVsTafsirSynthesis": "Berdasarkan Tesis Agus Gunawan (2025), LSF memetakan kepadatan Sirkumstansi pada ayat ini—yakni Sirkumstansi Tujuan ('litukhrija'), Ruang Metaforis ('minazh-zhulumāt ilā an-nūr'), dan Sebab/Izin ('bi-idzni rabbihim')—yang secara linguistik mengikat misi kenabian di bawah otoritas Ilahi."
+      }
+    },
+    "14:11": {
+      "surah": 14,
+      "surahName": "Ibrahim",
+      "verse": 11,
+      "ref": "QS. Ibrahim [14]: 11",
+      "sourceRef": "Tesis Agus Gunawan (2025) - Surat Ibrahim Segmen 2 (Ayat 11-20)",
+      "arabic": "قَالَتْ لَهُمْ رُسُلُهُمْ إِن نَّحْنُ إِلَّا بَشَرٌ مِّثْلُكُمْ وَلَٰكِنَّ اللَّهَ يَمُنُّ عَلَىٰ مَن يَشَاءُ مِنْ عِبَادِهِ",
+      "translit": "Qālat lahum rusuluhum in naḥnu illā basyarun mitslukum wa-lākinna llāha yamunnu ʿalā man yasyā'u min ʿibādih",
+      "translation": "Rasul-rasul mereka berkata kepada mereka, 'Kami hanyalah manusia seperti kamu, tetapi Allah memberi karunia kepada siapa yang Dia kehendaki di antara hamba-hamba-Nya.'",
+      "processCategory": "Verbal",
+      "processCategoryAr": "العملية اللفظية",
+      "speechCategory": "Deklaratif",
+      "themeCategory": "Multiple",
+      "clauses": [
+        {
+          "clauseId": "14:11:c1",
+          "arabicText": "قَالَتْ لَهُمْ رُسُلُهُمْ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Verbal",
+              "typeAr": "العملية اللفظية",
+              "lexicalVerb": "قَالَتْ",
+              "root": "ق-و-ل"
+            },
+            "participants": [
+              {
+                "roleEn": "Sayer",
+                "roleAr": "القائل",
+                "text": "رُسُلُهُمْ"
+              },
+              {
+                "roleEn": "Receiver",
+                "roleAr": "المستلم / المخاطب",
+                "text": "لَهُمْ"
+              }
+            ],
+            "circumstances": []
+          },
+          "interpersonal": {
+            "speechFunction": "Statement (Dialog Kenabian)",
+            "mood": "Deklaratif",
+            "moodAr": "خبر سردي"
+          },
+          "textual": {
+            "theme": "قَالَتْ لَهُمْ رُسُلُهُمْ",
+            "rheme": "إِن نَّحْنُ إِلَّا بَشَرٌ مِّثْلُكُمْ...",
+            "themeType": "Unmarked"
+          }
+        },
+        {
+          "clauseId": "14:11:c2",
+          "arabicText": "إِن نَّحْنُ إِلَّا بَشَرٌ مِّثْلُكُمْ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Relational",
+              "typeAr": "العملية العلاقاتية التحديدية",
+              "subtype": "Identifying",
+              "lexicalVerb": "إسناد اسمي (النفي والاستثناء)",
+              "root": "ب-ش-ر"
+            },
+            "participants": [
+              {
+                "roleEn": "Identified",
+                "roleAr": "المعرف",
+                "text": "نَحْنُ"
+              },
+              {
+                "roleEn": "Identifier",
+                "roleAr": "المعرف به",
+                "text": "بَشَرٌ مِّثْلُكُمْ"
+              }
+            ],
+            "circumstances": []
+          },
+          "interpersonal": {
+            "speechFunction": "Statement (Pengakuan Kemanusiaan)",
+            "mood": "Deklaratif Qashr",
+            "moodAr": "قصر بالنفي والاستثناء"
+          },
+          "textual": {
+            "theme": "إِن نَّحْنُ",
+            "rheme": "إِلَّا بَشَرٌ مِّثْلُكُمْ",
+            "themeType": "Multiple"
+          }
+        },
+        {
+          "clauseId": "14:11:c3",
+          "arabicText": "وَلَٰكِنَّ اللَّهَ يَمُنُّ عَلَىٰ مَن يَشَاءُ مِنْ عِبَادِهِ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Material",
+              "typeAr": "العملية المادية (+ الذهنية: يشاء)",
+              "lexicalVerb": "يَمُنُّ / يَشَاءُ",
+              "root": "م-ن-ن / ش-ي-أ"
+            },
+            "participants": [
+              {
+                "roleEn": "Actor",
+                "roleAr": "الفاعل",
+                "text": "اللَّهَ"
+              },
+              {
+                "roleEn": "Recipient / Senser-Target",
+                "roleAr": "المستلم",
+                "text": "مَن يَشَاءُ مِنْ عِبَادِهِ"
+              }
+            ],
+            "circumstances": [
+              {
+                "typeEn": "Partitive",
+                "typeAr": "محددة التبعيض",
+                "text": "مِنْ عِبَادِهِ"
+              }
+            ]
+          },
+          "interpersonal": {
+            "speechFunction": "Statement (Koreksi Teologis)",
+            "mood": "Deklaratif Kontrastif",
+            "moodAr": "استدراك بـ لكن"
+          },
+          "textual": {
+            "theme": "وَلَٰكِنَّ اللَّهَ",
+            "rheme": "يَمُنُّ عَلَىٰ مَن يَشَاءُ مِنْ عِبَادِهِ",
+            "themeType": "Multiple"
+          }
+        }
+      ],
+      "diagramSegments": [
+        {
+          "ar": "قَالَتْ لَهُمْ رُسُلُهُمْ",
+          "ide": "Proses Verbal + Receiver + Sayer",
+          "ideAr": "عملية لفظية + مستلم + قائل",
+          "int": "Mood Pengantar Dialog",
+          "intAr": "تصدير الحوار",
+          "tex": "Tema Klausa Pengujar",
+          "texAr": "موضوع السرد",
+          "flex": "1.2"
+        },
+        {
+          "ar": "إِن نَّحْنُ إِلَّا بَشَرٌ مِّثْلُكُمْ",
+          "ide": "Proses Relasional (Identified–Identifier)",
+          "ideAr": "عملية علائقية (معرف+معرف به)",
+          "int": "Mood Deklaratif Qashr",
+          "intAr": "قصر بالنفي والاستثناء",
+          "tex": "Tema+Rema Proyeksi 1",
+          "texAr": "موضوع المقول الأول",
+          "flex": "1.4"
+        },
+        {
+          "ar": "وَلَٰكِنَّ اللَّهَ",
+          "ide": "Aktor Ilahi (Allah)",
+          "ideAr": "الفاعل (لفظ الجلالة)",
+          "int": "Subjek Kontrastif (Istidrak)",
+          "intAr": "استدراك",
+          "tex": "Multiple Theme (Tekstual+Topikal)",
+          "texAr": "موضوع مركب",
+          "flex": "1"
+        },
+        {
+          "ar": "يَمُنُّ عَلَىٰ مَن يَشَاءُ مِنْ عِبَادِهِ",
+          "ide": "Proses Material + Mental (يَشَاءُ)",
+          "ideAr": "عملية مادية + ذهنية",
+          "int": "Residu Karunia Ilahi",
+          "intAr": "بقية الإسناد",
+          "tex": "Rema Koreksi Teologis",
+          "texAr": "الخبر المستدرك",
+          "flex": "1.5"
+        }
+      ],
+      "tokens": [
+        {
+          "ar": "قَالَتْ",
+          "tr": "qālat",
+          "root": "ق-و-ل",
+          "pos": "Fi'il Madhi",
+          "role": "Process Verbal",
+          "roleAr": "العملية اللفظية"
+        },
+        {
+          "ar": "لَهُمْ",
+          "tr": "lahum",
+          "root": "حرف+ضمير",
+          "pos": "Jar Majrur",
+          "role": "Receiver (Lawan Bicara)",
+          "roleAr": "المستلم"
+        },
+        {
+          "ar": "رُسُلُهُمْ",
+          "tr": "rusuluhum",
+          "root": "ر-س-ل",
+          "pos": "Fa'il",
+          "role": "Sayer (Penutur)",
+          "roleAr": "القائل"
+        },
+        {
+          "ar": "نَّحْنُ",
+          "tr": "naḥnu",
+          "root": "ضمير",
+          "pos": "Mubtada'",
+          "role": "Identified (Relasional)",
+          "roleAr": "المعرف"
+        },
+        {
+          "ar": "بَشَرٌ مِّثْلُكُمْ",
+          "tr": "basyarun mitslukum",
+          "root": "ب-ش-ر",
+          "pos": "Khabar",
+          "role": "Identifier (Relasional)",
+          "roleAr": "المعرف به"
+        },
+        {
+          "ar": "وَلَٰكِنَّ اللَّهَ",
+          "tr": "wa-lākinna llāha",
+          "root": "حرف+علم",
+          "pos": "Harf Istidrak + Isim Inna",
+          "role": "Multiple Theme / Actor",
+          "roleAr": "موضوع مركب / فاعل"
+        },
+        {
+          "ar": "يَمُنُّ",
+          "tr": "yamunnu",
+          "root": "م-ن-ن",
+          "pos": "Fi'il Mudhari'",
+          "role": "Process Material (Pemberian)",
+          "roleAr": "العملية المادية"
+        },
+        {
+          "ar": "يَشَاءُ",
+          "tr": "yasyā'u",
+          "root": "ش-ي-أ",
+          "pos": "Fi'il Mudhari'",
+          "role": "Process Mental (Kehendak)",
+          "roleAr": "العملية الذهنية"
+        }
+      ],
+      "ideational": {
+        "processType": "Multi-Proses: Verbal → Relasional → Material & Mental",
+        "processTypeAr": "تعدد العمليات: لفظية ثم علائقية ثم مادية وذهنية",
+        "rows": [
+          {
+            "seg": "قَالَتْ لَهُمْ رُسُلُهُمْ",
+            "comp": "Proses Verbal + Sayer + Receiver",
+            "compAr": "العملية اللفظية",
+            "role": "Dialog Kenabian",
+            "desc": "Membuka jawaban para rasul atas keraguan kaumnya."
+          },
+          {
+            "seg": "إِن نَّحْنُ إِلَّا بَشَرٌ مِّثْلُكُمْ",
+            "comp": "Proses Relasional Identifikatif",
+            "compAr": "العملية العلاقاتية",
+            "role": "Identified (نحن) + Identifier (بشر)",
+            "desc": "Sesuai Tesis Agus Gunawan (2025): menegaskan kesetaraan biologis rasul sebagai manusia."
+          },
+          {
+            "seg": "وَلَٰكِنَّ اللَّهَ يَمُنُّ...",
+            "comp": "Proses Material (يَمُنُّ)",
+            "compAr": "العملية المادية",
+            "role": "Karunia Kenabian",
+            "desc": "Pemberian wahyu adalah karunia aktif Allah kepada hamba terpilih."
+          },
+          {
+            "seg": "مَن يَشَاءُ مِنْ عِبَادِهِ",
+            "comp": "Proses Mental (يَشَاءُ)",
+            "compAr": "العملية الذهنية",
+            "role": "Kehendak Ilahi",
+            "desc": "Verba 'yasyā'u' merepresentasikan kehendak/kognisi Ilahi yang berdaulat."
+          }
+        ],
+        "summary": "Ayat kunci dari Segmen 2 Tesis Surat Ibrahim: memadukan 4 tipe proses dalam satu ayat untuk menjawab argumen kaum kafir secara logis sekaligus teologis."
+      },
+      "interpersonal": {
+        "speechFunc": "Deklaratif Dialogis & Kontrastif",
+        "speechFuncAr": "حوار إخباري استدراكي",
+        "modality": "Pembatasan Qashr (إِنْ ... إِلَّا) + Istidrak (لَٰكِنَّ)",
+        "rows": [
+          {
+            "seg": "قَالَتْ لَهُمْ رُسُلُهُمْ",
+            "block": "Mood Pengantar",
+            "blockAr": "إسناد القول",
+            "role": "Pelapor Dialog",
+            "desc": "Menghadirkan suara kolektif para rasul lintas zaman."
+          },
+          {
+            "seg": "إِن نَّحْنُ إِلَّا بَشَرٌ",
+            "block": "Mood + Residu",
+            "blockAr": "أسلوب قصر",
+            "role": "Pengakuan Kerendahan Hati",
+            "desc": "Mengakui kemanusiaan tanpa merendahkan otoritas risalah."
+          },
+          {
+            "seg": "وَلَٰكِنَّ اللَّهَ يَمُنُّ",
+            "block": "Mood Kontrastif",
+            "blockAr": "استدراك",
+            "role": "Pembalik Argumen",
+            "desc": "Partikel 'lākinna' mengalihkan fokus dari keterbatasan manusia ke kemahakuasaan Allah."
+          }
+        ],
+        "summary": "Dialog interpersonal ini menunjukkan etika retorika para rasul: menyepakati premis lawan bicara ('kami memang manusia') lalu membalik kesimpulan dengan 'lākinna'."
+      },
+      "textual": {
+        "themeType": "Multiple Theme (Konjungsi Tekstual + Topikal)",
+        "themeTypeAr": "الموضوع المركب (نصي + موضعي)",
+        "themeContent": "قَالَتْ ... → إِن نَّحْنُ ... → وَلَٰكِنَّ اللَّهَ",
+        "themeDesc": "Konjungsi 'wa-lākinna' bertindak sebagai Tema Tekstual yang mempertentangkan klausa sebelumnya dengan Tema Topikal 'Allāha'.",
+        "rhemeContent": "يَمُنُّ عَلَىٰ مَن يَشَاءُ مِنْ عِبَادِهِ",
+        "rhemeDesc": "Informasi baru mengenai hak prerogatif Allah dalam menganugerahkan risalah.",
+        "summary": "Peralihan Tema dari 'نحن' (kami rasul) ke 'ولكن الله' (akan tetapi Allah) memindahkan pusat gravitasi wacana dari kemanusiaan ke ketuhanan."
+      },
+      "nahwuBalaghahBridge": {
+        "nahwu": "إِنْ nafiyah bermakna ما (tidaklah) berpasangan dengan إِلَّا; لَٰكِنَّ adalah akhawat Inna yang menashabkan اللَّهَ sebagai isim-nya.",
+        "balaghah": "Qashr haqiqi idhafi pada إِن نَّحْنُ إِلَّا بَشَرٌ diikuti Istidrak (وَلَٰكِنَّ) untuk menolak anggapan bahwa rasul harus berupa malaikat.",
+        "sflSynthesis": "Menunjukkan bagaimana LSF memetakan partikel Nahwu (وَ، لَٰكِنَّ) sebagai Textual Theme sekaligus penanda relasi antar-klausa."
+      },
+      "pedagogicalNote": {
+        "targetLevel": "Lanjut (Mutaqaddim)",
+        "learningObjective": "Mengidentifikasi empat proses berbeda (Verbal, Relasional, Material, Mental) dalam satu ayat dialogis.",
+        "qiraahActivity": "Membuat bagan klause-per-klausa seperti tabel analisis Bab IV Tesis Agus Gunawan (2025)."
+      },
+      "tafsirComparison": {
+        "kemenagSummary": "Tafsir Kemenag menjelaskan jawaban para rasul atas penolakan kaumnya yang menganggap rasul harus malaikat: para rasul mengakui diri mereka manusia biasa, namun kenabian adalah hak prerogatif karunia Allah kepada hamba yang Dia kehendaki.",
+        "klasikMatsur": "Ath-Thabari mencatat dialog ini merupakan pola berulang dakwah para nabi (Nuh, Hud, Shalih, hingga Nabi Muhammad saw) dalam menghadapi argumen materialistik kaum kafir.",
+        "lughawiBalaghi": "Menggunakan kombinasi Qashr ('in naḥnu illā basyarun') untuk membatasi identitas biologis dan huruf Istidrak ('wa-lākinna') untuk membalikkan kesimpulan lawan bicara secara elegan.",
+        "kontemporerAdabi": "Quraish Shihab menekankan dimensi humanisme kenabian: justru karena rasul adalah manusia, teladan mereka dapat ditiru secara nyata dalam kehidupan sosial, bukan figur mitologis yang tak terjangkau.",
+        "kontemporerMaqashidi": "Menegaskan prinsip meritokrasi spiritual dan kesetaraan kemanusiaan: kemuliaan tidak lahir dari jenis fisik atau status sosial, melainkan karunia wahyu dan ketakwaan.",
+        "lsfVsTafsirSynthesis": "LSF (Tesis Surat Ibrahim) menunjukkan keunikan ayat ini yang memadukan 4 proses sekaligus—Verbal ('qālat'), Relasional Identifikatif ('naḥnu–basyar'), Material ('yamunnu'), dan Mental ('yasyā'u')—serta penggunaan Multiple Theme 'wa-lākinna Allāha' untuk memindahkan pusat argumen dari rasul kepada Allah."
+      }
+    },
+    "14:19": {
+      "surah": 14,
+      "surahName": "Ibrahim",
+      "verse": 19,
+      "ref": "QS. Ibrahim [14]: 19",
+      "sourceRef": "Tesis Agus Gunawan (2025) - Surat Ibrahim Segmen 2 (Ayat 19)",
+      "arabic": "أَلَمْ تَرَ أَنَّ اللَّهَ خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ بِالْحَقِّ ۚ إِن يَشَأْ يُذْهِبْكُمْ وَيَأْتِ بِخَلْقٍ جَدِيدٍ",
+      "translit": "A-lam tara anna llāha khalaqa s-samāwāti wal-arḍa bil-ḥaqq; in yasya' yudzhibkum wa-ya'ti bikhalqin jadīd",
+      "translation": "Tidakkah kamu memperhatikan bahwa sesungguhnya Allah telah menciptakan langit dan bumi dengan hak (benar)? Jika Dia menghendaki, niscaya Dia membinasakan kamu dan mendatangkan makhluk yang baru.",
+      "processCategory": "Mental",
+      "processCategoryAr": "العملية العقلية / الذهنية",
+      "speechCategory": "Interogatif",
+      "themeCategory": "Multiple",
+      "clauses": [
+        {
+          "clauseId": "14:19:c1",
+          "arabicText": "أَلَمْ تَرَ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Mental",
+              "typeAr": "العملية الذهنية (الإدراك)",
+              "subtype": "Perceptive / Cognitive",
+              "lexicalVerb": "تَرَ",
+              "root": "ر-أ-ي"
+            },
+            "participants": [
+              {
+                "roleEn": "Senser",
+                "roleAr": "الشاهد العقلي",
+                "text": "أنت (المخاطب)"
+              }
+            ],
+            "circumstances": []
+          },
+          "interpersonal": {
+            "speechFunction": "Interogatif Retoris (Taqrir)",
+            "mood": "Interogatif",
+            "moodAr": "استفهام تقريري"
+          },
+          "textual": {
+            "theme": "أَلَمْ تَرَ",
+            "rheme": "أَنَّ اللَّهَ خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ بِالْحَقِّ",
+            "themeType": "Multiple"
+          }
+        },
+        {
+          "clauseId": "14:19:c2",
+          "arabicText": "أَنَّ اللَّهَ خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ بِالْحَقِّ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Material",
+              "typeAr": "العملية المادية",
+              "lexicalVerb": "خَلَقَ",
+              "root": "خ-ل-ق"
+            },
+            "participants": [
+              {
+                "roleEn": "Actor",
+                "roleAr": "الفاعل (الخالق)",
+                "text": "اللَّهَ"
+              },
+              {
+                "roleEn": "Goal",
+                "roleAr": "الهدف (المخلوق)",
+                "text": "السَّمَاوَاتِ وَالْأَرْضَ"
+              }
+            ],
+            "circumstances": [
+              {
+                "typeEn": "Manner / Truth",
+                "typeAr": "محددة الكيفية والحق",
+                "text": "بِالْحَقِّ"
+              }
+            ]
+          },
+          "interpersonal": {
+            "speechFunction": "Statement (Fakta Kosmik)",
+            "mood": "Deklaratif Tersemat",
+            "moodAr": "مؤكد بـ أن"
+          },
+          "textual": {
+            "theme": "أَنَّ اللَّهَ",
+            "rheme": "خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ بِالْحَقِّ",
+            "themeType": "Multiple"
+          }
+        },
+        {
+          "clauseId": "14:19:c3",
+          "arabicText": "إِن يَشَأْ يُذْهِبْكُمْ وَيَأْتِ بِخَلْقٍ جَدِيدٍ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Existential",
+              "typeAr": "العملية الذهنية + المادية + الوجودية",
+              "lexicalVerb": "يَشَأْ / يُذْهِبْ / يَأْتِ",
+              "root": "ش-ي-أ / ذ-ه-ب / أ-ت-ي"
+            },
+            "participants": [
+              {
+                "roleEn": "Senser / Actor",
+                "roleAr": "الفاعل",
+                "text": "هو (الله)"
+              },
+              {
+                "roleEn": "Goal",
+                "roleAr": "الهدف",
+                "text": "كُمْ (المخاطبون)"
+              },
+              {
+                "roleEn": "Existent / New Creation",
+                "roleAr": "الموجود الجديد",
+                "text": "بِخَلْقٍ جَدِيدٍ"
+              }
+            ],
+            "circumstances": []
+          },
+          "interpersonal": {
+            "speechFunction": "Warning / Condition",
+            "mood": "Deklaratif Bersyarat",
+            "moodAr": "أسلوب شرط"
+          },
+          "textual": {
+            "theme": "إِن يَشَأْ",
+            "rheme": "يُذْهِبْكُمْ وَيَأْتِ بِخَلْقٍ جَدِيدٍ",
+            "themeType": "Marked"
+          }
+        }
+      ],
+      "diagramSegments": [
+        {
+          "ar": "أَلَمْ تَرَ",
+          "ide": "Proses Mental Persepsi",
+          "ideAr": "عملية ذهنية إدراكية",
+          "int": "Mood Interogatif Retoris",
+          "intAr": "استفهام تقريري",
+          "tex": "Tema Interogatif-Interpersonal",
+          "texAr": "موضوع تفاعلي",
+          "flex": "0.9"
+        },
+        {
+          "ar": "أَنَّ اللَّهَ خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ",
+          "ide": "Proses Material Penciptaan",
+          "ideAr": "عملية مادية (الخلق)",
+          "int": "Fenomena Fakta Kosmik",
+          "intAr": "حقيقة مؤكدة",
+          "tex": "Rema 1 (Argumen Penciptaan)",
+          "texAr": "الخبر الأول",
+          "flex": "1.6"
+        },
+        {
+          "ar": "بِالْحَقِّ",
+          "ide": "Sirkumstansi Cara/Kebenaran",
+          "ideAr": "محددة الكيفية",
+          "int": "Residu Adjunct",
+          "intAr": "قيد الكيفية",
+          "tex": "Penutup Klausa 1",
+          "texAr": "ختام الجملة",
+          "flex": "0.7"
+        },
+        {
+          "ar": "إِن يَشَأْ يُذْهِبْكُمْ",
+          "ide": "Mental (Kehendak) → Material",
+          "ideAr": "عملية ذهنية ثم مادية",
+          "int": "Mood Syarat-Jawab",
+          "intAr": "شرط وجواب",
+          "tex": "Tema Bersyarat + Rema",
+          "texAr": "موضوع شرطي",
+          "flex": "1.2"
+        },
+        {
+          "ar": "وَيَأْتِ بِخَلْقٍ جَدِيدٍ",
+          "ide": "Proses Eksistensial (Ciptaan Baru)",
+          "ideAr": "عملية وجودية",
+          "int": "Residu Kemungkinan Baru",
+          "intAr": "تهديد/إثبات القدرة",
+          "tex": "Rema Klimaks",
+          "texAr": "الخبر الختامي",
+          "flex": "1.2"
+        }
+      ],
+      "tokens": [
+        {
+          "ar": "أَلَمْ",
+          "tr": "a-lam",
+          "root": "حرف",
+          "pos": "Hamzah Istifham + Lam Jazm",
+          "role": "Interpersonal Theme (Tanya Retoris)",
+          "roleAr": "موضوع استفهامي"
+        },
+        {
+          "ar": "تَرَ",
+          "tr": "tara",
+          "root": "ر-أ-ي",
+          "pos": "Fi'il Mudhari' Majzum",
+          "role": "Process Mental (Persepsi)",
+          "roleAr": "العملية الذهنية"
+        },
+        {
+          "ar": "خَلَقَ",
+          "tr": "khalaqa",
+          "root": "خ-ل-ق",
+          "pos": "Fi'il Madhi",
+          "role": "Process Material (Penciptaan)",
+          "roleAr": "العملية المادية"
+        },
+        {
+          "ar": "بِالْحَقِّ",
+          "tr": "bil-ḥaqq",
+          "root": "ح-ق-ق",
+          "pos": "Jar Majrur",
+          "role": "Circumstance Manner",
+          "roleAr": "محددة الكيفية"
+        },
+        {
+          "ar": "يَشَأْ",
+          "tr": "yasya'",
+          "root": "ش-ي-أ",
+          "pos": "Fi'il Syarat",
+          "role": "Process Mental (Kehendak)",
+          "roleAr": "العملية الذهنية"
+        },
+        {
+          "ar": "يُذْهِبْكُمْ",
+          "tr": "yudzhibkum",
+          "root": "ذ-ه-ب",
+          "pos": "Jawab Syarat",
+          "role": "Process Material + Goal",
+          "roleAr": "العملية المادية"
+        },
+        {
+          "ar": "بِخَلْقٍ جَدِيدٍ",
+          "tr": "bikhalqin jadīd",
+          "root": "خ-ل-ق / ج-د-د",
+          "pos": "Jar Majrur + Na'at",
+          "role": "Existent (Entitas Baru)",
+          "roleAr": "الموجود الجديد"
+        }
+      ],
+      "ideational": {
+        "processType": "Mental (Persepsi & Kehendak) + Material + Eksistensial",
+        "processTypeAr": "عملية ذهنية (رؤية/مشيئة) + مادية + وجودية",
+        "rows": [
+          {
+            "seg": "أَلَمْ تَرَ",
+            "comp": "Proses Mental Perseptif",
+            "compAr": "العملية الذهنية",
+            "role": "Senser (Engkau)",
+            "desc": "Mengajak akal dan penglihatan batin manusia untuk merenungi realitas kosmik."
+          },
+          {
+            "seg": "خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ بِالْحَقِّ",
+            "comp": "Proses Material + Sirkumstansi Cara",
+            "compAr": "العملية المادية + الكيفية",
+            "role": "Penciptaan Kosmik",
+            "desc": "Aktor (Allah) menciptakan langit dan bumi dengan cara/tujuan yang haq."
+          },
+          {
+            "seg": "إِن يَشَأْ يُذْهِبْكُمْ",
+            "comp": "Proses Mental (يَشَأْ) + Material (يُذْهِبْ)",
+            "compAr": "ذهنية ثم مادية",
+            "role": "Kehendak & Pemusnahan",
+            "desc": "Kehendak Ilahi langsung berwujud pada pergantian generasi."
+          },
+          {
+            "seg": "وَيَأْتِ بِخَلْقٍ جَدِيدٍ",
+            "comp": "Proses Eksistensial",
+            "compAr": "العملية الوجودية",
+            "role": "Existent (Makhluk Baru)",
+            "desc": "Dalam Tesis Agus Gunawan (2025), frasa 'bikhalqin jadīd' merepresentasikan kemunculan eksistensi baru."
+          }
+        ],
+        "summary": "Mengintegrasikan Proses Mental ('tidakkah kamu melihat', 'jika Dia menghendaki'), Proses Material ('mencipta', 'membinasakan'), dan Proses Eksistensial ('mendatangkan ciptaan baru')."
+      },
+      "interpersonal": {
+        "speechFunc": "Interogatif Retoris (Taqrir / Menggugah Kesadaran)",
+        "speechFuncAr": "استفهام إنكاري تقريري",
+        "modality": "Keyakinan Logis & Peringatan",
+        "rows": [
+          {
+            "seg": "أَلَمْ تَرَ",
+            "block": "Mood Interogatif",
+            "blockAr": "المزاج الاستفهامي",
+            "role": "Pertanyaan Penegas",
+            "desc": "Hamzah + lam menuntut pengakuan tak terbantahkan dari mitra tutur."
+          },
+          {
+            "seg": "إِن يَشَأْ يُذْهِبْكُمْ",
+            "block": "Mood Bersyarat",
+            "blockAr": "أسلوب الشرط",
+            "role": "Peringatan Eksistensial",
+            "desc": "Menempatkan manusia dalam posisi ketergantungan mutlak pada kehendak Allah."
+          }
+        ],
+        "summary": "Pertanyaan retoris 'A-lam tara' membuka dialog rasional yang memaksa pembaca mengakui kekuasaan mutlak Sang Pencipta."
+      },
+      "textual": {
+        "themeType": "Multiple Theme (Interpersonal + Topical)",
+        "themeTypeAr": "الموضوع المركب (تفاعلي + موضعي)",
+        "themeContent": "أَلَمْ تَرَ (Tema Interogatif) → إِن يَشَأْ (Tema Bersyarat)",
+        "themeDesc": "Pertanyaan di awal langsung mengaktifkan kesadaran pembaca sebelum memaparkan bukti penciptaan alam.",
+        "rhemeContent": "أَنَّ اللَّهَ خَلَقَ السَّمَاوَاتِ وَالْأَرْضَ بِالْحَقِّ ... وَيَأْتِ بِخَلْقٍ جَدِيدٍ",
+        "rhemeDesc": "Argumen kosmologis tentang penciptaan dan re-kreasi.",
+        "summary": "Alur tematik bergerak dari pertanyaan kesadaran individu menuju bukti kosmos dan peringatan pergantian eksistensi."
+      },
+      "nahwuBalaghahBridge": {
+        "nahwu": "أَلَمْ تَرَ: Hamzah Istifham + Lam (jazm), membuang huruf illat alif pada تَرَ; jumlah an-na beserta isim & khabarnya menduduki posisi dua maf'ul dari تَرَ (ru'yah qalbiyah).",
+        "balaghah": "Istifham Taqririy (pertanyaan yang bertujuan memaksa pengakuan kebenaran yang sudah jelas).",
+        "sflSynthesis": "Hamzah Istifham dalam Nahwu berperan sebagai Interpersonal Theme yang langsung memposisikan penutur dan pendengar dalam dialog reflektif."
+      },
+      "pedagogicalNote": {
+        "targetLevel": "Lanjut (Mutaqaddim)",
+        "learningObjective": "Membedakan verba رَأَى penglihatan fisik vs رَأَى kognitif (Mental Process) dalam teks Al-Qur'an.",
+        "qiraahActivity": "Identifikasi bagaimana 'istifham taqririy' membangun argumen persuasif dalam wacana Al-Qur'an."
+      },
+      "tafsirComparison": {
+        "kemenagSummary": "Tafsir Kemenag menekankan bukti penciptaan langit dan bumi 'dengan hak' (teratur, bertujuan, bukan main-main) sebagai pengingat bahwa Allah Mahakuasa melenyapkan generasi yang ingkar dan menghadirkan ciptaan baru.",
+        "klasikMatsur": "Ibnu Katsir mengaitkan frasa 'bil-ḥaqq' dengan keadilan dan kepastian hari pembalasan, serta merujuk ayat senada (QS. Fathir: 16–17) tentang kemudahan Allah mengganti suatu kaum.",
+        "lughawiBalaghi": "Az-Zamakhsyari menjelaskan 'A-lam tara' sebagai Istifham Taqririy yang mendorong kesadaran akal (ru'yah qalbiyah), sedangkan kata 'bi-khalqin jadīd' berbentuk nakirah untuk mengisyaratkan keluasan kuasa penciptaan baru.",
+        "kontemporerAdabi": "Tafsir kontemporer membaca ayat ini dalam dialog sains dan etika lingkungan: alam semesta diciptakan 'bil-ḥaqq' (hukum alam yang terukur dan bernilai moral), sehingga perusakan dan keangkuhan manusia berisiko membawa kehancuran peradaban.",
+        "kontemporerMaqashidi": "Menjaga keseimbangan kosmos (hifzh al-'alam) dan membangun kesadaran ekologi-teologis bahwa eksistensi manusia bergantung pada kehendak Allah.",
+        "lsfVsTafsirSynthesis": "LSF menangkap transisi yang halus dari Proses Mental Perseptif ('a-lam tara') ke Proses Material kosmik ('khalaqa'), lalu menuju Proses Eksistensial ('bi-khalqin jadīd'), memperlihatkan bagaimana Al-Qur'an memadukan ajakan berpikir (Senser) dengan ancaman pergantian eksistensi."
+      }
+    },
+    "76:1": {
+      "surah": 76,
+      "surahName": "Al-Insan",
+      "verse": 1,
+      "ref": "QS. Al-Insan [76]: 1",
+      "sourceRef": "Kajian LSF Surat Al-Insan (Zulhaeri) - Ayat 1",
+      "arabic": "هَلْ أَتَىٰ عَلَى الْإِنسَانِ حِينٌ مِّنَ الدَّهْرِ لَمْ يَكُن شَيْئًا مَّذْكُورًا",
+      "translit": "Hal atā ʿalā l-insāni ḥīnun mina d-dahri lam yakun syay'an madzkūrā",
+      "translation": "Bukankah telah datang atas manusia satu waktu dari masa, ketika itu dia belum merupakan sesuatu yang dapat disebut?",
+      "processCategory": "Existential",
+      "processCategoryAr": "العملية الوجودية",
+      "speechCategory": "Interogatif",
+      "themeCategory": "Multiple",
+      "clauses": [
+        {
+          "clauseId": "76:1:c1",
+          "arabicText": "هَلْ أَتَىٰ عَلَى الْإِنسَانِ حِينٌ مِّنَ الدَّهْرِ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Material",
+              "typeAr": "العملية المادية / الحدثية",
+              "lexicalVerb": "أَتَىٰ",
+              "root": "أ-ت-ي"
+            },
+            "participants": [
+              {
+                "roleEn": "Actor / Event",
+                "roleAr": "الفاعل (الزمن)",
+                "text": "حِينٌ مِّنَ الدَّهْرِ"
+              }
+            ],
+            "circumstances": [
+              {
+                "typeEn": "Location / Affected",
+                "typeAr": "المتأثر المكاني/البشري",
+                "text": "عَلَى الْإِنسَانِ"
+              }
+            ]
+          },
+          "interpersonal": {
+            "speechFunction": "Interogatif Penegas (هَلْ = قَدْ)",
+            "mood": "Interogatif",
+            "moodAr": "استفهام للتقرير"
+          },
+          "textual": {
+            "theme": "هَلْ أَتَىٰ",
+            "rheme": "عَلَى الْإِنسَانِ حِينٌ مِّنَ الدَّهْرِ",
+            "themeType": "Multiple"
+          }
+        },
+        {
+          "clauseId": "76:1:c2",
+          "arabicText": "لَمْ يَكُن شَيْئًا مَّذْكُورًا",
+          "transitivity": {
+            "process": {
+              "typeEn": "Existential",
+              "typeAr": "العملية الوجودية المنفية",
+              "lexicalVerb": "لَمْ يَكُن",
+              "root": "ك-و-ن"
+            },
+            "participants": [
+              {
+                "roleEn": "Existent",
+                "roleAr": "الموجود (المنفي وجوده)",
+                "text": "شَيْئًا مَّذْكُورًا"
+              }
+            ],
+            "circumstances": []
+          },
+          "interpersonal": {
+            "speechFunction": "Statement (Ketiadaan Pra-Eksistensi)",
+            "mood": "Deklaratif Negatif",
+            "moodAr": "نفي الوجود المعتبر"
+          },
+          "textual": {
+            "theme": "لَمْ يَكُن",
+            "rheme": "شَيْئًا مَّذْكُورًا",
+            "themeType": "Unmarked"
+          }
+        }
+      ],
+      "diagramSegments": [
+        {
+          "ar": "هَلْ",
+          "ide": "Penanda Pertanyaan Eksistensial",
+          "ideAr": "أداة استفهام تقريري",
+          "int": "Interpersonal Mood Marker",
+          "intAr": "مؤشر الاستفهام",
+          "tex": "Interpersonal Theme",
+          "texAr": "موضوع تفاعلي",
+          "flex": "0.6"
+        },
+        {
+          "ar": "أَتَىٰ عَلَى الْإِنسَانِ حِينٌ مِّنَ الدَّهْرِ",
+          "ide": "Proses Kedatangan Waktu",
+          "ideAr": "عملية حدثية + ظرف",
+          "int": "Proposisi Temporal",
+          "intAr": "المزاج",
+          "tex": "Rema 1 (Rentang Masa)",
+          "texAr": "الخبر الأول",
+          "flex": "1.5"
+        },
+        {
+          "ar": "لَمْ يَكُن",
+          "ide": "Proses Eksistensial Negatif",
+          "ideAr": "عملية وجودية منفية",
+          "int": "Finit Negatif (Past)",
+          "intAr": "نفي الكينونة",
+          "tex": "Tema Klausa Sifat",
+          "texAr": "موضوع الجملة الثانية",
+          "flex": "0.9"
+        },
+        {
+          "ar": "شَيْئًا مَّذْكُورًا",
+          "ide": "Existent (Entitas Tak Disebut)",
+          "ideAr": "الموجود المنفي",
+          "int": "Residu Komplemen",
+          "intAr": "خبر كان",
+          "tex": "Rema Penegas Asal-Usul",
+          "texAr": "خبر الخاتمة",
+          "flex": "1.2"
+        }
+      ],
+      "tokens": [
+        {
+          "ar": "هَلْ",
+          "tr": "hal",
+          "root": "حرف",
+          "pos": "Harf Istifham (bi ma'na Qad)",
+          "role": "Interpersonal Theme",
+          "roleAr": "موضوع تفاعلي"
+        },
+        {
+          "ar": "أَتَىٰ",
+          "tr": "atā",
+          "root": "أ-ت-ي",
+          "pos": "Fi'il Madhi",
+          "role": "Process Kejadian Waktu",
+          "roleAr": "العملية الحدثية"
+        },
+        {
+          "ar": "عَلَى الْإِنسَانِ",
+          "tr": "ʿalā l-insāni",
+          "root": "أ-ن-س",
+          "pos": "Jar Majrur",
+          "role": "Scope / Manusia",
+          "roleAr": "النطاق البشري"
+        },
+        {
+          "ar": "حِينٌ مِّنَ الدَّهْرِ",
+          "tr": "ḥīnun mina d-dahr",
+          "root": "ح-ي-ن / د-ه-ر",
+          "pos": "Fa'il + Jar Majrur",
+          "role": "Circumstance / Actor Waktu",
+          "roleAr": "الزمن"
+        },
+        {
+          "ar": "لَمْ يَكُن",
+          "tr": "lam yakun",
+          "root": "ك-و-ن",
+          "pos": "Harf Nafiy + Fi'il Naqish",
+          "role": "Process Existential Negatif",
+          "roleAr": "العملية الوجودية"
+        },
+        {
+          "ar": "شَيْئًا مَّذْكُورًا",
+          "tr": "syay'an madzkūrā",
+          "root": "ش-ي-أ / ذ-ك-ر",
+          "pos": "Khabar Kana + Na'at",
+          "role": "Existent (Belum Layak Disebut)",
+          "roleAr": "الموجود"
+        }
+      ],
+      "ideational": {
+        "processType": "Eksistensial (Keberadaan & Ketiadaan Manusia)",
+        "processTypeAr": "العملية الوجودية",
+        "rows": [
+          {
+            "seg": "أَتَىٰ عَلَى الْإِنسَانِ حِينٌ مِّنَ الدَّهْرِ",
+            "comp": "Proses Kejadian + Waktu",
+            "compAr": "العملية + الزمن",
+            "role": "Konteks Pra-Sejarah",
+            "desc": "Rentang masa panjang sebelum manusia dianugerahi wujud sempurna."
+          },
+          {
+            "seg": "لَمْ يَكُن شَيْئًا مَّذْكُورًا",
+            "comp": "Proses Eksistensial Negatif",
+            "compAr": "العملية الوجودية المنفية",
+            "role": "Existent",
+            "desc": "Menegaskan bahwa manusia pernah berada dalam kondisi belum terhitung/disebut."
+          }
+        ],
+        "summary": "Melalui Proses Eksistensial negatif ('lam yakun syay'an madzkūrā'), ayat pembuka Surat Al-Insan meruntuhkan kesombongan manusia dengan mengingatkan fase ketiadaannya."
+      },
+      "interpersonal": {
+        "speechFunc": "Interogatif Penegas (Taqrir)",
+        "speechFuncAr": "استفهام تقريري (بمعنى قد)",
+        "modality": "Penegasan Sejarah Eksistensi",
+        "rows": [
+          {
+            "seg": "هَلْ",
+            "block": "Mood Interogatif",
+            "blockAr": "أداة الاستفهام",
+            "role": "Interpersonal Theme",
+            "desc": "Menurut mufasir dan ahli Balaghah, 'Hal' di sini berfungsi menggugah pengakuan pasti ('Sungguh telah datang')."
+          },
+          {
+            "seg": "لَمْ يَكُن شَيْئًا مَّذْكُورًا",
+            "block": "Mood Negatif",
+            "blockAr": "النفي",
+            "role": "Proposisi Pengingat",
+            "desc": "Menanamkan sikap tawadhu' kepada pembaca."
+          }
+        ],
+        "summary": "Bentuk tanya 'Hal' menuntut keterlibatan reflektif pembaca agar mengakui asal-usul penciptaannya."
+      },
+      "textual": {
+        "themeType": "Multiple Theme (Interpersonal + Topical)",
+        "themeTypeAr": "الموضوع المركب",
+        "themeContent": "هَلْ أَتَىٰ",
+        "themeDesc": "Pertanyaan pembuka surat menjadi titik tolak psikologis sebelum masuk ke proses penciptaan pada ayat ke-2.",
+        "rhemeContent": "عَلَى الْإِنسَانِ حِينٌ مِّنَ الدَّهْرِ لَمْ يَكُن شَيْئًا مَّذْكُورًا",
+        "rhemeDesc": "Informasi baru mengenai fase pra-eksistensi manusia.",
+        "summary": "Menjadi fondasi kohesi tematik untuk ayat berikutnya (إِنَّا خَلَقْنَا الْإِنسَانَ) yang menjelaskan penciptaan dari nutfah."
+      },
+      "nahwuBalaghahBridge": {
+        "nahwu": "حِينٌ adalah Fa'il dari أَتَىٰ; jumlah لَمْ يَكُن شَيْئًا مَّذْكُورًا berkedudukan sebagai Na'at (sifat) dari حِينٌ atau Hal dari الْإِنسَانِ.",
+        "balaghah": "Istifham bermakna Taqrir (هَلْ = قَدْ) untuk menguatkan fakta tak terbantahkan.",
+        "sflSynthesis": "Menjadi contoh klasik Proses Eksistensial dengan verba كَانَ (be/exist) dalam bentuk lampau yang dinegasikan."
+      },
+      "pedagogicalNote": {
+        "targetLevel": "Menengah–Lanjut",
+        "learningObjective": "Memahami fungsi verba كَانَ sebagai Proses Eksistensial (bukan sekadar Relasional) ketika berbicara tentang ada/tidaknya entitas.",
+        "qiraahActivity": "Merangkai alur eksistensial ayat 1 dengan proses penciptaan fisik ayat 2 pada Surat Al-Insan."
+      },
+      "tafsirComparison": {
+        "kemenagSummary": "Tafsir Kemenag menerangkan bahwa sebelum ditiupkan ruh dan berbentuk sempurna, manusia melewati rentang masa panjang ketika ia belum berwujud dan belum layak disebut sebagai makhluk yang bermakna.",
+        "klasikMatsur": "Ibnu Katsir mengutip riwayat Ibnu Abbas bahwa 'ḥīnun min ad-dahr' merujuk pada masa sebelum penciptaan Adam atau fase tanah liat dan empat puluh tahun sebelum ditiupkan ruh.",
+        "lughawiBalaghi": "Para ahli Nahwu dan Balaghah menyatakan partikel 'Hal' di awal ayat bermakna 'Qad' (sungguh telah datang) sebagai pertanyaan retoris penegas fakta (Istifham Taqririy).",
+        "kontemporerAdabi": "Quraish Shihab menekankan pesan psikologis ayat pembuka Surat Al-Insan ini: mengajak manusia merenungi awal mula ketiadaannya agar tidak angkuh dan mau bersyukur atas anugerah wujud.",
+        "kontemporerMaqashidi": "Mengukuhkan martabat kemanusiaan yang tidak berasal dari kebetulan buta, melainkan diangkat dari ketiadaan menjadi makhluk berakal yang memikul amanah moral.",
+        "lsfVsTafsirSynthesis": "Dari kajian LSF Surat Al-Insan, klausa 'lam yakun syay'an madzkūrā' dianalisis sebagai Proses Eksistensial negatif yang dipasangkan dengan Interpersonal Theme 'Hal', menciptakan efek retoris reflektif sebelum pemaparan penciptaan biologis di ayat ke-2."
+      }
+    },
+    "76:2": {
+      "surah": 76,
+      "surahName": "Al-Insan",
+      "verse": 2,
+      "ref": "QS. Al-Insan [76]: 2",
+      "sourceRef": "Kajian LSF Surat Al-Insan (Zulhaeri) - Ayat 2",
+      "arabic": "إِنَّا خَلَقْنَا الْإِنسَانَ مِن نُّطْفَةٍ أَمْشَاجٍ نَّبْتَلِيهِ فَجَعَلْنَاهُ سَمِيعًا بَصِيرًا",
+      "translit": "Innā khalaqnā l-insāna min nuṭfatin amsyājin nabtalīhi fa-jaʿalnāhu samīʿan baṣīrā",
+      "translation": "Sungguh, Kami telah menciptakan manusia dari setetes mani yang bercampur yang Kami hendak mengujinya (dengan perintah dan larangan), karena itu Kami jadikan dia mendengar dan melihat.",
+      "processCategory": "Material",
+      "processCategoryAr": "العملية المادية",
+      "speechCategory": "Deklaratif",
+      "themeCategory": "Multiple",
+      "clauses": [
+        {
+          "clauseId": "76:2:c1",
+          "arabicText": "إِنَّا خَلَقْنَا الْإِنسَانَ مِن نُّطْفَةٍ أَمْشَاجٍ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Material",
+              "typeAr": "العملية المادية",
+              "lexicalVerb": "خَلَقْنَا",
+              "root": "خ-ل-ق"
+            },
+            "participants": [
+              {
+                "roleEn": "Actor",
+                "roleAr": "الفاعل",
+                "text": "نَا (الله)"
+              },
+              {
+                "roleEn": "Goal",
+                "roleAr": "الهدف",
+                "text": "الْإِنسَانَ"
+              }
+            ],
+            "circumstances": [
+              {
+                "typeEn": "Matter / Origin",
+                "typeAr": "محددة الأصل والمادة",
+                "text": "مِن نُّطْفَةٍ أَمْشَاجٍ"
+              }
+            ]
+          },
+          "interpersonal": {
+            "speechFunction": "Statement (Penegasan Penciptaan)",
+            "mood": "Deklaratif Ta'kid (إِنَّا)",
+            "moodAr": "خبر مؤكد"
+          },
+          "textual": {
+            "theme": "إِنَّا",
+            "rheme": "خَلَقْنَا الْإِنسَانَ مِن نُّطْفَةٍ أَمْشَاجٍ",
+            "themeType": "Multiple"
+          }
+        },
+        {
+          "clauseId": "76:2:c2",
+          "arabicText": "نَّبْتَلِيهِ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Material",
+              "typeAr": "العملية المادية / الاختبارية",
+              "lexicalVerb": "نَّبْتَلِي",
+              "root": "ب-ل-و"
+            },
+            "participants": [
+              {
+                "roleEn": "Actor",
+                "roleAr": "الفاعل",
+                "text": "نحن (الله)"
+              },
+              {
+                "roleEn": "Goal",
+                "roleAr": "الهدف",
+                "text": "هِ (الإنسان)"
+              }
+            ],
+            "circumstances": []
+          },
+          "interpersonal": {
+            "speechFunction": "Statement (Tujuan Ujian)",
+            "mood": "Deklaratif",
+            "moodAr": "حالية / تعليلية"
+          },
+          "textual": {
+            "theme": "نَّبْتَلِي",
+            "rheme": "هِ",
+            "themeType": "Unmarked"
+          }
+        },
+        {
+          "clauseId": "76:2:c3",
+          "arabicText": "فَجَعَلْنَاهُ سَمِيعًا بَصِيرًا",
+          "transitivity": {
+            "process": {
+              "typeEn": "Relational",
+              "typeAr": "العملية العلاقاتية التحويلية",
+              "subtype": "Attributive Transformative",
+              "lexicalVerb": "جَعَلْنَا",
+              "root": "ج-ع-ل"
+            },
+            "participants": [
+              {
+                "roleEn": "Initiator / Attributor",
+                "roleAr": "المجعل",
+                "text": "نَا (الله)"
+              },
+              {
+                "roleEn": "Carrier",
+                "roleAr": "الحامل",
+                "text": "هُ (الإنسان)"
+              },
+              {
+                "roleEn": "Attribute (Perceptive)",
+                "roleAr": "السمة الإدراكية",
+                "text": "سَمِيعًا بَصِيرًا"
+              }
+            ],
+            "circumstances": []
+          },
+          "interpersonal": {
+            "speechFunction": "Statement (Pemberian Potensi)",
+            "mood": "Deklaratif Konsekuensial",
+            "moodAr": "تفريع بالفاء"
+          },
+          "textual": {
+            "theme": "فَجَعَلْنَاهُ",
+            "rheme": "سَمِيعًا بَصِيرًا",
+            "themeType": "Multiple"
+          }
+        }
+      ],
+      "diagramSegments": [
+        {
+          "ar": "إِنَّا",
+          "ide": "Aktor Penegas (Allah)",
+          "ideAr": "المؤكد + الفاعل",
+          "int": "Mood Penegasan (Ta'kid)",
+          "intAr": "توكيد بـ إن",
+          "tex": "Multiple Theme (Penegas+Topik)",
+          "texAr": "موضوع مركب",
+          "flex": "0.7"
+        },
+        {
+          "ar": "خَلَقْنَا الْإِنسَانَ",
+          "ide": "Proses Material + Goal",
+          "ideAr": "عملية مادية + هدف",
+          "int": "Mood + Komplemen",
+          "intAr": "المزاج والمكمل",
+          "tex": "Rema 1 (Penciptaan)",
+          "texAr": "الخبر الأول",
+          "flex": "1.2"
+        },
+        {
+          "ar": "مِن نُّطْفَةٍ أَمْشَاجٍ",
+          "ide": "Sirkumstansi Materi Asal",
+          "ideAr": "محددة المادة الأصلية",
+          "int": "Residu Adjunct",
+          "intAr": "ملحق الأصل",
+          "tex": "Rema 2 (Asal Biologis)",
+          "texAr": "الخبر الثاني",
+          "flex": "1.2"
+        },
+        {
+          "ar": "نَّبْتَلِيهِ",
+          "ide": "Proses Material-Ujian",
+          "ideAr": "عملية الابتلاء",
+          "int": "Residu Tujuan Ujian",
+          "intAr": "حالية التقدير",
+          "tex": "Rema 3 (Tujuan)",
+          "texAr": "الخبر الثالث",
+          "flex": "0.9"
+        },
+        {
+          "ar": "فَجَعَلْنَاهُ سَمِيعًا بَصِيرًا",
+          "ide": "Proses Relasional + Atribut Indrawi",
+          "ideAr": "عملية علائقية + سمة",
+          "int": "Residu Konsekuensi (فَـ)",
+          "intAr": "نتيجة تفريعية",
+          "tex": "Rema Pamungkas (Bekal)",
+          "texAr": "ختام الخبر",
+          "flex": "1.4"
+        }
+      ],
+      "tokens": [
+        {
+          "ar": "إِنَّا",
+          "tr": "innā",
+          "root": "حرف+ضمير",
+          "pos": "Inna + Isim-nya",
+          "role": "Multiple Theme / Actor",
+          "roleAr": "موضوع مركب / فاعل"
+        },
+        {
+          "ar": "خَلَقْنَا",
+          "tr": "khalaqnā",
+          "root": "خ-ل-ق",
+          "pos": "Fi'il Madhi + Fa'il",
+          "role": "Process Material",
+          "roleAr": "العملية المادية"
+        },
+        {
+          "ar": "الْإِنسَانَ",
+          "tr": "al-insāna",
+          "root": "أ-ن-س",
+          "pos": "Maf'ul Bih",
+          "role": "Goal (Manusia)",
+          "roleAr": "الهدف"
+        },
+        {
+          "ar": "مِن نُّطْفَةٍ أَمْشَاجٍ",
+          "tr": "min nuṭfatin amsyāj",
+          "root": "ن-ط-ف / م-ش-ج",
+          "pos": "Jar Majrur + Na'at",
+          "role": "Circumstance Origin/Matter",
+          "roleAr": "محددة الأصل"
+        },
+        {
+          "ar": "نَّبْتَلِيهِ",
+          "tr": "nabtalīhi",
+          "root": "ب-ل-و",
+          "pos": "Fi'il Mudhari' + Maf'ul",
+          "role": "Process Ujian + Goal",
+          "roleAr": "عملية الابتلاء"
+        },
+        {
+          "ar": "فَجَعَلْنَاهُ",
+          "tr": "fa-jaʿalnāhu",
+          "root": "ج-ع-ل",
+          "pos": "Fa Tafri' + Fi'il + Maf'ul 1",
+          "role": "Process Relasional + Carrier",
+          "roleAr": "عملية علائقية"
+        },
+        {
+          "ar": "سَمِيعًا بَصِيرًا",
+          "tr": "samīʿan baṣīrā",
+          "root": "س-م-ع / ب-ص-ر",
+          "pos": "Maf'ul Bih Tsani",
+          "role": "Attribute Persepsi Mental",
+          "roleAr": "سمة الإدراك"
+        }
+      ],
+      "ideational": {
+        "processType": "Material (خَلَقْنَا / نَّبْتَلِيهِ) & Relasional-Atributif (جَعَلْنَاهُ)",
+        "processTypeAr": "العملية المادية والعلائقية التحويلية",
+        "rows": [
+          {
+            "seg": "خَلَقْنَا الْإِنسَانَ",
+            "comp": "Proses Material + Aktor + Goal",
+            "compAr": "العملية المادية",
+            "role": "Penciptaan Fisik",
+            "desc": "Allah menciptakan manusia sebagai entitas biologis-spiritual."
+          },
+          {
+            "seg": "مِن نُّطْفَةٍ أَمْشَاجٍ",
+            "comp": "Sirkumstansi Materi Asal",
+            "compAr": "محددة المادة",
+            "role": "Asal-usul Nutfah",
+            "desc": "Menjelaskan bahan asal penciptaan dari percampuran benih."
+          },
+          {
+            "seg": "نَّبْتَلِيهِ",
+            "comp": "Proses Material/Sosial",
+            "compAr": "عملية الابتلاء",
+            "role": "Ujian Taklif",
+            "desc": "Penciptaan bukan tanpa maksud, melainkan untuk menguji tanggung jawab moral."
+          },
+          {
+            "seg": "فَجَعَلْنَاهُ سَمِيعًا بَصِيرًا",
+            "comp": "Proses Relasional + Atribut Indrawi",
+            "compAr": "عملية علائقية",
+            "role": "Carrier (هُ) + Attribute",
+            "desc": "Membekali manusia dengan instrumen persepsi (pendengaran dan penglihatan)."
+          }
+        ],
+        "summary": "Sesuai kajian LSF Surat Al-Insan, ayat ini merangkai penciptaan fisik (Material), tujuan ujian (نَبْتَلِيهِ), dan pemberian kapasitas indrawi-mental (سَمِيعًا بَصِيرًا)."
+      },
+      "interpersonal": {
+        "speechFunc": "Deklaratif Penegasan (Ta'kid dengan إِنَّا)",
+        "speechFuncAr": "خبر مؤكد",
+        "modality": "Kepastian Tinggi (إِنَّ)",
+        "rows": [
+          {
+            "seg": "إِنَّا",
+            "block": "Mood (Penegas)",
+            "blockAr": "أداة التوكيد",
+            "role": "Subjek Agung",
+            "desc": "Menegaskan keagungan dan otoritas Sang Pencipta."
+          },
+          {
+            "seg": "فَجَعَلْنَاهُ سَمِيعًا بَصِيرًا",
+            "block": "Residu",
+            "blockAr": "البقية",
+            "role": "Implikasi Tanggung Jawab",
+            "desc": "Karena diberi pendengaran dan penglihatan, manusia tidak punya alasan menolak tanggung jawab."
+          }
+        ],
+        "summary": "Penggunaan penegas 'Innā' dan konjungsi konsekuensi 'fa' mengikat erat antara anugerah penciptaan dengan tanggung jawab moral manusia."
+      },
+      "textual": {
+        "themeType": "Multiple Theme (إِنَّا + فَجَعَلْنَاهُ)",
+        "themeTypeAr": "الموضوع المركب",
+        "themeContent": "إِنَّا (Tema Awal Penegas)",
+        "themeDesc": "Subjek agung 'Innā' menjadi Tema berulang di ayat 2 dan 3 untuk menjaga kohesi fokus pada tindakan Allah.",
+        "rhemeContent": "خَلَقْنَا الْإِنسَانَ مِن نُّطْفَةٍ أَمْشَاجٍ نَّبْتَلِيهِ فَجَعَلْنَاهُ سَمِيعًا بَصِيرًا",
+        "rhemeDesc": "Kronologi penciptaan, tujuan ujian, dan pembekalan panca indera.",
+        "summary": "Pengulangan pola Tema 'Innā' pada ayat 2 dan 3 menciptakan ritme wacana yang mengokohkan relasi Pencipta–ciptaan."
+      },
+      "nahwuBalaghahBridge": {
+        "nahwu": "إِنَّا = إِنَّ + نَا; jumlah نَّبْتَلِيهِ berkedudukan sebagai Hal (keadaan) atau Isti'naf bayani; جَعَلَ bermakna tashyir yang mengambil dua maf'ul.",
+        "balaghah": "Shighah Mubalaghah (سَمِيعًا بَصِيرًا) menunjukkan kesempurnaan daya tangkap indrawi dan akal sebagai bekal ujian.",
+        "sflSynthesis": "Verba جَعَلَ berfungsi sebagai Atributor Relasional yang menghubungkan Carrier (manusia) dengan Attribute (sami'an bashira) sebagai prasyarat Proses Mental."
+      },
+      "pedagogicalNote": {
+        "targetLevel": "Menengah",
+        "learningObjective": "Menganalisis ayat yang mengandung tiga klausa berurutan dengan perubahan dari Material ke Relasional.",
+        "qiraahActivity": "Menelusuri hubungan sebab-akibat antara kata نَّبْتَلِيهِ dan pemberian سَمِيعًا بَصِيرًا."
+      },
+      "tafsirComparison": {
+        "kemenagSummary": "Tafsir Kemenag menjelaskan penciptaan manusia dari 'nuṭfah amsyāj' (percampuran sel sperma dan ovum), dengan tujuan mengujinya (taklif), sehingga manusia dibekali pendengaran dan penglihatan untuk menerima petunjuk.",
+        "klasikMatsur": "Ibnu Katsir mengutip penafsiran sahabat tentang 'amsyāj' sebagai percampuran benih laki-laki dan perempuan serta fase-fase embriologi menuju kesempurnaan indrawi.",
+        "lughawiBalaghi": "Bentuk shighah mubalaghah 'samī'an baṣīrā' menunjukkan ketajaman daya tangkap, sedangkan fi'il mudhari' 'nabtalīhi' menggambarkan ujian yang terus berlangsung sepanjang hidup.",
+        "kontemporerAdabi": "Penafsiran ilmiah-kontemporer (Tafsir Ilmi Kemenag & Al-Misbah) mengaitkan 'nuṭfatin amsyāj' dengan genetika modern/zigot dan menekankan bahwa anugerah indra adalah instrumen akal serta tanggung jawab etis.",
+        "kontemporerMaqashidi": "Menegaskan hubungan antara penciptaan biologis, kapasitas rasional-indrawi, dan akuntabilitas moral manusia (taklif).",
+        "lsfVsTafsirSynthesis": "LSF menelusuri rantai tiga klausa berurutan: Proses Material ('khalaqnā') → Proses Ujian ('nabtalīhi') → Proses Relasional Atributif ('ja'alnāhu samī'an baṣīrā'), sehingga tampak jelas bagaimana struktur bahasa mengaitkan asal-usul fisik dengan pembekalan persepsi."
+      }
+    },
+    "76:3": {
+      "surah": 76,
+      "surahName": "Al-Insan",
+      "verse": 3,
+      "ref": "QS. Al-Insan [76]: 3",
+      "sourceRef": "Kajian LSF Surat Al-Insan (Zulhaeri) - Ayat 3",
+      "arabic": "إِنَّا هَدَيْنَاهُ السَّبِيلَ إِمَّا شَاكِرًا وَإِمَّا كَفُورًا",
+      "translit": "Innā hadaynāhu s-sabīla immā syākiran wa-immā kafūrā",
+      "translation": "Sungguh, Kami telah menunjukkan kepadanya jalan yang lurus; ada yang bersyukur dan ada pula yang kufur.",
+      "processCategory": "Behavioural",
+      "processCategoryAr": "العملية السلوكية (الاستجابة)",
+      "speechCategory": "Deklaratif",
+      "themeCategory": "Multiple",
+      "clauses": [
+        {
+          "clauseId": "76:3:c1",
+          "arabicText": "إِنَّا هَدَيْنَاهُ السَّبِيلَ",
+          "transitivity": {
+            "process": {
+              "typeEn": "Material",
+              "typeAr": "العملية المادية / الإرشادية",
+              "lexicalVerb": "هَدَيْنَا",
+              "root": "ه-د-ي"
+            },
+            "participants": [
+              {
+                "roleEn": "Actor",
+                "roleAr": "الفاعل",
+                "text": "نَا (الله)"
+              },
+              {
+                "roleEn": "Recipient",
+                "roleAr": "المستلم",
+                "text": "هُ (الإنسان)"
+              },
+              {
+                "roleEn": "Scope / Path",
+                "roleAr": "المجال (السبيل)",
+                "text": "السَّبِيلَ"
+              }
+            ],
+            "circumstances": []
+          },
+          "interpersonal": {
+            "speechFunction": "Statement (Penjelasan Hidayah)",
+            "mood": "Deklaratif Ta'kid",
+            "moodAr": "خبر مؤكد"
+          },
+          "textual": {
+            "theme": "إِنَّا",
+            "rheme": "هَدَيْنَاهُ السَّبِيلَ",
+            "themeType": "Multiple"
+          }
+        },
+        {
+          "clauseId": "76:3:c2",
+          "arabicText": "إِمَّا شَاكِرًا وَإِمَّا كَفُورًا",
+          "transitivity": {
+            "process": {
+              "typeEn": "Behavioural",
+              "typeAr": "العملية السلوكية والموقفية",
+              "lexicalVerb": "شَاكِرًا / كَفُورًا (حال سلوكي)",
+              "root": "ش-ك-ر / ك-ف-ر"
+            },
+            "participants": [
+              {
+                "roleEn": "Behaver",
+                "roleAr": "الفاعل السلوكي (الإنسان)",
+                "text": "هُ (ضمير مستتر)"
+              }
+            ],
+            "circumstances": [
+              {
+                "typeEn": "Manner / Polarity",
+                "typeAr": "حالة الاختيار السلوكي",
+                "text": "إِمَّا شَاكِرًا وَإِمَّا كَفُورًا"
+              }
+            ]
+          },
+          "interpersonal": {
+            "speechFunction": "Statement (Kebebasan Memilih)",
+            "mood": "Deklaratif Disjungtif",
+            "moodAr": "تخيير وتفصيل"
+          },
+          "textual": {
+            "theme": "إِمَّا شَاكِرًا",
+            "rheme": "وَإِمَّا كَفُورًا",
+            "themeType": "Unmarked"
+          }
+        }
+      ],
+      "diagramSegments": [
+        {
+          "ar": "إِنَّا",
+          "ide": "Aktor Penegas (Allah)",
+          "ideAr": "المؤكد + الفاعل",
+          "int": "Mood Ta'kid (إِنَّ)",
+          "intAr": "توكيد إلهي",
+          "tex": "Multiple Theme (Kohesi Ayat 2)",
+          "texAr": "موضوع مركب",
+          "flex": "0.8"
+        },
+        {
+          "ar": "هَدَيْنَاهُ السَّبِيلَ",
+          "ide": "Proses Bimbingan + Penerima + Jalan",
+          "ideAr": "عملية الهداية + مستلم + مجال",
+          "int": "Mood + Komplemen",
+          "intAr": "المزاج والبقية",
+          "tex": "Rema 1 (Penjelasan Jalan)",
+          "texAr": "الخبر الأول",
+          "flex": "1.5"
+        },
+        {
+          "ar": "إِمَّا شَاكِرًا",
+          "ide": "Perilaku Syukur (Behavioural)",
+          "ideAr": "سلوك الشكر",
+          "int": "Residu Pilihan Positif",
+          "intAr": "موقف الشاكر",
+          "tex": "Rema 2 (Polaritas A)",
+          "texAr": "الاختيار الأول",
+          "flex": "1"
+        },
+        {
+          "ar": "وَإِمَّا كَفُورًا",
+          "ide": "Perilaku Kufur (Behavioural)",
+          "ideAr": "سلوك الكفر",
+          "int": "Residu Pilihan Negatif",
+          "intAr": "موقف الكفور",
+          "tex": "Rema 3 (Polaritas B)",
+          "texAr": "الاختيار الثاني",
+          "flex": "1"
+        }
+      ],
+      "tokens": [
+        {
+          "ar": "إِنَّا",
+          "tr": "innā",
+          "root": "حرف+ضمير",
+          "pos": "Inna + Isim-nya",
+          "role": "Multiple Theme / Actor",
+          "roleAr": "موضوع مركب / فاعل"
+        },
+        {
+          "ar": "هَدَيْنَاهُ",
+          "tr": "hadaynāhu",
+          "root": "ه-د-ي",
+          "pos": "Fi'il Madhi + Fa'il + Maf'ul 1",
+          "role": "Process Hidayah + Recipient",
+          "roleAr": "عملية الهداية"
+        },
+        {
+          "ar": "السَّبِيلَ",
+          "tr": "as-sabīl",
+          "root": "س-ب-ل",
+          "pos": "Maf'ul Bih Tsani",
+          "role": "Scope / Path",
+          "roleAr": "المجال (السبيل)"
+        },
+        {
+          "ar": "إِمَّا شَاكِرًا",
+          "tr": "immā syākirā",
+          "root": "ش-ك-ر",
+          "pos": "Harf Tafshil + Hal",
+          "role": "Behavioural Response (+)",
+          "roleAr": "استجابة سلوكية (الشكر)"
+        },
+        {
+          "ar": "وَإِمَّا كَفُورًا",
+          "tr": "wa-immā kafūrā",
+          "root": "ك-ف-ر",
+          "pos": "Athaf + Hal",
+          "role": "Behavioural Response (-)",
+          "roleAr": "استجابة سلوكية (الكفر)"
+        }
+      ],
+      "ideational": {
+        "processType": "Behavioral (Respon Sikap Manusia) & Material (Hidayah)",
+        "processTypeAr": "العملية السلوكية (شكر/كفر) وعملية الهداية",
+        "rows": [
+          {
+            "seg": "هَدَيْنَاهُ السَّبِيلَ",
+            "comp": "Proses Bimbingan + Recipient + Scope",
+            "compAr": "عملية الهداية",
+            "role": "Penjelasan Jalan",
+            "desc": "Allah menjelaskan jalan kebenaran dan kesesatan secara terang."
+          },
+          {
+            "seg": "إِمَّا شَاكِرًا",
+            "comp": "Proses/Keadaan Behavioral (+)",
+            "compAr": "السلوك الإيجابي",
+            "role": "Behaver (Manusia Bersyukur)",
+            "desc": "Wujud respon batin-perilaku yang menerima hidayah dengan syukur."
+          },
+          {
+            "seg": "وَإِمَّا كَفُورًا",
+            "comp": "Proses/Keadaan Behavioral (-)",
+            "compAr": "السلوك السلبي",
+            "role": "Behaver (Manusia Kufur)",
+            "desc": "Shighah mubalaghah 'kafūr' menekankan sikap pengingkaran yang aktif."
+          }
+        ],
+        "summary": "Melengkapi spektrum 6 proses Hallidayan: setelah penciptaan dan bimbingan jalan (Material), manusia dihadapkan pada respon perilaku/kesadaran (Behavioural): bersyukur atau ingkar."
+      },
+      "interpersonal": {
+        "speechFunc": "Deklaratif Ekspositori (Penetapan Kebebasan Memilih)",
+        "speechFuncAr": "خبر تفصيلي للاختيار",
+        "modality": "Tanggung Jawab Moral Penuh",
+        "rows": [
+          {
+            "seg": "إِنَّا هَدَيْنَاهُ",
+            "block": "Mood Ta'kid",
+            "blockAr": "المزاج المؤكد",
+            "role": "Klausa Kewajiban Ilahi Terpenuhi",
+            "desc": "Allah telah menunaikan penjelasan jalan (hidayah al-bayan)."
+          },
+          {
+            "seg": "إِمَّا شَاكِرًا وَإِمَّا كَفُورًا",
+            "block": "Residu Disjungtif",
+            "blockAr": "تفصيل الاختيار",
+            "role": "Opsi Tanggung Jawab",
+            "desc": "Menegaskan kebebasan kehendak (ikhtiyar) manusia di hadapan wahyu."
+          }
+        ],
+        "summary": "Secara interpersonal, struktur disjungtif 'immā ... wa-immā' memposisikan pembaca di persimpangan keputusan moral."
+      },
+      "textual": {
+        "themeType": "Multiple Theme (Paralelisme dengan Ayat 2)",
+        "themeTypeAr": "الموضوع المركب المتوازي",
+        "themeContent": "إِنَّا (Paralel dengan ayat 2)",
+        "themeDesc": "Mengulang titik tolak 'Innā' untuk menunjukkan kesinambungan antara penciptaan fisik dan bimbingan petunjuk.",
+        "rhemeContent": "هَدَيْنَاهُ السَّبِيلَ إِمَّا شَاكِرًا وَإِمَّا كَفُورًا",
+        "rhemeDesc": "Hidayah jalan dan dua kutub sikap manusia.",
+        "summary": "Paralelisme Tema 'Innā khalaqnā...' (ayat 2) → 'Innā hadaynā...' (ayat 3) menciptakan kohesi retoris yang kuat."
+      },
+      "nahwuBalaghahBridge": {
+        "nahwu": "شَاكِرًا dan كَفُورًا berkedudukan sebagai Hal (keadaan) dari dhamir هُ (manusia) atau khabar bagi kana yang tersirat.",
+        "balaghah": "Muqabalah (kontras) antara شَاكِرًا (Isim Fa'il yang stabil) dan كَفُورًا (Shighah Mubalaghah untuk melukiskan keingkaran yang melampaui batas).",
+        "sflSynthesis": "Memperlihatkan bagaimana kata sifat verbal/Hal dalam bahasa Arab dapat merealisasikan dimensi Behavioural & Attitudinal dalam LSF."
+      },
+      "pedagogicalNote": {
+        "targetLevel": "Menengah",
+        "learningObjective": "Menganalisis paralelisme Tema antar-ayat (إِنَّا خَلَقْنَا / إِنَّا هَدَيْنَاهُ) dan polaritas perilaku.",
+        "qiraahActivity": "Membandingkan bentuk morfologis شَاكِرًا vs كَفُورًا dan dampaknya terhadap makna fungsional."
+      },
+      "tafsirComparison": {
+        "kemenagSummary": "Tafsir Kemenag menerangkan bahwa setelah memberi akal dan indra, Allah menunjukkan jalan kebenaran dan kesesatan melalui wahyu dan rasul; manusia diberi kebebasan memilih antara menjadi hamba yang bersyukur atau kufur.",
+        "klasikMatsur": "Ath-Thabari menjelaskan 'as-sabīl' sebagai jalan kebenaran dan kesesatan yang telah diterangkan secara gamblang, menguatkan ayat QS. Al-Balad: 10.",
+        "lughawiBalaghi": "Balaghah membandingkan diksi 'syākiran' (Isim Fa'il biasa, menunjukkan sikap syukur yang konsisten dan wajar) dengan 'kafūrā' (Shighah Mubalaghah, melukiskan keingkaran yang melampaui batas).",
+        "kontemporerAdabi": "Quraish Shihab menyoroti penghormatan Al-Qur'an terhadap kebebasan memilih (ikhtiyar) manusia: Tuhan menunjukkan jalan, namun respons moral berada di tangan kesadaran tiap individu.",
+        "kontemporerMaqashidi": "Menggarisbawahi prinsip kebebasan berkehendak dan tanggung jawab individu (moral agency) dalam tatanan masyarakat yang berkeadaban.",
+        "lsfVsTafsirSynthesis": "LSF mengklasifikasikan 'syākiran' dan 'kafūrā' dalam ranah Proses Behavioural (respon perilaku-kesadaran atas hidayah), serta menunjukkan paralelisme Tema Tekstual 'Innā' dari ayat 2 ke ayat 3 yang menjaga kesinambungan aksi Ilahi dan respons manusia."
+      }
+    }
+  }
+};
+window.QURANIC_SFL_SCHEMA = {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quranic-sfl.local/schemas/sfl-schema.json",
+  "title": "QuranicSFLDataset",
+  "description": "Skema JSON terstandar untuk Analisis Linguistik Sistemik Fungsional (LSF), Korpus Al-Qur'an Kemenag RI (114 Surat, 6.236 Ayat), serta Komparasi Metode LSF vs. Tafsir Klasik & Kontemporer.",
+  "type": "object",
+  "required": ["schemaVersion", "metadata", "taxonomy", "verses"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["title", "framework", "language", "references"],
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "framework": { "type": "string" },
+        "language": { "type": "array", "items": { "type": "string" } },
+        "lastUpdated": { "type": "string", "format": "date" },
+        "references": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "title", "author", "type"],
+            "properties": {
+              "id": { "type": "string" },
+              "title": { "type": "string" },
+              "author": { "type": "string" },
+              "year": { "type": ["string", "integer"] },
+              "type": { "type": "string" },
+              "notes": { "type": "string" }
+            }
+          }
+        },
+        "corpusBenchmark": {
+          "type": "object",
+          "properties": {
+            "source": { "type": "string" },
+            "segment": { "type": "string" },
+            "totalClauses": { "type": "integer" },
+            "distribution": {
+              "type": "object",
+              "additionalProperties": { "type": "number" }
+            }
+          }
+        },
+        "methodologyMatrix": {
+          "type": "array",
+          "description": "Matriks perbandingan metodologi antara LSF dengan metode tafsir klasik dan kontemporer.",
+          "items": { "$ref": "#/$defs/MethodologyProfile" }
+        }
+      }
+    },
+    "taxonomy": {
+      "type": "object",
+      "required": ["processes", "participants", "circumstances", "metafunctions"],
+      "properties": {
+        "metafunctions": { "type": "array", "items": { "$ref": "#/$defs/TaxonomyTerm" } },
+        "processes": { "type": "array", "items": { "$ref": "#/$defs/TaxonomyTerm" } },
+        "participants": { "type": "array", "items": { "$ref": "#/$defs/TaxonomyTerm" } },
+        "circumstances": { "type": "array", "items": { "$ref": "#/$defs/TaxonomyTerm" } }
+      }
+    },
+    "verses": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/VerseSFLAnalysis" }
+    }
+  },
+  "$defs": {
+    "ProcessCategory": {
+      "type": "string",
+      "enum": ["Material", "Mental", "Relational", "Verbal", "Behavioural", "Existential"]
+    },
+    "SpeechFunctionCategory": {
+      "type": "string",
+      "enum": ["Deklaratif", "Imperatif", "Interogatif", "Doa"]
+    },
+    "ThemeCategory": {
+      "type": "string",
+      "enum": ["Unmarked", "Marked", "Multiple"]
+    },
+    "MethodologyProfile": {
+      "type": "object",
+      "required": ["id", "name", "era", "keyFigures", "paradigm", "unitOfAnalysis", "strength", "relationToLsf"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "era": { "type": "string" },
+        "keyFigures": { "type": "string" },
+        "paradigm": { "type": "string" },
+        "unitOfAnalysis": { "type": "string" },
+        "strength": { "type": "string" },
+        "relationToLsf": { "type": "string" }
+      }
+    },
+    "TafsirComparison": {
+      "type": "object",
+      "required": ["kemenagSummary", "klasikMatsur", "lughawiBalaghi", "kontemporerAdabi", "kontemporerMaqashidi", "lsfVsTafsirSynthesis"],
+      "properties": {
+        "kemenagSummary": { "type": "string" },
+        "klasikMatsur": { "type": "string" },
+        "lughawiBalaghi": { "type": "string" },
+        "kontemporerAdabi": { "type": "string" },
+        "kontemporerMaqashidi": { "type": "string" },
+        "lsfVsTafsirSynthesis": { "type": "string" }
+      }
+    },
+    "TaxonomyTerm": {
+      "type": "object",
+      "required": ["key", "labelId", "labelEn", "labelAr", "description"],
+      "properties": {
+        "key": { "type": "string" },
+        "labelId": { "type": "string" },
+        "labelEn": { "type": "string" },
+        "labelAr": { "type": "string" },
+        "description": { "type": "string" },
+        "examples": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "DiagramSegment": {
+      "type": "object",
+      "required": ["ar", "ide", "int", "tex", "flex"],
+      "properties": {
+        "ar": { "type": "string" },
+        "ide": { "type": "string" },
+        "ideAr": { "type": "string" },
+        "int": { "type": "string" },
+        "intAr": { "type": "string" },
+        "tex": { "type": "string" },
+        "texAr": { "type": "string" },
+        "flex": { "type": "string" }
+      }
+    },
+    "SFLToken": {
+      "type": "object",
+      "required": ["ar", "tr", "role"],
+      "properties": {
+        "ar": { "type": "string" },
+        "tr": { "type": "string" },
+        "root": { "type": "string" },
+        "pos": { "type": "string" },
+        "role": { "type": "string" },
+        "roleAr": { "type": "string" }
+      }
+    },
+    "SFLClause": {
+      "type": "object",
+      "required": ["clauseId", "arabicText", "transitivity", "interpersonal", "textual"],
+      "properties": {
+        "clauseId": { "type": "string" },
+        "arabicText": { "type": "string" },
+        "transitivity": {
+          "type": "object",
+          "required": ["process", "participants", "circumstances"],
+          "properties": {
+            "process": {
+              "type": "object",
+              "required": ["typeEn", "typeAr", "lexicalVerb"],
+              "properties": {
+                "typeEn": { "$ref": "#/$defs/ProcessCategory" },
+                "typeAr": { "type": "string" },
+                "subtype": { "type": "string" },
+                "lexicalVerb": { "type": "string" },
+                "root": { "type": "string" }
+              }
+            },
+            "participants": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["roleEn", "roleAr", "text"],
+                "properties": {
+                  "roleEn": { "type": "string" },
+                  "roleAr": { "type": "string" },
+                  "text": { "type": "string" }
+                }
+              }
+            },
+            "circumstances": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["typeEn", "typeAr", "text"],
+                "properties": {
+                  "typeEn": { "type": "string" },
+                  "typeAr": { "type": "string" },
+                  "text": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "interpersonal": {
+          "type": "object",
+          "required": ["speechFunction", "mood"],
+          "properties": {
+            "speechFunction": { "type": "string" },
+            "mood": { "type": "string" },
+            "moodAr": { "type": "string" },
+            "modality": { "type": "string" }
+          }
+        },
+        "textual": {
+          "type": "object",
+          "required": ["theme", "rheme", "themeType"],
+          "properties": {
+            "theme": { "type": "string" },
+            "rheme": { "type": "string" },
+            "themeType": { "$ref": "#/$defs/ThemeCategory" }
+          }
+        }
+      }
+    },
+    "VerseSFLAnalysis": {
+      "type": "object",
+      "required": [
+        "surah",
+        "verse",
+        "ref",
+        "arabic",
+        "translit",
+        "translation",
+        "processCategory",
+        "speechCategory",
+        "themeCategory",
+        "diagramSegments",
+        "tokens",
+        "ideational",
+        "interpersonal",
+        "textual"
+      ],
+      "properties": {
+        "surah": { "type": "integer", "minimum": 1, "maximum": 114 },
+        "surahName": { "type": "string" },
+        "verse": { "type": "integer", "minimum": 1 },
+        "ref": { "type": "string" },
+        "sourceRef": { "type": "string" },
+        "isDraftHeuristic": { "type": "boolean" },
+        "arabic": { "type": "string" },
+        "translit": { "type": "string" },
+        "translation": { "type": "string" },
+        "processCategory": { "$ref": "#/$defs/ProcessCategory" },
+        "processCategoryAr": { "type": "string" },
+        "speechCategory": { "$ref": "#/$defs/SpeechFunctionCategory" },
+        "themeCategory": { "$ref": "#/$defs/ThemeCategory" },
+        "clauses": { "type": "array", "items": { "$ref": "#/$defs/SFLClause" } },
+        "diagramSegments": { "type": "array", "items": { "$ref": "#/$defs/DiagramSegment" } },
+        "tokens": { "type": "array", "items": { "$ref": "#/$defs/SFLToken" } },
+        "ideational": {
+          "type": "object",
+          "required": ["processType", "rows", "summary"],
+          "properties": {
+            "processType": { "type": "string" },
+            "processTypeAr": { "type": "string" },
+            "rows": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["seg", "comp", "role", "desc"],
+                "properties": {
+                  "seg": { "type": "string" },
+                  "comp": { "type": "string" },
+                  "compAr": { "type": "string" },
+                  "role": { "type": "string" },
+                  "desc": { "type": "string" }
+                }
+              }
+            },
+            "summary": { "type": "string" }
+          }
+        },
+        "interpersonal": {
+          "type": "object",
+          "required": ["speechFunc", "rows", "summary"],
+          "properties": {
+            "speechFunc": { "type": "string" },
+            "speechFuncAr": { "type": "string" },
+            "modality": { "type": "string" },
+            "rows": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["seg", "block", "role", "desc"],
+                "properties": {
+                  "seg": { "type": "string" },
+                  "block": { "type": "string" },
+                  "blockAr": { "type": "string" },
+                  "role": { "type": "string" },
+                  "desc": { "type": "string" }
+                }
+              }
+            },
+            "summary": { "type": "string" }
+          }
+        },
+        "textual": {
+          "type": "object",
+          "required": ["themeType", "themeContent", "themeDesc", "rhemeContent", "rhemeDesc", "summary"],
+          "properties": {
+            "themeType": { "type": "string" },
+            "themeTypeAr": { "type": "string" },
+            "themeContent": { "type": "string" },
+            "themeDesc": { "type": "string" },
+            "rhemeContent": { "type": "string" },
+            "rhemeDesc": { "type": "string" },
+            "summary": { "type": "string" }
+          }
+        },
+        "nahwuBalaghahBridge": {
+          "type": "object",
+          "properties": {
+            "nahwu": { "type": "string" },
+            "balaghah": { "type": "string" },
+            "sflSynthesis": { "type": "string" }
+          }
+        },
+        "pedagogicalNote": {
+          "type": "object",
+          "properties": {
+            "targetLevel": { "type": "string" },
+            "learningObjective": { "type": "string" },
+            "qiraahActivity": { "type": "string" }
+          }
+        },
+        "tafsirComparison": {
+          "$ref": "#/$defs/TafsirComparison"
+        }
+      }
+    }
+  }
+}
+;
+window.QURANIC_SFL_TS_TYPES = "/**\n * Quranic LSF Explorer - TypeScript Type Definitions (V6.0)\n * Mencakup korpus lengkap Al-Qur'an Kemenag RI (114 Surat, 6.236 Ayat),\n * Ebook LSF (Halliday 2004, Tesis Surat Ibrahim 2025, Kajian Al-Insan, Risalah LSF Arab),\n * serta Matriks Komparasi LSF vs. Metode Tafsir Klasik & Kontemporer.\n */\n\nexport type ProcessCategory =\n  | \"Material\"\n  | \"Mental\"\n  | \"Relational\"\n  | \"Verbal\"\n  | \"Behavioural\"\n  | \"Existential\";\n\nexport type SpeechFunctionCategory =\n  | \"Deklaratif\"\n  | \"Imperatif\"\n  | \"Interogatif\"\n  | \"Doa\";\n\nexport type ThemeCategory = \"Unmarked\" | \"Marked\" | \"Multiple\";\n\nexport interface KemenagAyah {\n  n: number;\n  ar: string;\n  tr: string;\n  id: string;\n  au: string;\n}\n\nexport interface KemenagSurah {\n  nomor: number;\n  nama: string;\n  namaLatin: string;\n  jumlahAyat: number;\n  tempatTurun: \"Mekah\" | \"Madinah\" | string;\n  arti: string;\n  deskripsi: string;\n  audioFull: string;\n  ayat: KemenagAyah[];\n}\n\nexport interface KemenagQuranCorpus {\n  source: string;\n  totalSurah: number;\n  totalAyat: number;\n  surahs: KemenagSurah[];\n}\n\nexport interface MethodologyProfile {\n  id: string;\n  name: string;\n  era: string;\n  keyFigures: string;\n  paradigm: string;\n  unitOfAnalysis: string;\n  strength: string;\n  relationToLsf: string;\n}\n\nexport interface TafsirComparison {\n  kemenagSummary: string;\n  klasikMatsur: string;\n  lughawiBalaghi: string;\n  kontemporerAdabi: string;\n  kontemporerMaqashidi: string;\n  lsfVsTafsirSynthesis: string;\n}\n\nexport interface TaxonomyTerm {\n  key: string;\n  labelId: string;\n  labelEn: string;\n  labelAr: string;\n  description: string;\n  examples?: string[];\n}\n\nexport interface EbookReference {\n  id: string;\n  title: string;\n  author: string;\n  year?: string | number;\n  type: string;\n  notes?: string;\n}\n\nexport interface CorpusBenchmark {\n  source: string;\n  segment: string;\n  totalClauses: number;\n  distribution: Record<ProcessCategory | string, number>;\n}\n\nexport interface DiagramSegment {\n  ar: string;\n  ide: string;\n  ideAr?: string;\n  int: string;\n  intAr?: string;\n  tex: string;\n  texAr?: string;\n  flex: string;\n}\n\nexport interface SFLToken {\n  ar: string;\n  tr: string;\n  root?: string;\n  pos?: string;\n  role: string;\n  roleAr?: string;\n}\n\nexport interface ClauseParticipant {\n  roleEn: string;\n  roleAr: string;\n  text: string;\n}\n\nexport interface ClauseCircumstance {\n  typeEn: string;\n  typeAr: string;\n  text: string;\n}\n\nexport interface SFLClause {\n  clauseId: string;\n  arabicText: string;\n  transitivity: {\n    process: {\n      typeEn: ProcessCategory;\n      typeAr: string;\n      subtype?: string;\n      lexicalVerb: string;\n      root?: string;\n    };\n    participants: ClauseParticipant[];\n    circumstances: ClauseCircumstance[];\n  };\n  interpersonal: {\n    speechFunction: string;\n    mood: string;\n    moodAr?: string;\n    modality?: string;\n  };\n  textual: {\n    theme: string;\n    rheme: string;\n    themeType: ThemeCategory;\n  };\n}\n\nexport interface IdeationalRow {\n  seg: string;\n  comp: string;\n  compAr?: string;\n  role: string;\n  desc: string;\n}\n\nexport interface InterpersonalRow {\n  seg: string;\n  block: string;\n  blockAr?: string;\n  role: string;\n  desc: string;\n}\n\nexport interface NahwuBalaghahBridge {\n  nahwu: string;\n  balaghah: string;\n  sflSynthesis: string;\n}\n\nexport interface PedagogicalNote {\n  targetLevel: string;\n  learningObjective: string;\n  qiraahActivity: string;\n}\n\nexport interface VerseSFLAnalysis {\n  surah: number;\n  surahName?: string;\n  verse: number;\n  ref: string;\n  sourceRef?: string;\n  isDraftHeuristic?: boolean;\n  arabic: string;\n  translit: string;\n  translation: string;\n  processCategory: ProcessCategory;\n  processCategoryAr?: string;\n  speechCategory: SpeechFunctionCategory;\n  themeCategory: ThemeCategory;\n  clauses?: SFLClause[];\n  diagramSegments: DiagramSegment[];\n  tokens: SFLToken[];\n  ideational: {\n    processType: string;\n    processTypeAr?: string;\n    rows: IdeationalRow[];\n    summary: string;\n  };\n  interpersonal: {\n    speechFunc: string;\n    speechFuncAr?: string;\n    modality?: string;\n    rows: InterpersonalRow[];\n    summary: string;\n  };\n  textual: {\n    themeType: string;\n    themeTypeAr?: string;\n    themeContent: string;\n    themeDesc: string;\n    rhemeContent: string;\n    rhemeDesc: string;\n    summary: string;\n  };\n  nahwuBalaghahBridge?: NahwuBalaghahBridge;\n  pedagogicalNote?: PedagogicalNote;\n  tafsirComparison?: TafsirComparison;\n}\n\nexport interface QuranicSFLDataset {\n  $schema?: string;\n  schemaVersion: string;\n  metadata: {\n    title: string;\n    description?: string;\n    framework: string;\n    language: string[];\n    lastUpdated?: string;\n    references: EbookReference[];\n    corpusBenchmark?: CorpusBenchmark;\n    methodologyMatrix?: MethodologyProfile[];\n  };\n  taxonomy: {\n    metafunctions: TaxonomyTerm[];\n    processes: TaxonomyTerm[];\n    participants: TaxonomyTerm[];\n    circumstances: TaxonomyTerm[];\n  };\n  verses: Record<string, VerseSFLAnalysis>;\n}\n";

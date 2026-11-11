@@ -1,0 +1,14 @@
+# Raw 133MB JSON exceeds GitHub's 100MB per-file limit (app uses tafsir-ik/*.js + quran-tafsir-ibnkatsir.js instead)
+quran-tafsir-ibnkatsir.json
+
+# OS & Node/Android build artifacts
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+android/app/build/
+android/build/
+android/.gradle/
+android/local.properties
+www/
+dist/
