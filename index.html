@@ -141,7 +141,7 @@
       <div class="flex justify-between items-center pb-3 border-b border-slate-100 gap-2">
         <div>
           <h3 class="font-bold text-lg text-emerald-950">Panduan Teori, Kamus Arab–LSF &amp; Pustaka Ebook LSF</h3>
-          <p class="text-xs text-slate-500">Korpus LSF, Al-Qur'an Kementerian Agama RI, &amp; Pembaruan Berkala Gemini AI</p>
+          <p class="text-xs text-slate-500">Korpus LSF, Al-Qur'an Kementerian Agama RI, &amp; Pembaruan Berkala Korpus</p>
         </div>
         <div class="flex items-center gap-2">
           <button type="button" id="btn-theory-new-window" class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-semibold px-2.5 py-1.5 rounded-lg border border-emerald-200 transition">Buka di Jendela Baru ↗</button>
@@ -150,7 +150,7 @@
       </div>
 
       <div id="theory-sync-status" class="mt-3 px-3 py-2 rounded-xl bg-sky-50/90 border border-sky-200 flex flex-wrap items-center justify-between gap-2 text-[11px] text-sky-950">
-        <span id="theory-sync-text" class="font-semibold">✦ Sinkronisasi Otomatis Gemini AI aktif — siap menangkap pembaruan korpus &amp; penafsiran.</span>
+        <span id="theory-sync-text" class="font-semibold">✦ Sinkronisasi Otomatis Pustaka &amp; Kamus aktif — siap menangkap pembaruan korpus &amp; penafsiran.</span>
         <button type="button" id="btn-sync-knowledge-now" class="px-2.5 py-0.5 rounded-lg bg-white hover:bg-sky-100 border border-sky-200 text-sky-900 font-bold text-[10px] transition shrink-0">Sinkronkan Sekarang</button>
       </div>
 
@@ -210,10 +210,6 @@
           <h3 id="ktm-title" class="font-bold text-lg text-emerald-950 mt-1">Tafsir Surat</h3>
         </div>
         <div class="flex items-center gap-2">
-          <button type="button" data-ai-scope="tafsir-modal" data-ai-label="Tafsir Modal Ayat" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-xs font-bold transition shadow-2xs" title="Tanyakan penafsiran &amp; LSF ayat ini ke Gemini AI">
-            <svg class="w-3.5 h-3.5 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
-            <span>Tanya AI</span>
-          </button>
           <button type="button" id="btn-ktm-new-window" class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-semibold px-2.5 py-1.5 rounded-lg border border-emerald-200 transition">Buka di Jendela Baru ↗</button>
           <button id="btn-close-ktm" class="text-slate-400 hover:text-slate-700 p-1 text-xl font-bold">&times;</button>
         </div>
@@ -774,7 +770,7 @@
 
       <!-- Tampilan Teks Ayat & Token Interaktif -->
       <section id="sfl-active-verse-section" class="bg-gradient-to-b from-white to-slate-50/60 rounded-2xl shadow-sm border border-slate-200 p-6 text-center relative">
-        <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
           <div class="flex flex-wrap items-center gap-2">
             <span class="text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200" id="badge-verse-ref">QS. Al-Fatihah [1]: 2</span>
             <span id="badge-heuristic-mode" class="hidden text-[11px] font-semibold bg-amber-100 text-amber-900 px-2.5 py-0.5 rounded-full border border-amber-300">Draf Analisis Otomatis LSF</span>
@@ -786,12 +782,14 @@
           </div>
         </div>
 
-        <div class="h-[156px] overflow-y-auto px-3 py-2 flex flex-col justify-center">
-          <div class="my-1 px-1">
-            <p id="arabic-text" class="font-arabic text-lg sm:text-xl lg:text-[22px] text-emerald-950 leading-[2.25] font-normal" dir="rtl"></p>
+        <div class="min-h-[96px] max-h-[380px] overflow-y-auto px-3 pt-3 pb-2 flex flex-col">
+          <div class="my-auto">
+            <div class="px-1 pt-1">
+              <p id="arabic-text" class="font-arabic text-base sm:text-lg text-emerald-950 leading-[2.35] font-normal pt-1" dir="rtl"></p>
+            </div>
+            <p id="transliteration-text" class="hidden text-sm font-medium text-slate-500 italic"></p>
+            <p id="translation-text" class="hidden text-sm sm:text-base text-slate-700 mt-1.5 max-w-3xl mx-auto font-medium"></p>
           </div>
-          <p id="transliteration-text" class="text-sm font-medium text-slate-500 italic"></p>
-          <p id="translation-text" class="text-sm sm:text-base text-slate-700 mt-1.5 max-w-3xl mx-auto font-medium"></p>
         </div>
 
         <div class="mt-4 flex justify-center gap-2">
@@ -872,10 +870,6 @@
               </div>
               <div class="flex flex-wrap items-center gap-2 self-start sm:self-auto">
                 <span class="text-xs font-semibold px-3 py-1 bg-emerald-100 text-emerald-900 rounded-md" id="ideational-process-type"></span>
-                <button type="button" data-ai-scope="ideational" data-ai-label="Transitivitas (Ideasional)" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-3 py-1 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-xs font-bold transition shadow-2xs">
-                  <svg class="w-3.5 h-3.5 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
-                  <span>Tanya AI</span>
-                </button>
               </div>
             </div>
             <div id="clauses-breakdown-container" class="space-y-2"></div>
@@ -905,10 +899,6 @@
               <div class="flex flex-wrap items-center gap-1.5">
                 <span class="text-xs font-semibold px-2.5 py-1 bg-indigo-100 text-indigo-900 rounded-md" id="interpersonal-speech-func"></span>
                 <span class="text-xs font-medium px-2.5 py-1 bg-slate-100 text-slate-700 rounded-md border border-slate-200" id="interpersonal-modality"></span>
-                <button type="button" data-ai-scope="interpersonal" data-ai-label="Mood &amp; Tutur (Interpersonal)" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-3 py-1 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-xs font-bold transition shadow-2xs">
-                  <svg class="w-3.5 h-3.5 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
-                  <span>Tanya AI</span>
-                </button>
               </div>
             </div>
             <div class="overflow-x-auto">
@@ -936,10 +926,6 @@
               </div>
               <div class="flex flex-wrap items-center gap-2 self-start sm:self-auto">
                 <span class="text-xs font-semibold px-2.5 py-1 bg-amber-100 text-amber-900 rounded-md" id="textual-theme-type"></span>
-                <button type="button" data-ai-scope="textual" data-ai-label="Tema–Rema (Tekstual)" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-3 py-1 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-xs font-bold transition shadow-2xs">
-                  <svg class="w-3.5 h-3.5 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
-                  <span>Tanya AI</span>
-                </button>
               </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -964,10 +950,6 @@
                 <h3 class="font-bold text-teal-950 text-lg">Integrasi Nahwu–Balaghah &amp; Implikasi Pedagogis</h3>
                 <p class="text-xs text-slate-500">Sintesis dari risalah <span class="arabic-term-badge"><span class="font-arabic">اللسانيات الوظيفية النظامية والنحو العربي</span> dan </span>Bab V Tesis Agus Gunawan (2025).</p>
               </div>
-              <button type="button" data-ai-scope="bridge" data-ai-label="Jembatan Nahwu &amp; Balaghah" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-3 py-1 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-xs font-bold transition shadow-2xs self-start sm:self-auto">
-                <svg class="w-3.5 h-3.5 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
-                <span>Tanya AI</span>
-              </button>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs leading-relaxed">
               <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
@@ -1008,10 +990,6 @@
               <div class="space-y-2">
                 <div class="flex items-center justify-between gap-2">
                   <h4 class="text-xs font-bold uppercase tracking-wider text-purple-900">1. Tafsir Tahlili Kemenag RI</h4>
-                  <button type="button" data-ai-scope="kemenag" data-ai-label="Tafsir Kemenag RI" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-[11px] font-bold transition">
-                    <svg class="w-3 h-3 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
-                    <span>Tanya AI</span>
-                  </button>
                 </div>
                 <div id="verse-kemenag-tafsir-box" class="p-4 bg-purple-50/40 rounded-xl border border-purple-200 text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line max-h-[380px] overflow-y-auto"></div>
               </div>
@@ -1023,10 +1001,6 @@
                       <button type="button" data-ik-lang="id" class="ik-lang-btn px-2 py-0.5 rounded-md bg-amber-600 text-white transition">Indonesia</button>
                       <button type="button" data-ik-lang="en" class="ik-lang-btn px-2 py-0.5 rounded-md text-amber-900 hover:bg-amber-200/70 transition">English</button>
                     </div>
-                    <button type="button" data-ai-scope="ibnkatsir" data-ai-label="Tafsir Ibnu Katsir" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-[11px] font-bold transition">
-                      <svg class="w-3 h-3 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
-                      <span>Tanya AI</span>
-                    </button>
                   </div>
                 </div>
                 <div id="verse-ibnkatsir-en-box" class="p-4 bg-amber-50/40 rounded-xl border border-amber-200 text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line max-h-[260px] overflow-y-auto"></div>
@@ -1063,15 +1037,17 @@
           </div>
         </div>
 
-        <!-- Header Ayat yang Dibandingkan (Tinggi Stabil agar Pergantian Ayat Tidak Menggeser Tampilan) -->
-        <div id="studio-verse-banner" class="h-[164px] p-4 bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 text-white rounded-2xl text-center flex flex-col justify-between overflow-hidden">
-          <div class="flex justify-center gap-2 text-xs shrink-0">
+        <!-- Header Ayat yang Dibandingkan (Tinggi Stabil & Bebas Tumpang-Tindih Badge/Harakat) -->
+        <div id="studio-verse-banner" class="min-h-[128px] max-h-[280px] p-4 bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 text-white rounded-2xl text-center flex flex-col gap-2.5 overflow-hidden">
+          <div class="flex flex-wrap justify-center items-center gap-2 text-xs shrink-0 pb-2 border-b border-white/10">
             <span id="studio-verse-ref" class="px-3 py-0.5 rounded-full bg-emerald-500/30 border border-emerald-400/40 font-semibold text-emerald-200"></span>
             <span id="studio-verse-tags" class="px-3 py-0.5 rounded-full bg-amber-500/20 border border-amber-400/30 font-semibold text-amber-200 truncate max-w-[320px]"></span>
           </div>
-          <div class="flex-1 overflow-y-auto px-2 py-1 flex flex-col justify-center space-y-1">
-            <p id="studio-verse-arabic" class="font-arabic text-lg sm:text-xl font-normal text-amber-200 leading-[2.1]" dir="rtl"></p>
-            <p id="studio-verse-translation" class="text-xs sm:text-sm text-slate-200 italic max-w-3xl mx-auto"></p>
+          <div class="flex-1 min-h-0 overflow-y-auto px-2 pt-2 pb-1 flex flex-col">
+            <div class="my-auto">
+              <p id="studio-verse-arabic" class="font-arabic text-base sm:text-lg font-normal text-amber-200 leading-[2.35] pt-1" dir="rtl"></p>
+              <p id="studio-verse-translation" class="hidden text-xs sm:text-sm text-slate-200 italic max-w-3xl mx-auto"></p>
+            </div>
           </div>
         </div>
 
@@ -1092,40 +1068,24 @@
               <div class="p-3 bg-white rounded-xl border border-emerald-200 space-y-1">
                 <div class="flex items-center justify-between gap-2">
                   <strong class="text-emerald-900">A. Ideasional (Transitivitas):</strong>
-                  <button type="button" data-ai-scope="ideational" data-ai-label="Studio Ideasional LSF" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-[10px] font-bold transition">
-                    <svg class="w-3 h-3 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
-                    <span>Tanya AI</span>
-                  </button>
                 </div>
                 <p id="studio-lsf-ideational" class="text-slate-700"></p>
               </div>
               <div class="p-3 bg-white rounded-xl border border-indigo-200 space-y-1">
                 <div class="flex items-center justify-between gap-2">
                   <strong class="text-indigo-900">B. Interpersonal (Mood &amp; Relasi Tutur):</strong>
-                  <button type="button" data-ai-scope="interpersonal" data-ai-label="Studio Interpersonal LSF" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-[10px] font-bold transition">
-                    <svg class="w-3 h-3 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
-                    <span>Tanya AI</span>
-                  </button>
                 </div>
                 <p id="studio-lsf-interpersonal" class="text-slate-700"></p>
               </div>
               <div class="p-3 bg-white rounded-xl border border-amber-200 space-y-1">
                 <div class="flex items-center justify-between gap-2">
                   <strong class="text-amber-900">C. Tekstual (Tema–Rema &amp; Fokus):</strong>
-                  <button type="button" data-ai-scope="textual" data-ai-label="Studio Tekstual LSF" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-50 hover:bg-sky-100 text-sky-900 border border-sky-200 text-[10px] font-bold transition">
-                    <svg class="w-3 h-3 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
-                    <span>Tanya AI</span>
-                  </button>
                 </div>
                 <p id="studio-lsf-textual" class="text-slate-700"></p>
               </div>
               <div class="p-3 bg-teal-900 text-emerald-50 rounded-xl space-y-1">
                 <div class="flex items-center justify-between gap-2">
                   <strong class="text-amber-200">D. Jembatan Nahwu–Balaghah (Ebook Arab):</strong>
-                  <button type="button" data-ai-scope="bridge" data-ai-label="Studio Nahwu &amp; Balaghah" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/95 hover:bg-white text-sky-950 text-[10px] font-bold transition">
-                    <svg class="w-3 h-3 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
-                    <span>Tanya AI</span>
-                  </button>
                 </div>
                 <p id="studio-lsf-bridge" class="text-emerald-100"></p>
               </div>
@@ -1176,10 +1136,6 @@
         <div class="p-5 bg-gradient-to-r from-indigo-900 to-purple-900 text-white rounded-2xl space-y-2">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <h4 class="font-bold text-sm sm:text-base text-amber-200">Sintesis Perbandingan: Titik Temu &amp; Keunggulan Khas LSF vs. Metode Tafsir</h4>
-            <button type="button" data-ai-scope="synthesis" data-ai-label="Sintesis LSF vs. Tafsir" class="btn-ask-ai-cloud inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/95 hover:bg-white text-sky-950 text-xs font-bold transition shadow-xs">
-              <svg class="w-3.5 h-3.5 text-sky-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.5 19h11a4.5 4.5 0 00.9-8.91A6 6 0 006.74 8.2 4 4 0 006.5 19z"/></svg>
-              <span>Tanya AI</span>
-            </button>
           </div>
           <p id="studio-synthesis-text" class="text-xs sm:text-sm text-indigo-100 leading-relaxed"></p>
         </div>
@@ -1212,62 +1168,8 @@
     </section><!-- /pillar-tafsir -->
           </div><!-- /CENTER WORKSPACE (xl:col-span-8) -->
 
-          <!-- ZONE 3: RIGHT SIDEBAR WIDGETS (MUROTTAL HARMONIS & GEMINI AI LSF DI SEBELAH KANAN) -->
+          <!-- ZONE 3: RIGHT SIDEBAR WIDGETS (MUROTTAL HARMONIS & REFERENSI INTI DI SEBELAH KANAN) -->
           <aside class="xl:col-span-4 space-y-4 xl:sticky xl:top-4">
-
-            <!-- GEMINI AI ASSISTANT PANEL (Posisi Kanan Atas: Kata Kunci LSF Otomatis & Tanya AI) -->
-            <section id="gemini-ai-panel" class="rounded-2xl shadow-sm bg-gradient-to-b from-sky-50/90 via-white to-emerald-50/70 border border-sky-200/80 p-3.5 space-y-2.5 text-xs">
-              <div class="flex items-start justify-between gap-2 pb-2 border-b border-sky-100">
-                <div class="flex items-center gap-2 min-w-0">
-                  <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-sky-500 via-indigo-600 to-teal-500 text-white flex items-center justify-center shrink-0 shadow-xs">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L14.2 9.2L21.5 11.5L14.2 13.8L12 21L9.8 13.8L2.5 11.5L9.8 9.2L12 2Z"/></svg>
-                  </div>
-                  <div class="min-w-0">
-                    <div class="flex items-center gap-1.5 flex-wrap">
-                      <h3 class="font-extrabold text-sm text-slate-900 leading-tight">Gemini AI • LSF</h3>
-                      <span id="gemini-mode-badge" class="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-200">Mode Cerdas Lokal</span>
-                    </div>
-                    <p id="gemini-active-ref" class="text-[11px] text-sky-900 font-semibold truncate">QS. Al-Fatihah [1]: 2</p>
-                  </div>
-                </div>
-                <button type="button" id="btn-gemini-settings" class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white hover:bg-sky-100 text-sky-900 border border-sky-200 text-[10px] font-bold transition shrink-0" title="Pengaturan Gemini API Key">
-                  <span>⚙</span>
-                  <span>API Key</span>
-                </button>
-              </div>
-
-              <!-- Pengaturan Gemini API Key (Disimpan Aman Secara Lokal di Perangkat Anda) -->
-              <div id="gemini-key-box" class="hidden rounded-xl bg-white/95 border border-sky-200 p-2.5 space-y-2 text-[11px]">
-                <div class="flex items-center justify-between gap-2">
-                  <span class="font-bold text-slate-800">Koneksi Google Gemini API Asli</span>
-                  <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer" class="text-[10px] font-bold text-sky-700 hover:underline">Buat Key Gratis ↗</a>
-                </div>
-                <div class="flex items-center gap-1.5">
-                  <input type="password" id="gemini-api-key-input" autocomplete="off" spellcheck="false" placeholder="Tempel API Key (AIza...)" class="flex-1 min-w-0 px-2.5 py-1 rounded-lg bg-slate-50 border border-sky-200 text-[11px] outline-none focus:ring-2 focus:ring-sky-400">
-                  <button type="button" id="btn-gemini-save-key" class="px-2.5 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[10px] transition shrink-0">Simpan</button>
-                  <button type="button" id="btn-gemini-clear-key" class="px-2 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-bold text-[10px] transition shrink-0">Hapus</button>
-                </div>
-                <p id="gemini-key-help" class="text-[10px] text-slate-500 leading-snug">API Key tersimpan hanya di browser/HP Anda (<code class="text-slate-700">localStorage</code>). Tanpa API Key, panel tetap aktif memakai Mode Cerdas Lokal.</p>
-              </div>
-
-              <!-- Kata & Istilah Kunci yang Perlu Dipahami pada Penafsiran LSF -->
-              <div class="bg-white/90 rounded-xl p-2.5 border border-sky-100 space-y-1.5">
-                <div class="flex items-center justify-between gap-2">
-                  <span class="text-[10px] font-extrabold uppercase tracking-wider text-sky-900">Kata &amp; Istilah Kunci LSF</span>
-                  <span class="text-[10px] text-slate-400">Klik kata untuk uraian</span>
-                </div>
-                <div id="gemini-auto-terms" class="flex flex-wrap gap-1.5 h-[76px] overflow-y-auto content-start pr-1"></div>
-              </div>
-
-              <!-- Gemini AI Chat & Penjelasan Kontekstual -->
-              <div id="gemini-chat-log" class="space-y-2 max-h-44 overflow-y-auto pr-1 text-[11px] leading-relaxed"></div>
-
-              <!-- Form Tanya Gemini AI -->
-              <form id="gemini-chat-form" class="flex items-center gap-1.5 pt-0.5">
-                <input type="text" id="gemini-prompt-input" placeholder="Tanya AI makna kata, Nahwu, LSF, atau Tafsir..." class="flex-1 min-w-0 px-3 py-1.5 rounded-xl bg-white border border-sky-200 text-xs outline-none focus:ring-2 focus:ring-sky-400">
-                <button type="submit" id="btn-gemini-send" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 text-white font-bold text-xs shadow-xs transition shrink-0">Kirim</button>
-              </form>
-            </section>
 
             <!-- Pemutar Murottal Al-Qur'an (Hijau Zamrud Lebih Muda & Emas Hangat) -->
             <section id="global-audio-bar" class="rounded-2xl overflow-hidden relative text-white border border-amber-200/35 shadow-[0_14px_34px_-12px_rgba(16,99,74,0.34)]" style="background: linear-gradient(155deg, #178262 0%, #1d9670 48%, #10634a 100%);">
