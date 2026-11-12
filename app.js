@@ -307,10 +307,17 @@
     // Gemini AI LSF Assistant (Right Sidebar)
     geminiAiPanel: document.getElementById("gemini-ai-panel"),
     geminiActiveRef: document.getElementById("gemini-active-ref"),
+    geminiModeBadge: document.getElementById("gemini-mode-badge"),
+    btnGeminiSettings: document.getElementById("btn-gemini-settings"),
+    geminiKeyBox: document.getElementById("gemini-key-box"),
+    geminiApiKeyInput: document.getElementById("gemini-api-key-input"),
+    btnGeminiSaveKey: document.getElementById("btn-gemini-save-key"),
+    btnGeminiClearKey: document.getElementById("btn-gemini-clear-key"),
     geminiAutoTerms: document.getElementById("gemini-auto-terms"),
     geminiChatLog: document.getElementById("gemini-chat-log"),
     geminiChatForm: document.getElementById("gemini-chat-form"),
-    geminiPromptInput: document.getElementById("gemini-prompt-input")
+    geminiPromptInput: document.getElementById("gemini-prompt-input"),
+    btnGeminiSend: document.getElementById("btn-gemini-send")
   };
 
   // Normalisasi teks judul Arab agar seluruh glif kompatibel dengan font Khot Diwani Biasa
@@ -3108,19 +3115,244 @@
     }
   }
 
-  async function buildOfflineAiResponseHtml(promptText, scope, v, extraContext = "") {
-    const ref = v ? v.ref : "Al-Qur'an";
-    const sNum = v ? Number(v.surah) : 1;
-    const aNum = v ? Number(v.verse) : 1;
-    const [kemenagTxt, ikObj] = await Promise.all([
-      getKemenagTafsirForVerse(sNum, aNum),
-      getIbnKathirTafsirForVerse(sNum, aNum)
-    ]);
+  const GEMINI_KEY_STORAGE = "quran_lsf_gemini_api_key";
+  const GEMINI_MODELS = ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-2.0-flash"];
 
+  function getSavedGeminiApiKey() {
+    try {
+      return (localStorage.getItem(GEMINI_KEY_STORAGE) || "").trim();
+    } catch (_) {
+      return "";
+    }
+  }
+
+  function setSavedGeminiApiKey(key) {
+    try {
+      if (key) localStorage.setItem(GEMINI_KEY_STORAGE, key.trim());
+      else localStorage.removeItem(GEMINI_KEY_STORAGE);
+    } catch (_) {
+      // Ignore storage quota errors
+    }
+    updateGeminiKeyStatusUi();
+  }
+
+  function updateGeminiKeyStatusUi() {
+    const key = getSavedGeminiApiKey();
+    if (el.geminiApiKeyInput && document.activeElement !== el.geminiApiKeyInput) {
+      el.geminiApiKeyInput.value = key;
+    }
+    if (!el.geminiModeBadge) return;
+    if (key) {
+      el.geminiModeBadge.textContent = "✦ Gemini Live";
+      el.geminiModeBadge.className = "text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300";
+    } else {
+      el.geminiModeBadge.textContent = "Mode Cerdas Lokal";
+      el.geminiModeBadge.className = "text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-200";
+    }
+  }
+
+  function normalizeArabicForSearch(str) {
+    return String(str || "")
+      .replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g, "")
+      .replace(/[أإآٱ]/g, "ا")
+      .replace(/ة/g, "ه")
+      .replace(/ى/g, "ي")
+      .trim()
+      .toLowerCase();
+  }
+
+  function withTimeout(promise, ms, fallbackVal) {
+    return new Promise((resolve) => {
+      let settled = false;
+      const timer = setTimeout(() => {
+        if (!settled) {
+          settled = true;
+          resolve(fallbackVal);
+        }
+      }, ms);
+      Promise.resolve(promise)
+        .then((val) => {
+          if (!settled) {
+            settled = true;
+            clearTimeout(timer);
+            resolve(val);
+          }
+        })
+        .catch(() => {
+          if (!settled) {
+            settled = true;
+            clearTimeout(timer);
+            resolve(fallbackVal);
+          }
+        });
+    });
+  }
+
+  function formatAiMarkdownHtml(rawText) {
+    const safeLines = escapeHtml(String(rawText || "")).split(/\r?\n/);
+    const out = [];
+    let inList = false;
+
+    const formatInline = (line) =>
+      line
+        .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+        .replace(/\*([^*\n]+?)\*/g, "<em>$1</em>")
+        .replace(/`([^`\n]+?)`/g, '<code class="px-1 py-0.5 rounded bg-slate-100 text-slate-800 text-[10px]">$1</code>');
+
+    safeLines.forEach((rawLine) => {
+      const trimmed = rawLine.trim();
+      const bulletMatch = trimmed.match(/^[-*•]\s+(.+)$/);
+      const numMatch = trimmed.match(/^\d+\.\s+(.+)$/);
+      if (bulletMatch || numMatch) {
+        if (!inList) {
+          out.push('<ul class="list-disc pl-4 space-y-0.5">');
+          inList = true;
+        }
+        out.push(`<li>${formatInline((bulletMatch || numMatch)[1])}</li>`);
+        return;
+      }
+      if (inList) {
+        out.push("</ul>");
+        inList = false;
+      }
+      if (!trimmed) return;
+      if (trimmed.startsWith("### ")) {
+        out.push(`<div class="font-bold text-slate-900 pt-1">${formatInline(trimmed.slice(4))}</div>`);
+      } else if (trimmed.startsWith("## ")) {
+        out.push(`<div class="font-extrabold text-emerald-950 pt-1">${formatInline(trimmed.slice(3))}</div>`);
+      } else {
+        out.push(`<p>${formatInline(trimmed)}</p>`);
+      }
+    });
+    if (inList) out.push("</ul>");
+    return out.join("") || `<p>${escapeHtml(String(rawText || ""))}</p>`;
+  }
+
+  function appendGeminiLoadingMessage() {
+    if (!el.geminiChatLog) return null;
+    const row = document.createElement("div");
+    row.className = "bg-white border border-sky-200 text-slate-600 rounded-2xl rounded-tl-sm px-3 py-2.5 mr-2 shadow-2xs space-y-1";
+    row.innerHTML = `
+      <div class="flex items-center justify-between gap-2">
+        <span class="text-[10px] font-extrabold text-indigo-700">✦ Gemini AI • LSF</span>
+        <span class="text-[9px] px-1.5 py-0.5 rounded bg-sky-50 text-sky-800 border border-sky-200 font-semibold animate-pulse">Memproses...</span>
+      </div>
+      <div class="text-slate-500 italic">Sedang menganalisis ayat, LSF, dan tafsir untuk pertanyaan Anda...</div>
+    `;
+    el.geminiChatLog.appendChild(row);
+    el.geminiChatLog.scrollTop = el.geminiChatLog.scrollHeight;
+    return row;
+  }
+
+  function replaceGeminiMessageRow(row, htmlText, badgeLabel = "") {
+    if (!row) {
+      appendGeminiMessage("ai", htmlText, badgeLabel);
+      return;
+    }
+    row.className = "bg-white border border-sky-100 text-slate-700 rounded-2xl rounded-tl-sm px-3 py-2.5 mr-2 shadow-2xs space-y-1";
+    row.innerHTML = `
+      <div class="flex items-center justify-between gap-2">
+        <span class="text-[10px] font-extrabold text-indigo-700">✦ Gemini AI • LSF</span>
+        ${badgeLabel ? `<span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold">${escapeHtml(badgeLabel)}</span>` : ""}
+      </div>
+      <div class="space-y-1">${htmlText}</div>
+    `;
+    if (el.geminiChatLog) el.geminiChatLog.scrollTop = el.geminiChatLog.scrollHeight;
+  }
+
+  async function callRealGeminiApi(apiKey, promptText, scope, v, extraContext, kemenagTxt, ikDisplay) {
+    const tokenLines = (v && v.tokens ? v.tokens : [])
+      .map((t) => `- ${t.ar} (${t.tr || "-"}) | POS: ${t.pos || "-"} | Peran LSF: ${t.role || "-"}${t.root && t.root !== "-" ? ` | Akar: ${t.root}` : ""}`)
+      .join("\n");
+
+    const systemText = [
+      "Anda adalah asisten pakar Al-Qur'an, Linguistik Sistemik Fungsional (LSF / SFL Halliday), Nahwu, Balaghah, Tafsir Kemenag RI, dan Tafsir Ibnu Katsir.",
+      "Jawab langsung pertanyaan pengguna dalam Bahasa Indonesia yang jelas, ilmiah, santun, ringkas, dan terstruktur menggunakan poin/tebal (**...**).",
+      "Rujuk data ayat aktif yang diberikan dan jawab pertanyaan spesifik pengguna secara langsung (jangan mengulang template umum)."
+    ].join(" ");
+
+    const userContext = [
+      `Ayat Aktif: ${v ? v.ref : "-"}`,
+      `Teks Arab: ${v ? v.arabic : "-"}`,
+      `Terjemah Kemenag: ${v ? v.translation : "-"}`,
+      `Proses Ideasional: ${v && v.ideational ? `${v.ideational.processType} — ${v.ideational.summary}` : "-"}`,
+      `Tutur Interpersonal: ${v && v.interpersonal ? `${v.interpersonal.speechFunc} (${v.interpersonal.modality}) — ${v.interpersonal.summary}` : "-"}`,
+      `Tema-Rema Tekstual: ${v && v.textual ? `${v.textual.themeType} | Tema: "${v.textual.themeContent}" | Rema: "${v.textual.rhemeContent}" — ${v.textual.summary}` : "-"}`,
+      `Nahwu & Balaghah: ${v && v.nahwuBalaghahBridge ? `Nahwu: ${v.nahwuBalaghahBridge.nahwu}; Balaghah: ${v.nahwuBalaghahBridge.balaghah}` : "-"}`,
+      tokenLines ? `Analisis Kata:\n${tokenLines}` : "",
+      kemenagTxt ? `Cuplikan Tafsir Kemenag: ${String(kemenagTxt).replace(/\s+/g, " ").trim().slice(0, 900)}` : "",
+      ikDisplay ? `Cuplikan Tafsir Ibnu Katsir: ${String(ikDisplay).replace(/\s+/g, " ").trim().slice(0, 700)}` : "",
+      extraContext ? `Fokus Konteks: ${extraContext}` : "",
+      `Pertanyaan Pengguna (${scope}): ${promptText}`
+    ]
+      .filter(Boolean)
+      .join("\n\n");
+
+    let lastErr = null;
+    for (const model of GEMINI_MODELS) {
+      const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+      const timer = controller ? setTimeout(() => controller.abort(), 22000) : null;
+      try {
+        const res = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              systemInstruction: { parts: [{ text: systemText }] },
+              contents: [{ role: "user", parts: [{ text: userContext }] }],
+              generationConfig: { temperature: 0.45, maxOutputTokens: 900 }
+            }),
+            signal: controller ? controller.signal : undefined
+          }
+        );
+
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          const msg = (data && data.error && data.error.message) || `HTTP ${res.status}`;
+          if (res.status === 404 || /not found|not supported/i.test(msg)) {
+            lastErr = new Error(msg);
+            continue;
+          }
+          if (res.status === 400 || res.status === 401 || res.status === 403) {
+            throw new Error(`API Key ditolak atau tidak valid (${msg}). Periksa kembali key di tombol ⚙ API Key.`);
+          }
+          if (res.status === 429) {
+            throw new Error(`Kuota Gemini API sedang penuh/limit sementara (${msg}). Coba lagi beberapa saat.`);
+          }
+          throw new Error(msg);
+        }
+
+        const candidate = data && data.candidates && data.candidates[0];
+        const parts = candidate && candidate.content && candidate.content.parts;
+        const text = Array.isArray(parts) ? parts.map((p) => p && p.text ? p.text : "").join("\n").trim() : "";
+        if (text) {
+          return { text, model };
+        }
+        throw new Error("Respons Gemini kosong.");
+      } catch (err) {
+        if (err && err.name === "AbortError") {
+          lastErr = new Error("Koneksi ke Google Gemini habis waktu (timeout).");
+          break;
+        }
+        lastErr = err;
+        if (!/not found|not supported/i.test(String(err && err.message))) {
+          break;
+        }
+      } finally {
+        if (timer) clearTimeout(timer);
+      }
+    }
+    throw lastErr || new Error("Gagal menghubungi Google Gemini API.");
+  }
+
+  function buildSmartOfflineAiResponseHtml(promptText, scope, v, extraContext = "", kemenagTxt = "", ikDisplay = "", errorNote = "") {
+    const ref = v ? v.ref : "Al-Qur'an";
     const keyTokens = (v && v.tokens ? v.tokens.slice(0, 3).map((t) => `${t.ar} (${t.role})`).join(", ") : "-");
-    const kemenagShort = (kemenagTxt || "").replace(/\s+/g, " ").trim().slice(0, 230);
-    const ikDisplay = getIbnKathirDisplayText(ikObj);
-    const ikShort = (ikDisplay || "").replace(/\s+/g, " ").trim().slice(0, 210);
+    const cleanKemenag = String(kemenagTxt || "").replace(/\s+/g, " ").trim();
+    const cleanIk = String(ikDisplay || "").replace(/\s+/g, " ").trim();
+    const kemenagShort = cleanKemenag.slice(0, 230);
+    const ikShort = cleanIk.slice(0, 210);
 
     let focusLine = "";
     if (extraContext) {
@@ -3134,17 +3366,79 @@
     } else if (scope === "bridge" && v && v.nahwuBalaghahBridge) {
       focusLine = `<div><strong>Jembatan Nahwu–Balaghah:</strong> ${escapeHtml(v.nahwuBalaghahBridge.nahwu)} | <em>Ma'ani:</em> ${escapeHtml(v.nahwuBalaghahBridge.balaghah)}</div>`;
     } else if (scope === "kemenag") {
-      focusLine = `<div><strong>Intisari Tafsir Kemenag RI:</strong> ${escapeHtml(kemenagShort)}...</div>`;
+      focusLine = `<div><strong>Intisari Tafsir Kemenag RI:</strong> ${escapeHtml(kemenagShort)}${cleanKemenag.length > 230 ? "..." : ""}</div>`;
     } else if (scope === "ibnkatsir") {
-      focusLine = `<div><strong>Intisari Tafsir Ibnu Katsir:</strong> ${escapeHtml(ikShort)}...</div>`;
+      focusLine = `<div><strong>Intisari Tafsir Ibnu Katsir:</strong> ${escapeHtml(ikShort)}${cleanIk.length > 210 ? "..." : ""}</div>`;
     } else {
-      focusLine = `<div><strong>Saran Pemahaman ${escapeHtml(ref)}:</strong> Ayat ini memadukan Proses <em>${escapeHtml(v ? v.processCategory : "-")}</em>, tutur <em>${escapeHtml(v ? v.speechCategory : "-")}</em>, dan Tema <em>${escapeHtml(v ? v.themeCategory : "-")}</em>.</div>`;
+      const qRaw = String(promptText || "").trim();
+      const qLower = qRaw.toLowerCase();
+      const qNormAr = normalizeArabicForSearch(qRaw);
+      const qWords = qLower.split(/[\s,.;:?!()"']+/).filter((w) => w.length >= 3);
+      const blocks = [];
+
+      const matchedTokens = (v && Array.isArray(v.tokens) ? v.tokens : []).filter((tok) => {
+        const arNorm = normalizeArabicForSearch(tok.ar);
+        const trLow = String(tok.tr || "").toLowerCase();
+        const roleLow = String(tok.role || "").toLowerCase();
+        const rootLow = normalizeArabicForSearch(tok.root || "");
+        if (arNorm && qNormAr.includes(arNorm)) return true;
+        if (trLow && trLow.length >= 3 && qLower.includes(trLow)) return true;
+        if (rootLow && rootLow.length >= 2 && qNormAr.includes(rootLow)) return true;
+        return qWords.some((w) => trLow.includes(w) || roleLow.includes(w));
+      });
+
+      if (matchedTokens.length > 0) {
+        blocks.push(
+          `<div><strong>Analisis Lafadz Terkait:</strong> ${matchedTokens
+            .map((t) => `<span class="font-arabic font-bold text-emerald-900">${escapeHtml(t.ar)}</span> (${escapeHtml(t.tr || "-")}, ${escapeHtml(t.pos || "-")}, Peran LSF: <em>${escapeHtml(t.role || "-")}</em>${t.root && t.root !== "-" ? `, Akar: ${escapeHtml(t.root)}` : ""})`)
+            .join(" • ")}</div>`
+        );
+      }
+
+      if (/\b(terjemah|arti|maksud|makna|pesan|inti|kesimpulan|hikmah)\b/.test(qLower) && v) {
+        blocks.push(`<div><strong>Terjemah &amp; Inti ${escapeHtml(ref)}:</strong> "${escapeHtml(v.translation || "-")}"</div>`);
+      }
+      if (/\b(ideasional|proses|transitivitas|pelaku|partisipan|kata kerja|fi'il|fiil)\b/.test(qLower) && v && v.ideational) {
+        blocks.push(`<div><strong>Ideasional (${escapeHtml(v.ideational.processType)}):</strong> ${escapeHtml(v.ideational.summary)}</div>`);
+      }
+      if (/\b(interpersonal|mood|tutur|modalitas|perintah|larangan|berita|seruan)\b/.test(qLower) && v && v.interpersonal) {
+        blocks.push(`<div><strong>Interpersonal (${escapeHtml(v.interpersonal.speechFunc)}):</strong> ${escapeHtml(v.interpersonal.summary)}</div>`);
+      }
+      if (/\b(tekstual|tema|rema|theme|rheme|struktur)\b/.test(qLower) && v && v.textual) {
+        blocks.push(`<div><strong>Tekstual (${escapeHtml(v.textual.themeType)}):</strong> Tema "${escapeHtml(v.textual.themeContent)}" → Rema "${escapeHtml(v.textual.rhemeContent)}". ${escapeHtml(v.textual.summary)}</div>`);
+      }
+      if (/\b(nahwu|irab|i'rab|balaghah|ma'ani|maani|gramatika|sintaksis)\b/.test(qLower) && v && v.nahwuBalaghahBridge) {
+        blocks.push(`<div><strong>Nahwu–Balaghah:</strong> ${escapeHtml(v.nahwuBalaghahBridge.nahwu)} | <em>Balaghah:</em> ${escapeHtml(v.nahwuBalaghahBridge.balaghah)}</div>`);
+      }
+
+      const matchingSentences = (cleanKemenag + ". " + cleanIk)
+        .split(/(?<=[.!?])\s+/)
+        .filter((s) => s.length > 20 && qWords.some((w) => s.toLowerCase().includes(w)))
+        .slice(0, 2);
+
+      if (matchingSentences.length > 0) {
+        blocks.push(`<div><strong>Petikan Tafsir Sesuai Kata Kunci:</strong> ${escapeHtml(matchingSentences.join(" "))}</div>`);
+      }
+
+      if (blocks.length === 0) {
+        blocks.push(
+          `<div><strong>Ringkasan Terarah ${escapeHtml(ref)}:</strong> "${escapeHtml(v ? v.translation : "-")}" — memadukan Proses <em>${escapeHtml(v ? v.processCategory : "-")}</em>, tutur <em>${escapeHtml(v ? v.speechCategory : "-")}</em>, dan Tema <em>${escapeHtml(v ? v.themeCategory : "-")}</em>.</div>`
+        );
+      }
+      focusLine = blocks.join("");
     }
 
+    const errorHtml = errorNote
+      ? `<div class="px-2 py-1 rounded bg-rose-50 border border-rose-200 text-rose-800 text-[10px]"><strong>Info Gemini Live:</strong> ${escapeHtml(errorNote)} (menampilkan analisis lokal sebagai cadangan).</div>`
+      : !getSavedGeminiApiKey() && scope === "custom"
+      ? `<div class="px-2 py-1 rounded bg-sky-50 border border-sky-200 text-sky-900 text-[10px]">Tip: Klik tombol <strong>⚙ API Key</strong> di atas (gratis dari Google AI Studio) agar pertanyaan bebas dijawab langsung oleh Google Gemini AI.</div>`
+      : "";
+
     return `
+      ${errorHtml}
       ${focusLine}
-      <div class="pt-1 border-t border-slate-100"><strong>Kata yang Perlu Dipahami:</strong> ${escapeHtml(keyTokens)}</div>
-      <div class="text-slate-500"><strong>Rujukan Kemenag:</strong> ${escapeHtml(kemenagShort)}${kemenagShort.length >= 230 ? "..." : ""}</div>
+      <div class="pt-1 border-t border-slate-100"><strong>Kata Kunci Ayat:</strong> ${escapeHtml(keyTokens)}</div>
+      <div class="text-slate-500"><strong>Rujukan Kemenag:</strong> ${escapeHtml(kemenagShort)}${cleanKemenag.length > 230 ? "..." : ""}</div>
     `;
   }
 
@@ -3160,10 +3454,78 @@
       }
     }
 
-    const localHtml = await buildOfflineAiResponseHtml(promptText, scope, v, extraContext);
-    appendGeminiMessage("ai", localHtml, "Analisis LSF");
-    captureGeminiQaKnowledge(promptText, scope, v, extraContext || localHtml);
+    const loadingRow = appendGeminiLoadingMessage();
+    if (el.btnGeminiSend) el.btnGeminiSend.disabled = true;
+
+    try {
+      const sNum = v ? Number(v.surah) : 1;
+      const aNum = v ? Number(v.verse) : 1;
+      const [kemenagTxt, ikObj] = await Promise.all([
+        withTimeout(getKemenagTafsirForVerse(sNum, aNum), 3500, ""),
+        withTimeout(getIbnKathirTafsirForVerse(sNum, aNum), 3500, null)
+      ]);
+      const ikDisplay = ikObj ? getIbnKathirDisplayText(ikObj) : "";
+      const apiKey = getSavedGeminiApiKey();
+
+      if (apiKey) {
+        try {
+          const live = await callRealGeminiApi(apiKey, promptText, scope, v, extraContext, kemenagTxt, ikDisplay);
+          const formattedHtml = formatAiMarkdownHtml(live.text);
+          replaceGeminiMessageRow(loadingRow, formattedHtml, `✦ ${live.model}`);
+          captureGeminiQaKnowledge(promptText, scope, v, live.text.slice(0, 320));
+          return;
+        } catch (err) {
+          const fallbackHtml = buildSmartOfflineAiResponseHtml(
+            promptText,
+            scope,
+            v,
+            extraContext,
+            kemenagTxt,
+            ikDisplay,
+            err && err.message ? err.message : "Gagal menghubungi Gemini API"
+          );
+          replaceGeminiMessageRow(loadingRow, fallbackHtml, "Cadangan Lokal");
+          captureGeminiQaKnowledge(promptText, scope, v, extraContext || fallbackHtml);
+          return;
+        }
+      }
+
+      const localHtml = buildSmartOfflineAiResponseHtml(promptText, scope, v, extraContext, kemenagTxt, ikDisplay);
+      replaceGeminiMessageRow(loadingRow, localHtml, "Analisis LSF Lokal");
+      captureGeminiQaKnowledge(promptText, scope, v, extraContext || localHtml);
+    } finally {
+      if (el.btnGeminiSend) el.btnGeminiSend.disabled = false;
+    }
   }
+
+  if (el.btnGeminiSettings && el.geminiKeyBox) {
+    el.btnGeminiSettings.addEventListener("click", () => {
+      el.geminiKeyBox.classList.toggle("hidden");
+      if (!el.geminiKeyBox.classList.contains("hidden") && el.geminiApiKeyInput) {
+        el.geminiApiKeyInput.focus();
+      }
+    });
+  }
+  if (el.btnGeminiSaveKey && el.geminiApiKeyInput) {
+    el.btnGeminiSaveKey.addEventListener("click", () => {
+      const val = el.geminiApiKeyInput.value.trim();
+      if (!val) {
+        showToast("Masukkan Gemini API Key terlebih dahulu.", true);
+        return;
+      }
+      setSavedGeminiApiKey(val);
+      if (el.geminiKeyBox) el.geminiKeyBox.classList.add("hidden");
+      showToast("Gemini API Key tersimpan aman di perangkat ini.");
+    });
+  }
+  if (el.btnGeminiClearKey) {
+    el.btnGeminiClearKey.addEventListener("click", () => {
+      setSavedGeminiApiKey("");
+      if (el.geminiApiKeyInput) el.geminiApiKeyInput.value = "";
+      showToast("API Key dihapus. Beralih ke Mode Cerdas Lokal.");
+    });
+  }
+  updateGeminiKeyStatusUi();
 
   if (el.geminiChatForm && el.geminiPromptInput) {
     el.geminiChatForm.addEventListener("submit", (e) => {

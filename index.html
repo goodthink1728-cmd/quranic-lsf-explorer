@@ -1223,10 +1223,31 @@
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L14.2 9.2L21.5 11.5L14.2 13.8L12 21L9.8 13.8L2.5 11.5L9.8 9.2L12 2Z"/></svg>
                   </div>
                   <div class="min-w-0">
-                    <h3 class="font-extrabold text-sm text-slate-900 leading-tight">Gemini AI • LSF</h3>
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <h3 class="font-extrabold text-sm text-slate-900 leading-tight">Gemini AI • LSF</h3>
+                      <span id="gemini-mode-badge" class="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-200">Mode Cerdas Lokal</span>
+                    </div>
                     <p id="gemini-active-ref" class="text-[11px] text-sky-900 font-semibold truncate">QS. Al-Fatihah [1]: 2</p>
                   </div>
                 </div>
+                <button type="button" id="btn-gemini-settings" class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white hover:bg-sky-100 text-sky-900 border border-sky-200 text-[10px] font-bold transition shrink-0" title="Pengaturan Gemini API Key">
+                  <span>⚙</span>
+                  <span>API Key</span>
+                </button>
+              </div>
+
+              <!-- Pengaturan Gemini API Key (Disimpan Aman Secara Lokal di Perangkat Anda) -->
+              <div id="gemini-key-box" class="hidden rounded-xl bg-white/95 border border-sky-200 p-2.5 space-y-2 text-[11px]">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="font-bold text-slate-800">Koneksi Google Gemini API Asli</span>
+                  <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer" class="text-[10px] font-bold text-sky-700 hover:underline">Buat Key Gratis ↗</a>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <input type="password" id="gemini-api-key-input" autocomplete="off" spellcheck="false" placeholder="Tempel API Key (AIza...)" class="flex-1 min-w-0 px-2.5 py-1 rounded-lg bg-slate-50 border border-sky-200 text-[11px] outline-none focus:ring-2 focus:ring-sky-400">
+                  <button type="button" id="btn-gemini-save-key" class="px-2.5 py-1 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[10px] transition shrink-0">Simpan</button>
+                  <button type="button" id="btn-gemini-clear-key" class="px-2 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-bold text-[10px] transition shrink-0">Hapus</button>
+                </div>
+                <p id="gemini-key-help" class="text-[10px] text-slate-500 leading-snug">API Key tersimpan hanya di browser/HP Anda (<code class="text-slate-700">localStorage</code>). Tanpa API Key, panel tetap aktif memakai Mode Cerdas Lokal.</p>
               </div>
 
               <!-- Kata & Istilah Kunci yang Perlu Dipahami pada Penafsiran LSF -->
