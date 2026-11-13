@@ -63,61 +63,6 @@
     }
     .font-mono-code { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
     body.hide-arabic-terms .arabic-term-badge { display: none !important; }
-    #audio-teleprompter {
-      scrollbar-width: thin;
-      scrollbar-color: rgba(252, 211, 77, 0.48) rgba(12, 74, 56, 0.35);
-    }
-    #audio-teleprompter::-webkit-scrollbar { width: 5px; }
-    #audio-teleprompter::-webkit-scrollbar-track {
-      background: rgba(12, 74, 56, 0.35);
-      border-radius: 9999px;
-    }
-    #audio-teleprompter::-webkit-scrollbar-thumb {
-      background: rgba(252, 211, 77, 0.48);
-      border-radius: 9999px;
-    }
-    #audio-teleprompter::-webkit-scrollbar-thumb:hover {
-      background: rgba(252, 211, 77, 0.78);
-    }
-    .murottal-select {
-      color-scheme: dark;
-    }
-    .murottal-select option {
-      background-color: #126850;
-      color: #fef3c7;
-    }
-    #murottal-seek-slider {
-      -webkit-appearance: none;
-      appearance: none;
-      height: 5px;
-      border-radius: 9999px;
-      background: rgba(255, 255, 255, 0.22);
-      cursor: pointer;
-    }
-    #murottal-seek-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 13px;
-      height: 13px;
-      border-radius: 9999px;
-      background: #fbbf24;
-      border: 2px solid #0e5742;
-      box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.32);
-      cursor: pointer;
-      transition: transform 0.12s ease;
-    }
-    #murottal-seek-slider::-webkit-slider-thumb:hover {
-      transform: scale(1.15);
-    }
-    #murottal-seek-slider::-moz-range-thumb {
-      width: 13px;
-      height: 13px;
-      border-radius: 9999px;
-      background: #fbbf24;
-      border: 2px solid #0e5742;
-      box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.32);
-      cursor: pointer;
-    }
     body {
       font-family: 'Inter', sans-serif;
       background-color: #fbf7ef;
@@ -480,7 +425,7 @@
           </div>
         </div>
 
-        <!-- 2-COLUMN BENTO GRID: CENTER WORKSPACE (8 COL) + RIGHT MUROTTAL BOX (4 COL) -->
+        <!-- 2-COLUMN BENTO GRID: CENTER WORKSPACE (8 COL) + RIGHT SIDEBAR (4 COL) -->
         <div class="grid grid-cols-1 xl:grid-cols-12 gap-5 items-start">
 
           <!-- CENTER WORKSPACE -->
@@ -669,7 +614,7 @@
           <div>
             <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-900 px-2.5 py-0.5 rounded">Mushaf &amp; Terjemahan Kementerian Agama RI</span>
             <h2 class="text-lg font-bold text-slate-900 mt-1">Direktori Lengkap 114 Surat &amp; 6.236 Ayat Al-Qur'an</h2>
-            <p class="text-xs text-slate-500">Pilih surat untuk membaca seluruh ayat, memutar murottal, membuka Tafsir Kemenag, atau menganalisisnya dengan metode LSF.</p>
+            <p class="text-xs text-slate-500">Pilih surat untuk membaca seluruh ayat, membuka Tafsir Kemenag, atau menganalisisnya dengan metode LSF.</p>
           </div>
           <div class="flex flex-wrap items-center gap-2">
             <input type="text" id="mushaf-search-surah" placeholder="Cari surat (mis. Al-Fatihah, Ibrahim, Yasin)..." class="text-xs p-2 bg-slate-50 border border-slate-300 rounded-lg w-full sm:w-64">
@@ -703,9 +648,6 @@
           </div>
           <div class="text-right shrink-0 space-y-2 max-w-full">
             <div id="mushaf-detail-arabic" class="font-diwani text-4xl sm:text-5xl text-amber-200 leading-[1.6] px-1 max-w-full overflow-hidden" dir="rtl" lang="ar">الفاتحة</div>
-            <button id="btn-mushaf-play-full" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-lg text-xs transition">
-              Putar Surat (Lanjut Otomatis)
-            </button>
           </div>
         </div>
 
@@ -793,9 +735,6 @@
         </div>
 
         <div class="mt-4 flex justify-center gap-2">
-          <button id="btn-play-active-audio" class="hidden px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 rounded-lg text-xs font-semibold transition">
-            Putar Murottal (Lanjut Otomatis)
-          </button>
           <button id="btn-jump-to-tafsir-comp" class="px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200 rounded-lg text-xs font-semibold transition">
             Buka Perbandingan LSF vs. Tafsir →
           </button>
@@ -1168,134 +1107,8 @@
     </section><!-- /pillar-tafsir -->
           </div><!-- /CENTER WORKSPACE (xl:col-span-8) -->
 
-          <!-- ZONE 3: RIGHT SIDEBAR WIDGETS (MUROTTAL HARMONIS & REFERENSI INTI DI SEBELAH KANAN) -->
+          <!-- ZONE 3: RIGHT SIDEBAR WIDGETS (REFERENSI INTI DI SEBELAH KANAN) -->
           <aside class="xl:col-span-4 space-y-4 xl:sticky xl:top-4">
-
-            <!-- Pemutar Murottal Al-Qur'an (Hijau Zamrud Lebih Muda & Emas Hangat) -->
-            <section id="global-audio-bar" class="rounded-2xl overflow-hidden relative text-white border border-amber-200/35 shadow-[0_14px_34px_-12px_rgba(16,99,74,0.34)]" style="background: linear-gradient(155deg, #178262 0%, #1d9670 48%, #10634a 100%);">
-              <!-- Subtle Watermark Twilight Mosque Domes & Golden Stars (Blended Softly, No Borders) -->
-              <svg class="absolute inset-0 w-full h-full opacity-25 pointer-events-none" viewBox="0 0 400 360" preserveAspectRatio="xMidYMid slice" fill="none" aria-hidden="true">
-                <circle cx="52" cy="36" r="1.5" fill="#FDE68A"/>
-                <circle cx="145" cy="22" r="1.2" fill="#FEF3C7"/>
-                <circle cx="290" cy="26" r="1.4" fill="#FDE68A"/>
-                <circle cx="350" cy="46" r="1.6" fill="#FEF3C7"/>
-                <path d="M26 215V135H38V215M32 112L25 135H39L32 112Z" fill="#0D523E"/>
-                <path d="M44 220V172C44 146 78 132 96 132C114 132 148 146 148 172V220H44Z" fill="#136F53"/>
-                <path d="M362 215V135H374V215M368 112L361 135H375L368 112Z" fill="#0D523E"/>
-                <path d="M252 220V172C252 146 286 132 304 132C322 132 356 146 356 172V220H252Z" fill="#136F53"/>
-                <circle cx="200" cy="155" r="120" fill="url(#softRadialMurottal)"/>
-                <defs>
-                  <radialGradient id="softRadialMurottal" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#A7F3D0" stop-opacity="0.24"/>
-                    <stop offset="100%" stop-color="#10634A" stop-opacity="0"/>
-                  </radialGradient>
-                </defs>
-              </svg>
-
-              <div class="p-3 space-y-1.5 relative z-10">
-                <!-- Header -->
-                <div class="flex items-center justify-between gap-2">
-                  <div class="flex items-center gap-2 min-w-0">
-                    <div class="w-6 h-6 rounded-lg bg-amber-300/20 border border-amber-200/30 backdrop-blur-sm flex items-center justify-center shrink-0">
-                      <svg class="w-3.5 h-3.5 text-amber-200" fill="currentColor" viewBox="0 0 24 24"><path d="M4 10h2v4H4v-4zm4-4h2v12H8V6zm4-3h2v18h-2V3zm4 5h2v8h-2V8zm4 2h2v4h-2v-4z"/></svg>
-                    </div>
-                    <h3 class="text-[11px] font-extrabold uppercase tracking-wider text-amber-200 truncate">Murottal Al-Qur'an</h3>
-                  </div>
-                  <button type="button" id="btn-audio-close" class="px-2 py-0.5 bg-white/15 hover:bg-rose-500/80 rounded-lg text-[10px] font-semibold transition shrink-0" title="Sembunyikan Kotak Murottal">Sembunyikan</button>
-                </div>
-
-                <!-- Borderless Frosted Selector Strip (Pilih Surat & Pilih Ayat) -->
-                <div class="grid grid-cols-12 gap-1.5 bg-[#0e5742]/65 border border-emerald-200/25 backdrop-blur-md rounded-xl p-1">
-                  <div class="col-span-7 flex items-center gap-1 min-w-0">
-                    <span class="w-6 h-6 rounded-lg bg-[#0c4a38]/80 text-amber-200 flex items-center justify-center shrink-0" title="Pilih Surat">
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                    </span>
-                    <select id="audio-surah-select" aria-label="Pilih Surat" class="murottal-select flex-1 min-w-0 h-6 text-[11px] bg-[#126850] hover:bg-[#167a5e] text-amber-50 font-semibold border border-emerald-200/30 focus:border-amber-300/70 rounded-lg px-1.5 outline-none truncate transition cursor-pointer"></select>
-                  </div>
-                  <div class="col-span-5 flex items-center gap-1 min-w-0">
-                    <span class="w-6 h-6 rounded-lg bg-[#0c4a38]/80 text-amber-200 flex items-center justify-center shrink-0" title="Pilih Ayat">
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                    </span>
-                    <select id="audio-ayah-select" aria-label="Pilih Ayat" class="murottal-select flex-1 min-w-0 h-6 text-[11px] bg-[#126850] hover:bg-[#167a5e] text-amber-50 font-semibold border border-emerald-200/30 focus:border-amber-300/70 rounded-lg px-1.5 outline-none truncate transition cursor-pointer"></select>
-                  </div>
-                </div>
-
-                <!-- Boxy Unified Flow Stage -->
-                <div class="rounded-xl bg-[#0c4a38]/48 border border-emerald-100/15 backdrop-blur-md p-2 text-center space-y-1">
-                  <!-- Compact Surah Crown -->
-                  <div class="inline-flex flex-wrap items-center justify-center gap-x-2 bg-white/14 rounded-lg px-3 py-0.5 max-w-full overflow-hidden">
-                    <span id="audio-surah-ar" class="font-diwani text-base text-amber-200 leading-[1.3] truncate" dir="rtl" lang="ar">سُورَةُ الفَاتِحَة</span>
-                    <span id="audio-now-playing" class="text-[10px] font-bold text-white leading-snug truncate">QS. Al-Fatihah [1] • Ayat 1 dari 7</span>
-                  </div>
-
-                  <!-- Info Singkat Ayat Sebelumnya -->
-                  <button type="button" id="btn-audio-prev-preview" class="w-full h-5 bg-white/10 hover:bg-white/18 rounded-lg px-2 flex items-center justify-between gap-2 text-[9px] transition disabled:opacity-45 disabled:cursor-default">
-                    <span class="font-bold text-amber-200 shrink-0">◄ Sebelumnya</span>
-                    <span id="audio-prev-ref" class="text-emerald-50/90 truncate">Awal Al-Qur'an</span>
-                    <span id="audio-prev-ar" class="font-arabic text-[11px] text-emerald-50/85 truncate max-w-[80px]" dir="rtl">—</span>
-                  </button>
-
-                  <!-- Aliran Vertikal Berkelanjutan Seluruh Ayat Surat -->
-                  <div id="audio-teleprompter" class="relative h-[112px] overflow-y-auto overscroll-contain pr-1 text-right">
-                    <div id="audio-surah-stream" class="space-y-1"></div>
-                  </div>
-
-                  <div id="audio-next-info" class="text-[9px] text-amber-200 font-semibold truncate">(Lanjut otomatis ke Ayat 2..dst)</div>
-                </div>
-
-                <!-- Audio Player Bar (Senada Hijau Zamrud Muda & Emas Hangat) -->
-                <div class="bg-[#0e5742]/75 border border-emerald-200/25 px-2.5 py-2 rounded-xl shadow-inner flex items-center gap-2">
-                  <audio id="quran-audio-player" preload="metadata" class="hidden" src="https://cdn.equran.id/audio-partial/Misyari-Rasyid-Al-Afasi/001001.mp3"></audio>
-                  <button type="button" id="btn-audio-mini-toggle" class="w-6 h-6 rounded-lg bg-amber-300/20 hover:bg-amber-300/35 text-amber-200 flex items-center justify-center shrink-0 transition" title="Putar / Jeda" aria-label="Putar atau Jeda">
-                    <svg class="w-3 h-3 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5.14v14l11-7-11-7z"/></svg>
-                  </button>
-                  <span id="murottal-time-current" class="font-mono-code text-[10px] font-semibold text-amber-100 tabular-nums shrink-0">0:00</span>
-                  <input id="murottal-seek-slider" type="range" min="0" max="1000" value="0" aria-label="Posisi Audio Murottal" class="flex-1 min-w-0 outline-none" />
-                  <span id="murottal-time-duration" class="font-mono-code text-[10px] font-medium text-emerald-100/85 tabular-nums shrink-0">0:00</span>
-                  <button type="button" id="btn-audio-mute" class="w-6 h-6 rounded-lg bg-white/10 hover:bg-white/20 text-emerald-50 hover:text-amber-200 flex items-center justify-center shrink-0 transition" title="Bisukan / Suarakan" aria-label="Bisukan atau Suarakan">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5zm4.54 3.46a5 5 0 010 7.07m2.83-9.9a9 9 0 010 12.73"/></svg>
-                  </button>
-                </div>
-
-                <!-- Compact Box Controls Row -->
-                <div class="flex items-center justify-around gap-1">
-                  <label class="cursor-pointer group flex flex-col items-center gap-0.5" title="Ulangi Ayat">
-                    <input type="checkbox" id="chk-audio-repeat" class="sr-only peer">
-                    <span class="w-7 h-7 rounded-lg bg-white/15 peer-checked:bg-amber-400 peer-checked:text-slate-950 text-emerald-50 flex items-center justify-center transition group-hover:scale-105">
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7h12l-3-3m3 3l-3 3M20 17H8l3 3m-3-3l3-3"/></svg>
-                    </span>
-                    <span class="text-[9px] font-semibold text-emerald-50/95">Ulangi</span>
-                  </label>
-
-                  <button type="button" id="btn-audio-prev" class="flex flex-col items-center gap-0.5 group" title="Ayat Sebelumnya">
-                    <span class="w-7 h-7 rounded-lg bg-white/15 hover:bg-white/28 text-white flex items-center justify-center transition group-hover:scale-105 text-[10px] font-bold">◄</span>
-                    <span class="text-[9px] font-semibold text-emerald-50/95">Sebelum</span>
-                  </button>
-
-                  <button type="button" id="btn-audio-play-active" class="w-9 h-9 rounded-xl bg-gradient-to-b from-amber-300 to-amber-500 hover:from-amber-200 hover:to-amber-400 text-slate-950 shadow-md flex items-center justify-center transition hover:scale-105" title="Putar / Jeda" aria-label="Putar atau Jeda Murottal">
-                    <svg class="w-4 h-4 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5.14v14l11-7-11-7z"/></svg>
-                  </button>
-
-                  <button type="button" id="btn-audio-next" class="flex flex-col items-center gap-0.5 group" title="Ayat Berikutnya">
-                    <span class="w-7 h-7 rounded-lg bg-white/15 hover:bg-white/28 text-white flex items-center justify-center transition group-hover:scale-105 text-[10px] font-bold">►</span>
-                    <span class="text-[9px] font-semibold text-emerald-50/95">Berikut</span>
-                  </button>
-
-                  <label class="cursor-pointer group flex flex-col items-center gap-0.5" title="Lanjut Otomatis ke Ayat/Surat Berikutnya">
-                    <input type="checkbox" id="chk-audio-autocontinue" checked class="sr-only peer">
-                    <span class="w-7 h-7 rounded-lg bg-white/15 peer-checked:bg-amber-400 peer-checked:text-slate-950 text-emerald-50 flex items-center justify-center transition group-hover:scale-105">
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7"/></svg>
-                    </span>
-                    <span class="text-[9px] font-semibold text-emerald-50/95">Otomatis</span>
-                  </label>
-                </div>
-              </div>
-            </section>
-
-            <!-- Button Muncul Kembali Saat Kotak Murottal Disembunyikan -->
-            <button type="button" id="btn-audio-reopen" class="hidden w-full py-2.5 px-4 bg-[#178262] hover:bg-[#1d9670] border border-amber-200/35 text-amber-50 rounded-2xl text-xs font-semibold shadow-xs transition">
-              Tampilkan Kotak Murottal Al-Qur'an
-            </button>
 
             <!-- Secondary Right Card: Ringkasan Taksonomi LSF & Kitab Tafsir -->
             <section class="bg-white/95 backdrop-blur rounded-3xl shadow-sm border border-amber-200/70 p-4 space-y-3 text-xs">

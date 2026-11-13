@@ -121,36 +121,11 @@
     mushafDetailTitle: document.getElementById("mushaf-detail-title"),
     mushafDetailDesc: document.getElementById("mushaf-detail-desc"),
     mushafDetailArabic: document.getElementById("mushaf-detail-arabic"),
-    btnMushafPlayFull: document.getElementById("btn-mushaf-play-full"),
     mushafFromAyah: document.getElementById("mushaf-from-ayah"),
     mushafToAyah: document.getElementById("mushaf-to-ayah"),
     btnMushafApplyRange: document.getElementById("btn-mushaf-apply-range"),
     chkMushafTranslit: document.getElementById("chk-mushaf-translit"),
     chkMushafTranslation: document.getElementById("chk-mushaf-translation"),
-    globalAudioBar: document.getElementById("global-audio-bar"),
-    audioTeleprompter: document.getElementById("audio-teleprompter"),
-    audioSurahStream: document.getElementById("audio-surah-stream"),
-    audioSurahSelect: document.getElementById("audio-surah-select"),
-    audioAyahSelect: document.getElementById("audio-ayah-select"),
-    audioSurahAr: document.getElementById("audio-surah-ar"),
-    audioNowPlaying: document.getElementById("audio-now-playing"),
-    btnAudioPrevPreview: document.getElementById("btn-audio-prev-preview"),
-    audioPrevRef: document.getElementById("audio-prev-ref"),
-    audioPrevAr: document.getElementById("audio-prev-ar"),
-    audioNextInfo: document.getElementById("audio-next-info"),
-    chkAudioAutocontinue: document.getElementById("chk-audio-autocontinue"),
-    chkAudioRepeat: document.getElementById("chk-audio-repeat"),
-    btnAudioPlayActive: document.getElementById("btn-audio-play-active"),
-    btnAudioPrev: document.getElementById("btn-audio-prev"),
-    btnAudioNext: document.getElementById("btn-audio-next"),
-    btnAudioClose: document.getElementById("btn-audio-close"),
-    btnAudioReopen: document.getElementById("btn-audio-reopen"),
-    quranAudioPlayer: document.getElementById("quran-audio-player"),
-    btnAudioMiniToggle: document.getElementById("btn-audio-mini-toggle"),
-    murottalTimeCurrent: document.getElementById("murottal-time-current"),
-    murottalSeekSlider: document.getElementById("murottal-seek-slider"),
-    murottalTimeDuration: document.getElementById("murottal-time-duration"),
-    btnAudioMute: document.getElementById("btn-audio-mute"),
     btnHeroOpenMushaf: document.getElementById("btn-hero-open-mushaf"),
     btnHeroOpenStudio: document.getElementById("btn-hero-open-studio"),
     btnKpiMushaf: document.getElementById("btn-kpi-mushaf"),
@@ -169,7 +144,6 @@
     btnQuickLoadAyah: document.getElementById("btn-quick-load-ayah"),
     btnSaveHeuristicVerse: document.getElementById("btn-save-heuristic-verse"),
     badgeHeuristicMode: document.getElementById("badge-heuristic-mode"),
-    btnPlayActiveAudio: document.getElementById("btn-play-active-audio"),
     btnJumpToTafsirComp: document.getElementById("btn-jump-to-tafsir-comp"),
 
     // LSF Navigation & Display
@@ -906,10 +880,6 @@
     el.mushafFromAyah.value = 1;
     el.mushafToAyah.value = Math.min(s.jumlahAyat, 30); // Default tampilkan 30 ayat awal agar responsif, bisa dinaikkan s.d. jumlahAyat
 
-    el.btnMushafPlayFull.onclick = () => {
-      playSurahAudio(s.nomor);
-    };
-
     renderMushafAyahs(s);
     if (shouldScroll && el.mushafSurahDetail) {
       el.mushafSurahDetail.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -918,26 +888,8 @@
   }
 
   // =========================================================================
-  // CONTINUOUS MUROTTAL PLAYER (AYAT BERSAMBUNG & SURAT PENUH)
+  // SURAH & AYAH SELECTOR OPTION BUILDERS
   // =========================================================================
-  const audioState = {
-    mode: "ayah", // "ayah" | "surah"
-    surah: 1,
-    ayah: 1
-  };
-
-  function highlightPlayingAyahCard() {
-    el.mushafAyahsList.querySelectorAll("[data-ayah-card]").forEach((card) => {
-      const isPlayingThis =
-        !el.globalAudioBar.classList.contains("hidden") &&
-        audioState.mode === "ayah" &&
-        card.getAttribute("data-ayah-card") === `${audioState.surah}:${audioState.ayah}`;
-      card.classList.toggle("ring-2", isPlayingThis);
-      card.classList.toggle("ring-amber-500", isPlayingThis);
-      card.classList.toggle("bg-amber-50/40", isPlayingThis);
-    });
-  }
-
   function buildSurahOptionsHtml() {
     return (kemenagCorpus.surahs || [])
       .map((s) => `<option value="${s.nomor}">${s.nomor}. ${escapeHtml(s.namaLatin)} (${s.jumlahAyat} Ayat)</option>`)
@@ -953,448 +905,6 @@
       html += `<option value="${i}">Ayat ${i}${star}</option>`;
     }
     return html;
-  }
-
-  function populateAudioSelectors() {
-    if (!el.audioSurahSelect || !el.audioAyahSelect) return;
-    el.audioSurahSelect.innerHTML = buildSurahOptionsHtml();
-    el.audioSurahSelect.value = String(audioState.surah || 1);
-    el.audioAyahSelect.innerHTML = buildAyahOptionsHtml(audioState.surah || 1, { includeFullSurah: true });
-    el.audioAyahSelect.value = audioState.mode === "surah" ? "full" : String(audioState.ayah || 1);
-  }
-
-  function getAdjacentAudioItem(surahNum, ayahNum, delta, isFullSurah = false) {
-    const surahs = kemenagCorpus.surahs || [];
-    const curS = surahs.find((x) => x.nomor === Number(surahNum));
-    if (!curS) return null;
-
-    if (isFullSurah) {
-      const targetS = surahs.find((x) => x.nomor === curS.nomor + delta);
-      if (!targetS) return null;
-      return {
-        surah: targetS,
-        ayah: (targetS.ayat && targetS.ayat[0]) || null,
-        isFullSurah: true,
-        label: `QS. ${targetS.namaLatin} [${targetS.nomor}] (${targetS.jumlahAyat} Ayat)`
-      };
-    }
-
-    const targetAyahNum = Number(ayahNum) + delta;
-    if (targetAyahNum >= 1 && targetAyahNum <= curS.jumlahAyat) {
-      const aObj = (curS.ayat || []).find((x) => x.n === targetAyahNum);
-      return aObj
-        ? { surah: curS, ayah: aObj, isFullSurah: false, label: `QS. ${curS.namaLatin} [${curS.nomor}]: ${aObj.n}` }
-        : null;
-    }
-
-    const adjSurah = surahs.find((x) => x.nomor === curS.nomor + delta);
-    if (!adjSurah) return null;
-    const adjAyahNum = delta > 0 ? 1 : adjSurah.jumlahAyat;
-    const adjAyah = (adjSurah.ayat || []).find((x) => x.n === adjAyahNum);
-    return adjAyah
-      ? { surah: adjSurah, ayah: adjAyah, isFullSurah: false, label: `QS. ${adjSurah.namaLatin} [${adjSurah.nomor}]: ${adjAyah.n}` }
-      : null;
-  }
-
-  const murottalStreamState = {
-    surah: null,
-    activeAyah: null
-  };
-
-  function setStreamRowActive(row, isActive) {
-    if (!row) return;
-    const arEl = row.querySelector(".stream-ar");
-    if (isActive) {
-      row.classList.add("bg-amber-400/20", "ring-1", "ring-amber-300/60", "opacity-100");
-      row.classList.remove("bg-white/5", "opacity-65");
-      if (arEl) {
-        arEl.classList.add("text-amber-200");
-        arEl.classList.remove("text-emerald-50/90");
-      }
-    } else {
-      row.classList.remove("bg-amber-400/20", "ring-1", "ring-amber-300/60", "opacity-100");
-      row.classList.add("bg-white/5", "opacity-65");
-      if (arEl) {
-        arEl.classList.remove("text-amber-200");
-        arEl.classList.add("text-emerald-50/90");
-      }
-    }
-  }
-
-  function computeRowScrollTarget(tp, row, progress, maxTp) {
-    if (!row) return 0;
-    const topMargin = 12;
-    const rowTop = Math.max(0, row.offsetTop - topMargin);
-    const overflowH = row.offsetHeight + topMargin + 8 - tp.clientHeight;
-    // Rentang progres pembacaan efektif qari (0.06..0.94) agar ayat yang dibaca selalu tetap terlihat
-    const voiceProgress = Math.min(1, Math.max(0, (progress - 0.06) / 0.88));
-    if (overflowH > 0) {
-      return Math.min(maxTp, rowTop + overflowH * voiceProgress);
-    }
-    const tailDrift = progress > 0.78 ? ((progress - 0.78) / 0.22) * 8 : 0;
-    return Math.min(maxTp, rowTop + tailDrift);
-  }
-
-  function updateMurottalTeleprompter(immediate = false) {
-    if (!el.audioTeleprompter || !el.quranAudioPlayer || !el.audioSurahStream) return;
-    const dur = el.quranAudioPlayer.duration;
-    const cur = el.quranAudioPlayer.currentTime;
-    if (!dur || !isFinite(dur) || dur <= 0) return;
-
-    const pct = Math.min(1, Math.max(0, cur / dur));
-    const tp = el.audioTeleprompter;
-    const maxTp = Math.max(0, tp.scrollHeight - tp.clientHeight);
-    const items = el.audioSurahStream.querySelectorAll(".surah-stream-item");
-    if (!items.length) return;
-
-    if (audioState.mode === "surah") {
-      let matchedIdx = items.length - 1;
-      for (let i = 0; i < items.length; i++) {
-        const st = parseFloat(items[i].getAttribute("data-wstart") || "0");
-        const en = parseFloat(items[i].getAttribute("data-wend") || "1");
-        if (pct >= st && pct <= en) {
-          matchedIdx = i;
-          break;
-        }
-      }
-      items.forEach((node, idx) => setStreamRowActive(node, idx === matchedIdx));
-      const activeEl = items[matchedIdx];
-      if (activeEl) {
-        const st = parseFloat(activeEl.getAttribute("data-wstart") || "0");
-        const en = parseFloat(activeEl.getAttribute("data-wend") || "1");
-        const localPct = en > st ? Math.min(1, Math.max(0, (pct - st) / (en - st))) : 0;
-        const target = computeRowScrollTarget(tp, activeEl, localPct, maxTp);
-        if (immediate) {
-          tp.scrollTop = target;
-        } else if (Math.abs(target - tp.scrollTop) > 0.5) {
-          tp.scrollTop = tp.scrollTop + (target - tp.scrollTop) * 0.14;
-        }
-      }
-      return;
-    }
-
-    const activeRow = el.audioSurahStream.querySelector(`.surah-stream-item[data-surah-ay="${audioState.ayah}"]`);
-    if (!activeRow) return;
-
-    const targetTop = computeRowScrollTarget(tp, activeRow, pct, maxTp);
-    if (immediate) {
-      tp.scrollTop = targetTop;
-    } else if (Math.abs(targetTop - tp.scrollTop) > 0.5) {
-      tp.scrollTop = tp.scrollTop + (targetTop - tp.scrollTop) * 0.14;
-    }
-  }
-
-  function syncAudioPreviewText(s, a, isFullSurah = false) {
-    if (el.audioSurahSelect) el.audioSurahSelect.value = String(s.nomor);
-    if (el.audioAyahSelect) {
-      if (Number(el.audioAyahSelect.getAttribute("data-surah")) !== s.nomor || el.audioAyahSelect.options.length === 0) {
-        el.audioAyahSelect.innerHTML = buildAyahOptionsHtml(s.nomor, { includeFullSurah: true });
-        el.audioAyahSelect.setAttribute("data-surah", String(s.nomor));
-      }
-      el.audioAyahSelect.value = isFullSurah ? "full" : String(a ? a.n : 1);
-    }
-    if (el.audioSurahAr) el.audioSurahAr.textContent = s.nama ? `سُورَةُ ${formatDiwaniArabic(s.nama)}` : "";
-
-    const activeAyNum = a ? a.n : 1;
-    const prevItem = getAdjacentAudioItem(s.nomor, activeAyNum, -1, isFullSurah);
-    if (el.btnAudioPrevPreview && el.audioPrevRef && el.audioPrevAr) {
-      el.btnAudioPrevPreview.disabled = !prevItem;
-      el.audioPrevRef.textContent = prevItem ? prevItem.label : "Awal Al-Qur'an";
-      el.audioPrevAr.innerHTML = prevItem && prevItem.ayah ? formatQuranArabicHtml(prevItem.ayah.ar, true) : "—";
-    }
-
-    if (!el.audioSurahStream || !el.audioTeleprompter) return;
-
-    const ayList = s.ayat || [];
-    const surahChanged = murottalStreamState.surah !== s.nomor || el.audioSurahStream.children.length === 0;
-    const prevAyNum = murottalStreamState.activeAyah;
-
-    if (surahChanged) {
-      const weights = ayList.map((ay) => 18 + String(ay.ar || "").length);
-      const totalW = weights.reduce((acc, x) => acc + x, 0) || 1;
-      let cum = 0;
-      el.audioSurahStream.innerHTML = ayList
-        .map((ay, idx) => {
-          const st = cum / totalW;
-          cum += weights[idx];
-          const en = cum / totalW;
-          return `
-        <div data-surah-ay="${ay.n}" data-wstart="${st.toFixed(4)}" data-wend="${en.toFixed(4)}" class="surah-stream-item rounded-xl px-3 py-1.5 bg-white/5 opacity-65 transition-colors duration-200 cursor-pointer flex items-start justify-between gap-2.5">
-          <span class="shrink-0 mt-1 px-2 py-0.5 rounded-lg bg-white/10 text-[10px] font-bold text-amber-200/90 inline-flex items-center gap-1" title="Nomor Ayat ${ay.n}">
-            <span>${ay.n}</span>
-            <span class="opacity-50">|</span>
-            <span class="font-arabic text-xs leading-none">${toArabicIndicDigits(ay.n)}</span>
-          </span>
-          <p class="stream-ar font-arabic text-base text-emerald-50/90 leading-[2.0] text-right flex-1 min-w-0 transition-colors duration-200" dir="rtl">${formatQuranArabicHtml(ay.ar, true)}</p>
-        </div>
-      `;
-        })
-        .join("");
-      el.audioSurahStream.querySelectorAll(".surah-stream-item").forEach((card) => {
-        card.addEventListener("click", () => {
-          const ayNum = parseInt(card.getAttribute("data-surah-ay"), 10);
-          if (ayNum) playAyahSequence(s.nomor, ayNum);
-        });
-      });
-      murottalStreamState.surah = s.nomor;
-      murottalStreamState.activeAyah = null;
-    }
-
-    if (prevAyNum && prevAyNum !== activeAyNum) {
-      const oldRow = el.audioSurahStream.querySelector(`.surah-stream-item[data-surah-ay="${prevAyNum}"]`);
-      if (oldRow) setStreamRowActive(oldRow, false);
-    }
-
-    const newRow = el.audioSurahStream.querySelector(`.surah-stream-item[data-surah-ay="${activeAyNum}"]`);
-    if (newRow) setStreamRowActive(newRow, true);
-    murottalStreamState.activeAyah = activeAyNum;
-
-    requestAnimationFrame(() => {
-      if (!newRow || !el.audioTeleprompter) return;
-      const tp = el.audioTeleprompter;
-      const targetRowTop = Math.max(0, newRow.offsetTop - 12);
-      if (surahChanged || prevAyNum === null) {
-        tp.scrollTop = targetRowTop;
-      } else {
-        tp.scrollTo({ top: targetRowTop, behavior: "smooth" });
-      }
-    });
-  }
-
-  function playAyahSequence(surahId, ayahNum, autoPlay = true) {
-    const s = (kemenagCorpus.surahs || []).find((x) => x.nomor === Number(surahId));
-    const a = s && (s.ayat || []).find((x) => x.n === Number(ayahNum));
-    if (!s || !a || !a.au) {
-      showToast("Audio murottal untuk ayat ini tidak tersedia.", true);
-      return;
-    }
-
-    audioState.mode = "ayah";
-    audioState.surah = s.nomor;
-    audioState.ayah = a.n;
-
-    el.globalAudioBar.classList.remove("hidden");
-    if (el.btnAudioReopen) el.btnAudioReopen.classList.add("hidden");
-    syncAudioPreviewText(s, a, false);
-    el.audioNowPlaying.textContent = `QS. ${s.namaLatin} [${s.nomor}] • Ayat ${a.n} dari ${s.jumlahAyat}`;
-    if (a.n < s.jumlahAyat) {
-      el.audioNextInfo.textContent = `(Lanjut otomatis ke Ayat ${a.n + 1}..dst)`;
-    } else if (s.nomor < 114) {
-      const nextS = (kemenagCorpus.surahs || []).find((x) => x.nomor === s.nomor + 1);
-      el.audioNextInfo.textContent = nextS ? `(Bersambung ke QS. ${nextS.namaLatin} [${nextS.nomor}]: 1)` : "";
-    } else {
-      el.audioNextInfo.textContent = "(Ayat terakhir Mushaf)";
-    }
-
-    if (el.quranAudioPlayer.src !== a.au) {
-      el.quranAudioPlayer.src = a.au;
-    }
-    if (autoPlay) el.quranAudioPlayer.play().catch(() => {});
-    highlightPlayingAyahCard();
-  }
-
-  function playSurahAudio(surahId, autoPlay = true) {
-    const s = (kemenagCorpus.surahs || []).find((x) => x.nomor === Number(surahId));
-    if (!s || !s.audioFull) {
-      showToast("Audio penuh surat tidak tersedia.", true);
-      return;
-    }
-    audioState.mode = "surah";
-    audioState.surah = s.nomor;
-    audioState.ayah = 1;
-
-    el.globalAudioBar.classList.remove("hidden");
-    if (el.btnAudioReopen) el.btnAudioReopen.classList.add("hidden");
-    syncAudioPreviewText(s, (s.ayat && s.ayat[0]) || null, true);
-    el.audioNowPlaying.textContent = `QS. ${s.namaLatin} [${s.nomor}] • Surat Penuh (${s.jumlahAyat} Ayat)`;
-    const nextS = s.nomor < 114 ? (kemenagCorpus.surahs || []).find((x) => x.nomor === s.nomor + 1) : null;
-    el.audioNextInfo.textContent = nextS ? `(Bersambung ke QS. ${nextS.namaLatin} [${nextS.nomor}])` : "(Surat terakhir)";
-
-    if (el.quranAudioPlayer.src !== s.audioFull) {
-      el.quranAudioPlayer.src = s.audioFull;
-    }
-    if (autoPlay) el.quranAudioPlayer.play().catch(() => {});
-    highlightPlayingAyahCard();
-  }
-
-  function stepAudioTrack(delta) {
-    if (audioState.mode === "surah") {
-      const target = audioState.surah + delta;
-      if (target >= 1 && target <= 114) {
-        playSurahAudio(target);
-      } else {
-        showToast("Sudah berada di batas daftar surat.");
-      }
-      return;
-    }
-
-    const curS = (kemenagCorpus.surahs || []).find((x) => x.nomor === audioState.surah);
-    if (!curS) return;
-    if (delta > 0) {
-      if (audioState.ayah < curS.jumlahAyat) {
-        playAyahSequence(curS.nomor, audioState.ayah + 1);
-      } else if (curS.nomor < 114) {
-        playAyahSequence(curS.nomor + 1, 1);
-      } else {
-        showToast("Khatam 114 surat (6.236 ayat).");
-      }
-    } else {
-      if (audioState.ayah > 1) {
-        playAyahSequence(curS.nomor, audioState.ayah - 1);
-      } else if (curS.nomor > 1) {
-        const prevS = (kemenagCorpus.surahs || []).find((x) => x.nomor === curS.nomor - 1);
-        if (prevS) playAyahSequence(prevS.nomor, prevS.jumlahAyat);
-      }
-    }
-  }
-
-  if (el.audioSurahSelect) {
-    el.audioSurahSelect.addEventListener("change", () => {
-      const sid = parseInt(el.audioSurahSelect.value, 10) || 1;
-      el.audioAyahSelect.innerHTML = buildAyahOptionsHtml(sid, { includeFullSurah: true });
-      el.audioAyahSelect.setAttribute("data-surah", String(sid));
-      playAyahSequence(sid, 1);
-    });
-  }
-  if (el.audioAyahSelect) {
-    el.audioAyahSelect.addEventListener("change", () => {
-      const sid = parseInt(el.audioSurahSelect.value, 10) || 1;
-      const val = el.audioAyahSelect.value;
-      if (val === "full") {
-        playSurahAudio(sid);
-      } else {
-        playAyahSequence(sid, parseInt(val, 10) || 1);
-      }
-    });
-  }
-
-  el.quranAudioPlayer.addEventListener("ended", () => {
-    if (el.chkAudioRepeat && el.chkAudioRepeat.checked) {
-      el.quranAudioPlayer.currentTime = 0;
-      el.quranAudioPlayer.play().catch(() => {});
-      return;
-    }
-    if (!el.chkAudioAutocontinue || !el.chkAudioAutocontinue.checked) return;
-    stepAudioTrack(1);
-  });
-  el.btnAudioNext.addEventListener("click", () => stepAudioTrack(1));
-  el.btnAudioPrev.addEventListener("click", () => stepAudioTrack(-1));
-  if (el.btnAudioPrevPreview) el.btnAudioPrevPreview.addEventListener("click", () => stepAudioTrack(-1));
-  const PLAY_ICON_SVG = '<svg class="w-5 h-5 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5.14v14l11-7-11-7z"/></svg>';
-  const PAUSE_ICON_SVG = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7V5zm6.5 0H17v14h-3.5V5z"/></svg>';
-
-  function formatMurottalClock(sec) {
-    if (!sec || !isFinite(sec) || sec < 0) return "0:00";
-    const whole = Math.floor(sec);
-    const m = Math.floor(whole / 60);
-    const s = whole % 60;
-    return `${m}:${String(s).padStart(2, "0")}`;
-  }
-
-  function syncMurottalCustomPlayerBar() {
-    if (!el.quranAudioPlayer) return;
-    const dur = el.quranAudioPlayer.duration;
-    const cur = el.quranAudioPlayer.currentTime || 0;
-    const hasDur = Boolean(dur && isFinite(dur) && dur > 0);
-    const pct = hasDur ? Math.min(100, Math.max(0, (cur / dur) * 100)) : 0;
-
-    if (el.murottalTimeCurrent) el.murottalTimeCurrent.textContent = formatMurottalClock(cur);
-    if (el.murottalTimeDuration) el.murottalTimeDuration.textContent = hasDur ? formatMurottalClock(dur) : "0:00";
-    if (el.murottalSeekSlider) {
-      el.murottalSeekSlider.value = hasDur ? String(Math.round((pct / 100) * 1000)) : "0";
-      el.murottalSeekSlider.style.background = `linear-gradient(to right, #fbbf24 0%, #fbbf24 ${pct.toFixed(1)}%, rgba(255,255,255,0.18) ${pct.toFixed(1)}%, rgba(255,255,255,0.18) 100%)`;
-    }
-    if (el.btnAudioMiniToggle) {
-      const miniPlaySvg = `<svg class="w-3 h-3 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5.14v14l11-7-11-7z"/></svg>`;
-      const miniPauseSvg = `<svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>`;
-      el.btnAudioMiniToggle.innerHTML = el.quranAudioPlayer.paused || el.quranAudioPlayer.ended ? miniPlaySvg : miniPauseSvg;
-    }
-    if (el.btnAudioMute) {
-      const muted = Boolean(el.quranAudioPlayer.muted || el.quranAudioPlayer.volume === 0);
-      el.btnAudioMute.innerHTML = muted
-        ? `<svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5zm10 4l-6 6m0-6l6 6"/></svg>`
-        : `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5L6 9H2v6h4l5 4V5zm4.54 3.46a5 5 0 010 7.07m2.83-9.9a9 9 0 010 12.73"/></svg>`;
-    }
-  }
-
-  if (el.btnAudioPlayActive) {
-    const toggleAudioPlayback = () => {
-      if (!el.quranAudioPlayer.paused && el.quranAudioPlayer.src) {
-        el.quranAudioPlayer.pause();
-        return;
-      }
-      const sid = parseInt(el.audioSurahSelect && el.audioSurahSelect.value, 10) || audioState.surah || 1;
-      const aval = el.audioAyahSelect ? el.audioAyahSelect.value : String(audioState.ayah || 1);
-      if (aval === "full") {
-        playSurahAudio(sid);
-      } else {
-        playAyahSequence(sid, parseInt(aval, 10) || 1);
-      }
-    };
-    el.btnAudioPlayActive.addEventListener("click", toggleAudioPlayback);
-    if (el.btnAudioMiniToggle) el.btnAudioMiniToggle.addEventListener("click", toggleAudioPlayback);
-    if (el.btnAudioMute) {
-      el.btnAudioMute.addEventListener("click", () => {
-        el.quranAudioPlayer.muted = !el.quranAudioPlayer.muted;
-        syncMurottalCustomPlayerBar();
-      });
-    }
-    if (el.murottalSeekSlider) {
-      el.murottalSeekSlider.addEventListener("input", () => {
-        const dur = el.quranAudioPlayer.duration;
-        if (!dur || !isFinite(dur) || dur <= 0) return;
-        const val = parseFloat(el.murottalSeekSlider.value) || 0;
-        el.quranAudioPlayer.currentTime = (val / 1000) * dur;
-        syncMurottalCustomPlayerBar();
-        updateMurottalTeleprompter(true);
-      });
-    }
-    el.quranAudioPlayer.addEventListener("play", () => {
-      el.btnAudioPlayActive.innerHTML = PAUSE_ICON_SVG;
-      syncMurottalCustomPlayerBar();
-      const tick = () => {
-        if (!el.quranAudioPlayer || el.quranAudioPlayer.paused || el.quranAudioPlayer.ended) return;
-        syncMurottalCustomPlayerBar();
-        updateMurottalTeleprompter(false);
-        requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    });
-    el.quranAudioPlayer.addEventListener("timeupdate", () => {
-      syncMurottalCustomPlayerBar();
-      updateMurottalTeleprompter(false);
-    });
-    el.quranAudioPlayer.addEventListener("seeking", () => {
-      syncMurottalCustomPlayerBar();
-      updateMurottalTeleprompter(true);
-    });
-    el.quranAudioPlayer.addEventListener("loadedmetadata", () => {
-      syncMurottalCustomPlayerBar();
-      updateMurottalTeleprompter(true);
-    });
-    el.quranAudioPlayer.addEventListener("durationchange", syncMurottalCustomPlayerBar);
-    el.quranAudioPlayer.addEventListener("volumechange", syncMurottalCustomPlayerBar);
-    el.quranAudioPlayer.addEventListener("pause", () => {
-      el.btnAudioPlayActive.innerHTML = PLAY_ICON_SVG;
-      syncMurottalCustomPlayerBar();
-    });
-    el.quranAudioPlayer.addEventListener("ended", () => {
-      el.btnAudioPlayActive.innerHTML = PLAY_ICON_SVG;
-      syncMurottalCustomPlayerBar();
-    });
-    syncMurottalCustomPlayerBar();
-  }
-  el.btnAudioClose.addEventListener("click", () => {
-    el.quranAudioPlayer.pause();
-    el.globalAudioBar.classList.add("hidden");
-    if (el.btnAudioReopen) el.btnAudioReopen.classList.remove("hidden");
-    highlightPlayingAyahCard();
-  });
-  if (el.btnAudioReopen) {
-    el.btnAudioReopen.addEventListener("click", () => {
-      el.globalAudioBar.classList.remove("hidden");
-      el.btnAudioReopen.classList.add("hidden");
-    });
   }
 
   function renderMushafAyahs(s) {
@@ -1421,11 +931,6 @@
               }
             </div>
             <div class="flex flex-wrap gap-1.5 text-xs">
-              ${
-                a.au
-                  ? `<button type="button" data-play-surah="${s.nomor}" data-play-ayah="${a.n}" class="btn-ayah-audio px-2.5 py-1 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 rounded-lg font-semibold transition" title="Putar dari ayat ini &amp; lanjut otomatis">Audio ▸</button>`
-                  : ""
-              }
               <button type="button" data-open-ktm="${s.nomor}:${a.n}" class="btn-ayah-ktm px-2.5 py-1 bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 rounded-lg font-semibold transition">Tafsir Kemenag &amp; Ibnu Katsir</button>
               <button type="button" data-open-sfl="${s.nomor}:${a.n}" class="btn-ayah-sfl px-2.5 py-1 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg font-semibold transition">Analisis LSF</button>
               <button type="button" data-open-comp="${s.nomor}:${a.n}" class="btn-ayah-comp px-2.5 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold transition">LSF vs. Tafsir</button>
@@ -1455,15 +960,6 @@
         renderMushafAyahs(s);
       });
     }
-
-    el.mushafAyahsList.querySelectorAll(".btn-ayah-audio").forEach((b) => {
-      b.addEventListener("click", () => {
-        const sid = parseInt(b.getAttribute("data-play-surah"), 10);
-        const aid = parseInt(b.getAttribute("data-play-ayah"), 10);
-        playAyahSequence(sid, aid);
-      });
-    });
-    highlightPlayingAyahCard();
 
     el.mushafAyahsList.querySelectorAll(".btn-ayah-ktm").forEach((b) => {
       b.addEventListener("click", () => {
@@ -1986,14 +1482,10 @@
 
     populateGuideReferencesAndGlossary();
     populateQuickSurahSelect();
-    populateAudioSelectors();
     populateStudioSelectors();
     populateCompareSelectors();
     renderSurahGrid();
     selectMushafSurah(1);
-
-    const s1 = (kemenagCorpus.surahs || []).find((x) => x.nomor === 1);
-    if (s1) syncAudioPreviewText(s1, (s1.ayat && s1.ayat[0]) || null, false);
 
     applyFilters();
     const keys = Object.keys(dataset.verses);
@@ -2728,16 +2220,6 @@
     el.sourceRefLabel.textContent = `Sumber analisis: ${data.sourceRef || "Korpus LSF"}`;
     el.badgeHeuristicMode.classList.toggle("hidden", !data.isDraftHeuristic);
     el.btnSaveHeuristicVerse.classList.toggle("hidden", !data.isDraftHeuristic);
-
-    // Find audio URL from Kemenag full corpus
-    const kSurah = (kemenagCorpus.surahs || []).find((s) => s.nomor === data.surah);
-    const kAyah = kSurah && (kSurah.ayat || []).find((a) => a.n === data.verse);
-    const audioUrl = data.audioUrl || (kAyah && kAyah.au) || "";
-    el.btnPlayActiveAudio.classList.toggle("hidden", !audioUrl);
-    el.btnPlayActiveAudio.onclick = () => {
-      if (!audioUrl) return;
-      playAyahSequence(data.surah, data.verse);
-    };
 
     const procArText = showArabicTerms && data.processCategoryAr ? ` • ${data.processCategoryAr}` : "";
     el.badgeProcessPill.textContent = `Proses: ${data.processCategory}${procArText}`;
