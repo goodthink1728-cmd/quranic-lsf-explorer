@@ -2599,9 +2599,19 @@
     el.btnSaveHeuristicVerse.classList.toggle("hidden", !data.isDraftHeuristic);
 
     const procArText = showArabicTerms && data.processCategoryAr ? ` • ${data.processCategoryAr}` : "";
-    el.badgeProcessPill.textContent = `Proses: ${data.processCategory}${procArText}`;
-    el.badgeSpeechPill.textContent = `Tutur: ${data.speechCategory || "Deklaratif"}`;
-    el.badgeThemePill.textContent = `Tema: ${data.themeCategory}`;
+    const procKey = (data.processCategory || "material").toLowerCase();
+    if (el.badgeProcessPill) {
+      el.badgeProcessPill.href = `referensi-proses-lsf.html?proses=${encodeURIComponent(procKey)}`;
+      el.badgeProcessPill.textContent = `Proses: ${data.processCategory}${procArText} ↗`;
+    }
+    if (el.badgeSpeechPill) {
+      el.badgeSpeechPill.href = `referensi-proses-lsf.html?proses=interpersonal`;
+      el.badgeSpeechPill.textContent = `Tutur: ${data.speechCategory || "Deklaratif"} ↗`;
+    }
+    if (el.badgeThemePill) {
+      el.badgeThemePill.href = `referensi-proses-lsf.html?proses=textual`;
+      el.badgeThemePill.textContent = `Tema: ${data.themeCategory} ↗`;
+    }
     if (el.kpiActiveRef) el.kpiActiveRef.textContent = data.ref;
     if (el.kpiActiveProcess) el.kpiActiveProcess.textContent = `Proses: ${data.processCategory} • ${data.themeCategory}`;
 
