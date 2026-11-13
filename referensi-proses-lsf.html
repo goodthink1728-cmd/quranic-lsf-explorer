@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Referensi Inti 6 Proses LSF &amp; Kitab Tafsir — Quranic LSF</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #fbf7ef; color: #1e293b; }
+    .font-arabic { font-family: 'Scheherazade New', 'Noto Naskh Arabic', serif; }
+    @media print { .no-print { display: none !important; } }
+  </style>
+</head>
+<body class="p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
+
+  <!-- Header Jendela Baru -->
+  <header class="bg-gradient-to-r from-emerald-950 via-teal-900 to-emerald-900 text-white rounded-3xl p-6 shadow-md border border-amber-400/50 flex flex-wrap items-center justify-between gap-4">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="text-[11px] uppercase tracking-wider text-amber-300 font-bold bg-white/10 px-2.5 py-0.5 rounded-full border border-amber-300/30">
+          Jendela Rujukan Ilmiah &amp; Kitab Tafsir
+        </span>
+        <span class="text-xs text-emerald-200">Quranic LSF V6.0</span>
+      </div>
+      <h1 id="page-main-title" class="text-xl sm:text-2xl font-bold text-white mt-1.5 flex items-center gap-2">
+        <span>6 Proses LSF &amp; Kitab Pendamping</span>
+      </h1>
+      <p id="page-main-subtitle" class="text-xs text-emerald-100/90 mt-1 max-w-2xl">
+        Kajian mendalam Metafungsi Ideasional (Transitivitas) M.A.K. Halliday, Gramatika Arab Nahwu-Balaghah, Tafsir Tahlili Kemenag RI, &amp; Tafsir Ibnu Katsir.
+      </p>
+    </div>
+    <div class="flex items-center gap-2 no-print">
+      <button onclick="window.print()" class="px-3.5 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 shadow-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+        <span>Cetak / Simpan PDF</span>
+      </button>
+      <button onclick="window.close()" class="px-3.5 py-2 bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold rounded-xl text-xs transition shadow-sm">
+        Tutup Jendela ✕
+      </button>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs (Pilihan 6 Proses & Kitab) -->
+  <nav class="no-print bg-white rounded-2xl p-2 shadow-sm border border-slate-200 flex flex-wrap gap-1.5 text-xs font-semibold">
+    <button onclick="switchTab('Material')" id="nav-Material" class="nav-tab px-3 py-2 rounded-xl transition flex items-center gap-1.5">
+      <span>⚙ Material</span><span class="text-[10px] text-slate-500 font-normal">(Tindakan)</span>
+    </button>
+    <button onclick="switchTab('Mental')" id="nav-Mental" class="nav-tab px-3 py-2 rounded-xl transition flex items-center gap-1.5">
+      <span>💡 Mental</span><span class="text-[10px] text-slate-500 font-normal">(Kesadaran)</span>
+    </button>
+    <button onclick="switchTab('Relational')" id="nav-Relational" class="nav-tab px-3 py-2 rounded-xl transition flex items-center gap-1.5">
+      <span>⇄ Relational</span><span class="text-[10px] text-slate-500 font-normal">(Sifat)</span>
+    </button>
+    <button onclick="switchTab('Verbal')" id="nav-Verbal" class="nav-tab px-3 py-2 rounded-xl transition flex items-center gap-1.5">
+      <span>💬 Verbal</span><span class="text-[10px] text-slate-500 font-normal">(Ujaran)</span>
+    </button>
+    <button onclick="switchTab('Behavioural')" id="nav-Behavioural" class="nav-tab px-3 py-2 rounded-xl transition flex items-center gap-1.5">
+      <span>😊 Behavioural</span><span class="text-[10px] text-slate-500 font-normal">(Sikap)</span>
+    </button>
+    <button onclick="switchTab('Existential')" id="nav-Existential" class="nav-tab px-3 py-2 rounded-xl transition flex items-center gap-1.5">
+      <span>✦ Existential</span><span class="text-[10px] text-slate-500 font-normal">(Wujud)</span>
+    </button>
+    <button onclick="switchTab('Kitab')" id="nav-Kitab" class="nav-tab px-3 py-2 rounded-xl transition flex items-center gap-1.5">
+      <span>📖 Kitab Tafsir</span><span class="text-[10px] text-slate-500 font-normal">(Kemenag &amp; Ibnu Katsir)</span>
+    </button>
+  </nav>
+
+  <!-- Container Konten Dinamis -->
+  <main id="content-container" class="space-y-5"></main>
+
+  <!-- Footer -->
+  <footer class="text-center text-xs text-slate-500 pt-4 border-t border-slate-200">
+    <p>Quranic LSF &amp; Tafsir Explorer V6.0 • Korpus 114 Surat (6.236 Ayat) • Rujukan Resmi LPMQ Kemenag RI &amp; Maktabah Dar Thayyibah</p>
+  </footer>
+
+  <script>
+  const KNOWLEDGE = {
+    Material: {
+      pill: "1. Metafungsi Ideasional • Transitivitas LSF",
+      title: "Proses Material (Material Process)",
+      titleAr: "العملية المادية",
+      subtitle: "Klausa tindakan fisik, peristiwa nyata, dan aksi kebendaan (Doing & Happening)",
+      summary: "Proses Material adalah tipe proses paling fundamental dalam Transitivitas Ideasional LSF Halliday yang memodelkan pengalaman eksternal dunia nyata berupa perbuatan fisik, aktivitas konkret, atau peristiwa alamiah yang mengubah atau mempengaruhi entitas sasaran.",
+      coreQuestions: "Apa yang dilakukan oleh Actor? / Apa yang terjadi terhadap Goal?",
+      participants: [
+        { nameEn: "Actor", nameAr: "الفاعل / المُحْدِث", role: "Entitas sadar atau benda yang melakukan tindakan atau menjadi penggerak aksi." },
+        { nameEn: "Goal", nameAr: "المفعول به / الهدف", role: "Entitas yang menjadi sasaran langsung atau terdampak oleh tindakan Actor." },
+        { nameEn: "Scope / Range", nameAr: "المفعول المطلق / النطاق", role: "Batasan atau domain aktivitas tanpa mengalami perubahan bentuk fisik." },
+        { nameEn: "Recipient / Client", nameAr: "المستفيد / المجرور باللام", role: "Penerima manfaat atau pihak yang diserahi sesuatu." }
+      ],
+      nahwuBalaghah: "Dalam tata bahasa Arab klasik, Proses Material berkorespondensi dengan <strong>Fi'il Muta'addi (فعل متعدٍ)</strong> yang menuntut <em>Fa'il</em> dan <em>Maf'ul bih</em>, atau <strong>Fi'il Lazim (فعل لازم)</strong> yang hanya membutuhkan <em>Fa'il</em>. Dari tinjauan Balaghah (Ilmu Ma'ani), penggunaan kata kerja material menunjukkan <em>At-Tajaddud wal-Huduts (التجدد والحدوث)</em>, yaitu keterbaruan peristiwa yang terjadi secara berproses dalam dimensi ruang dan waktu.",
+      quranVerse: "الَّذِي جَعَلَ لَكُمُ الْأَرْضَ فِرَاشًا وَالسَّمَاءَ بِنَاءً وَأَنْزَلَ مِنَ السَّمَاءِ مَاءً فَأَخْرَجَ بِهِ مِنَ الثَّمَرَاتِ رِزْقًا لَكُمْ",
+      quranRef: "QS. Al-Baqarah [2]: 22",
+      quranTrans: "\"(Dialah) yang menjadikan bumi sebagai hamparan bagimu dan langit sebagai atap, dan Dialah yang menurunkan air (hujan) dari langit, lalu Dia menghasilkan dengan (hujan) itu buah-buahan sebagai rezeki untukmu.\"",
+      quranAnalysis: [
+        { part: "أَنْزَلَ (Anzala)", role: "Proses Material (Tindakan fisik menurunkan air hujan)" },
+        { part: "هُوَ / Allah (Dhamir Mustatir)", role: "Actor (Pelaku Tunggal Maha Kuasa)" },
+        { part: "مَاءً (Mā'an)", role: "Goal (Objek fisik materi yang diturunkan)" },
+        { part: "مِنَ السَّمَاءِ (Minas-Samā'i)", role: "Sirkumstansi Lokasi Spasial (Sumber/Arah)" }
+      ],
+      tafsirNote: "Tafsir Ibnu Katsir menguraikan bahwa ayat ini menyajikan bukti-bukti empiris materiil penciptaan alam semesta sebagai dalil qath'i bagi manusia untuk beribadah semata-mata kepada Allah tanpa menyekutukan-Nya (Tauhid Rububiyyah & Uluhiyyah).",
+      references: [
+        "Halliday, M.A.K. & Matthiessen, C.M.I.M. (2014). Halliday's Introduction to Functional Grammar (4th ed.). Routledge, Bab 5 'Clauses as Representation', hlm. 224–248.",
+        "Eggins, Suzanne. (2004). An Introduction to Systemic Functional Linguistics (2nd ed.). Continuum, hlm. 215–228.",
+        "Ad-Darwisy, Muhyiddin. I'rab Al-Qur'an Al-Karim wa Bayanuhu, Jilid 1, hlm. 68–73.",
+        "Tafsir Al-Qur'an Al-'Azhim (Ibnu Katsir), Jilid 1, Penjelasan QS. Al-Baqarah: 21–22.",
+        "Kementerian Agama RI. Al-Qur'an dan Tafsirnya (Edisi yang Disempurnakan), Tafsir Tahlili Surah Al-Baqarah: 22."
+      ]
+    },
+    Mental: {
+      pill: "2. Metafungsi Ideasional • Transitivitas LSF",
+      title: "Proses Mental (Mental Process)",
+      titleAr: "العملية العقلية / الذهنية",
+      subtitle: "Klausa representasi kesadaran batin, persepsi indrawi, kognisi akal, dan afeksi emosi (Sensing & Thinking)",
+      summary: "Proses Mental memodelkan pengalaman batiniah makhluk berkesadaran (conscious being). Berbeda dari aksi fisik dunia luar, proses ini berlangsung di alam kesadaran pikiran, pancaindra, perasaan hati, dan kehendak ruhiyah.",
+      coreQuestions: "Apa yang dipikirkan, dirasakan, dilihat, atau diketahui oleh Senser?",
+      participants: [
+        { nameEn: "Senser", nameAr: "المدرِك / الشاعر", role: "Partisipan sadar yang mengalami proses batin atau persepsi pancaindra." },
+        { nameEn: "Phenomenon", nameAr: "المدرَك / الظاهرة", role: "Objek, ide, fakta, atau entitas yang dipersepsikan, dipikirkan, atau dirasakan." }
+      ],
+      nahwuBalaghah: "Berkorespondensi dengan <strong>Af'al al-Qulub (أفعال القلوب)</strong> dalam bab <em>Zhanna wa Akhwatuha</em> (علم، رأى، ظن، خاف، وجد) yang menghubungkan keyakinan hati dengan hakikat kebenaran. Dalam Balaghah, proses mental menegaskan dimensi aqidah batiniah, keikhlasan niat, dan keterikatan fitrah jiwa manusia dengan wahyu ilahi.",
+      quranVerse: "المر ۚ تِلْكَ آيَاتُ الْكِتَابِ ۗ وَالَّذِي أُنْزِلَ إِلَيْكَ مِنْ رَبِّكَ الْحَقُّ وَلَٰكِنَّ أَكْثَرَ النَّاسِ لَا يُؤْمِنُونَ",
+      quranRef: "QS. Ar-Ra'd [13]: 1",
+      quranTrans: "\"Alif Lām Mīm Rā. Itulah ayat-ayat Kitab (Al-Qur'an). Dan (Kitab) yang diturunkan kepadamu dari Tuhanmu itu adalah kebenaran, tetapi kebanyakan manusia tidak beriman.\"",
+      quranAnalysis: [
+        { part: "أَكْثَرَ النَّاسِ (Aktsaran-Nās)", role: "Senser (Entitas manusia yang dituntut memiliki kesadaran iman)" },
+        { part: "لَا يُؤْمِنُونَ (Lā Yu'minūn)", role: "Proses Mental Kognitif/Keimanan (Penolakan keyakinan batin)" },
+        { part: "الْحَقُّ (Al-Haqq)", role: "Phenomenon (Kebenaran wahyu Al-Qur'an yang ditolak)" }
+      ],
+      tafsirNote: "Tafsir Kemenag RI dan Ibnu Katsir menggarisbawahi bahwa tidak berimannya mayoritas manusia bukan karena kurangnya dalil logika atau mukjizat, melainkan karena keangkuhan batin dan keengganan membuka pintu kesadaran hati terhadap kebenaran wahyu.",
+      references: [
+        "Halliday, M.A.K. & Matthiessen, C.M.I.M. (2014). Halliday's Introduction to Functional Grammar (4th ed.). Routledge, Bab 5, hlm. 248–268.",
+        "Eggins, Suzanne. (2004). An Introduction to Systemic Functional Linguistics, hlm. 225–235.",
+        "Ibnu Hisyam Al-Anshari. Awdhah Al-Masalik ila Alfiyyah Ibn Malik, Bab Af'al al-Qulub.",
+        "Tafsir Al-Qur'an Al-'Azhim (Ibnu Katsir), Jilid 4, Tafsir QS. Ar-Ra'd: 1.",
+        "Tafsir Tahlili Kemenag RI, Juz 13, Tafsir Surah Ar-Ra'd: 1."
+      ]
+    },
+    Relational: {
+      pill: "3. Metafungsi Ideasional • Transitivitas LSF",
+      title: "Proses Relasional (Relational Process)",
+      titleAr: "العملية العلائقية / التناسبية",
+      subtitle: "Klausa penetapan sifat, relasi kepemilikan, atau penentuan identitas hakiki (Being & Having)",
+      summary: "Proses Relasional berfungsi mengidentifikasi dan mencirikan entitas. Menghubungkan dua konsep dalam relasi logis tanpa aksi materiil, terbagi menjadi dua mode utama: Atributif (menisbatkan sifat) dan Identifikatif (menetapkan kesamaan hakikat atau definisi esensial).",
+      coreQuestions: "Apa kualitas/sifat dari Carrier? / Siapa atau apa identitas dari Token/Value?",
+      participants: [
+        { nameEn: "Carrier / Attribute", nameAr: "الحامل / الصفة والنعت", role: "Pada relasi atributif (X memiliki karakteristik/kualitas Y)." },
+        { nameEn: "Token / Value", nameAr: "الممثل / القيمة والمدلول", role: "Pada relasi identifikatif (X mendefinisikan atau sama dengan Y secara hakiki)." }
+      ],
+      nahwuBalaghah: "Berkorespondensi langsung dengan <strong>Jumlah Ismiyyah (جملة اسمية)</strong>: Mubtada' dan Khabar, kalimat bertauhid dengan <em>Inna wa Akhwatuha</em>, atau <em>Kana an-Naqishah</em>. Dalam kaidah Balaghah, struktur ini melambangkan <em>Ats-Tsubut wad-Dawam (الثبوت والدوام)</em>, yakni sifat atau identitas yang mapan, abadi, dan tidak terikat batas waktu.",
+      quranVerse: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+      quranRef: "QS. Al-Fatihah [1]: 2",
+      quranTrans: "\"Segala puji bagi Allah, Tuhan seluruh alam.\"",
+      quranAnalysis: [
+        { part: "الْحَمْدُ (Al-Hamdu)", role: "Token / Carrier (Segala bentuk pujian kesempurnaan mutlak)" },
+        { part: "لِلَّهِ (Lillāh)", role: "Proses Relasional Identifikatif + Nilai (Kekhususan hakiki bagi Allah)" },
+        { part: "رَبِّ الْعَالَمِينَ", role: "Attribute / Value (Sifat Rububiyyah pemelihara seluruh alam)" }
+      ],
+      tafsirNote: "Tafsir Ibnu Katsir menerangkan bahwa penetapan puji-pujian dalam bentuk isim (relasional) menunjukkan bahwa Allah senantiasa terpuji pada dzat, nama, dan sifat-Nya sejak azali hingga abadi, terlepas apakah ada hamba yang memuji-Nya atau tidak.",
+      references: [
+        "Halliday, M.A.K. & Matthiessen, C.M.I.M. (2014). Halliday's Introduction to Functional Grammar (4th ed.). Routledge, Bab 5, hlm. 259–309.",
+        "Martin, J.R., Matthiessen, C., & Painter, C. (1997). Working with Functional Grammar. Arnold.",
+        "Az-Zamakhsyari. Al-Kasysyaf 'an Haqa'iq Ghawamidh At-Tanzil, Tafsir Surah Al-Fatihah.",
+        "Tafsir Al-Qur'an Al-'Azhim (Ibnu Katsir), Jilid 1, Tafsir Al-Hamdullilah.",
+        "Kementerian Agama RI. Al-Qur'an dan Tafsirnya, Tafsir QS. Al-Fatihah: 2."
+      ]
+    },
+    Verbal: {
+      pill: "4. Metafungsi Ideasional • Transitivitas LSF",
+      title: "Proses Verbal (Verbal Process)",
+      titleAr: "العملية اللفظية / القولية",
+      subtitle: "Klausa ujaran, pertukaran pesan firman wahyu, dan komunikasi dakwah (Saying & Telling)",
+      summary: "Proses Verbal memodelkan kegiatan komunikasi simbolik melalui bahasa dan ujaran. Dalam Al-Qur'an, proses ini menjadi instrumen sentral pewahyuan kalam ilahi, dialog para anbiya', amanat risalah, serta seruan dakwah tauhid.",
+      coreQuestions: "Apa yang difirmankan/diucapkan oleh Sayer? / Kepada siapa pesan itu disampaikan?",
+      participants: [
+        { nameEn: "Sayer", nameAr: "القائل / المتكلم", role: "Penutur yang menyampaikan perkataan, perintah, atau wahyu." },
+        { nameEn: "Receiver", nameAr: "المخاطَب / المتلقي", role: "Mitra tutur yang dituju oleh perkataan." },
+        { nameEn: "Verbiage", nameAr: "مقول القول / البيان", role: "Konten teks atau pesan yang disampaikan." },
+        { nameEn: "Target", nameAr: "المقصود بالقول", role: "Entitas yang menjadi sasaran evaluasi verbal." }
+      ],
+      nahwuBalaghah: "Berkorespondensi dengan <strong>Jumlatul Qaul (جملة مقول القول)</strong> yang menduduki posisi <em>Maf'ul bih</em> bagi kata kerja ujaran seperti <em>Qala (قال), Nada (نادى), Aw-ha (أوحى)</em>. Dalam Balaghah, mencakup ragam gaya bahasa <em>Khabar wa Insya'</em>, uslub Khithab, Nida' (seruan ilahiah), dan Basyarah/Indzar.",
+      quranVerse: "وَإِذْ قَالَ رَبُّكَ لِلْمَلَائِكَةِ إِنِّي جَاعِلٌ فِي الْأَرْضِ خَلِيفَةً",
+      quranRef: "QS. Al-Baqarah [2]: 30",
+      quranTrans: "\"Dan (ingatlah) ketika Tuhanmu berfirman kepada para malaikat, 'Sesungguhnya Aku hendak menjadikan seorang khalifah di bumi.'\"",
+      quranAnalysis: [
+        { part: "قَالَ (Qāla)", role: "Proses Verbal (Tindakan berfirman menyampaikan amanat wahyu)" },
+        { part: "رَبُّكَ (Rabbuka)", role: "Sayer (Allah Sang Maha Pencipta)" },
+        { part: "لِلْمَلَائِكَةِ (Lil-Malā'ikah)", role: "Receiver (Para Malaikat sebagai mitra tutur penerima pesan)" },
+        { part: "إِنِّي جَاعِلٌ فِي الْأَرْضِ خَلِيفَةً", role: "Verbiage / Maqul Al-Qaul (Ketetapan penciptaan khalifah)" }
+      ],
+      tafsirNote: "Tafsir Ibnu Katsir menguraikan bahwa dialog verbal ini bukan bermaksud meminta musyawarah, melainkan bentuk pemuliaan terhadap kedudukan Adam AS dan pengumuman agung kepada para malaikat tentang hikmah penciptaan manusia.",
+      references: [
+        "Halliday, M.A.K. & Matthiessen, C.M.I.M. (2014). Halliday's Introduction to Functional Grammar (4th ed.). Routledge, Bab 5, hlm. 302–320.",
+        "Thompson, Geoff. (2014). Introducing Functional Grammar (3rd ed.). Routledge, hlm. 112–120.",
+        "As-Suyuthi, Jalaluddin. Al-Itqan fi 'Ulum Al-Qur'an, Pembahasan Gaya Bahasa Kalam Al-Qur'an.",
+        "Tafsir Al-Qur'an Al-'Azhim (Ibnu Katsir), Jilid 1, Tafsir QS. Al-Baqarah: 30.",
+        "Tafsir Tahlili Kemenag RI, Juz 1, Tafsir Kisah Penciptaan Khalifah."
+      ]
+    },
+    Behavioural: {
+      pill: "5. Metafungsi Ideasional • Transitivitas LSF",
+      title: "Proses Behavioural (Behavioural Process)",
+      titleAr: "العملية السلوكية",
+      subtitle: "Klausa representasi perilaku fisiologis-psikologis dan manifestasi raga berjiwa (Behaving)",
+      summary: "Proses Behavioural menempati irisan unik antara tindakan fisik (Material) dan kesadaran batin (Mental). Menggambarkan perbuatan lahiriah manusia yang berakar langsung dari luapan kesadaran batiniah, refleks indrawi, atau kepatuhan spiritual (seperti menangis khusyuk, sujud merendah, tersenyum, bersabar).",
+      coreQuestions: "Bagaimana manifestasi ekspresi ragawi yang diwujudkan oleh Behaver?",
+      participants: [
+        { nameEn: "Behaver", nameAr: "الفاعل السلوكي", role: "Partisipan sadar yang mengekspresikan tindakan fisiologis/psikologis." },
+        { nameEn: "Behaviour", nameAr: "السلوك", role: "Wujud perilaku atau ekspresi yang teramati." },
+        { nameEn: "Matter / Circumstance", nameAr: "المتعلق بالسلوك", role: "Fenomena atau situasi yang memicu timbulnya perilaku tersebut." }
+      ],
+      nahwuBalaghah: "Dalam tata bahasa Arab, proses ini terangkum pada verba-verba perpaduan <em>Al-Jawarih (jasmani)</em> dan <em>Al-Qalb (ruhani)</em> seperti <em>Baka (بكى - menangis), Kharra Sujjadan (خرَّ ساجداً - tersungkur bersujud), Dhahika (ضحك - tertawa), Shabara (صبر - bersabar)</em>. Dalam Balaghah, melambangkan kepasrahan total dan kelembutan sanubari insan bertauhid.",
+      quranVerse: "إِذَا تُتْلَىٰ عَلَيْهِمْ آيَاتُ الرَّحْمَٰنِ خَرُّوا سُجَّدًا وَبُكِيًّا ۩",
+      quranRef: "QS. Maryam [19]: 58",
+      quranTrans: "\"Apabila dibacakan ayat-ayat Allah Yang Maha Pengasih kepada mereka, maka mereka tunduk bersujud dan menangis.\"",
+      quranAnalysis: [
+        { part: "هُمْ / Para Nabi (Mustatir)", role: "Behaver (Sosok anbiya' yang berjiwa suci)" },
+        { part: "خَرُّوا سُجَّدًا وَبُكِيًّا", role: "Proses Behavioural Gabungan (Sujud ragawi dan tangisan haru batin)" },
+        { part: "إِذَا تُتْلَىٰ عَلَيْهِمْ آيَاتُ الرَّحْمَٰنِ", role: "Circumstance Waktu & Stimulus (Mendengar lantunan wahyu Ar-Rahman)" }
+      ],
+      tafsirNote: "Tafsir Ibnu Katsir mengutip atsar bahwa para sahabat nabi dan salafus shalih senantiasa menangis tersedu-sedu ketika mendengar ayat rahmat dan ancaman, membuktikan bahwa iman sejati menggetarkan fisik hingga mengucurkan air mata.",
+      references: [
+        "Halliday, M.A.K. & Matthiessen, C.M.I.M. (2014). Halliday's Introduction to Functional Grammar (4th ed.). Routledge, Bab 5, hlm. 300–306.",
+        "Butt, D., Fahey, R., Feez, S., & Spinks, S. (2000). Using Functional Grammar: An Explorer's Guide. NCELTR.",
+        "Al-Jurjani, Abdul Qahir. Dala'il Al-I'jaz fi 'Ilmil Ma'ani.",
+        "Tafsir Al-Qur'an Al-'Azhim (Ibnu Katsir), Jilid 5, Tafsir QS. Maryam: 58.",
+        "Tafsir Tahlili Kemenag RI, Juz 16, Karakteristik Para Nabi dalam Surah Maryam."
+      ]
+    },
+    Existential: {
+      pill: "6. Metafungsi Ideasional • Transitivitas LSF",
+      title: "Proses Eksistensial (Existential Process)",
+      titleAr: "العملية الوجودية",
+      subtitle: "Klausa representasi kehadiran, keberadaan hakiki, dan wujud fenomena di alam nyata (Existing & Being in reality)",
+      summary: "Proses Eksistensial menyatakan kehadiran atau ketiadaan sesuatu di dunia nyata. Proses ini menegaskan bahwa suatu entitas atau kejadian 'itu ada / terjadi', tanpa melibatkan tindakan aktif dari pelaku sekunder.",
+      coreQuestions: "Apa yang dinyatakan ada atau hadir di alam semesta?",
+      participants: [
+        { nameEn: "Existent", nameAr: "الموجود / الكائن", role: "Entitas atau fenomena tunggal yang dinyatakan eksistensinya." },
+        { nameEn: "Circumstantial Location", nameAr: "المكان / ظرف الوجود", role: "Koordinat ruang atau masa di mana entitas tersebut mewujud." }
+      ],
+      nahwuBalaghah: "Berkorespondensi dengan <strong>Kāna at-Tāmmah (كان التامة)</strong> yang mencukupi diri dengan <em>Fa'il</em> tanpa membutuhkan khabar (bermakna wujud/terjadi), verba <em>Wujida (وُجِدَ)</em>, serta partikel eksistensi/ketiadaan seperti <em>Laisa (ليس)</em> dan <em>Tsamma (ثَمَّ)</em>. Dalam Balaghah, menjadi puncak penetapan tauhid wujud dan kalimat penciptaan instan (Kun Fayakun).",
+      quranVerse: "بَدِيعُ السَّمَاوَاتِ وَالْأَرْضِ ۖ وَإِذَا قَضَىٰ أَمْرًا فَإِنَّمَا يَقُولُ لَهُ كُنْ فَيَكُونُ",
+      quranRef: "QS. Al-Baqarah [2]: 117",
+      quranTrans: "\"(Allah) Pencipta langit dan bumi. Apabila Dia hendak menetapkan sesuatu, Dia hanya berkata kepadanya, 'Jadilah!' Maka jadilah sesuatu itu.\"",
+      quranAnalysis: [
+        { part: "كُنْ (Kun)", role: "Proses Eksistensial Imperatif / Kana at-Tammah (Perintah berwujud seketika)" },
+        { part: "أَمْرًا (Amran / Al-Wujud)", role: "Existent (Entitas ciptaan yang dihadirkan ke alam eksistensi)" },
+        { part: "فَيَكُونُ (Fa-Yakūn)", role: "Realisasi Eksistensi Wujud (Maka berwujudlah ia secara nyata)" }
+      ],
+      tafsirNote: "Tafsir Kemenag RI dan Ibnu Katsir menguraikan bahwa penciptaan Allah terjadi tanpa perantara bahan baku maupun usaha bertahap yang melelahkan. Titah eksistensi ilahi mutlak dan seketika menembus ruang ketiadaan menjadi keberadaan.",
+      references: [
+        "Halliday, M.A.K. & Matthiessen, C.M.I.M. (2014). Halliday's Introduction to Functional Grammar (4th ed.). Routledge, Bab 5, hlm. 307–313.",
+        "Fawcett, Robin P. (2000). A Theory of Syntax for Systemic Functional Linguistics. John Benjamins.",
+        "Az-Zarkasyi, Badruddin. Al-Burhan fi 'Ulum Al-Qur'an, Pembahasan Kaidah Kana at-Tammah.",
+        "Tafsir Al-Qur'an Al-'Azhim (Ibnu Katsir), Jilid 1, Tafsir QS. Al-Baqarah: 117.",
+        "Tafsir Tahlili Kemenag RI, Juz 1, Tafsir Hakikat Keagungan Kalimat 'Kun Fayakun'."
+      ]
+    },
+    Kitab: {
+      pill: "Kitab Rujukan Tafsir Resmi & Mu'tabarah",
+      title: "Kitab Pendamping Terintegrasi: Tafsir Kemenag RI & Tafsir Ibnu Katsir",
+      titleAr: "التفسير التحليلي لوزارة الشؤون الدينية وتفسير ابن كثير العظيم",
+      subtitle: "Integrasi 6.236 Ayat Tafsir Tahlili Resmi Indonesia dan 8 Jilid Matan Otoritatif Ibnu Katsir",
+      summary: "Aplikasi Quranic LSF & Tafsir Explorer memadukan analisis gramatika linguistik modern (LSF Halliday) dengan dua pilar khazanah tafsir otoritatif umat Islam: Tafsir Tahlili Kemenag RI sebagai standar tafsir komprehensif resmi kontemporer Indonesia dan Tafsir Ibnu Katsir sebagai mahakarya tafsir bi al-ma'tsur terbesar sepanjang sejarah.",
+      kemenagInfo: "Diterbitkan resmi oleh Lajnah Pentashihan Mushaf Al-Qur'an (LPMQ) Badan Litbang dan Diklat Kementerian Agama RI. Mengkaji seluruh ayat Al-Qur'an secara runtut analitis (tahlili) dalam 30 Juz dan 114 Surat, melengkapi setiap ayat dengan asbabun nuzul, munasabah, telaah mufradat kosa kata, terjemah resmi, dan penjelasan kontekstual ilmiah.",
+      ibnKatsirInfo: "Karya Al-Hafizh Abu Al-Fida' Imaduddin Isma'il bin Katsir (701–774 H). Merupakan standar tertinggi Tafsir bi al-Ma'tsur yang menafsirkan ayat Al-Qur'an dengan ayat lainnya, Hadits Nabi SAW berderajat shahih/hasan, serta riwayat sahabat dan tabi'in. Terintegrasi matan bahasa Arab lengkap serta terjemahan bahasa Inggris/Indonesia.",
+      synergyInfo: "Linguistik Sistemik Fungsional (LSF) membedah struktur gramatika mikro (ideasional, interpersonal, tekstual). Kitab Tafsir melengkapi dengan pemahaman makro: maksud syar'i (Maqashid asy-Syari'ah), dimensi aqidah tauhid, hukum fiqih, serta asbab turunnya firman ilahi.",
+      references: [
+        "Kementerian Agama Republik Indonesia. (2019). Al-Qur'an dan Tafsirnya (Edisi yang Disempurnakan), 10 Jilid. Jakarta: Balai Pustaka & LPMQ Kemenag RI.",
+        "Ibnu Katsir, Abu Al-Fida' Isma'il. Tafsir Al-Qur'an Al-'Azhim, Tahqiq Sami bin Muhammad As-Salamah (8 Jilid). Riyadh: Dar Thayyibah.",
+        "Lajnah Pentashihan Mushaf Al-Qur'an (LPMQ). Database Mushaf Standar Indonesia & Terjemah Kemenag RI.",
+        "Qattan, Manna' Khalil. (2000). Mabahits fi 'Ulum Al-Qur'an. Kairo: Maktabah Wahbah.",
+        "Halliday, M.A.K. & Hasan, Ruqaiya. (1989). Language, Context, and Text: Aspects of Language in a Social-Semiotic Perspective. Oxford University Press."
+      ]
+    }
+  };
+
+  function escapeHtml(str) {
+    if (!str) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function renderContent(key) {
+    const item = KNOWLEDGE[key] || KNOWLEDGE.Material;
+    
+    // Update active nav button
+    document.querySelectorAll(".nav-tab").forEach(btn => {
+      btn.className = "nav-tab px-3 py-2 rounded-xl transition flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700";
+    });
+    const activeBtn = document.getElementById("nav-" + key);
+    if (activeBtn) {
+      activeBtn.className = "nav-tab px-3 py-2 rounded-xl transition flex items-center gap-1.5 bg-emerald-800 text-white shadow-sm";
+    }
+
+    let bodyHtml = "";
+    if (key === "Kitab") {
+      bodyHtml = `
+        <article class="bg-white rounded-3xl p-6 shadow-sm border border-amber-200/80 space-y-6">
+          <div class="border-b border-amber-100 pb-4">
+            <span class="text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-900 px-3 py-1 rounded-full border border-amber-300">
+              ${escapeHtml(item.pill)}
+            </span>
+            <div class="mt-2 font-arabic text-xl text-teal-900" dir="rtl">${escapeHtml(item.titleAr)}</div>
+            <h2 class="text-2xl font-bold text-emerald-950 mt-1">${escapeHtml(item.title)}</h2>
+            <p class="text-sm text-slate-500 mt-1">${escapeHtml(item.subtitle)}</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-amber-50/80 border border-amber-200 space-y-2">
+            <h3 class="font-bold text-amber-950 text-base flex items-center gap-2">
+              <span>📖</span><span>Hakikat &amp; Metodologi Integrasi Kitab Tafsir</span>
+            </h3>
+            <p class="leading-relaxed text-slate-700 text-sm">${item.summary}</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="p-5 rounded-2xl bg-emerald-50/80 border border-emerald-200 space-y-3">
+              <h3 class="font-bold text-emerald-950 text-base flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
+                <span>1. Tafsir Tahlili Kemenag RI (6.236 Ayat)</span>
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${item.kemenagInfo}</p>
+            </div>
+            <div class="p-5 rounded-2xl bg-indigo-50/80 border border-indigo-200 space-y-3">
+              <h3 class="font-bold text-indigo-950 text-base flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-indigo-600"></span>
+                <span>2. Tafsir Ibnu Katsir (8 Jilid Matan)</span>
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${item.ibnKatsirInfo}</p>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white border border-slate-200 space-y-2.5">
+            <h3 class="font-bold text-slate-900 text-base">3. Sinergi Metodologis LSF &amp; Ilmu Tafsir</h3>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${item.synergyInfo}</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
+            <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider">📚 Sumber Rujukan Otoritatif:</h3>
+            <ul class="list-disc list-inside space-y-1.5 text-xs text-slate-700">
+              ${item.references.map(r => `<li>${escapeHtml(r)}</li>`).join("")}
+            </ul>
+          </div>
+        </article>
+      `;
+    } else {
+      bodyHtml = `
+        <article class="bg-white rounded-3xl p-6 shadow-sm border border-emerald-100 space-y-6">
+          <div class="border-b border-slate-100 pb-4">
+            <span class="text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-900 px-3 py-1 rounded-full border border-emerald-300">
+              ${escapeHtml(item.pill)}
+            </span>
+            <div class="mt-2 font-arabic text-xl text-emerald-800" dir="rtl">${escapeHtml(item.titleAr)}</div>
+            <h2 class="text-2xl font-bold text-emerald-950 mt-1">${escapeHtml(item.title)}</h2>
+            <p class="text-sm text-slate-500 mt-1">${escapeHtml(item.subtitle)}</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-2.5">
+            <h3 class="font-bold text-emerald-950 text-base flex items-center gap-2">
+              <span>✦</span><span>Konsep Dasar &amp; Hakikat Semantik LSF</span>
+            </h3>
+            <p class="leading-relaxed text-slate-700 text-sm">${item.summary}</p>
+            <div class="mt-3 text-xs sm:text-sm font-semibold text-emerald-900 bg-white/90 p-3 rounded-xl border border-emerald-200">
+              <strong>Pertanyaan Kunci:</strong> <em>${item.coreQuestions}</em>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white border border-slate-200 space-y-3">
+            <h3 class="font-bold text-slate-900 text-base flex items-center justify-between">
+              <span>Struktur Partisipan Kunci (Participant Roles)</span>
+              <span class="text-xs font-normal text-slate-500 font-arabic">المشاركون في التركيب</span>
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              ${item.participants.map(p => `
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                  <div class="flex items-center justify-between font-bold text-emerald-900 mb-1">
+                    <span class="text-sm">${escapeHtml(p.nameEn)}</span>
+                    <span class="font-arabic text-base text-teal-800">${escapeHtml(p.nameAr)}</span>
+                  </div>
+                  <p class="text-slate-600 leading-snug">${escapeHtml(p.role)}</p>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-indigo-50/60 border border-indigo-200 space-y-2.5">
+            <h3 class="font-bold text-indigo-950 text-base">Integrasi Gramatika Arab &amp; Balaghah (Nahwu &amp; Ilmu Ma'ani)</h3>
+            <div class="text-xs sm:text-sm text-slate-700 leading-relaxed">${item.nahwuBalaghah}</div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-amber-50/60 border border-amber-200 space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-amber-950 text-base">Contoh Analisis Ayat Al-Qur'an</h3>
+              <span class="text-xs font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-300">${item.quranRef}</span>
+            </div>
+            <div class="bg-slate-900 text-amber-200 p-5 rounded-2xl text-center space-y-3 shadow-inner">
+              <p class="font-arabic text-2xl sm:text-3xl leading-[2.4]" dir="rtl">${item.quranVerse}</p>
+              <p class="text-xs sm:text-sm text-slate-300 italic font-normal text-left">${item.quranTrans}</p>
+            </div>
+            <div class="space-y-2 pt-1">
+              <span class="text-xs font-bold text-slate-800 block uppercase tracking-wider">Bedah Konstituen &amp; Peran Kata:</span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                ${item.quranAnalysis.map(a => `
+                  <div class="p-2.5 rounded-xl bg-white border border-amber-200 flex items-center justify-between gap-2 shadow-2xs">
+                    <span class="font-arabic font-semibold text-emerald-950 text-base">${escapeHtml(a.part)}</span>
+                    <span class="text-slate-600 text-right text-xs">${escapeHtml(a.role)}</span>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-emerald-50/80 border border-emerald-200 space-y-2.5">
+            <h3 class="font-bold text-emerald-950 text-base">Signifikansi Tadabbur &amp; Penafsiran (Ibnu Katsir &amp; Kemenag RI)</h3>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">${item.tafsirNote}</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
+            <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider">📚 Sumber Rujukan Akademik &amp; Kitab Otoritatif:</h3>
+            <ul class="list-disc list-inside space-y-1.5 text-xs text-slate-700">
+              ${item.references.map(r => `<li>${escapeHtml(r)}</li>`).join("")}
+            </ul>
+          </div>
+        </article>
+      `;
+    }
+
+    document.getElementById("content-container").innerHTML = bodyHtml;
+  }
+
+  function switchTab(key) {
+    history.replaceState(null, "", "?proses=" + key.toLowerCase());
+    renderContent(key);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // Auto-detect URL parameter
+  const params = new URLSearchParams(window.location.search);
+  const p = (params.get("proses") || "").toLowerCase();
+  const map = {
+    material: "Material",
+    mental: "Mental",
+    relational: "Relational",
+    verbal: "Verbal",
+    behavioural: "Behavioural",
+    existential: "Existential",
+    kitab: "Kitab"
+  };
+  renderContent(map[p] || "Material");
+  </script>
+</body>
+</html>

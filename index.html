@@ -143,6 +143,44 @@
   </div>
 
 
+  <!-- Modal Penjelasan Mendetail 6 Proses LSF & Kitab Referensi (Jendela Baru / Modal Dialog) -->
+  <div id="lsf-process-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-3xl w-full p-6 max-h-[90vh] overflow-y-auto border border-emerald-100 flex flex-col">
+      <!-- Modal Header -->
+      <div class="flex justify-between items-start pb-3 border-b border-slate-100 gap-3">
+        <div class="space-y-1">
+          <div class="flex flex-wrap items-center gap-2">
+            <span id="lsf-modal-pill" class="text-[11px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-900 px-2.5 py-0.5 rounded-full border border-emerald-300">
+              Proses Ideasional LSF
+            </span>
+            <span id="lsf-modal-ar-title" class="font-arabic text-base font-semibold text-emerald-800"></span>
+          </div>
+          <h3 id="lsf-modal-title" class="font-bold text-xl text-emerald-950"></h3>
+          <p id="lsf-modal-subtitle" class="text-xs text-slate-500"></p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <button type="button" id="btn-process-new-window" class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-semibold px-2.5 py-1.5 rounded-lg border border-emerald-200 transition flex items-center gap-1 shadow-2xs">
+            <span>Buka Jendela Baru</span>
+            <span class="text-emerald-700">↗</span>
+          </button>
+          <button id="btn-close-process-modal" type="button" aria-label="Tutup Jendela" class="text-slate-400 hover:text-slate-700 p-1 text-2xl font-bold leading-none">&times;</button>
+        </div>
+      </div>
+
+      <!-- Modal Body (Dynamic Rich Content & Academic References) -->
+      <div id="lsf-process-modal-body" class="py-4 space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed overflow-y-auto"></div>
+
+      <!-- Modal Footer -->
+      <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+        <span class="italic">Sumber: M.A.K. Halliday, Suzanne Eggins, Tafsir Kemenag RI, &amp; Tafsir Ibnu Katsir</span>
+        <button id="btn-close-process-modal-bottom" type="button" class="px-4 py-2 bg-emerald-800 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold transition shadow-sm">
+          Tutup Jendela
+        </button>
+      </div>
+    </div>
+  </div>
+
+
   <!-- Modal Tafsir Kemenag & Tafsir Ibnu Katsir untuk Ayat dari Direktori -->
   <div id="kemenag-tafsir-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-xl max-w-4xl w-full p-6 max-h-[90vh] overflow-y-auto">
@@ -684,16 +722,17 @@
 
       <!-- Kontrol Pemilihan Ayat: Akses Cepat Seluruh 114 Surat & 6.236 Ayat -->
       <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 space-y-3">
-        <div class="p-3 bg-emerald-50/70 rounded-xl border border-emerald-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+        <div class="p-3.5 bg-emerald-50/70 rounded-xl border border-emerald-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
           <div>
             <span class="text-xs font-bold text-emerald-900 uppercase tracking-wide">Akses Cepat Seluruh Al-Qur'an (114 Surat • 6.236 Ayat Kemenag RI):</span>
             <p class="text-[11px] text-emerald-800">Pilih surat &amp; ayat mana saja (bertanda ★ memiliki analisis terkurasi Ebook LSF) untuk dianalisis &amp; dibandingkan dengan Tafsir.</p>
           </div>
-          <div class="flex flex-wrap items-center gap-2">
-            <select id="quick-surah-select" class="text-xs bg-white border border-emerald-300 rounded-lg p-2 font-medium text-slate-800 max-w-[240px]"></select>
-            <select id="quick-ayah-select" class="text-xs bg-white border border-emerald-300 rounded-lg p-2 font-medium text-slate-800 w-32"></select>
-            <button id="btn-quick-load-ayah" class="px-3 py-2 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold rounded-lg transition">
-              Muat Ayat Ini
+          <div class="flex flex-col sm:flex-row sm:items-center gap-2 w-full lg:w-auto">
+            <select id="quick-surah-select" aria-label="Pilih Surat" class="text-xs bg-white border border-emerald-300 rounded-lg p-2.5 font-medium text-slate-800 w-full sm:w-60 shadow-2xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"></select>
+            <select id="quick-ayah-select" aria-label="Pilih Ayat" class="text-xs bg-white border border-emerald-300 rounded-lg p-2.5 font-medium text-slate-800 w-full sm:w-32 shadow-2xs focus:ring-2 focus:ring-emerald-500 focus:outline-none"></select>
+            <button id="btn-quick-load-ayah" type="button" class="px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white text-xs font-bold rounded-lg transition shadow-sm flex items-center justify-center gap-1.5 shrink-0">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+              <span>Muat Ayat Ini</span>
             </button>
           </div>
         </div>
@@ -730,7 +769,7 @@
               <p id="arabic-text" class="font-arabic text-base sm:text-lg text-emerald-950 leading-[2.35] font-normal pt-1" dir="rtl"></p>
             </div>
             <p id="transliteration-text" class="hidden text-sm font-medium text-slate-500 italic"></p>
-            <p id="translation-text" class="hidden text-sm sm:text-base text-slate-700 mt-1.5 max-w-3xl mx-auto font-medium"></p>
+            <p id="translation-text" class="text-xs sm:text-sm text-slate-700 mt-2.5 max-w-3xl mx-auto font-normal leading-relaxed text-center px-2"></p>
           </div>
         </div>
 
@@ -743,7 +782,7 @@
         <!-- Token Interaktif -->
         <div class="mt-6 pt-5 border-t border-slate-100">
           <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
-            Klik Unsur Kata di Bawah untuk Audio Cue, Akar Kata (Root), Kategori Nahwu &amp; Peran LSF:
+            Klik Unsur Kata di Bawah untuk Akar Kata (Root), Kategori Nahwu &amp; Peran LSF:
           </p>
           <div id="tokens-container" class="flex flex-wrap justify-center gap-2" dir="rtl"></div>
 
@@ -985,7 +1024,7 @@
           <div class="flex-1 min-h-0 overflow-y-auto px-2 pt-2 pb-1 flex flex-col">
             <div class="my-auto">
               <p id="studio-verse-arabic" class="font-arabic text-base sm:text-lg font-normal text-amber-200 leading-[2.35] pt-1" dir="rtl"></p>
-              <p id="studio-verse-translation" class="hidden text-xs sm:text-sm text-slate-200 italic max-w-3xl mx-auto"></p>
+              <p id="studio-verse-translation" class="text-xs sm:text-sm text-slate-200 mt-2 max-w-3xl mx-auto leading-relaxed text-center italic"></p>
             </div>
           </div>
         </div>
@@ -1114,53 +1153,88 @@
             <section class="bg-white/95 backdrop-blur rounded-3xl shadow-sm border border-amber-200/70 p-4 space-y-3 text-xs">
               <div class="flex items-center justify-between border-b border-amber-100 pb-2">
                 <div>
-                  <span class="text-[10px] font-bold uppercase tracking-wider text-amber-700">Referensi Inti</span>
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-amber-700">Referensi Inti</span>
+                    <span class="text-[9px] font-semibold bg-emerald-100 text-emerald-800 px-1.5 py-0.2 rounded-full">Klik Icon Info ℹ</span>
+                  </div>
                   <h3 class="font-bold text-sm text-emerald-950">6 Proses LSF &amp; Kitab</h3>
                 </div>
                 <span class="font-diwani text-lg text-teal-800">القرآن</span>
               </div>
               <div class="grid grid-cols-2 gap-2 text-[11px]">
-                <div class="p-2 rounded-xl bg-emerald-50/90 border border-emerald-200/70 flex items-center gap-2">
-                  <span class="w-7 h-7 rounded-lg bg-white text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h10"/></svg>
-                  </span>
-                  <div class="min-w-0"><strong class="text-emerald-950 block leading-tight">Material</strong><span class="text-[10px] text-slate-600 block truncate">Tindakan fisik</span></div>
-                </div>
-                <div class="p-2 rounded-xl bg-sky-50/90 border border-sky-200/70 flex items-center gap-2">
-                  <span class="w-7 h-7 rounded-lg bg-white text-sky-700 border border-sky-200 flex items-center justify-center shrink-0">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-                  </span>
-                  <div class="min-w-0"><strong class="text-sky-950 block leading-tight">Mental</strong><span class="text-[10px] text-slate-600 block truncate">Kesadaran &amp; ilmu</span></div>
-                </div>
-                <div class="p-2 rounded-xl bg-teal-50/90 border border-teal-200/70 flex items-center gap-2">
-                  <span class="w-7 h-7 rounded-lg bg-white text-teal-700 border border-teal-200 flex items-center justify-center shrink-0">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
-                  </span>
-                  <div class="min-w-0"><strong class="text-teal-950 block leading-tight">Relational</strong><span class="text-[10px] text-slate-600 block truncate">Sifat &amp; identitas</span></div>
-                </div>
-                <div class="p-2 rounded-xl bg-indigo-50/90 border border-indigo-200/70 flex items-center gap-2">
-                  <span class="w-7 h-7 rounded-lg bg-white text-indigo-700 border border-indigo-200 flex items-center justify-center shrink-0">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-                  </span>
-                  <div class="min-w-0"><strong class="text-indigo-950 block leading-tight">Verbal</strong><span class="text-[10px] text-slate-600 block truncate">Ujaran &amp; wahyu</span></div>
-                </div>
-                <div class="p-2 rounded-xl bg-amber-50/90 border border-amber-200/70 flex items-center gap-2">
-                  <span class="w-7 h-7 rounded-lg bg-white text-amber-700 border border-amber-200 flex items-center justify-center shrink-0">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                  </span>
-                  <div class="min-w-0"><strong class="text-amber-950 block leading-tight">Behavioural</strong><span class="text-[10px] text-slate-600 block truncate">Sikap &amp; respon</span></div>
-                </div>
-                <div class="p-2 rounded-xl bg-purple-50/90 border border-purple-200/70 flex items-center gap-2">
-                  <span class="w-7 h-7 rounded-lg bg-white text-purple-700 border border-purple-200 flex items-center justify-center shrink-0">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v3m0 14v3M4.93 4.93l2.12 2.12m9.9 9.9l2.12 2.12M2 12h3m14 0h3M4.93 19.07l2.12-2.12m9.9-9.9l2.12-2.12"/></svg>
-                  </span>
-                  <div class="min-w-0"><strong class="text-purple-950 block leading-tight">Existential</strong><span class="text-[10px] text-slate-600 block truncate">Keberadaan &amp; ada</span></div>
-                </div>
+                <a href="referensi-proses-lsf.html?proses=material" target="_blank" rel="noopener noreferrer" data-process="Material" class="btn-lsf-process-card p-2 rounded-xl bg-emerald-50/90 hover:bg-emerald-100/90 border border-emerald-200/80 hover:border-emerald-400 flex items-center justify-between gap-1.5 text-left transition transform hover:-translate-y-0.5 active:translate-y-0 shadow-2xs group focus:outline-none focus:ring-2 focus:ring-emerald-400 cursor-pointer" title="Buka Jendela Baru: Penjelasan Detail Proses Material (Tindakan Fisik)">
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span class="w-7 h-7 rounded-lg bg-white text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h10"/></svg>
+                    </span>
+                    <div class="min-w-0"><strong class="text-emerald-950 block leading-tight">Material</strong><span class="text-[10px] text-slate-600 block truncate">Tindakan fisik</span></div>
+                  </div>
+                  <span class="text-[9px] font-bold text-emerald-700 bg-white/90 border border-emerald-200/80 px-1 py-0.5 rounded shrink-0 shadow-2xs group-hover:bg-emerald-700 group-hover:text-white transition">↗</span>
+                </a>
+
+                <a href="referensi-proses-lsf.html?proses=mental" target="_blank" rel="noopener noreferrer" data-process="Mental" class="btn-lsf-process-card p-2 rounded-xl bg-sky-50/90 hover:bg-sky-100/90 border border-sky-200/80 hover:border-sky-400 flex items-center justify-between gap-1.5 text-left transition transform hover:-translate-y-0.5 active:translate-y-0 shadow-2xs group focus:outline-none focus:ring-2 focus:ring-sky-400 cursor-pointer" title="Buka Jendela Baru: Penjelasan Detail Proses Mental (Kesadaran & Ilmu)">
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span class="w-7 h-7 rounded-lg bg-white text-sky-700 border border-sky-200 flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    </span>
+                    <div class="min-w-0"><strong class="text-sky-950 block leading-tight">Mental</strong><span class="text-[10px] text-slate-600 block truncate">Kesadaran &amp; ilmu</span></div>
+                  </div>
+                  <span class="text-[9px] font-bold text-sky-700 bg-white/90 border border-sky-200/80 px-1 py-0.5 rounded shrink-0 shadow-2xs group-hover:bg-sky-700 group-hover:text-white transition">↗</span>
+                </a>
+
+                <a href="referensi-proses-lsf.html?proses=relational" target="_blank" rel="noopener noreferrer" data-process="Relational" class="btn-lsf-process-card p-2 rounded-xl bg-teal-50/90 hover:bg-teal-100/90 border border-teal-200/80 hover:border-teal-400 flex items-center justify-between gap-1.5 text-left transition transform hover:-translate-y-0.5 active:translate-y-0 shadow-2xs group focus:outline-none focus:ring-2 focus:ring-teal-400 cursor-pointer" title="Buka Jendela Baru: Penjelasan Detail Proses Relasional (Sifat & Identitas)">
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span class="w-7 h-7 rounded-lg bg-white text-teal-700 border border-teal-200 flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                    </span>
+                    <div class="min-w-0"><strong class="text-teal-950 block leading-tight">Relational</strong><span class="text-[10px] text-slate-600 block truncate">Sifat &amp; identitas</span></div>
+                  </div>
+                  <span class="text-[9px] font-bold text-teal-700 bg-white/90 border border-teal-200/80 px-1 py-0.5 rounded shrink-0 shadow-2xs group-hover:bg-teal-700 group-hover:text-white transition">↗</span>
+                </a>
+
+                <a href="referensi-proses-lsf.html?proses=verbal" target="_blank" rel="noopener noreferrer" data-process="Verbal" class="btn-lsf-process-card p-2 rounded-xl bg-indigo-50/90 hover:bg-indigo-100/90 border border-indigo-200/80 hover:border-indigo-400 flex items-center justify-between gap-1.5 text-left transition transform hover:-translate-y-0.5 active:translate-y-0 shadow-2xs group focus:outline-none focus:ring-2 focus:ring-indigo-400 cursor-pointer" title="Buka Jendela Baru: Penjelasan Detail Proses Verbal (Ujaran & Wahyu)">
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span class="w-7 h-7 rounded-lg bg-white text-indigo-700 border border-indigo-200 flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                    </span>
+                    <div class="min-w-0"><strong class="text-indigo-950 block leading-tight">Verbal</strong><span class="text-[10px] text-slate-600 block truncate">Ujaran &amp; wahyu</span></div>
+                  </div>
+                  <span class="text-[9px] font-bold text-indigo-700 bg-white/90 border border-indigo-200/80 px-1 py-0.5 rounded shrink-0 shadow-2xs group-hover:bg-indigo-700 group-hover:text-white transition">↗</span>
+                </a>
+
+                <a href="referensi-proses-lsf.html?proses=behavioural" target="_blank" rel="noopener noreferrer" data-process="Behavioural" class="btn-lsf-process-card p-2 rounded-xl bg-amber-50/90 hover:bg-amber-100/90 border border-amber-200/80 hover:border-amber-400 flex items-center justify-between gap-1.5 text-left transition transform hover:-translate-y-0.5 active:translate-y-0 shadow-2xs group focus:outline-none focus:ring-2 focus:ring-amber-400 cursor-pointer" title="Buka Jendela Baru: Penjelasan Detail Proses Behavioural (Sikap & Respon)">
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span class="w-7 h-7 rounded-lg bg-white text-amber-700 border border-amber-200 flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </span>
+                    <div class="min-w-0"><strong class="text-amber-950 block leading-tight">Behavioural</strong><span class="text-[10px] text-slate-600 block truncate">Sikap &amp; respon</span></div>
+                  </div>
+                  <span class="text-[9px] font-bold text-amber-700 bg-white/90 border border-amber-200/80 px-1 py-0.5 rounded shrink-0 shadow-2xs group-hover:bg-amber-700 group-hover:text-white transition">↗</span>
+                </a>
+
+                <a href="referensi-proses-lsf.html?proses=existential" target="_blank" rel="noopener noreferrer" data-process="Existential" class="btn-lsf-process-card p-2 rounded-xl bg-purple-50/90 hover:bg-purple-100/90 border border-purple-200/80 hover:border-purple-400 flex items-center justify-between gap-1.5 text-left transition transform hover:-translate-y-0.5 active:translate-y-0 shadow-2xs group focus:outline-none focus:ring-2 focus:ring-purple-400 cursor-pointer" title="Buka Jendela Baru: Penjelasan Detail Proses Eksistensial (Keberadaan & Ada)">
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span class="w-7 h-7 rounded-lg bg-white text-purple-700 border border-purple-200 flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-105 transition">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path stroke-linecap="round" d="M12 2v3m0 14v3M4.93 4.93l2.12 2.12m9.9 9.9l2.12 2.12M2 12h3m14 0h3M4.93 19.07l2.12-2.12m9.9-9.9l2.12-2.12"/></svg>
+                    </span>
+                    <div class="min-w-0"><strong class="text-purple-950 block leading-tight">Existential</strong><span class="text-[10px] text-slate-600 block truncate">Keberadaan &amp; ada</span></div>
+                  </div>
+                  <span class="text-[9px] font-bold text-purple-700 bg-white/90 border border-purple-200/80 px-1 py-0.5 rounded shrink-0 shadow-2xs group-hover:bg-purple-700 group-hover:text-white transition">↗</span>
+                </a>
               </div>
-              <div class="p-3 rounded-2xl bg-gradient-to-r from-amber-50 to-emerald-50 border border-amber-200/80 space-y-1">
-                <div class="font-bold text-emerald-950 text-[11px]">Kitab Pendamping Terintegrasi:</div>
+              <a href="referensi-proses-lsf.html?proses=kitab" target="_blank" rel="noopener noreferrer" data-process="Kitab" class="btn-lsf-process-card block w-full text-left p-3 rounded-2xl bg-gradient-to-r from-amber-50 to-emerald-50 hover:from-amber-100/80 hover:to-emerald-100/80 border border-amber-200 hover:border-amber-400 space-y-1 transition transform hover:-translate-y-0.5 active:translate-y-0 shadow-2xs focus:outline-none focus:ring-2 focus:ring-amber-400 group cursor-pointer" title="Buka Jendela Baru: Penjelasan Lengkap Integrasi Tafsir Kemenag & Ibnu Katsir">
+                <div class="flex items-center justify-between">
+                  <div class="font-bold text-emerald-950 text-[11px] flex items-center gap-1.5">
+                    <span>Kitab Pendamping Terintegrasi:</span>
+                    <span class="text-[9px] font-semibold bg-amber-200/70 text-amber-900 px-1.5 py-0.2 rounded-full flex items-center gap-0.5">
+                      <span>Jendela Baru</span>
+                      <span>↗</span>
+                    </span>
+                  </div>
+                  <span class="text-amber-800 text-xs group-hover:scale-110 transition">📖</span>
+                </div>
                 <p class="text-[11px] text-slate-600 leading-snug">Tafsir Tahlili Kemenag RI (6.236 Ayat) &amp; Tafsir Ibnu Katsir (Matan + Jilid I–VIII).</p>
-              </div>
+              </a>
             </section>
 
           </aside>
